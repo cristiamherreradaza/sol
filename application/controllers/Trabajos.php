@@ -31,6 +31,9 @@ class Trabajos extends CI_Controller {
 	public function nuevo()
 	{
 		// echo 'la vista desde trabajos';
-		$this->load->view('templates/main');
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('trabajos/nuevo');
+		$this->load->view('template/footer');
 	}
 }
