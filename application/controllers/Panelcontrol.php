@@ -22,7 +22,7 @@ class Panelcontrol extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
     }
-    
+
     public function hola()
     {
         echo 'Holas desde code';
