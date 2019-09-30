@@ -254,6 +254,85 @@
                   </div>
                 </div>
 
+                <!-- inicia modelos -->
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="card card-outline-info">
+                          <div class="card-header">
+                              <h4 class="mb-0 text-white">SACO</h4>
+                          </div>
+                          <div class="card-body">
+
+                            <div class="row">
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Talla</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Largo</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Hombro</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Espalda</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                          </div>
+
+                          <div class="row">
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Pecho</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Estomago</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">Medio Brazo</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col-md-3">
+                                <div class="form-group">
+                                  <label class="control-label">L. Manga</label>
+                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- fin modelos -->
+
 							</div>
 							<div class="form-actions">
 								<button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
