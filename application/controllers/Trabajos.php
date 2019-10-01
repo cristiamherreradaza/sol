@@ -41,9 +41,21 @@ class Trabajos extends CI_Controller {
 	
 	public function nuevo()
 	{
-		$modelos_varon = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
-		$data['modelos_varon']=$modelos_varon;
-		// vdebug($modelos_varon, true, false, true);
+		$modelos_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
+		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
+		$detalles_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
+
+		$modelos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'=>'pantalon', 'genero'=>'varon'))->result_array();
+		$pinzas_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'=>'pantalon', 'genero'=>'varon'))->result_array();
+		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo'=>'pantalon', 'genero'=>'varon'))->result_array();
+
+		$data['modelos_varon_saco']=$modelos_varon_saco;
+		$data['modelos_varon_pantalon']=$modelos_varon_pantalon;
+		$data['aberturas_varon_saco']=$aberturas_varon_saco;
+		$data['detalles_varon_saco']=$detalles_varon_saco;
+		$data['pinzas_varon_pantalon']=$pinzas_varon_pantalon;
+		$data['bolsillos_varon_pantalon']=$bolsillos_varon_pantalon;
+		// vdebug($modelos_varon_pantalon, true, false, true);
 		// echo 'la vista desde trabajos';
 		$this->load->view('template/header');
 		$this->load->view('template/menu');

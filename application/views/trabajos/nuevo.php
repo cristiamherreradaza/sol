@@ -72,7 +72,7 @@
                           <div class="card-header">
                               <h4 class="mb-0 text-white">SACO</h4>
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" style="background-color: #e6f2ff;">
 
                             <div class="row">
 
@@ -146,7 +146,7 @@
                       <div class="card card-outline-success">
                           <div class="card-header">
                               <h4 class="mb-0 text-white">PANTALON</h4></div>
-                          <div class="card-body">
+                          <div class="card-body" style="background-color: #e6ffe6;">
 
                             <div class="row">
 
@@ -222,7 +222,7 @@
                       <div class="card card-outline-primary">
                           <div class="card-header">
                               <h4 class="mb-0 text-white">CHALECO</h4></div>
-                          <div class="card-body">
+                          <div class="card-body" style="background-color: #f0e7fe;">
 
                             <div class="row">
 
@@ -254,79 +254,78 @@
                   </div>
                 </div>
 
-                <!-- inicia modelos -->
+                <!-- inicia modelos sacos -->
                 <div class="row">
                     <div class="col-md-12">
                       <div class="card card-outline-info">
                           <div class="card-header">
                               <h4 class="mb-0 text-white">SACO</h4>
                           </div>
-                          <div class="card-body">
+                          <div class="card-body" style="background-color: #e6f2ff;">
 
                             <div class="row">
 
-                              <div class="col-md-3">
+                              <div class="col">
                                 <div class="form-group">
                                   <?php //vdebug($modelos_varon, false, false, true); ?>
                                   <label class="control-label">Modelo</label>
                                   <select class="form-control custom-select">
-                                    <?php foreach ($modelos_varon as $mv): ?>
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($modelos_varon_saco as $mv): ?>
                                       <option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
                                     <?php endforeach ?>
                                   </select>
-                                  <small class="form-control-feedback"> Select your gender </small> 
                                 </div>
                               </div>
 
-                              <div class="col-md-3">
+                              <div class="col">
                                 <div class="form-group">
-                                  <label class="control-label">Largo</label>
+                                  <label class="control-label">Botones</label>
+                                  <input type="number" id="firstName" class="form-control" placeholder="">
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Aberturas</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($aberturas_varon_saco as $a): ?>
+                                      <option value="<?php echo $a['id'] ?>"><?php echo $a['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Detalle</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($detalles_varon_saco as $d): ?>
+                                      <option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Color</label>
                                   <input type="text" id="firstName" class="form-control" placeholder="">
                                 </div>
                               </div>
 
-                              <div class="col-md-3">
+                              <div class="col">
                                 <div class="form-group">
-                                  <label class="control-label">Hombro</label>
+                                  <label class="control-label">Ojal Puno</label>
                                   <input type="text" id="firstName" class="form-control" placeholder="">
                                 </div>
                               </div>
 
-                              <div class="col-md-3">
+                              <div class="col">
                                 <div class="form-group">
-                                  <label class="control-label">Espalda</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
-                                </div>
-                              </div>
-
-                          </div>
-
-                          <div class="row">
-
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label">Pecho</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
-                                </div>
-                              </div>
-
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label">Estomago</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
-                                </div>
-                              </div>
-
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label">Medio Brazo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
-                                </div>
-                              </div>
-
-                              <div class="col-md-3">
-                                <div class="form-group">
-                                  <label class="control-label">L. Manga</label>
+                                  <label class="control-label">Color</label>
                                   <input type="text" id="firstName" class="form-control" placeholder="">
                                 </div>
                               </div>
@@ -337,7 +336,163 @@
                     </div>
                   </div>
                 </div>
-                <!-- fin modelos -->
+                <!-- fin modelos sacos -->
+
+                <!-- inicia modelos pantalon -->
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="card card-outline-success">
+                          <div class="card-header">
+                              <h4 class="mb-0 text-white">PANTALON</h4>
+                          </div>
+                          <div class="card-body" style="background-color: #e6ffe6;">
+
+                            <div class="row">
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <?php //vdebug($modelos_varon, false, false, true); ?>
+                                  <label class="control-label">Modelo</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($modelos_varon_pantalon as $mvp): ?>
+                                      <option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Pinzas</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($pinzas_varon_pantalon as $pvp): ?>
+                                      <option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-2">
+                                <div class="form-group">
+                                  <label class="control-label">Bragueta</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <option value="">Cierre</option>
+                                    <option value="">Boton</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Bolsillo atras</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($bolsillos_varon_pantalon as $bvp): ?>
+                                      <option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-2">
+                                <div class="form-group">
+                                  <label class="control-label">Bota pie</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <option value="">Normal</option>
+                                    <option value="">Dobles</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- fin modelos pantalon -->
+
+                <!-- modelos chalecos -->
+                <div class="row">
+                    <div class="col-md-12">
+                      <div class="card card-outline-primary">
+                          <div class="card-header">
+                              <h4 class="mb-0 text-white">CHALECO</h4>
+                          </div>
+                          <div class="card-body" style="background-color: #f0e7fe;">
+
+                            <div class="row">
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <?php //vdebug($modelos_varon, false, false, true); ?>
+                                  <label class="control-label">Modelo</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($modelos_varon_pantalon as $mvp): ?>
+                                      <option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Pinzas</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($pinzas_varon_pantalon as $pvp): ?>
+                                      <option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-2">
+                                <div class="form-group">
+                                  <label class="control-label">Bragueta</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <option value="">Cierre</option>
+                                    <option value="">Boton</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col">
+                                <div class="form-group">
+                                  <label class="control-label">Bolsillo atras</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <?php foreach ($bolsillos_varon_pantalon as $bvp): ?>
+                                      <option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-2">
+                                <div class="form-group">
+                                  <label class="control-label">Bota pie</label>
+                                  <select class="form-control custom-select">
+                                    <option value="">Seleccione</option>
+                                    <option value="">Normal</option>
+                                    <option value="">Dobles</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                          </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- modelos chalecos -->
 
 							</div>
 							<div class="form-actions">
