@@ -41,7 +41,7 @@ class Trabajos extends CI_Controller {
 	
 	public function nuevo()
 	{
-		$modelos_varon = $this->db->get_where('modelos', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
+		$modelos_varon = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
 		$data['modelos_varon']=$modelos_varon;
 		// vdebug($modelos_varon, true, false, true);
 		// echo 'la vista desde trabajos';

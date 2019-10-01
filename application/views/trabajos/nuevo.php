@@ -267,8 +267,14 @@
 
                               <div class="col-md-3">
                                 <div class="form-group">
-                                  <label class="control-label">Talla</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <?php //vdebug($modelos_varon, false, false, true); ?>
+                                  <label class="control-label">Modelo</label>
+                                  <select class="form-control custom-select">
+                                    <?php foreach ($modelos_varon as $mv): ?>
+                                      <option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
+                                    <?php endforeach ?>
+                                  </select>
+                                  <small class="form-control-feedback"> Select your gender </small> 
                                 </div>
                               </div>
 
