@@ -18,6 +18,16 @@ class Trabajos extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	public function __construct()
+	{
+		parent::__construct();
+		// $this->load->helper('url_helper');
+		// $this->load->database();
+		$this->load->helper('vayes_helper');
+	}
+
+
 	public function index()
 	{
 		$this->load->view('welcome_message');
@@ -31,10 +41,13 @@ class Trabajos extends CI_Controller {
 	
 	public function nuevo()
 	{
+		$modelos_varon = $this->db->get_where('modelos', array('tipo'=>'saco', 'genero'=>'varon'))->result_array();
+		$data['modelos_varon']=$modelos_varon;
+		// vdebug($modelos_varon, true, false, true);
 		// echo 'la vista desde trabajos';
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
-		$this->load->view('trabajos/nuevo');
+		$this->load->view('trabajos/nuevo', $data);
 		$this->load->view('template/footer');
 	}
 }

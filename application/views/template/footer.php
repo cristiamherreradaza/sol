@@ -10,15 +10,15 @@
     <script src="<?php echo base_url(); ?>public/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="<?php echo base_url(); ?>public/js/jquery.slimscroll.js"></script>
+    <script src="<?php echo base_url(); ?>public/main/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
-    <script src="<?php echo base_url(); ?>public/js/waves.js"></script>
+    <script src="<?php echo base_url(); ?>public/main/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="<?php echo base_url(); ?>public/js/sidebarmenu.js"></script>
+    <script src="<?php echo base_url(); ?>public/main/js/sidebarmenu.js"></script>
     <!--stickey kit -->
     <script src="<?php echo base_url('/public/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js'); ?>"></script>
     <!--Custom JavaScript -->
-    <script src="<?php echo base_url(); ?>public/js/custom.min.js"></script>
+    <script src="<?php echo base_url(); ?>public/main/js/custom.min.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
