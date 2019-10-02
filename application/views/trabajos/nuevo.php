@@ -62,7 +62,7 @@
                   </div>
                 </div>
 
-                <div id="bloque_varon">
+                <div id="bloque_varon" style="display: block;">
 
                   <h3>Varon</h3>
                   <div class="row">
