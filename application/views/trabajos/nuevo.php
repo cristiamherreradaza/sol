@@ -12,29 +12,29 @@
 		<!-- Row -->
 		<div class="row">
 
-      <!-- modal clientes -->
-            <!-- sample modal content -->
-            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
-              <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Extra Large modal</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  </div>
-                  <div class="modal-body">
-                    <h4>Overflowing text to show scroll behavior</h4>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
-                    <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-                <!-- /.modal-content -->
-              </div>
-              <!-- /.modal-dialog -->
+    <!-- modal clientes -->
+      <!-- sample modal content -->
+      <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-xl">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myLargeModalLabel">Clientes</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <!-- /.modal -->
+            <div class="modal-body">
+              <h4>Overflowing text to show scroll behavior</h4>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</p>
+              <p>Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger waves-effect text-left" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
       <!-- fin modal clientes -->
 
 
@@ -52,9 +52,9 @@
 									<div class="col-md-4">
                     <label class="control-label">Nombre</label>
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="" aria-label="" aria-describedby="basic-addon1">
+                        <input type="text" name="nombre" class="form-control">
                         <div class="input-group-append">
-                            <button class="btn btn-info" type="button" data-toggle="modal" data-target=".bs-example-modal-lg" class="model_img img-fluid">Buscar</button>
+                            <button class="btn btn-info" type="button" onclick="cargarmodal('<?php echo base_url(); ?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
                         </div>
                     </div>
 									</div>

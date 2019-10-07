@@ -62,4 +62,12 @@ class Trabajos extends CI_Controller {
 		$this->load->view('trabajos/nuevo', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function ajax_listado_clientes(){
+		$listado_clientes = $this->db->get('Clientes')->result_array();
+		// vdebug($listado_clientes, true, false, true);
+		$data['clientes']=$listado_clientes;
+		$this->load->view('trabajos/ajax_listado_clientes', $data);
+	}
+
 }

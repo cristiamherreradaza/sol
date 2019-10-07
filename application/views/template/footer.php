@@ -1,4 +1,53 @@
  </div>
+ <style>
+  .modal .modal-body {
+      max-height: 500px;
+      overflow-y: auto;
+      overflow-x: hidden;
+  }
+</style>
+<!-- abrimos el modal -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal-dialog modal-xl">
+  <div class="modal-content">
+    <div id="div_barra_cargando">
+      <div class="progress progress-striped active progress-sm">
+        <div style="width: 100%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="45" role="progressbar"
+          class="progress-bar progress-bar-success">
+
+        </div>
+      </div>
+    </div>
+    <div id="divmodal" style="display: none;">
+
+    </div>
+  </div>
+</div>
+</div>
+<!-- fin del modal -->
+<script>
+function cargarmodal(urll)
+{
+    $("#div_barra_cargando").show();
+    $("#myModal").modal({
+        //backdrop: 'static',
+        //keyboard: false
+    });
+    $("#divmodal").show();
+    $("#divmodal").load(urll, function (responseText, textStatus, req) {
+        if (textStatus == "error")
+        {
+            $("#divmodal").hide();
+            alert("error!!!");
+        }
+        else {
+            $("#div_barra_cargando").hide(800);
+        }
+    });
+
+}
+</script>
+
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
