@@ -1,4 +1,3 @@
-<!-- ============================================================== -->
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <aside class="left-sidebar">
@@ -32,6 +31,15 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
                         <li><a href="map-vector.html">Listado</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios/categorias">Categorias</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
                     </ul>
                 </li>
                 <li>
@@ -69,4 +77,4 @@
 </aside>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
+<!-- ==============================================================
