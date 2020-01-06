@@ -37,7 +37,7 @@
       <!-- /.modal -->
       <!-- fin modal clientes -->
 
-
+      <?php echo form_open('Trabajos/guarda_trabajo') ?>
 			<div class="col-lg-12">
 				<div class="card card-outline-info">
 					<div class="card-header">
@@ -52,7 +52,7 @@
 									<div class="col-md-4">
                     <label class="control-label">Nombre</label>
                     <div class="input-group mb-3">
-                        <input type="text" name="nombre" class="form-control">
+                        <input type="text" name="nombre" class="form-control" placeholder="Ej: Cristiam Herrera Daza">
                         <div class="input-group-append">
                             <button class="btn btn-info" type="button" onclick="cargarmodal('<?php echo base_url(); ?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
                         </div>
@@ -62,21 +62,21 @@
                   <div class="col-md-2">
                     <div class="form-group">
                       <label class="control-label">CI</label>
-                      <input type="text" id="firstName" class="form-control" placeholder="John doe">
+                      <input type="number" name="ci" id="ci" class="form-control" placeholder="Ej: 4356987">
                     </div>
                   </div>
 
                   <div class="col-md-2">
 										<div class="form-group">
-											<label class="control-label">Celular</label>
-											<input type="text" id="nombre" class="form-control" placeholder="John doe">
+											<label class="control-label">Celulares</label>
+											<input type="text" name="ci" id="celulares" class="form-control" placeholder="Ej: 73254787, 79845632">
                     </div>
 									</div>
 
                   <div class="col-md-2">
                     <div class="form-group">
-                      <label class="control-label">Genero</label>
-                      <select class="form-control custom-select">
+                      <label class="control-label" style="color: #ad3939; font-weight: bold;">Genero</label>
+                      <select name="genero" class="form-control custom-select">
                         <option value="">Varon</option>
                         <option value="">Mujer</option>
                       </select>
@@ -85,23 +85,23 @@
                   <div class="col-md-2">
                     <div class="form-group">
                       <label class="control-label">Fecha</label>
-                      <input type="date" id="firstName" class="form-control" placeholder="John doe">
+                      <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                   </div>
 								</div>
 
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                     <button type="button" class="btn waves-effect waves-light btn-block btn-dark">Varon</button>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
-                  </div>
+                  </div> -->
                 </div>
 
                 <div id="bloque_varon" style="display: block;">
 
-                  <h3>Varon</h3>
+                  <p></p>
                   <div class="row">
                   
                     <div class="col-md-6">
@@ -116,28 +116,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Talla</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_talla" type="number" id="talla" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Largo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_largo" type="number" id="largo" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Hombro</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_hombro" type="number" id="hombro" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Espalda</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_espalda" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
@@ -148,28 +148,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Pecho</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_pecho" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Estomago</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_estomago" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Medio Brazo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_mbrazo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">L. Manga</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="s_lmanga" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
@@ -190,28 +190,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Largo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_largo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Entrepierna</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_entrepierna" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Cintura</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_cintura" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Muslo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_muslo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
@@ -222,28 +222,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Rodilla</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_rodilla" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Bota Pie</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_bpie" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Delantero</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_tdelantero" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Atras</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="p_tatras" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
@@ -266,21 +266,21 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Largo</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="c_largo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Pecho</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="c_pecho" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Estomago</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="c_estomago" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
@@ -306,7 +306,7 @@
                                 <div class="form-group">
                                   <?php //vdebug($modelos_varon, false, false, true); ?>
                                   <label class="control-label">Modelo</label>
-                                  <select class="form-control custom-select">
+                                  <select name="sd_modelo" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($modelos_varon_saco as $mv): ?>
                                       <option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
@@ -318,14 +318,14 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Botones</label>
-                                  <input type="number" id="firstName" class="form-control" placeholder="">
+                                  <input type="number" id="sd_botones" class="form-control" min="0" value="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Aberturas</label>
-                                  <select class="form-control custom-select">
+                                  <select name="sd_aberturas" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($aberturas_varon_saco as $a): ?>
                                       <option value="<?php echo $a['id'] ?>"><?php echo $a['nombre'] ?></option>
@@ -337,7 +337,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Detalle</label>
-                                  <select class="form-control custom-select">
+                                  <select name="sd_detalle" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($detalles_varon_saco as $d): ?>
                                       <option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
@@ -349,21 +349,21 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Color</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="">
                                 </div>
                               </div>
 
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Ojal Puno</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="sd_ojal" type="text" id="ojal" class="form-control" placeholder="">
                                 </div>
                               </div>
 
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Color</label>
-                                  <input type="text" id="firstName" class="form-control" placeholder="">
+                                  <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="">
                                 </div>
                               </div>
 
@@ -390,7 +390,7 @@
                                 <div class="form-group">
                                   <?php //vdebug($modelos_varon, false, false, true); ?>
                                   <label class="control-label">Modelo</label>
-                                  <select class="form-control custom-select">
+                                  <select name="pd_modelo" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($modelos_varon_pantalon as $mvp): ?>
                                       <option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
@@ -402,7 +402,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Pinzas</label>
-                                  <select class="form-control custom-select">
+                                  <select name="pd_pinzas" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($pinzas_varon_pantalon as $pvp): ?>
                                       <option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
@@ -414,7 +414,7 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label class="control-label">Bragueta</label>
-                                  <select class="form-control custom-select">
+                                  <select name="pd_bragueta" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <option value="">Cierre</option>
                                     <option value="">Boton</option>
@@ -425,7 +425,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Bolsillo atras</label>
-                                  <select class="form-control custom-select">
+                                  <select name="pd_batras" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($bolsillos_varon_pantalon as $bvp): ?>
                                       <option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
@@ -437,7 +437,7 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label class="control-label">Bota pie</label>
-                                  <select class="form-control custom-select">
+                                  <select name="pd_bpie" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <option value="">Normal</option>
                                     <option value="">Dobles</option>
@@ -468,7 +468,7 @@
                                 <div class="form-group">
                                   <?php //vdebug($modelos_varon, false, false, true); ?>
                                   <label class="control-label">Modelo</label>
-                                  <select class="form-control custom-select">
+                                  <select name="ch_modelo" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($modelos_varon_pantalon as $mvp): ?>
                                       <option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
@@ -480,7 +480,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Pinzas</label>
-                                  <select class="form-control custom-select">
+                                  <select name="ch_pinzas" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($pinzas_varon_pantalon as $pvp): ?>
                                       <option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
@@ -492,7 +492,7 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label class="control-label">Bragueta</label>
-                                  <select class="form-control custom-select">
+                                  <select name="ch_bragueta" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <option value="">Cierre</option>
                                     <option value="">Boton</option>
@@ -503,7 +503,7 @@
                               <div class="col">
                                 <div class="form-group">
                                   <label class="control-label">Bolsillo atras</label>
-                                  <select class="form-control custom-select">
+                                  <select name="ch_batras" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <?php foreach ($bolsillos_varon_pantalon as $bvp): ?>
                                       <option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
@@ -515,7 +515,7 @@
                               <div class="col-md-2">
                                 <div class="form-group">
                                   <label class="control-label">Bota pie</label>
-                                  <select class="form-control custom-select">
+                                  <select name="ch_bpie" class="form-control custom-select">
                                     <option value="">Seleccione</option>
                                     <option value="">Normal</option>
                                     <option value="">Dobles</option>
@@ -544,3 +544,14 @@
 		<!-- Row -->
 	</div>
 </div>
+<script type="text/javascript">
+  Date.prototype.toDateInputValue = (function() {
+      var local = new Date(this);
+      local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+      return local.toJSON().slice(0,10);
+  });
+
+  $(document).ready( function() {
+    $('#fecha').val(new Date().toDateInputValue());
+  });​
+</script>
