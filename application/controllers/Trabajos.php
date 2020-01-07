@@ -65,7 +65,22 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo()
 	{
-		
+		$datos_cliente = array(
+			'nombre'=>$this->input->post('nombre'),
+			'ci'=>$this->input->post('ci'),
+			'celulares'=>$this->input->post('celulares'),
+			'genero'=>$this->input->post('genero'),
+		);
+		$this->db->insert('clientes', $datos_cliente);
+		$id_cliente = $this->db->insert_id();
+
+		$datos_trabajo = array(
+			'cliente_id'=>$id_cliente,
+			'fecha'=>$this->input->post('fecha'),
+			'monto'=>$this->input->post('precio_total'),
+		);
+		$this->db->insert('trabajos', $datos_trabajo);
+		// vdebug($id_cliente, true, false, true);
 	}
 
 	public function ajax_listado_clientes(){

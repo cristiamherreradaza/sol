@@ -69,7 +69,7 @@
                   <div class="col-md-2">
 										<div class="form-group">
 											<label class="control-label">Celulares</label>
-											<input type="text" name="ci" id="celulares" class="form-control" placeholder="Ej: 73254787, 79845632">
+											<input type="text" name="celulares" id="celulares" class="form-control" placeholder="Ej: 73254787, 79845632">
                     </div>
 									</div>
 
@@ -77,8 +77,8 @@
                     <div class="form-group">
                       <label class="control-label" style="color: #ad3939; font-weight: bold;">Genero</label>
                       <select name="genero" class="form-control custom-select">
-                        <option value="">Varon</option>
-                        <option value="">Mujer</option>
+                        <option value="Varon">Varon</option>
+                        <option value="Mujer">Mujer</option>
                       </select>
                     </div>
                   </div>
@@ -531,11 +531,47 @@
                 </div>
                 <!-- modelos chalecos -->
 
+                <!-- monto total -->
+                <div class="row justify-content-md-center">
+                    <div class="col-md-3">
+                      <div class="card card-outline-danger">
+                        <div class="card-header">
+                            <h4 class="mb-0 text-white">PRECIO TOTAL DEL TRABAJO</h4>
+                        </div>
+                        <div class="card-body" style="background-color: #f0e7fe;">
+
+                          <div class="row">
+
+                            <div class="col">
+                              <div class="form-group">
+                                <!-- <label class="control-label">Botones</label> -->
+                                <input type="number" name="precio_total" id="sd_botones" class="form-control" min="0" value="0" step="any">
+                              </div>
+                            </div>
+
+                          </div>
+
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- fin monto total -->
+
 							</div>
-							<div class="form-actions">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button type="submit" class="btn waves-effect waves-light btn-block btn-success">Guardar Trabajo</button>
+                </div>
+                <div class="col-md-6">
+                  <button type="button" class="btn waves-effect waves-light btn-block btn-inverse">Cancelar</button>
+                </div>
+              </div>
+
+							<!-- <div class="form-actions">
 								<button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
 								<button type="button" class="btn btn-inverse">Cancel</button>
-							</div>
+							</div> -->
 						</form>
 					</div>
 				</div>
