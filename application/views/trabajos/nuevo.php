@@ -574,35 +574,35 @@
                                 <div class="row">
 
                                 <div class="col-md-2">
-                                  <div class="form-group">
+                                  <div class="form-group has-success">
                                     <label class="control-label">Costo Tela</label>
                                     <input type="number" name="costo_tela" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 has-success">
                                   <div class="form-group">
                                     <label class="control-label">Costo Confeccion</label>
                                     <input type="number" name="costo_confeccion" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
-                                  <div class="form-group">
-                                    <label class="control-label">Total</label>
+                                <div class="col-md-4">
+                                  <div class="form-group has-danger">
+                                    <label class="control-label"><b>TOTAL</b></label>
                                     <input type="number" name="monto" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                  <div class="form-group">
+                                <div class="col-md-2">
+                                  <div class="form-group has-warning">
                                     <label class="control-label">A cuenta</label>
                                     <input type="number" name="confec" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
-                                  <div class="form-group">
+                                <div class="col-md-2">
+                                  <div class="form-group has-primary">
                                     <label class="control-label">Saldo</label>
                                     <input type="number" name="confec" id="fecha" class="form-control">
                                   </div>
