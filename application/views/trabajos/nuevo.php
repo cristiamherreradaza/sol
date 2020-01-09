@@ -206,7 +206,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                 <label class="control-label">Botones</label>
-                                <input type="number" id="sd_botones" class="form-control" min="0" value="0" step="any">
+                                <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" value="0" step="any">
                               </div>
                             </div>
 
@@ -241,21 +241,24 @@
                             <div class="col">
                               <div class="form-group">
                                 <label class="control-label">Color</label>
-                                <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="">
+                                <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
+                              </div>
+                            </div>
+
+                            <div class="col-md-2">
+                              <div class="form-group">
+                                <label class="control-label">Ojal Pu&ntilde;o</label>
+                                <select name="sd_ojal" class="form-control custom-select">
+                                  <option value="Si">Si</option>
+                                  <option value="No">No</option>
+                                </select>
                               </div>
                             </div>
 
                             <div class="col">
                               <div class="form-group">
-                                <label class="control-label">Ojal Puno</label>
-                                <input name="sd_ojal" type="text" id="ojal" class="form-control" placeholder="">
-                              </div>
-                            </div>
-
-                            <div class="col">
-                              <div class="form-group">
-                                <label class="control-label">Color</label>
-                                <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="">
+                                <label class="control-label">Color Ojal</label>
+                                <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
                               </div>
                             </div>
 
@@ -510,7 +513,7 @@
                                     <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="">
                                   </div>
                                 </div>
-                                
+
                               </div>
 
                             </div>
@@ -537,21 +540,21 @@
 
                               <div class="row">
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                   <div class="form-group">
                                     <label class="control-label">Fecha Registro</label>
                                     <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                   <div class="form-group">
                                     <label class="control-label">Fecha Prueba</label>
                                     <input type="date" name="fecha_prueba" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                   <div class="form-group">
                                     <label class="control-label">Tela Propia</label>
                                     <select name="tela_propia" class="form-control custom-select">
@@ -561,36 +564,59 @@
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                   <div class="form-group">
                                     <label class="control-label">Marca</label>
                                     <input type="text" name="marca" id="fecha" class="form-control">
                                   </div>
                                 </div>
+                                </div>
+                                <div class="row">
 
                                 <div class="col-md-2">
                                   <div class="form-group">
                                     <label class="control-label">Costo Tela</label>
-                                    <input type="number" name="fecha_prueba" id="fecha" class="form-control">
+                                    <input type="number" name="costo_tela" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
                                 <div class="col-md-2">
                                   <div class="form-group">
                                     <label class="control-label">Costo Confeccion</label>
-                                    <input type="number" name="fecha_prueba" id="fecha" class="form-control">
+                                    <input type="number" name="costo_confeccion" id="fecha" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                  <div class="form-group">
+                                    <label class="control-label">Total</label>
+                                    <input type="number" name="monto" id="fecha" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                  <div class="form-group">
+                                    <label class="control-label">A cuenta</label>
+                                    <input type="number" name="confec" id="fecha" class="form-control">
+                                  </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                  <div class="form-group">
+                                    <label class="control-label">Saldo</label>
+                                    <input type="number" name="confec" id="fecha" class="form-control">
                                   </div>
                                 </div>
 
                               </div>
 
-                              <div class="row">
+                              <!-- <div class="row">
                                 <div class="col-md-10">
                                 </div>
                                 <div class="col-md-2">
                                   <div class="float-right"><div style="color: #000000; font-weight: bold;font-size: 16pt">TOTAL : <span id="precio_total">1500</span></div></div><br>
                                 </div>
-                              </div>
+                              </div> -->
 
                             </div>
                           </div>

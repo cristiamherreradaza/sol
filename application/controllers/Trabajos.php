@@ -63,7 +63,7 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() {
 
-		vdebug($this->input->post(), true, false, true);
+		// vdebug($this->input->post(), true, false, true);
 		$datos_cliente = array(
 			'nombre'    => $this->input->post('nombre'),
 			'ci'        => $this->input->post('ci'),
@@ -80,6 +80,23 @@ class Trabajos extends CI_Controller {
 		);
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
+
+		$datos_pantalon = array(
+			'cliente_id' => $id_cliente,
+			'trabajo_id' => $id_trabajo,
+			'modelo_id' => $this->input->post('sd_modelo'),
+			'abertura_id' => $this->input->post('sd_abertura'),
+			'detalle_id' => $this->input->post('sd_detalle'),
+			'talla' => $this->input->post('s_talla'),
+			'largo' => $this->input->post('s_largo'),
+			'hombro' => $this->input->post('s_hombro'),
+			'espalda' => $this->input->post('s_espalda'),
+			'pecho' => $this->input->post('s_pecho'),
+			'estomago' => $this->input->post('s_estomago'),
+			'medio_brazo' => $this->input->post('s_mbrazo'),
+			'largo_manga' => $this->input->post('s_lmanga'),
+		);
+		$this->db->insert('sacos', $datos_pantalon);
 
 		// guardamos saco
 		// fin guardamos saco
