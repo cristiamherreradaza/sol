@@ -540,21 +540,28 @@
 
                               <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Fecha Registro</label>
                                     <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Fecha Prueba</label>
                                     <input type="date" name="fecha_prueba" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label class="control-label">Hora Prueba</label>
+                                    <input type="time" id="hora_prueba" name="hora_prueba" class="form-control" value="15:00:00">
+                                  </div>
+                                </div>
+
+                                <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Tela Propia</label>
                                     <select name="tela_propia" class="form-control custom-select">
@@ -564,7 +571,7 @@
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Marca</label>
                                     <input type="text" name="marca" id="fecha" class="form-control">
@@ -576,35 +583,35 @@
                                 <div class="col-md-2">
                                   <div class="form-group has-success">
                                     <label class="control-label">Costo Tela</label>
-                                    <input type="number" name="costo_tela" id="fecha" class="form-control">
+                                    <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" value="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-2 has-success">
                                   <div class="form-group">
                                     <label class="control-label">Costo Confeccion</label>
-                                    <input type="number" name="costo_confeccion" id="fecha" class="form-control">
+                                    <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" value="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-4">
                                   <div class="form-group has-danger">
                                     <label class="control-label"><b>TOTAL</b></label>
-                                    <input type="number" name="monto" id="fecha" class="form-control">
+                                    <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" value="0" step="any" readonly>
                                   </div>
                                 </div>
 
                                 <div class="col-md-2">
                                   <div class="form-group has-warning">
                                     <label class="control-label">A cuenta</label>
-                                    <input type="number" name="confec" id="fecha" class="form-control">
+                                    <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" value="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-2">
                                   <div class="form-group has-primary">
                                     <label class="control-label">Saldo</label>
-                                    <input type="number" name="confec" id="fecha" class="form-control">
+                                    <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" value="0" step="any" readonly>
                                   </div>
                                 </div>
 
@@ -647,3 +654,38 @@
 		<!-- Row -->
 	</div>
 </div>
+<script type="text/javascript">
+
+  var costo_tela = 0;
+  var costo_confeccion = 0;
+  var suma = 0;
+  var monto_total = 0;
+  var a_cuenta = 0;
+  var saldo = 0;
+
+  $(".calculo").change(function() {
+    costo_tela = parseFloat($("#costo_tela").val());
+    costo_confeccion = parseFloat($("#costo_confeccion").val());
+    suma = costo_tela + costo_confeccion;
+    $("#monto_total").val(suma);
+    a_cuenta = parseFloat($("#a_cuenta").val());
+    saldo = suma - a_cuenta
+    $("#saldo").val(saldo);
+    console.log("Costo: "+suma);
+    // console.log("Costo de tela: "+costo_tela);
+  });
+
+  $('body').on('keydown', 'input, select', function(e) {
+      if (e.key === "Enter") {
+          var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
+          focusable = form.find('input,a,select,button,textarea').filter(':visible');
+          next = focusable.eq(focusable.index(this)+1);
+          if (next.length) {
+              next.focus();
+          } else {
+              form.submit();
+          }
+          return false;
+      }
+  });
+</script>

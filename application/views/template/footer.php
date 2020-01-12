@@ -54,7 +54,7 @@ function cargarmodal(urll)
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="<?php echo base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
+    
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -72,6 +72,7 @@ function cargarmodal(urll)
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    
 </body>
 
 </html>

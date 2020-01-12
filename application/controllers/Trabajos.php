@@ -63,7 +63,18 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() {
 
-		// vdebug($this->input->post(), true, false, true);
+		$hora_registro = date('H:i:s');
+		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
+
+		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
+		$fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
+		$fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
+		$fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
+
+		vdebug($fecha_mas_transformado, false, false, true);
+		vdebug($fecha_hora_trabajo, false, false, true);
+		vdebug($fecha_hora_prueba, true, false, true);
+
 		$datos_cliente = array(
 			'nombre'    => $this->input->post('nombre'),
 			'ci'        => $this->input->post('ci'),
@@ -73,26 +84,29 @@ class Trabajos extends CI_Controller {
 		$this->db->insert('clientes', $datos_cliente);
 		$id_cliente = $this->db->insert_id();
 
+
 		$datos_trabajo = array(
-			'cliente_id' => $id_cliente,
-			'fecha'      => $this->input->post('fecha'),
-			'monto'      => $this->input->post('precio_total'),
+			'cliente_id'       => $id_cliente,
+			'fecha'            => $fecha_hora,
+			'costo_tela'       => $this->input->post('costo_tela'),
+			'costo_confeccion' => $this->input->post('costo_confeccion'),
+			'monto'            => $this->input->post('precio_total'),
 		);
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
 
 		$datos_pantalon = array(
-			'cliente_id' => $id_cliente,
-			'trabajo_id' => $id_trabajo,
-			'modelo_id' => $this->input->post('sd_modelo'),
+			'cliente_id'  => $id_cliente,
+			'trabajo_id'  => $id_trabajo,
+			'modelo_id'   => $this->input->post('sd_modelo'),
 			'abertura_id' => $this->input->post('sd_abertura'),
-			'detalle_id' => $this->input->post('sd_detalle'),
-			'talla' => $this->input->post('s_talla'),
-			'largo' => $this->input->post('s_largo'),
-			'hombro' => $this->input->post('s_hombro'),
-			'espalda' => $this->input->post('s_espalda'),
-			'pecho' => $this->input->post('s_pecho'),
-			'estomago' => $this->input->post('s_estomago'),
+			'detalle_id'  => $this->input->post('sd_detalle'),
+			'talla'       => $this->input->post('s_talla'),
+			'largo'       => $this->input->post('s_largo'),
+			'hombro'      => $this->input->post('s_hombro'),
+			'espalda'     => $this->input->post('s_espalda'),
+			'pecho'       => $this->input->post('s_pecho'),
+			'estomago'    => $this->input->post('s_estomago'),
 			'medio_brazo' => $this->input->post('s_mbrazo'),
 			'largo_manga' => $this->input->post('s_lmanga'),
 		);
@@ -106,6 +120,7 @@ class Trabajos extends CI_Controller {
 
 	public function ajax_listado_clientes() {
 		$listado_clientes = $this->db->get('Clientes')->result_array();
+		// vdebug($d,);
 
 		// vdebug($listado_clientes, true, false, true);
 		$data['clientes'] = $listado_clientes;
