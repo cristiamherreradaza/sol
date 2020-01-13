@@ -82,10 +82,6 @@ class Trabajos extends CI_Controller {
 		$fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
 		$fh_entrega = $fecha_mas_transformado.' 16:00:00';
 
-		// vdebug($fecha_mas_transformado, false, false, true);
-		// vdebug($fecha_hora_trabajo, false, false, true);
-		// vdebug($fecha_hora_prueba, true, false, true);
-
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'fecha'            => $fecha_hora_trabajo,
@@ -101,9 +97,16 @@ class Trabajos extends CI_Controller {
 		);
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
-		vdebug($datos_trabajo, true, false, true);
 
-		$datos_pantalon = array(
+		$datos_pago = array(
+			'cliente_id'       => $id_cliente,
+			'trabajo_id'=>$id_trabajo,
+			'fecha'=>$fecha_hora_trabajo,
+			'monto'=>$this->input->post('a_cuenta')
+		);
+		$this->db->insert('pagos', $datos_pago);
+
+		$datos_saco = array(
 			'cliente_id'  => $id_cliente,
 			'trabajo_id'  => $id_trabajo,
 			'modelo_id'   => $this->input->post('sd_modelo'),
@@ -118,7 +121,28 @@ class Trabajos extends CI_Controller {
 			'medio_brazo' => $this->input->post('s_mbrazo'),
 			'largo_manga' => $this->input->post('s_lmanga'),
 		);
-		$this->db->insert('sacos', $datos_pantalon);
+		$this->db->insert('sacos', $datos_saco);
+
+		$datos_pantalon = array(
+			'cliente_id'  => $id_cliente,
+			'trabajo_id'  => $id_trabajo,
+			'modelo_id'   => $this->input->post('pd_modelo'),
+			'pinza_id'    => $this->input->post('pd_pinzas'),
+			'bolsillo_id'  => $this->input->post('pd_batras'),
+			'largo'  => $this->input->post('p_largo'),
+			'entre_pierna'  => $this->input->post('p_entrepierna'),
+			'cintura'  => $this->input->post('p_cintura'),
+			'muslo'  => $this->input->post('p_muslo'),
+			'rodilla'  => $this->input->post('p_rodilla'),
+			'bota_pie'  => $this->input->post('p_bpie'),
+			'tiro_delantero'  => $this->input->post('p_tdelantero'),
+			'tiro_atras'  => $this->input->post('p_tatras'),
+			'bragueta'  => $this->input->post('pd_bragueta'),
+			'bota_pie_des'  => $this->input->post('pd_bpie'),
+		);
+		$this->db->insert('pantalones', $datos_pantalon);
+
+		vdebug($datos_pantalon, true, false, true);
 
 		// guardamos saco
 		// fin guardamos saco

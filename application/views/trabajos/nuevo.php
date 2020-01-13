@@ -388,8 +388,8 @@
                                   <label class="control-label">Bragueta</label>
                                   <select name="pd_bragueta" class="form-control custom-select">
                                     <option value="">Seleccione</option>
-                                    <option value="">Cierre</option>
-                                    <option value="">Boton</option>
+                                    <option value="Cierre">Cierre</option>
+                                    <option value="Boton">Boton</option>
                                   </select>
                                 </div>
                               </div>
