@@ -63,17 +63,6 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() {
 
-		$hora_registro = date('H:i:s');
-		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
-
-		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
-		$fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
-		$fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
-		$fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
-
-		vdebug($fecha_mas_transformado, false, false, true);
-		vdebug($fecha_hora_trabajo, false, false, true);
-		vdebug($fecha_hora_prueba, true, false, true);
 
 		$datos_cliente = array(
 			'nombre'    => $this->input->post('nombre'),
@@ -84,16 +73,35 @@ class Trabajos extends CI_Controller {
 		$this->db->insert('clientes', $datos_cliente);
 		$id_cliente = $this->db->insert_id();
 
+		$hora_registro = date('H:i:s');
+		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
+
+		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
+		$fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
+		$fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
+		$fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
+		$fh_entrega = $fecha_mas_transformado.' 16:00:00';
+
+		// vdebug($fecha_mas_transformado, false, false, true);
+		// vdebug($fecha_hora_trabajo, false, false, true);
+		// vdebug($fecha_hora_prueba, true, false, true);
 
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
-			'fecha'            => $fecha_hora,
+			'fecha'            => $fecha_hora_trabajo,
+			'fecha_prueba'     => $this->input->post('fecha_prueba'),
+			'fecha_entrega'    => $fh_entrega,
 			'costo_tela'       => $this->input->post('costo_tela'),
 			'costo_confeccion' => $this->input->post('costo_confeccion'),
-			'monto'            => $this->input->post('precio_total'),
+			'total'            => $this->input->post('monto_total'),
+			'saldo'            => $this->input->post('saldo'),
+			'estado'           => 'Oficina',
+			'tela_propia'      => $this->input->post('tela_propia'),
+			'marca_tela'            => $this->input->post('marca')
 		);
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
+		vdebug($datos_trabajo, true, false, true);
 
 		$datos_pantalon = array(
 			'cliente_id'  => $id_cliente,
