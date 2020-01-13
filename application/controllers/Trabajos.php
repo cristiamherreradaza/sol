@@ -45,12 +45,15 @@ class Trabajos extends CI_Controller {
 		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'genero'    => 'varon'))->result_array();
 		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon', 'genero' => 'varon'))->result_array();
 
-		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'chaleco', 'genero'   => 'varon'))->result_array();
+		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'genero'   => 'varon'))->result_array();
+		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'genero'  => 'varon'))->result_array();
 
 		$data['modelos_varon_saco']       = $modelos_varon_saco;
 		$data['modelos_varon_pantalon']   = $modelos_varon_pantalon;
+		$data['modelos_varon_chalecos']   = $modelos_varon_chalecos;
 		$data['aberturas_varon_saco']     = $aberturas_varon_saco;
 		$data['detalles_varon_saco']      = $detalles_varon_saco;
+		$data['detalles_varon_chalecos']  = $detalles_varon_chalecos;
 		$data['pinzas_varon_pantalon']    = $pinzas_varon_pantalon;
 		$data['bolsillos_varon_pantalon'] = $bolsillos_varon_pantalon;
 		// vdebug($modelos_varon_pantalon, true, false, true);
@@ -124,25 +127,38 @@ class Trabajos extends CI_Controller {
 		$this->db->insert('sacos', $datos_saco);
 
 		$datos_pantalon = array(
-			'cliente_id'  => $id_cliente,
-			'trabajo_id'  => $id_trabajo,
-			'modelo_id'   => $this->input->post('pd_modelo'),
-			'pinza_id'    => $this->input->post('pd_pinzas'),
-			'bolsillo_id'  => $this->input->post('pd_batras'),
-			'largo'  => $this->input->post('p_largo'),
-			'entre_pierna'  => $this->input->post('p_entrepierna'),
-			'cintura'  => $this->input->post('p_cintura'),
-			'muslo'  => $this->input->post('p_muslo'),
-			'rodilla'  => $this->input->post('p_rodilla'),
-			'bota_pie'  => $this->input->post('p_bpie'),
-			'tiro_delantero'  => $this->input->post('p_tdelantero'),
-			'tiro_atras'  => $this->input->post('p_tatras'),
-			'bragueta'  => $this->input->post('pd_bragueta'),
-			'bota_pie_des'  => $this->input->post('pd_bpie'),
+			'cliente_id'     => $id_cliente,
+			'trabajo_id'     => $id_trabajo,
+			'modelo_id'      => $this->input->post('pd_modelo'),
+			'pinza_id'       => $this->input->post('pd_pinzas'),
+			'bolsillo_id'    => $this->input->post('pd_batras'),
+			'largo'          => $this->input->post('p_largo'),
+			'entre_pierna'   => $this->input->post('p_entrepierna'),
+			'cintura'        => $this->input->post('p_cintura'),
+			'muslo'          => $this->input->post('p_muslo'),
+			'rodilla'        => $this->input->post('p_rodilla'),
+			'bota_pie'       => $this->input->post('p_bpie'),
+			'tiro_delantero' => $this->input->post('p_tdelantero'),
+			'tiro_atras'     => $this->input->post('p_tatras'),
+			'bragueta'       => $this->input->post('pd_bragueta'),
+			'bota_pie_des'   => $this->input->post('pd_bpie'),
 		);
 		$this->db->insert('pantalones', $datos_pantalon);
 
-		vdebug($datos_pantalon, true, false, true);
+		$datos_chaleco = array(
+			'cliente_id'   => $id_cliente,
+			'trabajo_id'   => $id_trabajo,
+			'modelo_id'    => $this->input->post('ch_modelo'),
+			'detalle_id'   => $this->input->post('ch_detalle'),
+			'largo'        => $this->input->post('ch_largo'),
+			'pecho'        => $this->input->post('ch_pecho'),
+			'estomago'     => $this->input->post('ch_estomago'),
+			'botones'      => $this->input->post('ch_botones'),
+			'color_ojales' => $this->input->post('ch_color'),
+		);
+		$this->db->insert('chalecos', $datos_chaleco);
+
+		// vdebug($datos_chaleco, true, false, true);
 
 		// guardamos saco
 		// fin guardamos saco
@@ -150,7 +166,20 @@ class Trabajos extends CI_Controller {
 		// vdebug($id_cliente, true, false, true);
 	}
 
-	public function ajax_listado_clientes() {
+	public function detalle_trabajo($id_trabajo = null)
+	{
+		$data = '';
+		$trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+		// vdebug($trabajo, false, false, true);
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('trabajos/detalle_trabajo');
+		$this->load->view('template/footer');
+	}
+
+	public function ajax_listado_clientes() 
+	{
 		$listado_clientes = $this->db->get('Clientes')->result_array();
 		// vdebug($d,);
 

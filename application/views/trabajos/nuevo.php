@@ -50,18 +50,18 @@
             <div class="row pt-3">
 
              <div class="col-md-5">
-              <label class="control-label">Nombre</label>
+              <label class="control-label">Nombre del cliente</label>
               <div class="input-group mb-3">
-                <input type="text" name="nombre" class="form-control" placeholder="Ej: Cristiam Herrera Daza">
-                <div class="input-group-append">
-                  <button class="btn btn-info" type="button" onclick="cargarmodal('<?php echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
-                </div>
+                <input type="text" name="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza">
+                <!-- <div class="input-group-append">
+                  <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
+                </div> -->
               </div>
             </div>
 
             <div class="col-md-2">
               <div class="form-group">
-                <label class="control-label">CI</label>
+                <label class="control-label">Carnet</label>
                 <input type="number" name="ci" id="ci" class="form-control" placeholder="Ej: 4356987">
               </div>
             </div>
@@ -116,28 +116,28 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Talle</label>
-                                <input name="s_talla" type="number" id="talla" class="form-control" min="0" value="0" step="any">
+                                <input name="s_talla" type="number" id="talla" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Largo</label>
-                                <input name="s_largo" type="number" id="largo" class="form-control" min="0" value="0" step="any">
+                                <input name="s_largo" type="number" id="largo" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Hombro</label>
-                                <input name="s_hombro" type="number" id="hombro" class="form-control" min="0" value="0" step="any">
+                                <input name="s_hombro" type="number" id="hombro" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Espalda</label>
-                                <input name="s_espalda" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                <input name="s_espalda" type="number" id="firstName" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -148,28 +148,28 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Pecho</label>
-                                <input name="s_pecho" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                <input name="s_pecho" type="number" id="firstName" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Estomago</label>
-                                <input name="s_estomago" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                <input name="s_estomago" type="number" id="firstName" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Medio Brazo</label>
-                                <input name="s_mbrazo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                <input name="s_mbrazo" type="number" id="firstName" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">L. Manga</label>
-                                <input name="s_lmanga" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                <input name="s_lmanga" type="number" id="firstName" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -206,7 +206,7 @@
                             <div class="col-md-2">
                               <div class="form-group">
                                 <label class="control-label">Botones</label>
-                                <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" value="0" step="any">
+                                <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -284,28 +284,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Largo</label>
-                                  <input name="p_largo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_largo" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Entrepierna</label>
-                                  <input name="p_entrepierna" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_entrepierna" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Cintura</label>
-                                  <input name="p_cintura" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_cintura" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Muslo</label>
-                                  <input name="p_muslo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_muslo" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
@@ -316,28 +316,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Rodilla</label>
-                                  <input name="p_rodilla" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_rodilla" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Bota Pie</label>
-                                  <input name="p_bpie" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_bpie" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Delantero</label>
-                                  <input name="p_tdelantero" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_tdelantero" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Atras</label>
-                                  <input name="p_tatras" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                  <input name="p_tatras" type="number" id="firstName" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
@@ -437,24 +437,24 @@
 
                               <div class="row">
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                   <div class="form-group">
                                     <label class="control-label">Largo</label>
-                                    <input name="c_largo" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                    <input name="ch_largo" type="number" id="ch_largo" class="form-control" min="0" step="any">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                   <div class="form-group">
                                     <label class="control-label">Pecho</label>
-                                    <input name="c_pecho" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                    <input name="ch_pecho" type="number" id="ch_pecho" class="form-control" min="0" step="any">
                                   </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                   <div class="form-group">
                                     <label class="control-label">Estomago</label>
-                                    <input name="c_estomago" type="number" id="firstName" class="form-control" min="0" value="0" step="any">
+                                    <input name="ch_estomago" type="number" id="ch_estomago" class="form-control" min="0" step="any">
                                   </div>
                                 </div>
 
@@ -491,17 +491,17 @@
                                 <div class="col-md-2">
                                   <div class="form-group">
                                     <label class="control-label">Botones</label>
-                                    <input type="number" id="ch_botones" class="form-control" min="0" value="0" step="any">
+                                    <input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-4">
                                   <div class="form-group">
                                     <label class="control-label">Detalle</label>
-                                    <select name="sd_detalle" class="form-control custom-select">
+                                    <select name="ch_detalle" class="form-control custom-select">
                                       <option value="">Seleccione</option>
-                                      <?php foreach ($detalles_varon_saco as $d):?>
-                                        <option value="<?php echo $d['id']?>"><?php echo $d['nombre']?></option>
+                                      <?php foreach ($detalles_varon_chalecos as $dvch):?>
+                                        <option value="<?php echo $dvch['id']?>"><?php echo $dvch['nombre']?></option>
                                       <?php endforeach?>
                                     </select>
                                   </div>
@@ -509,8 +509,8 @@
 
                                 <div class="col">
                                   <div class="form-group">
-                                    <label class="control-label">Color</label>
-                                    <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="">
+                                    <label class="control-label">Color Ojales</label>
+                                    <input name="ch_color" type="text" id="sd_color" class="form-control" placeholder="">
                                   </div>
                                 </div>
 
@@ -583,35 +583,35 @@
                                 <div class="col-md-2">
                                   <div class="form-group has-success">
                                     <label class="control-label">Costo Tela</label>
-                                    <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" value="0" step="any">
+                                    <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-2 has-success">
                                   <div class="form-group">
                                     <label class="control-label">Costo Confeccion</label>
-                                    <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" value="0" step="any">
+                                    <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-4">
                                   <div class="form-group has-danger">
                                     <label class="control-label"><b>TOTAL</b></label>
-                                    <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" value="0" step="any" readonly>
+                                    <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" step="any" readonly>
                                   </div>
                                 </div>
 
                                 <div class="col-md-2">
                                   <div class="form-group has-warning">
                                     <label class="control-label">A cuenta</label>
-                                    <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" value="0" step="any">
+                                    <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any">
                                   </div>
                                 </div>
 
                                 <div class="col-md-2">
                                   <div class="form-group has-primary">
                                     <label class="control-label">Saldo</label>
-                                    <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" value="0" step="any" readonly>
+                                    <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" step="any" readonly>
                                   </div>
                                 </div>
 
