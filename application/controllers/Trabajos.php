@@ -33,7 +33,6 @@ class Trabajos extends CI_Controller {
 
 	public function hola() {
 		echo 'Holas desde code';
-
 	}
 
 	public function nuevo() {
