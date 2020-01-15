@@ -637,6 +637,20 @@
 
                                 <div class="col">
                                   <div class="form-group">
+                                    <label class="control-label">Fecha Entrega</label>
+                                    <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control" value="<?php echo date('Y-m-d');?>">
+                                  </div>
+                                </div>                                
+
+                                <div class="col">
+                                  <div class="form-group">
+                                    <label class="control-label">Hora Entrega</label>
+                                    <input type="time" id="hora_entrega" name="hora_prueba" class="form-control" value="15:00:00">
+                                  </div>
+                                </div>
+
+                                <div class="col">
+                                  <div class="form-group">
                                     <label class="control-label">Tela Propia</label>
                                     <select name="tela_propia" class="form-control custom-select">
                                       <option value="NO">NO</option>
@@ -751,7 +765,7 @@
     
   });
 
-  $("#pantalon_pu").keyup(function(){
+  $("#pantalon_pu, #pantalon_cantidad").keyup(function(){
 
     cantidad_pantalon = parseFloat($("#pantalon_cantidad").val());
     precio_pantalon   = parseFloat($("#pantalon_pu").val());
@@ -762,11 +776,11 @@
 
   });
 
-  $("#ch_pu").keyup(function(){
+  $("#ch_pu, ch_cantidad").keyup(function(){
 
     cantidad_ch = parseFloat($("#ch_cantidad").val());
     precio_ch   = parseFloat($("#ch_pu").val());
-    subtotal_ch    = cantidad_ch * precio_ch;
+    subtotal_ch = cantidad_ch * precio_ch;
 
     $('#ch_subtotal').val(subtotal_ch);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
