@@ -261,7 +261,31 @@
                                 <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
                               </div>
                             </div>
+                          </div>
 
+                          <div class="row">
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label"><b>Cantidad</b></label>
+                                <input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label"><b>Precio Unitario</b></label>
+                                <input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label class="control-label"><b>Subtotal</b></label>
+                                <input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
+                              </div>
+                            </div>
+                            
                           </div>
 
                         </div>
@@ -270,13 +294,14 @@
                     <!-- fin modelos sacos -->
 
                   </div>
+
                   <div class="row">
 
                     <!-- medidas pantalon -->
                     <div class="col-md-5">
                       <div class="card card-outline-success">
                         <div class="card-header">
-                          <h4 class="mb-0 text-white">PANTALON</h4></div>
+                          <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4></div>
                           <div class="card-body" style="background-color: #e6ffe6;">
 
                             <div class="row">
@@ -352,7 +377,7 @@
                       <div class="col-md-7">
                         <div class="card card-outline-success">
                           <div class="card-header">
-                            <h4 class="mb-0 text-white">PANTALON</h4>
+                            <h4 class="mb-0 text-white">CARACTERISTICAS PANTALON</h4>
                           </div>
                           <div class="card-body" style="background-color: #e6ffe6;">
 
@@ -411,19 +436,43 @@
                                   <label class="control-label">Bota pie</label>
                                   <select name="pd_bpie" class="form-control custom-select">
                                     <option value="">Seleccione</option>
-                                    <option value="">Normal</option>
-                                    <option value="">Dobles</option>
+                                    <option value="Normal">Normal</option>
+                                    <option value="Dobles">Dobles</option>
                                   </select>
                                 </div>
                               </div>
 
                             </div>
 
+                            <div class="row">
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label"><b>Cantidad</b></label>
+                                  <input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="1">
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label"><b>Precio Unitario</b></label>
+                                  <input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" placeholder="Ej: 150">
+                                </div>
+                              </div>
+
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                  <label class="control-label"><b>Subtotal</b></label>
+                                  <input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" readonly>
+                                </div>
+                              </div>
+                              
+                            </div>
+
                           </div>
                         </div>
                       </div>
                       <!-- fin medidas pantalon -->
-
                     </div>
 
                     <div class="row">
@@ -514,6 +563,31 @@
                                   </div>
                                 </div>
 
+                              </div>
+
+                              <div class="row">
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label"><b>Cantidad</b></label>
+                                    <input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="1">
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label"><b>Precio Unitario</b></label>
+                                    <input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150">
+                                  </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                  <div class="form-group">
+                                    <label class="control-label"><b>Subtotal</b></label>
+                                    <input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" readonly>
+                                  </div>
+                                </div>
+                                
                               </div>
 
                             </div>
@@ -656,17 +730,68 @@
 </div>
 <script type="text/javascript">
 
-  var costo_tela = 0;
-  var costo_confeccion = 0;
-  var suma = 0;
-  var monto_total = 0;
-  var a_cuenta = 0;
-  var saldo = 0;
+  var costo_tela        = 0;
+  var costo_confeccion  = 0;
+  var suma              = 0;
+  var monto_total       = 0;
+  var a_cuenta          = 0;
+  var saldo             = 0;
+  var subtotal_saco     = 0;
+  var subtotal_pantalon = 0;
+  var subtotal_ch       = 0;
+
+  $("#saco_pu, #saco_cantidad").keyup(function(){
+
+    cantidad_saco = parseFloat($("#saco_cantidad").val());
+    precio_saco   = parseFloat($("#saco_pu").val());
+    subtotal_saco      = cantidad_saco * precio_saco;
+
+    $('#saco_subtotal').val(subtotal_saco);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
+    
+  });
+
+  $("#pantalon_pu").keyup(function(){
+
+    cantidad_pantalon = parseFloat($("#pantalon_cantidad").val());
+    precio_pantalon   = parseFloat($("#pantalon_pu").val());
+    subtotal_pantalon = cantidad_pantalon * precio_pantalon;
+
+    $('#pantalon_subtotal').val(subtotal_pantalon);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
+
+  });
+
+  $("#ch_pu").keyup(function(){
+
+    cantidad_ch = parseFloat($("#ch_cantidad").val());
+    precio_ch   = parseFloat($("#ch_pu").val());
+    subtotal_ch    = cantidad_ch * precio_ch;
+
+    $('#ch_subtotal').val(subtotal_ch);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
+    
+  });
+
+
+  /*$('.saco-cal').keyup(function () {
+    alert('entro'); 
+    var sum = 0;
+
+    $('.saco-cal').each(function() {
+      sum += Number($(this).val());
+    });
+
+    $('#saco_subtotal').val(sum);
+
+  });*/
 
   $(".calculo").change(function() {
-    costo_tela = parseFloat($("#costo_tela").val());
+
+    costo_tela       = parseFloat($("#costo_tela").val());
     costo_confeccion = parseFloat($("#costo_confeccion").val());
-    suma = costo_tela + costo_confeccion;
+    suma             = costo_tela + costo_confeccion;
+
     $("#monto_total").val(suma);
     a_cuenta = parseFloat($("#a_cuenta").val());
     saldo = suma - a_cuenta

@@ -24,6 +24,7 @@ class Trabajos extends CI_Controller {
 		// $this->load->helper('url_helper');
 		// $this->load->database();
 		$this->load->helper('vayes_helper');
+		$this->load->helper('tools_helper');
 	}
 
 	public function index() {
@@ -113,8 +114,11 @@ class Trabajos extends CI_Controller {
 			'cliente_id'  => $id_cliente,
 			'trabajo_id'  => $id_trabajo,
 			'modelo_id'   => $this->input->post('sd_modelo'),
-			'abertura_id' => $this->input->post('sd_abertura'),
+			'abertura_id' => $this->input->post('sd_aberturas'),
 			'detalle_id'  => $this->input->post('sd_detalle'),
+			'color'       => $this->input->post('sd_color'),
+			'color_ojal'  => $this->input->post('sd_color_ojal'),
+			'ojal_puno'   => $this->input->post('sd_ojal'),
 			'talla'       => $this->input->post('s_talla'),
 			'largo'       => $this->input->post('s_largo'),
 			'hombro'      => $this->input->post('s_hombro'),
@@ -168,13 +172,40 @@ class Trabajos extends CI_Controller {
 
 	public function detalle_trabajo($id_trabajo = null)
 	{
-		$data = '';
-		$trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
-		// vdebug($trabajo, false, false, true);
+		$this->db->select('c.nombre, c.ci, c.celulares, 
+			c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$data['trabajo'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
+		$this->db->from('sacos as sa');
+		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
+		$data['saco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
+		$this->db->from('pantalones as pa');
+		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
+		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
+		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
+		$data['pantalon'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
+		$this->db->from('chalecos as ch');
+		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
+		$data['chaleco'] = $this->db->get()->row_array();
+
+		// vdebug($data['chaleco'], true, false, true);
+
+		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+		$fecha = fechaEs($data['trabajo']['fecha']);
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
-		$this->load->view('trabajos/detalle_trabajo');
+		$this->load->view('trabajos/detalle_trabajo', $data);
 		$this->load->view('template/footer');
 	}
 
