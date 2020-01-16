@@ -66,7 +66,6 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() {
 
-
 		$datos_cliente = array(
 			'nombre'    => $this->input->post('nombre'),
 			'ci'        => $this->input->post('ci'),
@@ -160,6 +159,7 @@ class Trabajos extends CI_Controller {
 			'color_ojales' => $this->input->post('ch_color'),
 		);
 		$this->db->insert('chalecos', $datos_chaleco);
+		$redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
 		// vdebug($datos_chaleco, true, false, true);
 
@@ -171,8 +171,7 @@ class Trabajos extends CI_Controller {
 
 	public function detalle_trabajo($id_trabajo = null)
 	{
-		$this->db->select('c.nombre, c.ci, c.celulares, 
-			c.genero, t.*');
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$data['trabajo'] = $this->db->get()->row_array();
@@ -216,6 +215,21 @@ class Trabajos extends CI_Controller {
 		// vdebug($listado_clientes, true, false, true);
 		$data['clientes'] = $listado_clientes;
 		$this->load->view('trabajos/ajax_listado_clientes', $data);
+	}
+
+	public function listado_trabajos()
+	{
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$data['trabajos'] = $this->db->get()->result_array();
+		// vdebug($data['trabajo'], true ,false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('trabajos/listado_trabajos', $data);
+		$this->load->view('template/footer');
 	}
 
 }
