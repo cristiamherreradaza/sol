@@ -30,7 +30,7 @@
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">TRABAJOS</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
-                        <li><a href="map-vector.html">Listado</a></li>
+                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
                     </ul>
                 </li>
                 <li>

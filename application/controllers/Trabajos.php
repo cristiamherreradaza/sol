@@ -66,6 +66,15 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() {
 
+		/*if (!empty($this->input->post('s_pecho'))) {
+			echo 'si';
+		}else{
+			echo 'no';
+		}
+		die();*/
+/*		$this->input->post('hora_entrega');
+		die();
+*/
 		$datos_cliente = array(
 			'nombre'    => $this->input->post('nombre'),
 			'ci'        => $this->input->post('ci'),
@@ -79,23 +88,24 @@ class Trabajos extends CI_Controller {
 		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
 
 		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
-		$fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
-		$fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
-		$fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
-		$fh_entrega = $fecha_mas_transformado.' 16:00:00';
+		$fecha_hora_entrega = $this->input->post('fecha_entrega').' '.$this->input->post('hora_entrega');
+		// $fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
+		// $fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
+		// $fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
+		// $fh_entrega = $fecha_mas_transformado.' 16:00:00';
 
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'fecha'            => $fecha_hora_trabajo,
-			'fecha_prueba'     => $this->input->post('fecha_prueba'),
-			'fecha_entrega'    => $fh_entrega,
+			'fecha_prueba'     => $fecha_hora_prueba,
+			'fecha_entrega'    => $fecha_hora_entrega,
 			'costo_tela'       => $this->input->post('costo_tela'),
 			'costo_confeccion' => $this->input->post('costo_confeccion'),
 			'total'            => $this->input->post('monto_total'),
 			'saldo'            => $this->input->post('saldo'),
 			'estado'           => 'Oficina',
 			'tela_propia'      => $this->input->post('tela_propia'),
-			'marca_tela'            => $this->input->post('marca')
+			'marca_tela'       => $this->input->post('marca')
 		);
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
@@ -108,58 +118,64 @@ class Trabajos extends CI_Controller {
 		);
 		$this->db->insert('pagos', $datos_pago);
 
-		$datos_saco = array(
-			'cliente_id'  => $id_cliente,
-			'trabajo_id'  => $id_trabajo,
-			'modelo_id'   => $this->input->post('sd_modelo'),
-			'abertura_id' => $this->input->post('sd_aberturas'),
-			'detalle_id'  => $this->input->post('sd_detalle'),
-			'color'       => $this->input->post('sd_color'),
-			'color_ojal'  => $this->input->post('sd_color_ojal'),
-			'ojal_puno'   => $this->input->post('sd_ojal'),
-			'talla'       => $this->input->post('s_talla'),
-			'largo'       => $this->input->post('s_largo'),
-			'hombro'      => $this->input->post('s_hombro'),
-			'espalda'     => $this->input->post('s_espalda'),
-			'pecho'       => $this->input->post('s_pecho'),
-			'estomago'    => $this->input->post('s_estomago'),
-			'medio_brazo' => $this->input->post('s_mbrazo'),
-			'largo_manga' => $this->input->post('s_lmanga'),
-		);
-		$this->db->insert('sacos', $datos_saco);
+		if (!empty($this->input->post('s_pecho'))) {
+			$datos_saco = array(
+				'cliente_id'  => $id_cliente,
+				'trabajo_id'  => $id_trabajo,
+				'modelo_id'   => $this->input->post('sd_modelo'),
+				'abertura_id' => $this->input->post('sd_aberturas'),
+				'detalle_id'  => $this->input->post('sd_detalle'),
+				'color'       => $this->input->post('sd_color'),
+				'color_ojal'  => $this->input->post('sd_color_ojal'),
+				'ojal_puno'   => $this->input->post('sd_ojal'),
+				'talla'       => $this->input->post('s_talla'),
+				'largo'       => $this->input->post('s_largo'),
+				'hombro'      => $this->input->post('s_hombro'),
+				'espalda'     => $this->input->post('s_espalda'),
+				'pecho'       => $this->input->post('s_pecho'),
+				'estomago'    => $this->input->post('s_estomago'),
+				'medio_brazo' => $this->input->post('s_mbrazo'),
+				'largo_manga' => $this->input->post('s_lmanga'),
+			);
+			$this->db->insert('sacos', $datos_saco);
+		}
 
-		$datos_pantalon = array(
-			'cliente_id'     => $id_cliente,
-			'trabajo_id'     => $id_trabajo,
-			'modelo_id'      => $this->input->post('pd_modelo'),
-			'pinza_id'       => $this->input->post('pd_pinzas'),
-			'bolsillo_id'    => $this->input->post('pd_batras'),
-			'largo'          => $this->input->post('p_largo'),
-			'entre_pierna'   => $this->input->post('p_entrepierna'),
-			'cintura'        => $this->input->post('p_cintura'),
-			'muslo'          => $this->input->post('p_muslo'),
-			'rodilla'        => $this->input->post('p_rodilla'),
-			'bota_pie'       => $this->input->post('p_bpie'),
-			'tiro_delantero' => $this->input->post('p_tdelantero'),
-			'tiro_atras'     => $this->input->post('p_tatras'),
-			'bragueta'       => $this->input->post('pd_bragueta'),
-			'bota_pie_des'   => $this->input->post('pd_bpie'),
-		);
-		$this->db->insert('pantalones', $datos_pantalon);
+		if (!empty($this->input->post('p_largo'))) {
+			$datos_pantalon = array(
+				'cliente_id'     => $id_cliente,
+				'trabajo_id'     => $id_trabajo,
+				'modelo_id'      => $this->input->post('pd_modelo'),
+				'pinza_id'       => $this->input->post('pd_pinzas'),
+				'bolsillo_id'    => $this->input->post('pd_batras'),
+				'largo'          => $this->input->post('p_largo'),
+				'entre_pierna'   => $this->input->post('p_entrepierna'),
+				'cintura'        => $this->input->post('p_cintura'),
+				'muslo'          => $this->input->post('p_muslo'),
+				'rodilla'        => $this->input->post('p_rodilla'),
+				'bota_pie'       => $this->input->post('p_bpie'),
+				'tiro_delantero' => $this->input->post('p_tdelantero'),
+				'tiro_atras'     => $this->input->post('p_tatras'),
+				'bragueta'       => $this->input->post('pd_bragueta'),
+				'bota_pie_des'   => $this->input->post('pd_bpie'),
+			);
+			$this->db->insert('pantalones', $datos_pantalon);
+		}
 
-		$datos_chaleco = array(
-			'cliente_id'   => $id_cliente,
-			'trabajo_id'   => $id_trabajo,
-			'modelo_id'    => $this->input->post('ch_modelo'),
-			'detalle_id'   => $this->input->post('ch_detalle'),
-			'largo'        => $this->input->post('ch_largo'),
-			'pecho'        => $this->input->post('ch_pecho'),
-			'estomago'     => $this->input->post('ch_estomago'),
-			'botones'      => $this->input->post('ch_botones'),
-			'color_ojales' => $this->input->post('ch_color'),
-		);
-		$this->db->insert('chalecos', $datos_chaleco);
-		$redirect("Trabajos/detalle_trabajo/$id_trabajo");
+		if (!empty($this->input->post('ch_estomago'))) {
+			$datos_chaleco = array(
+				'cliente_id'   => $id_cliente,
+				'trabajo_id'   => $id_trabajo,
+				'modelo_id'    => $this->input->post('ch_modelo'),
+				'detalle_id'   => $this->input->post('ch_detalle'),
+				'largo'        => $this->input->post('ch_largo'),
+				'pecho'        => $this->input->post('ch_pecho'),
+				'estomago'     => $this->input->post('ch_estomago'),
+				'botones'      => $this->input->post('ch_botones'),
+				'color_ojales' => $this->input->post('ch_color'),
+			);
+			$this->db->insert('chalecos', $datos_chaleco);
+		}
+		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
 		// vdebug($datos_chaleco, true, false, true);
 

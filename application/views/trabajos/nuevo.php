@@ -598,6 +598,118 @@
                       </div>
 
                       <!-- modelos chalecos -->
+
+                      <div class="row">
+
+                        <!-- chaleco medidas -->
+                        <div class="col-md-5">
+                          <div class="card card-outline-inverse">
+                            <div class="card-header">
+                              <h4 class="mb-0 text-white">CAMISA</h4></div>
+                              <div class="card-body" style="background-color: #f0e7fe;">
+
+                                <div class="row">
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Cuello</label>
+                                      <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Largo manga</label>
+                                      <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any">
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Color</label>
+                                      <input name="cam_color" type="number" id="cam_color" class="form-control" min="0" step="any">
+                                    </div>
+                                  </div>
+
+                                </div>
+                                <div class="row">
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Modelo cuello</label>
+                                      <select name="cam_mcuello" class="form-control custom-select">
+                                        <option value="">Seleccione</option>
+                                        <option value="Pajarito">Pajarito</option>
+                                        <option value="Normal">Normal</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Ancho</label>
+                                      <select name="cam_ancho" class="form-control custom-select">
+                                        <option value="">Seleccione</option>
+                                        <option value="Normal">Normal</option>
+                                        <option value="Slim">Slim</option>
+                                      </select>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-4">
+                                    <div class="form-group">
+                                      <label class="control-label">Cantidad</label>
+                                      <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" min="0" step="any">
+                                    </div>
+                                  </div>
+                                  
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- fin chaleco medidas -->
+
+                          <!-- modelos chalecos -->
+                          <div class="col-md-7">
+                            <div class="card card-outline-inverse">
+                              <div class="card-header">
+                                <h4 class="mb-0 text-white">EXTRAS</h4>
+                              </div>
+                              <div class="card-body" style="background-color: #f0e7fe;">
+
+                                <div class="row">
+
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label class="control-label">Corbaton</label>
+                                      <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro">
+                                    </div>
+                                  </div>
+
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label class="control-label">Corbata gato</label>
+                                      <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro">
+                                    </div>
+                                  </div>
+
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label class="control-label">Faja</label>
+                                      <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro">
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- fin modelos chalecos -->
+
+                        </div>
+
                       <div class="row">
 
                       </div>
@@ -645,7 +757,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Hora Entrega</label>
-                                    <input type="time" id="hora_entrega" name="hora_prueba" class="form-control" value="15:00:00">
+                                    <input type="time" id="hora_entrega" name="hora_entrega" class="form-control" value="15:00:00">
                                   </div>
                                 </div>
 
