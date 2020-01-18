@@ -45,7 +45,16 @@
         </div>
         <div class="card-body">
 
-          <form action="#">
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="btn waves-effect waves-light btn-block btn-warning">buscar</button>
+            </div>
+            
+            <!-- <div class="col-md-6">
+              <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
+            </div> -->
+          </div>
+
            <div class="form-body">
             <div class="row pt-3">
 
@@ -91,10 +100,10 @@
                 </div>
 
                 <div class="row">
-                  <div class="col-md-12">
+                  <!--<div class="col-md-12">
                     <button type="button" class="btn waves-effect waves-light btn-block btn-dark">Varon</button>
                   </div>
-                  <!-- <div class="col-md-6">
+                   <div class="col-md-6">
                     <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
                   </div> -->
                 </div>
