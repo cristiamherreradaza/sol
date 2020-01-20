@@ -54,17 +54,18 @@
               <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
             </div> -->
           </div>
-
-          <div class="row" style="display: block;">
-            <div class="col-md-3">
-              <div class="form-group">
-                <label class="control-label">Nombre cliente</label>
-                <input type="text" name="busca_cliente" id="busca_cliente" class="form-control" placeholder="Ej: Cristiam Herrera">
+          <div id="bloque_busqueda" style="display: block;">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label class="control-label">Nombre cliente</label>
+                  <input type="text" name="busca_cliente" id="busca_cliente" class="form-control" placeholder="Ej: Cristiam Herrera">
+                </div>
               </div>
-            </div>
-            
-            <div class="col-md-9" id="datos_cliente_ajax">
-
+              
+              <div class="col-md-9">
+                <div id="datos_cliente_ajax"></div>
+              </div>
             </div>
           </div>
 
@@ -950,7 +951,7 @@
 
   $(document).on('keydown', '#busca_cliente', function(e){
     nombre_cliente = $('#busca_cliente').val();
-    if (nombre_cliente.length > 4) {
+    if (nombre_cliente.length > 3) {
       // console.log(nombre_cliente.length);
       // var pagina   = $(this).attr('data-pagina');
       // var dv       = $(this).parents('.gale-archi-ajax');
@@ -961,7 +962,8 @@
         type: 'GET',
         success: function (data) {
           // dv.html(data);
-          console.log(data);
+          // console.log(data);
+          $("#datos_cliente_ajax").html(data);
         }
       });
     }

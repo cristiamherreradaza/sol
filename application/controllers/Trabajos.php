@@ -250,8 +250,13 @@ class Trabajos extends CI_Controller {
 
 	public function ajax_busca_cliente($nombre_cliente = null)
 	{
-		// vdebug($nombre_cliente, true, false, true);
-		echo $nombre_cliente;
+		// $nombre_cliente='juan';
+		// $consulta_cliente = $this->db->get_where;
+		$consulta_cliente = $this->db->like('nombre', $nombre_cliente);
+		$this->db->limit(10);
+		$data['clientes_encontrados'] = $this->db->get('clientes')->result_array();
+		// vdebug($res, true, false, true);
+		$this->load->view('trabajos/ajax_busca_cliente', $data);
 		// return $nombre_cliente;
 	}
 
