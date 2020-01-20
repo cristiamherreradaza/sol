@@ -248,4 +248,11 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function ajax_busca_cliente($nombre_cliente = null)
+	{
+		// vdebug($nombre_cliente, true, false, true);
+		echo $nombre_cliente;
+		// return $nombre_cliente;
+	}
+
 }

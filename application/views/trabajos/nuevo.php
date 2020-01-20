@@ -47,12 +47,25 @@
 
           <div class="row">
             <div class="col-md-12">
-              <button type="button" class="btn waves-effect waves-light btn-block btn-warning">buscar</button>
+              <button type="button" class="btn waves-effect waves-light btn-block btn-warning">BUSCAR CLIENTE</button>
             </div>
             
             <!-- <div class="col-md-6">
               <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
             </div> -->
+          </div>
+
+          <div class="row" style="display: block;">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label class="control-label">Nombre cliente</label>
+                <input type="text" name="busca_cliente" id="busca_cliente" class="form-control" placeholder="Ej: Cristiam Herrera">
+              </div>
+            </div>
+            
+            <div class="col-md-9" id="datos_cliente_ajax">
+
+            </div>
           </div>
 
            <div class="form-body">
@@ -146,7 +159,7 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Espalda</label>
-                                <input name="s_espalda" type="number" id="firstName" class="form-control" min="0" step="any">
+                                <input name="s_espalda" type="number" id="s_espalda" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -157,28 +170,28 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Pecho</label>
-                                <input name="s_pecho" type="number" id="firstName" class="form-control" min="0" step="any">
+                                <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Estomago</label>
-                                <input name="s_estomago" type="number" id="firstName" class="form-control" min="0" step="any">
+                                <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Medio Brazo</label>
-                                <input name="s_mbrazo" type="number" id="firstName" class="form-control" min="0" step="any">
+                                <input name="s_mbrazo" type="number" id="s_mbrazo" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">L. Manga</label>
-                                <input name="s_lmanga" type="number" id="firstName" class="form-control" min="0" step="any">
+                                <input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -318,28 +331,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Largo</label>
-                                  <input name="p_largo" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Entrepierna</label>
-                                  <input name="p_entrepierna" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Cintura</label>
-                                  <input name="p_cintura" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Muslo</label>
-                                  <input name="p_muslo" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
@@ -350,28 +363,28 @@
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Rodilla</label>
-                                  <input name="p_rodilla" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Bota Pie</label>
-                                  <input name="p_bpie" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Delantero</label>
-                                  <input name="p_tdelantero" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
                               <div class="col-md-3">
                                 <div class="form-group">
                                   <label class="control-label">Tiro Atras</label>
-                                  <input name="p_tatras" type="number" id="firstName" class="form-control" min="0" step="any">
+                                  <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any">
                                 </div>
                               </div>
 
@@ -568,7 +581,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Color Ojales</label>
-                                    <input name="ch_color" type="text" id="sd_color" class="form-control" placeholder="">
+                                    <input name="ch_color" type="text" id="ch_color" class="form-control" placeholder="">
                                   </div>
                                 </div>
 
@@ -745,7 +758,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Fecha Prueba</label>
-                                    <input type="date" name="fecha_prueba" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
+                                    <input type="date" name="fecha_prueba" id="fecha_prueba" class="form-control" value="<?php echo date('Y-m-d');?>">
                                   </div>
                                 </div>
 
@@ -783,7 +796,7 @@
                                 <div class="col">
                                   <div class="form-group">
                                     <label class="control-label">Marca</label>
-                                    <input type="text" name="marca" id="fecha" class="form-control">
+                                    <input type="text" name="marca" id="marca" class="form-control">
                                   </div>
                                 </div>
                                 </div>
@@ -934,6 +947,28 @@
     console.log("Costo: "+suma);
     // console.log("Costo de tela: "+costo_tela);
   });
+
+  $(document).on('keydown', '#busca_cliente', function(e){
+    nombre_cliente = $('#busca_cliente').val();
+    if (nombre_cliente.length > 4) {
+      // console.log(nombre_cliente.length);
+      // var pagina   = $(this).attr('data-pagina');
+      // var dv       = $(this).parents('.gale-archi-ajax');
+      // var idposmod = dv.attr('data-idposimod');
+
+      $.ajax({
+        url: '<?php echo base_url() ?>/Trabajos/ajax_busca_cliente/' + nombre_cliente,
+        type: 'GET',
+        success: function (data) {
+          // dv.html(data);
+          console.log(data);
+        }
+      });
+    }
+
+  });
+
+
 
   $('body').on('keydown', 'input, select', function(e) {
       if (e.key === "Enter") {
