@@ -175,6 +175,49 @@ class Trabajos extends CI_Controller {
 			);
 			$this->db->insert('chalecos', $datos_chaleco);
 		}
+
+		if (!empty($this->input->post('cam_cuello'))) {
+			$datos_camisa = array(
+				'cliente_id'   => $id_cliente,
+				'trabajo_id'   => $id_trabajo,
+				'cuello'    => $this->input->post('cam_cuello'),
+				'modelo_cuello'   => $this->input->post('cam_mcuello'),
+				'cuello_combinado'   => $this->input->post('cam_ccombinado'),
+				'largo_manga'   => $this->input->post('cam_lmanga'),
+				'color'   => $this->input->post('color'),
+			);
+			$this->db->insert('camisas', $datos_camisa);
+		}
+
+		$sw = 0;
+		if (!empty($this->input->post('corbaton_color')))
+		{
+			$corbaton_color = $this->input->post('corbaton_color');
+			$sw = 1;
+		}
+
+		if (!empty($this->input->post('cg_color')))
+		{
+			$cg_color = $this->input->post('cg_color');
+			$sw = 1;
+		}
+
+		if (!empty($this->input->post('faja_color')))
+		{
+			$faja_color = $this->input->post('faja_color');
+			$sw = 1;
+		}
+		if($sw == 1){
+			$datos_extras = array(
+				'cliente_id'   => $id_cliente,
+				'trabajo_id'   => $id_trabajo,
+				'corbaton'     => $corbaton_color,
+				'corbata_gato' => $cg_color,
+				'faja'         => $faja_color,
+			);
+			$this->db->insert('extras', $datos_extras);
+		}
+
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
 		// vdebug($datos_chaleco, true, false, true);
@@ -237,6 +280,7 @@ class Trabajos extends CI_Controller {
 	{
 		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
+		$this->db->order_by('id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajo'], true ,false, true);
