@@ -949,7 +949,7 @@
     // console.log("Costo de tela: "+costo_tela);
   });
 
-  $(document).on('keydown', '#busca_cliente', function(e){
+  $(document).on('keyup', '#busca_cliente', function(e){
     nombre_cliente = $('#busca_cliente').val();
     if (nombre_cliente.length > 3) {
       // console.log(nombre_cliente.length);
@@ -970,7 +970,10 @@
 
   });
 
-
+  function extraer_datos(id_cliente)
+  {
+    console.log(id_cliente);  
+  }
 
   $('body').on('keydown', 'input, select', function(e) {
       if (e.key === "Enter") {

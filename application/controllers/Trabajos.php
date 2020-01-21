@@ -252,7 +252,8 @@ class Trabajos extends CI_Controller {
 	{
 		// $nombre_cliente='juan';
 		// $consulta_cliente = $this->db->get_where;
-		$consulta_cliente = $this->db->like('nombre', $nombre_cliente);
+		$cliente_limpio = str_replace("%20"," ",$nombre_cliente);
+		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);		
 		$this->db->limit(10);
 		$data['clientes_encontrados'] = $this->db->get('clientes')->result_array();
 		// vdebug($res, true, false, true);
