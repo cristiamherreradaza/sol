@@ -261,4 +261,34 @@ class Trabajos extends CI_Controller {
 		// return $nombre_cliente;
 	}
 
+	public function ajax_medidas_cliente($id_cliente = null)
+	{
+		// echo $id_cliente;
+		$data['cliente'] = $this->db->get_where('clientes', array(
+			'id'=>$id_cliente
+		))->row_array();
+
+		$data['sacos'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('cliente_id', $id_cliente)
+			->limit(1)
+			->get('sacos')->row_array();
+
+		$data['pantalones'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('cliente_id', $id_cliente)
+			->limit(1)
+			->get('pantalones')->row_array();
+
+		$data['chalecos'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('cliente_id', $id_cliente)
+			->limit(1)
+			->get('chalecos')->row_array();
+
+		echo json_encode($data, JSON_PRETTY_PRINT);
+
+		// vdebug($datos, false, false, true);
+	}
+
 }

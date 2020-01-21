@@ -47,14 +47,14 @@
 
           <div class="row">
             <div class="col-md-12">
-              <button type="button" class="btn waves-effect waves-light btn-block btn-warning">BUSCAR CLIENTE</button>
+              <button type="button" class="btn waves-effect waves-light btn-block btn-warning" onclick="muestra_bloque_busqueda();">BUSCAR CLIENTE</button>
             </div>
             
             <!-- <div class="col-md-6">
               <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
             </div> -->
           </div>
-          <div id="bloque_busqueda" style="display: block;">
+          <div id="bloque_busqueda" style="display: none;">
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
@@ -65,6 +65,7 @@
               
               <div class="col-md-9">
                 <div id="datos_cliente_ajax"></div>
+                <div id="medidas_cliente_ajax"></div>
               </div>
             </div>
           </div>
@@ -75,7 +76,7 @@
              <div class="col-md-5">
               <label class="control-label">Nombre del cliente</label>
               <div class="input-group mb-3">
-                <input type="text" name="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza">
+                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza">
                 <!-- <div class="input-group-append">
                   <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
                 </div> -->
@@ -139,21 +140,21 @@
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Talle</label>
-                                <input name="s_talla" type="number" id="talla" class="form-control" min="0" step="any">
+                                <input name="s_talla" type="number" id="s_talla" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Largo</label>
-                                <input name="s_largo" type="number" id="largo" class="form-control" min="0" step="any">
+                                <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
                             <div class="col-md-3">
                               <div class="form-group">
                                 <label class="control-label">Hombro</label>
-                                <input name="s_hombro" type="number" id="hombro" class="form-control" min="0" step="any">
+                                <input name="s_hombro" type="number" id="s_hombro" class="form-control" min="0" step="any">
                               </div>
                             </div>
 
@@ -961,8 +962,6 @@
         url: '<?php echo base_url() ?>/Trabajos/ajax_busca_cliente/' + nombre_cliente,
         type: 'GET',
         success: function (data) {
-          // dv.html(data);
-          // console.log(data);
           $("#datos_cliente_ajax").html(data);
         }
       });
@@ -972,7 +971,24 @@
 
   function extraer_datos(id_cliente)
   {
-    console.log(id_cliente);  
+    // console.log(id_cliente);  
+    $.ajax({
+      url: '<?php echo base_url() ?>/Trabajos/ajax_medidas_cliente/' + id_cliente,
+      type: 'GET',
+      success: function (data) {
+        // dv.html(data);
+        datos_cliente = JSON.parse(data);
+        console.log(datos_cliente);
+        console.log(datos_cliente.cliente.nombre);
+        $("#nombre").val(datos_cliente.cliente.nombre);
+        $("#s_talla").val(datos_cliente.sacos.talla);
+      }
+    });
+  }
+
+  function muestra_bloque_busqueda()
+  {
+    $("#bloque_busqueda").toggle('slow');  
   }
 
   $('body').on('keydown', 'input, select', function(e) {
