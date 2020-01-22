@@ -270,6 +270,11 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ca.trabajo_id', $id_trabajo);
 		$data['camisa'] = $this->db->get()->row_array();
 
+		$this->db->select('*');
+		$this->db->from('extras as ex');
+		$this->db->where('ex.trabajo_id', $id_trabajo);
+		$data['extras'] = $this->db->get()->row_array();
+
 		// vdebug($data['chaleco'], false, false, true);
 
 		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();

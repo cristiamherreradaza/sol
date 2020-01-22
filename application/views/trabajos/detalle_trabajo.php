@@ -148,27 +148,27 @@
                                                 <table class="table table-hover">
                                                     <tbody>
                                                         <tr>
-                                                            <td>Modelo</td>
+                                                            <td class="text-info">Modelo</td>
                                                             <td class="text-right"><?php echo $saco['modelo_nombre']; ?> </td>
-                                                            <td>Botones</td>
+                                                            <td class="text-info">Botones</td>
                                                             <td class="text-right"><?php echo $saco['botones']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Aberturas</td>
+                                                            <td class="text-info">Aberturas</td>
                                                             <td class="text-right"><?php echo $saco['nombre_abertura']; ?></td>
-                                                            <td>Detalle</td>
+                                                            <td class="text-info">Detalle</td>
                                                             <td class="text-right"><?php echo $saco['detalle_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Color</td>
+                                                            <td class="text-info">Color</td>
                                                             <td class="text-right"><?php echo $saco['color']; ?></td>
                                                             <td></td>
                                                             <td class="text-right"></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Ojal</td>
+                                                            <td class="text-info">Ojal</td>
                                                             <td class="text-right"><?php echo $saco['ojal_puno']; ?></td>
-                                                            <td>Color Ojal</td>
+                                                            <td class="text-info">Color Ojal</td>
                                                             <td class="text-right"><?php echo $saco['color_ojal']; ?></td>
                                                         </tr>
                                                     </tbody>
@@ -190,19 +190,19 @@
                                                 <table class="table table-hover">
                                                     <tbody>
                                                         <tr>
-                                                            <td>Modelo</td>
+                                                            <td class="text-success">Modelo</td>
                                                             <td class="text-right"><?php echo $pantalon['modelo_nombre']; ?> </td>
-                                                            <td>PInzas</td>
+                                                            <td class="text-success">PInzas</td>
                                                             <td class="text-right"><?php echo $pantalon['pinzas_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Bragueta</td>
+                                                            <td class="text-success">Bragueta</td>
                                                             <td class="text-right"><?php echo $pantalon['bragueta']; ?></td>
-                                                            <td>Bolsillo atras</td>
+                                                            <td class="text-success">Bolsillo atras</td>
                                                             <td class="text-right"><?php echo $pantalon['bolsillo_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Bota pie</td>
+                                                            <td class="text-success">Bota pie</td>
                                                             <td class="text-right"><?php echo $pantalon['bota_pie_des']; ?></td>
                                                             <td></td>
                                                             <td class="text-right"></td>
@@ -229,15 +229,15 @@
                                                 <table class="table table-hover">
                                                     <tbody>
                                                         <tr>
-                                                            <td>Modelo</td>
+                                                            <td class="text-primary">Modelo</td>
                                                             <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
-                                                            <td>Botones</td>
+                                                            <td class="text-primary">Botones</td>
                                                             <td class="text-right"><?php echo $chaleco['botones']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Detalle</td>
+                                                            <td class="text-primary">Detalle</td>
                                                             <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
-                                                            <td>Color ojales</td>
+                                                            <td class="text-primary">Color ojales</td>
                                                             <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
                                                         </tr>
                                                     </tbody>
@@ -266,16 +266,14 @@
                                                             <td class="text-right"><?php echo $camisa['largo_manga']; ?></td>
                                                             <td>Color</td>
                                                             <td class="text-right"><?php echo $camisa['color']; ?> </td>
-                                                            <td>Modelo cuello</td>
-                                                            <td class="text-right"><?php echo $camisa['modelo_cuello']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Ancho</td>
-                                                            <td class="text-right"><?php echo $camisa['ancho']; ?> </td>
                                                             <td>Cuello combinado</td>
                                                             <td class="text-right"><?php echo $camisa['cuello_combinado']; ?></td>
                                                             <td>Cantidad</td>
                                                             <td class="text-right"><?php echo $camisa['cantidad']; ?> </td>
+                                                            <td>Modelo cuello</td>
+                                                            <td class="text-right"><?php echo $camisa['modelo_cuello']; ?></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -283,6 +281,39 @@
                                             </div>
                                         </div>
                                         <?php endif ?>
+                                    </div>
+
+                                    <div class="row">
+                                    <?php if (!empty($extras)): ?>
+                                        <div class="col-md-6">
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-inverse">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">EXTRAS</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Corbaton</td>
+                                                            <td class="text-right"><?php echo $extras['corbaton']; ?> </td>
+                                                            <td>Corbata Gato</td>
+                                                            <td class="text-right"><?php echo $extras['corbata_gato']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Detalle</td>
+                                                            <td class="text-right"><?php echo $extras['faja']; ?></td>
+                                                            <td></td>
+                                                            <td class="text-right"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+                                        </div>
+                                        <?php endif ?>
+
                                     </div>
 
                                 <div class="table-responsive mt-5" style="clear: both;">
@@ -342,13 +373,16 @@
                                     </table>
                                 </div>
                             </div>
+
+
                             <div class="col-md-12">
                                 <div class="float-right mt-4 text-right">
                                     <?php $sub_total = $sub_saco + $sub_pantalon + $sub_chaleco ?>
                                     <p>Sub - Total : <?php echo $sub_total ?></p>
-                                    <p>Precio tela : <?php echo $trabajo['costo_tela'] ?> </p>
+                                    <p>Precio - Tela : <?php echo $trabajo['costo_tela'] ?> </p>
                                     <hr>
                                     <h3><b>Total :</b> <?php echo $trabajo['costo_tela'] + $sub_total ?></h3>
+                                    <h3 class="text-info"><b>Saldo :</b> <?php echo $trabajo['saldo'] ?></h3>
                                 </div>
                                 <div class="clearfix"></div>
                                 <hr>
