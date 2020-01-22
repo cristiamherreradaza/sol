@@ -307,7 +307,10 @@
                                                         <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
                                                     </td>
                                                 </tr>
+                                            <?php else: ?>
+                                                <?php $sub_saco = 0 ?>
                                             <?php endif ?>
+
                                             <?php if (!empty($pantalon)): ?>
                                                 <tr>
                                                     <td class="text-center">2</td>
@@ -318,7 +321,10 @@
                                                         <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
                                                     </td>
                                                 </tr>
+                                            <?php else: ?>
+                                                <?php $sub_pantalon = 0 ?>
                                             <?php endif ?>
+
                                             <?php if (!empty($chaleco)): ?>
                                                 <tr>
                                                     <td class="text-center">3</td>
@@ -329,6 +335,8 @@
                                                         <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
                                                     </td>
                                                 </tr>
+                                            <?php else: ?>
+                                                <?php $sub_chaleco = 0 ?>
                                             <?php endif ?>
                                         </tbody>
                                     </table>

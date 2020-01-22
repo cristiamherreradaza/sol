@@ -177,6 +177,8 @@ class Trabajos extends CI_Controller {
 				'estomago'     => $this->input->post('ch_estomago'),
 				'botones'      => $this->input->post('ch_botones'),
 				'color_ojales' => $this->input->post('ch_color'),
+				'precio_unitario' => $this->input->post('ch_pu'),
+				'cantidad'        => $this->input->post('ch_cantidad'),
 			);
 			$this->db->insert('chalecos', $datos_chaleco);
 		}
