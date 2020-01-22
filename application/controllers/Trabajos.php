@@ -103,7 +103,6 @@ class Trabajos extends CI_Controller {
 			'costo_confeccion' => $this->input->post('costo_confeccion'),
 			'total'            => $this->input->post('monto_total'),
 			'saldo'            => $this->input->post('saldo'),
-			'estado'           => 'Oficina',
 			'tela_propia'      => $this->input->post('tela_propia'),
 			'marca_tela'       => $this->input->post('marca')
 		);
@@ -111,10 +110,10 @@ class Trabajos extends CI_Controller {
 		$id_trabajo = $this->db->insert_id();
 
 		$datos_pago = array(
-			'cliente_id'       => $id_cliente,
-			'trabajo_id'=>$id_trabajo,
-			'fecha'=>$fecha_hora_trabajo,
-			'monto'=>$this->input->post('a_cuenta')
+			'cliente_id' => $id_cliente,
+			'trabajo_id' => $id_trabajo,
+			'fecha'      => $fecha_hora_trabajo,
+			'monto'      => $this->input->post('a_cuenta')
 		);
 		$this->db->insert('pagos', $datos_pago);
 
@@ -271,7 +270,7 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ca.trabajo_id', $id_trabajo);
 		$data['camisa'] = $this->db->get()->row_array();
 
-		// vdebug($data['chaleco'], true, false, true);
+		// vdebug($data['chaleco'], false, false, true);
 
 		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 		$fecha = fechaEs($data['trabajo']['fecha']);
@@ -298,6 +297,7 @@ class Trabajos extends CI_Controller {
 		$this->db->from('trabajos as t');
 		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->limit(100);
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajo'], true ,false, true);
 

@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
+
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -28,11 +29,11 @@
                                        <th>Celular</th>
                                        <th>Fecha Prueba</th>
                                        <th>Fecha Entrega</th>
-                                       <th>C. Tela</th>
-                                       <th>C. Confeccion</th>
+                                       <th>$. Tela</th>
+                                       <th>$.Conf</th>
                                        <th>Total</th>
                                        <th>Saldo</th>
-                                       <th>Entregado</th>
+                                       <th>Ent</th>
                                        <th>Acciones</th>
                                    </tr>
                                </thead>
@@ -44,12 +45,16 @@
                                          <td><?php echo $t['celulares'] ?></td>
                                          <td><?php echo $t['fecha_prueba'] ?></td>
                                          <td><?php echo $t['fecha_entrega'] ?></td>
-                                         <td><?php echo $t['costo_tela'] ?></td>
-                                         <td><?php echo $t['costo_confeccion'] ?></td>
-                                         <td><?php echo $t['total'] ?></td>
-                                         <td><?php echo $t['saldo'] ?></td>
-                                         <td><?php echo $t['estado'] ?></td>
-                                         <td></td>
+                                         <td align="right"><?php echo $t['costo_tela'] ?></td>
+                                         <td align="right"><?php echo $t['costo_confeccion'] ?></td>
+                                         <td align="right"><?php echo $t['total'] ?></td>
+                                         <td align="right"><?php echo $t['saldo'] ?></td>
+                                         <td><?php echo $t['entregado'] ?></td>
+                                         <td>
+                                            <a href="<?php echo base_url() ?>/Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
+                                              <button type="button" class="btn btn-warning"><i class="fas fa-eye"></i></button>
+                                            </a>
+                                         </td>
                                      </tr>
                                   <?php endforeach ?>
                                </tbody>
