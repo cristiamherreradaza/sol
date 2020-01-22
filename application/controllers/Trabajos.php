@@ -120,43 +120,48 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('s_pecho'))) {
 			$datos_saco = array(
-				'cliente_id'  => $id_cliente,
-				'trabajo_id'  => $id_trabajo,
-				'modelo_id'   => $this->input->post('sd_modelo'),
-				'abertura_id' => $this->input->post('sd_aberturas'),
-				'detalle_id'  => $this->input->post('sd_detalle'),
-				'color'       => $this->input->post('sd_color'),
-				'color_ojal'  => $this->input->post('sd_color_ojal'),
-				'ojal_puno'   => $this->input->post('sd_ojal'),
-				'talla'       => $this->input->post('s_talla'),
-				'largo'       => $this->input->post('s_largo'),
-				'hombro'      => $this->input->post('s_hombro'),
-				'espalda'     => $this->input->post('s_espalda'),
-				'pecho'       => $this->input->post('s_pecho'),
-				'estomago'    => $this->input->post('s_estomago'),
-				'medio_brazo' => $this->input->post('s_mbrazo'),
-				'largo_manga' => $this->input->post('s_lmanga'),
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('sd_modelo'),
+				'abertura_id'     => $this->input->post('sd_aberturas'),
+				'detalle_id'      => $this->input->post('sd_detalle'),
+				'color'           => $this->input->post('sd_color'),
+				'color_ojal'      => $this->input->post('sd_color_ojal'),
+				'ojal_puno'       => $this->input->post('sd_ojal'),
+				'botones'         => $this->input->post('sd_botones'),
+				'talla'           => $this->input->post('s_talla'),
+				'largo'           => $this->input->post('s_largo'),
+				'hombro'          => $this->input->post('s_hombro'),
+				'espalda'         => $this->input->post('s_espalda'),
+				'pecho'           => $this->input->post('s_pecho'),
+				'estomago'        => $this->input->post('s_estomago'),
+				'medio_brazo'     => $this->input->post('s_mbrazo'),
+				'largo_manga'     => $this->input->post('s_lmanga'),
+				'precio_unitario' => $this->input->post('saco_pu'),
+				'cantidad'        => $this->input->post('saco_cantidad'),
 			);
 			$this->db->insert('sacos', $datos_saco);
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
 			$datos_pantalon = array(
-				'cliente_id'     => $id_cliente,
-				'trabajo_id'     => $id_trabajo,
-				'modelo_id'      => $this->input->post('pd_modelo'),
-				'pinza_id'       => $this->input->post('pd_pinzas'),
-				'bolsillo_id'    => $this->input->post('pd_batras'),
-				'largo'          => $this->input->post('p_largo'),
-				'entre_pierna'   => $this->input->post('p_entrepierna'),
-				'cintura'        => $this->input->post('p_cintura'),
-				'muslo'          => $this->input->post('p_muslo'),
-				'rodilla'        => $this->input->post('p_rodilla'),
-				'bota_pie'       => $this->input->post('p_bpie'),
-				'tiro_delantero' => $this->input->post('p_tdelantero'),
-				'tiro_atras'     => $this->input->post('p_tatras'),
-				'bragueta'       => $this->input->post('pd_bragueta'),
-				'bota_pie_des'   => $this->input->post('pd_bpie'),
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('pd_modelo'),
+				'pinza_id'        => $this->input->post('pd_pinzas'),
+				'bolsillo_id'     => $this->input->post('pd_batras'),
+				'largo'           => $this->input->post('p_largo'),
+				'entre_pierna'    => $this->input->post('p_entrepierna'),
+				'cintura'         => $this->input->post('p_cintura'),
+				'muslo'           => $this->input->post('p_muslo'),
+				'rodilla'         => $this->input->post('p_rodilla'),
+				'bota_pie'        => $this->input->post('p_bpie'),
+				'tiro_delantero'  => $this->input->post('p_tdelantero'),
+				'tiro_atras'      => $this->input->post('p_tatras'),
+				'bragueta'        => $this->input->post('pd_bragueta'),
+				'bota_pie_des'    => $this->input->post('pd_bpie'),
+				'precio_unitario' => $this->input->post('pantalon_pu'),
+				'cantidad'        => $this->input->post('pantalon_cantidad'),
 			);
 			$this->db->insert('pantalones', $datos_pantalon);
 		}
@@ -178,13 +183,13 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('cam_cuello'))) {
 			$datos_camisa = array(
-				'cliente_id'   => $id_cliente,
-				'trabajo_id'   => $id_trabajo,
-				'cuello'    => $this->input->post('cam_cuello'),
-				'modelo_cuello'   => $this->input->post('cam_mcuello'),
-				'cuello_combinado'   => $this->input->post('cam_ccombinado'),
-				'largo_manga'   => $this->input->post('cam_lmanga'),
-				'color'   => $this->input->post('color'),
+				'cliente_id'       => $id_cliente,
+				'trabajo_id'       => $id_trabajo,
+				'cuello'           => $this->input->post('cam_cuello'),
+				'modelo_cuello'    => $this->input->post('cam_mcuello'),
+				'cuello_combinado' => $this->input->post('cam_ccombinado'),
+				'largo_manga'      => $this->input->post('cam_lmanga'),
+				'color'            => $this->input->post('cam_color'),
 			);
 			$this->db->insert('camisas', $datos_camisa);
 		}
@@ -233,6 +238,7 @@ class Trabajos extends CI_Controller {
 		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
@@ -240,6 +246,7 @@ class Trabajos extends CI_Controller {
 		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
 		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
 		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
+		$this->db->where('sa.trabajo_id', $id_trabajo);
 		$data['saco'] = $this->db->get()->row_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
@@ -247,13 +254,20 @@ class Trabajos extends CI_Controller {
 		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
 		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
 		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
+		$this->db->where('pa.trabajo_id', $id_trabajo);
 		$data['pantalon'] = $this->db->get()->row_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
 		$this->db->from('chalecos as ch');
 		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
 		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
+		$this->db->where('ch.trabajo_id', $id_trabajo);
 		$data['chaleco'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('camisas as ca');
+		$this->db->where('ca.trabajo_id', $id_trabajo);
+		$data['camisa'] = $this->db->get()->row_array();
 
 		// vdebug($data['chaleco'], true, false, true);
 
@@ -280,7 +294,7 @@ class Trabajos extends CI_Controller {
 	{
 		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
-		$this->db->order_by('id', 'desc');
+		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajo'], true ,false, true);

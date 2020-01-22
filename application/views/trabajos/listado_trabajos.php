@@ -16,7 +16,7 @@
                <!-- table responsive -->
                <div class="card">
                    <div class="card-body">
-                    <?php vdebug($trabajos, true, false, true) ?>
+                    <?php //vdebug($trabajos, true, false, true) ?>
                        <h4 class="card-title">Listado de trabajos </h4>
                        <h6 class="card-subtitle">Trabajos</h6>
                        <div class="table-responsive m-t-40">
@@ -85,7 +85,10 @@
         $('#myTable').DataTable();
         // responsive table
         $('#config-table').DataTable({
-            responsive: true
+            responsive: true,
+            "order": [
+                [0, 'desc']
+            ],
         });
         var table = $('#example').DataTable({
             "columnDefs": [{

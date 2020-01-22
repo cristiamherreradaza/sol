@@ -36,307 +36,318 @@
 
 
                             <div class="col-md-12">
-                                <h3><b>DETALLE DEL SACO</b></h3>
-                                <hr>
                                 <div class="row">
-
-                                    <div class="col-md-4">
+                                    <div class="col-md-12">
+                                        
                                         <div class="table-responsive mt-5" style="clear: both;">
+                                            <?php if (!empty($saco)): ?>
+                                                <div class="card card-outline-info">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Talle</th>
+                                                            <th>Largo</th>
+                                                            <th>Hombro</th>
+                                                            <th>Espalda</th>
+                                                            <th>Pecho</th>
+                                                            <th>Estomago</th>
+                                                            <th>Medio Brazo</th>
+                                                            <th>Largo Maga</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $saco['talla']; ?></td>
+                                                            <td><?php echo $saco['largo']; ?></td>
+                                                            <td><?php echo $saco['hombro']; ?></td>
+                                                            <td><?php echo $saco['espalda']; ?></td>
+                                                            <td><?php echo $saco['pecho']; ?></td>
+                                                            <td><?php echo $saco['estomago']; ?></td>
+                                                            <td><?php echo $saco['medio_brazo']; ?></td>
+                                                            <td><?php echo $saco['largo_manga']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($pantalon)): ?>
+                                                <div class="card card-outline-success">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Largo</th>
+                                                            <th>Entrepierna</th>
+                                                            <th>Cintura</th>
+                                                            <th>Muslo</th>
+                                                            <th>Rodilla</th>
+                                                            <th>Bota pie</th>
+                                                            <th>Tiro delantero</th>
+                                                            <th>Tiro atras</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><?php echo $pantalon['largo']; ?></td>
+                                                            <td><?php echo $pantalon['entre_pierna']; ?></td>
+                                                            <td><?php echo $pantalon['cintura']; ?></td>
+                                                            <td><?php echo $pantalon['muslo']; ?></td>
+                                                            <td><?php echo $pantalon['rodilla']; ?></td>
+                                                            <td><?php echo $pantalon['bota_pie']; ?></td>
+                                                            <td><?php echo $pantalon['tiro_delantero']; ?></td>
+                                                            <td><?php echo $pantalon['tiro_atras']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($chaleco)): ?>                                            <div class="card card-outline-primary">
+                                                <div class="card-header">
+                                                    <h4 class="mb-0 text-white">MEDIDAS CHALECO</h4>
+                                                </div>
+                                            </div>
+
                                             <table class="table table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
+                                                        <th>Largo</th>
+                                                        <th>Pecho</th>
+                                                        <th>Estomago</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td>Talle</td>
-                                                        <td class="text-right"><?php echo $saco['talla']; ?> </td>
-                                                        <td>Pecho</td>
-                                                        <td class="text-right"><?php echo $saco['pecho']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Largo</td>
-                                                        <td class="text-right"><?php echo $saco['largo']; ?></td>
-                                                        <td>Estomago</td>
-                                                        <td class="text-right"><?php echo $saco['estomago']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Hombro</td>
-                                                        <td class="text-right"><?php echo $saco['hombro']; ?></td>
-                                                        <td>Medio Brazo</td>
-                                                        <td class="text-right"><?php echo $saco['medio_brazo']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Espalda</td>
-                                                        <td class="text-right"><?php echo $saco['espalda']; ?></td>
-                                                        <td>Largo Manga</td>
-                                                        <td class="text-right"><?php echo $saco['largo_manga']; ?></td>
+                                                        <td><?php echo $chaleco['largo']; ?></td>
+                                                        <td><?php echo $chaleco['pecho']; ?></td>
+                                                        <td><?php echo $chaleco['estomago']; ?></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
+                                            <?php endif ?>
                                         </div>
                                     </div>
-                                    <?php //vdebug($saco, false, false, true); ?>
-                                    <!-- <hr width="1" size="500"> -->
-
-                                    <div class="col-md-8">
-                                        <div class="table-responsive mt-5" style="clear: both;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Modelo</td>
-                                                        <td class="text-right"><?php echo $saco['modelo_nombre']; ?> </td>
-                                                        <td>Botones</td>
-                                                        <td class="text-right"><?php echo $saco['botones']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Aberturas</td>
-                                                        <td class="text-right"><?php echo $saco['nombre_abertura']; ?></td>
-                                                        <td>Detalle</td>
-                                                        <td class="text-right"><?php echo $saco['detalle_nombre']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Color</td>
-                                                        <td class="text-right"><?php echo $saco['color']; ?></td>
-                                                        <td></td>
-                                                        <td class="text-right"></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Ojal</td>
-                                                        <td class="text-right"><?php echo $saco['ojal_puno']; ?></td>
-                                                        <td>Color Ojal</td>
-                                                        <td class="text-right"><?php echo $saco['color_ojal']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
                                     </div>
-                                </div>
-                                <p></p>
 
-                                <h3><b>DETALLE DEL PANTALON</b></h3>
-                                <hr>
-
-                                <div class="row">
-
-                                    <div class="col-md-4">
-                                        <div class="table-responsive mt-5" style="clear: both;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Largo</td>
-                                                        <td class="text-right"><?php echo $pantalon['largo']; ?> </td>
-                                                        <td>Rodilla</td>
-                                                        <td class="text-right"><?php echo $pantalon['rodilla']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Entrepierna</td>
-                                                        <td class="text-right"><?php echo $pantalon['entre_pierna']; ?></td>
-                                                        <td>Bota pie</td>
-                                                        <td class="text-right"><?php echo $pantalon['bota_pie']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Cintura</td>
-                                                        <td class="text-right"><?php echo $pantalon['cintura']; ?></td>
-                                                        <td>Tiro Desaltero</td>
-                                                        <td class="text-right"><?php echo $pantalon['tiro_delantero']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Muslo</td>
-                                                        <td class="text-right"><?php echo $pantalon['muslo']; ?></td>
-                                                        <td>Tiro atras</td>
-                                                        <td class="text-right"><?php echo $pantalon['tiro_atras']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                    <div class="row">
+                                    <?php if (!empty($saco)): ?>
+                                        <div class="col-md-6">
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-info">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES SACO</h4>
+                                                    </div>
+                                                </div>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Modelo</td>
+                                                            <td class="text-right"><?php echo $saco['modelo_nombre']; ?> </td>
+                                                            <td>Botones</td>
+                                                            <td class="text-right"><?php echo $saco['botones']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Aberturas</td>
+                                                            <td class="text-right"><?php echo $saco['nombre_abertura']; ?></td>
+                                                            <td>Detalle</td>
+                                                            <td class="text-right"><?php echo $saco['detalle_nombre']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Color</td>
+                                                            <td class="text-right"><?php echo $saco['color']; ?></td>
+                                                            <td></td>
+                                                            <td class="text-right"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ojal</td>
+                                                            <td class="text-right"><?php echo $saco['ojal_puno']; ?></td>
+                                                            <td>Color Ojal</td>
+                                                            <td class="text-right"><?php echo $saco['color_ojal']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <?php //vdebug($pantalon, false, false, true); ?>
-                                    <!-- <hr width="1" size="500"> -->
+                                        <?php endif ?>
 
-                                    <div class="col-md-8">
-                                        <div class="table-responsive mt-5" style="clear: both;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Modelo</td>
-                                                        <td class="text-right"><?php echo $pantalon['modelo_nombre']; ?> </td>
-                                                        <td>PInzas</td>
-                                                        <td class="text-right"><?php echo $pantalon['pinzas_nombre']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Bragueta</td>
-                                                        <td class="text-right"><?php echo $pantalon['bragueta']; ?></td>
-                                                        <td>Bolsillo atras</td>
-                                                        <td class="text-right"><?php echo $pantalon['bolsillo_nombre']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Bota pie</td>
-                                                        <td class="text-right"><?php echo $pantalon['bota_pie_des']; ?></td>
-                                                        <td></td>
-                                                        <td class="text-right"></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                        <?php if (!empty($saco)): ?>
+                                        <div class="col-md-6">
+
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-success">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES PANTALON</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Modelo</td>
+                                                            <td class="text-right"><?php echo $pantalon['modelo_nombre']; ?> </td>
+                                                            <td>PInzas</td>
+                                                            <td class="text-right"><?php echo $pantalon['pinzas_nombre']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bragueta</td>
+                                                            <td class="text-right"><?php echo $pantalon['bragueta']; ?></td>
+                                                            <td>Bolsillo atras</td>
+                                                            <td class="text-right"><?php echo $pantalon['bolsillo_nombre']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Bota pie</td>
+                                                            <td class="text-right"><?php echo $pantalon['bota_pie_des']; ?></td>
+                                                            <td></td>
+                                                            <td class="text-right"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
                                         </div>
+                                        <?php endif ?>
                                     </div>
-                                    
-                                </div>
 
-                                <p></p>
 
-                                <h3><b>DETALLE DEL CHALECO</b></h3>
-                                <hr>
+                                    <div class="row">
+                                    <?php if (!empty($chaleco)): ?>
+                                        <div class="col-md-6">
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-primary">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES CHALECO</h4>
+                                                    </div>
+                                                </div>
 
-                                <div class="row">
-
-                                    <div class="col-md-4">
-                                        <div class="table-responsive mt-5" style="clear: both;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Largo</td>
-                                                        <td class="text-right"><?php echo $chaleco['largo']; ?> </td>
-                                                        <td>Pecho</td>
-                                                        <td class="text-right"><?php echo $chaleco['pecho']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Estomago</td>
-                                                        <td class="text-right"><?php echo $chaleco['estomago']; ?></td>
-                                                        <td></td>
-                                                        <td class="text-right"></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Modelo</td>
+                                                            <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
+                                                            <td>Botones</td>
+                                                            <td class="text-right"><?php echo $chaleco['botones']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Detalle</td>
+                                                            <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
+                                                            <td>Color ojales</td>
+                                                            <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
                                         </div>
-                                    </div>
-                                    <?php //vdebug($chaleco, false, false, true); ?>
-                                    <!-- <hr width="1" size="500"> -->
+                                        <?php endif ?>
 
-                                    <div class="col-md-8">
-                                        <div class="table-responsive mt-5" style="clear: both;">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                        <th>Descripcion</th>
-                                                        <th class="text-right">Medida</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Modelo</td>
-                                                        <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
-                                                        <td>Botones</td>
-                                                        <td class="text-right"><?php echo $chaleco['botones']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Detalle</td>
-                                                        <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
-                                                        <td>Color ojales</td>
-                                                        <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                        <?php if (!empty($camisa)): ?>
+                                        <div class="col-md-6">
+
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-inverse">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES CAMISA</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Cuello</td>
+                                                            <td class="text-right"><?php echo $camisa['cuello']; ?> </td>
+                                                            <td>Largo Manga</td>
+                                                            <td class="text-right"><?php echo $camisa['largo_manga']; ?></td>
+                                                            <td>Color</td>
+                                                            <td class="text-right"><?php echo $camisa['color']; ?> </td>
+                                                            <td>Modelo cuello</td>
+                                                            <td class="text-right"><?php echo $camisa['modelo_cuello']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Ancho</td>
+                                                            <td class="text-right"><?php echo $camisa['ancho']; ?> </td>
+                                                            <td>Cuello combinado</td>
+                                                            <td class="text-right"><?php echo $camisa['cuello_combinado']; ?></td>
+                                                            <td>Cantidad</td>
+                                                            <td class="text-right"><?php echo $camisa['cantidad']; ?> </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
                                         </div>
+                                        <?php endif ?>
                                     </div>
-                                    
-                                </div>
 
                                 <div class="table-responsive mt-5" style="clear: both;">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
-                                                <th>Description</th>
-                                                <th class="text-right">Quantity</th>
-                                                <th class="text-right">Unit Cost</th>
+                                                <th>Descripcion</th>
+                                                <th class="text-right">Cantidad</th>
+                                                <th class="text-right">Precio Unitario</th>
                                                 <th class="text-right">Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="text-center">1</td>
-                                                <td>Milk Powder</td>
-                                                <td class="text-right">2 </td>
-                                                <td class="text-right"> $24 </td>
-                                                <td class="text-right"> $48 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">2</td>
-                                                <td>Air Conditioner</td>
-                                                <td class="text-right"> 3 </td>
-                                                <td class="text-right"> $500 </td>
-                                                <td class="text-right"> $1500 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">3</td>
-                                                <td>RC Cars</td>
-                                                <td class="text-right"> 20 </td>
-                                                <td class="text-right"> %600 </td>
-                                                <td class="text-right"> $12000 </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">4</td>
-                                                <td>Down Coat</td>
-                                                <td class="text-right"> 60 </td>
-                                                <td class="text-right">$5 </td>
-                                                <td class="text-right"> $300 </td>
-                                            </tr>
+                                            <?php if (!empty($saco)): ?>
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td>Saco</td>
+                                                    <td class="text-right"><?php echo $saco['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif ?>
+                                            <?php if (!empty($pantalon)): ?>
+                                                <tr>
+                                                    <td class="text-center">2</td>
+                                                    <td>Pantalon</td>
+                                                    <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif ?>
+                                            <?php if (!empty($chaleco)): ?>
+                                                <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>Chaleco</td>
+                                                    <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endif ?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="float-right mt-4 text-right">
-                                    <p>Sub - Total amount: $13,848</p>
-                                    <p>vat (10%) : $138 </p>
+                                    <?php $sub_total = $sub_saco + $sub_pantalon + $sub_chaleco ?>
+                                    <p>Sub - Total : <?php echo $sub_total ?></p>
+                                    <p>Precio tela : <?php echo $trabajo['costo_tela'] ?> </p>
                                     <hr>
-                                    <h3><b>Total :</b> $13,986</h3>
+                                    <h3><b>Total :</b> <?php echo $trabajo['costo_tela'] + $sub_total ?></h3>
                                 </div>
                                 <div class="clearfix"></div>
                                 <hr>
-                                <div class="text-right">
+                                <!-- <div class="text-right">
                                     <button class="btn btn-danger" type="submit"> Proceed to payment </button>
                                     <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
