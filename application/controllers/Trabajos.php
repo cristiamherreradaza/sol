@@ -330,9 +330,18 @@ class Trabajos extends CI_Controller {
 		// return $nombre_cliente;
 	}
 
-	public function ajax_valida_cliente()
+	public function ajax_valida_cliente($nombre_cliente = null)
 	{
-		
+		$cliente_limpio = str_replace("%20"," ",$nombre_cliente);
+		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);		
+		$cliente_encontrado = $this->db->get('clientes')->result_array();
+		if(!empty($cliente_encontrado)){
+			$resultado = 1;
+		}else{
+			$resultado = 0;
+		}
+		echo json_encode($resultado);
+		// $this->load->view('trabajos/ajax_busca_cliente', $data);
 	}
 
 	public function ajax_medidas_cliente($id_cliente = null)
