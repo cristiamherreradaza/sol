@@ -74,6 +74,7 @@
             <div class="row pt-3">
 
              <div class="col-md-5">
+              <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente</label>
               <div class="input-group mb-3">
                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza">
@@ -818,14 +819,14 @@
                                 <div class="col-md-2">
                                   <div class="form-group has-success">
                                     <label class="control-label">Costo Tela</label>
-                                    <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any">
+                                    <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" required>
                                   </div>
                                 </div>
 
                                 <div class="col-md-2 has-success">
                                   <div class="form-group">
                                     <label class="control-label">Costo Confeccion</label>
-                                    <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any">
+                                    <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any" required>
                                   </div>
                                 </div>
 
@@ -839,7 +840,7 @@
                                 <div class="col-md-2">
                                   <div class="form-group has-warning">
                                     <label class="control-label">A cuenta</label>
-                                    <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any">
+                                    <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" required>
                                   </div>
                                 </div>
 
@@ -983,19 +984,56 @@
   function extraer_datos(id_cliente)
   {
     // console.log(id_cliente);  
+    $("#bloque_busqueda").toggle('slow');  
     $.ajax({
       url: '<?php echo base_url() ?>/Trabajos/ajax_medidas_cliente/' + id_cliente,
       type: 'GET',
       success: function (data) {
         // dv.html(data);
         datos_cliente = JSON.parse(data);
-        console.log(datos_cliente);
-        console.log(datos_cliente.cliente.nombre);
+        // console.log(datos_cliente);
+        // console.log(datos_cliente.cliente.nombre);
+
+        $("#cod_cliente").val(datos_cliente.cliente.id);
         $("#nombre").val(datos_cliente.cliente.nombre);
+        $("#ci").val(datos_cliente.cliente.ci);
+        $("#celulares").val(datos_cliente.cliente.celulares);
+
         $("#s_talla").val(datos_cliente.sacos.talla);
+        $("#s_largo").val(datos_cliente.sacos.largo);
+        $("#s_hombro").val(datos_cliente.sacos.hombro);
+        $("#s_espalda").val(datos_cliente.sacos.espalda);
+        $("#s_pecho").val(datos_cliente.sacos.pecho);
+        $("#s_estomago").val(datos_cliente.sacos.estomago);
+        $("#s_mbrazo").val(datos_cliente.sacos.medio_brazo);
+        $("#s_lmanga").val(datos_cliente.sacos.largo_manga);
+        
+        $("#p_largo").val(datos_cliente.pantalones.largo);
+        $("#p_entrepierna").val(datos_cliente.pantalones.entre_pierna);
+        $("#p_cintura").val(datos_cliente.pantalones.cintura);
+        $("#p_muslo").val(datos_cliente.pantalones.muslo);
+        $("#p_rodilla").val(datos_cliente.pantalones.rodilla);
+        $("#p_bpie").val(datos_cliente.pantalones.bota_pie);
+        $("#p_tdelantero").val(datos_cliente.pantalones.tiro_delantero);
+        $("#p_tatras").val(datos_cliente.pantalones.tiro_atras);
+
+        $("#ch_largo").val(datos_cliente.chalecos.largo);
+        $("#ch_pecho").val(datos_cliente.chalecos.pecho);
+        $("#ch_estomago").val(datos_cliente.chalecos.estomago);
       }
     });
   }
+
+  $(document).on('change', '#nombre', function(e){
+    alert('entro');
+    $.ajax({
+      url: '<?php echo base_url() ?>/Trabajos/ajax_medidas_cliente/' + id_cliente,
+      type: 'GET',
+      success: function (data) {
+        datos_cliente = JSON.parse(data);
+      }
+    });
+  });   
 
   function muestra_bloque_busqueda()
   {

@@ -75,14 +75,18 @@ class Trabajos extends CI_Controller {
 /*		$this->input->post('hora_entrega');
 		die();
 */
-		$datos_cliente = array(
-			'nombre'    => $this->input->post('nombre'),
-			'ci'        => $this->input->post('ci'),
-			'celulares' => $this->input->post('celulares'),
-			'genero'    => $this->input->post('genero'),
-		);
-		$this->db->insert('clientes', $datos_cliente);
-		$id_cliente = $this->db->insert_id();
+		if (!empty($this->input->post('cod_cliente'))) {
+			$id_cliente = $this->input->post('cod_cliente');
+		} else {
+			$datos_cliente = array(
+				'nombre'    => $this->input->post('nombre'),
+				'ci'        => $this->input->post('ci'),
+				'celulares' => $this->input->post('celulares'),
+				'genero'    => $this->input->post('genero'),
+			);
+			$this->db->insert('clientes', $datos_cliente);
+			$id_cliente = $this->db->insert_id();
+		}
 
 		$hora_registro = date('H:i:s');
 		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
@@ -326,6 +330,11 @@ class Trabajos extends CI_Controller {
 		// return $nombre_cliente;
 	}
 
+	public function ajax_valida_cliente()
+	{
+		
+	}
+
 	public function ajax_medidas_cliente($id_cliente = null)
 	{
 		// echo $id_cliente;
@@ -354,6 +363,11 @@ class Trabajos extends CI_Controller {
 		echo json_encode($data, JSON_PRETTY_PRINT);
 
 		// vdebug($datos, false, false, true);
+	}
+
+	public function login()
+	{
+		$this->load->view('template/login');
 	}
 
 }

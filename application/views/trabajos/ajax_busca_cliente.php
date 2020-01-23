@@ -17,7 +17,10 @@
                         <td><?php echo $c['nombre'] ?></td>
                         <td><?php echo $c['ci'] ?></td>
                         <td><?php echo $c['celulares'] ?></td>
-                        <td><span class="label label-success" onclick="extraer_datos(<?php echo $c['id'] ?>)">Elegir</span> </td>
+                        <td>
+                            <span class="label label-success" onclick="extraer_datos(<?php echo $c['id'] ?>)">ELEGIR</span>
+                            <!-- <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button> -->
+                        </td>
                     </tr>                
                 <?php endforeach ?>
             </tbody>

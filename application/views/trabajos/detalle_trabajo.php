@@ -12,24 +12,24 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
-                        <h3><b>DETALLE DEL TRABAJO</b> <span class="float-right">Numero: <?php echo $trabajo['id']; ?></span></h3>
+                        <center><h1><b>TRABAJO <span class="text-info"># <?php echo $trabajo['id']; ?></span></b></h1></center>
                         <?php //vdebug($trabajo, false, false, true); ?>
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="float-left">
                                     <address>
-                                        <h3> &nbsp;<b class="text-info"><?php echo $trabajo['nombre'] ?></b></h3>
-                                        <p class="text-muted ml-1">C.I.: <?php echo $trabajo['ci'] ?>,
-                                            <br/> Celulares: <?php echo $trabajo['celulares'] ?>,
-                                        </p>
+                                        <h3>Cliente: <b class="text-info"> <?php echo $trabajo['nombre'] ?></b></h3>
+                                        <h3>Carnet: <b class="text-info"> <?php echo $trabajo['ci'] ?></b></h3>
+                                        <h3>Celulares: <b class="text-info"> <?php echo $trabajo['celulares'] ?></b></h3>
+                                        <h3>Trabajo entregado: <b class="text-danger"> <?php echo $trabajo['entregado'] ?></b></h3>
                                     </address>
                                 </div>
                                 <div class="float-right text-right">
                                     <address>
-                                        <h4 class="font-bold">Fecha Entrega: <i class="fa fa-calendar"></i> <?php echo fechaEs($trabajo['fecha_entrega']); ?></h4>
-                                        <p class="mt-4"><b>Fecha de Prueba :</b> <i class="fa fa-calendar"></i> <?php echo fechaEs($trabajo['fecha_prueba']); ?></p>
-                                        <p><b>Fecha Registro :</b> <i class="fa fa-calendar"></i> <?php echo fechaEs($trabajo['fecha']); ?></p>
+                                        <h4 class="font-bold">Entrega: <?php echo fechaEs($trabajo['fecha_entrega']); ?></h4>
+                                        <p class="mt-4"><b>Prueba :</b> <?php echo fechaEs($trabajo['fecha_prueba']); ?></p>
+                                        <p><b>Registro :</b> <?php echo fechaEs($trabajo['fecha']); ?></p>
                                     </address>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                         </div>
                                         <?php endif ?>
 
-                                        <?php if (!empty($saco)): ?>
+                                        <?php if (!empty($pantalon['modelo_nombre'])): ?>
                                         <div class="col-md-6">
 
                                             <div class="table-responsive mt-5" style="clear: both;">
@@ -217,7 +217,7 @@
 
 
                                     <div class="row">
-                                    <?php if (!empty($chaleco)): ?>
+                                    <?php if (!empty($chaleco['modelo_nombre'])): ?>
                                         <div class="col-md-6">
                                             <div class="table-responsive mt-5" style="clear: both;">
                                                 <div class="card card-outline-primary">
