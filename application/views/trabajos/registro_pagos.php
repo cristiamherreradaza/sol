@@ -10,159 +10,182 @@
             <!-- Start Page Content -->
             <!-- ============================================================== -->
             <div class="row">
+
                 <div class="col-md-12">
-                    <div class="card card-body printableArea">
-                        <center><h1><b>TRABAJO <span class="text-info"># <?php echo $trabajo['id']; ?></span></b></h1></center>
-                        <?php //vdebug($trabajo, false, false, true); ?>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="float-left">
-                                    <address>
-                                        <h6>Cliente: <b class="text-info"> <?php echo $trabajo['nombre'] ?></b></h6>
-                                        <h6>Carnet: <b class="text-info"> <?php echo $trabajo['ci'] ?></b></h6>
-                                        <h6>Celulares: <b class="text-info"> <?php echo $trabajo['celulares'] ?></b></h6>
-                                        <h6>Trabajo entregado: <b class="text-danger"> <?php echo $trabajo['entregado'] ?></b></h6>
-                                    </address>
-                                </div>
-                                <div class="float-right text-right">
-                                    <address>
-                                        <h5 class="font-bold">Entrega: <?php echo fechaEs($trabajo['fecha_entrega']); ?></h5>
-                                        <p class="mt-4"><b>Prueba :</b> <?php echo fechaEs($trabajo['fecha_prueba']); ?></p>
-                                    </address>
+                    <div class="card card-outline-info">
+                        <div class="card-header">
+                            <h4 class="mb-0 text-white">REGISTRO DE PAGO</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <table class="table table-bordered no-wrap">
+                                        <tr>
+                                            <td><span class="font-bold">Nombre: </span> <?php echo $trabajo['nombre'] ?></td>
+                                            <td><span class="font-bold">Celulares: </span> <?php echo $trabajo['celulares'] ?></td>
+                                            <td><span class="font-bold">F. Entrega: </span> <?php echo $trabajo['fecha_entrega'] ?></td>
+                                            <td><span class="font-bold">F. Prueba: </span> <?php echo $trabajo['fecha_prueba'] ?></td>
+                                            <td><span class="font-bold">Entregado: </span> <?php echo $trabajo['entregado'] ?></td>
+                                        </tr>
+                                    </table>
                                 </div>
                             </div>
+                            <div class="row">
 
-                            <div class="col-md-6">
-                                <div class="table-responsive">
-                                    <div id="bloque_descripcion" style="display: block;">
-                                        <table class="table table-hover">
+                                <div class="col-md-3">
+                                    <form action="<?php echo base_url() ?>Trabajos/guarda_pago" method="POST">
+                                        <div class="row">
+
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="control-label">Monto </label>
+                                                    <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">
+                                                    <input type="hidden" name="cliente_id" value="<?php echo $trabajo['cliente_id'] ?>">
+                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label class="control-label">Fecha </label>
+                                                    <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="custom-control custom-checkbox mr-sm-2 mb-3">
+                                            <input type="checkbox" class="custom-control-input" id="checkbox0" name="entregado" value="si">
+                                            <label class="custom-control-label" for="checkbox0">Entregar trabajo</label>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">Guardar Pago</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div class="col-md-9">
+                                    <div class="card card-outline-primary">                                
+                                    <div class="card-header">
+                                        <h4 class="mb-0 text-white">LISTADO DE PAGOS</h4>
+                                    </div>
+                                    <?php //vdebug($pagos, false, false, true) ?>
+                                    <?php $total=0; ?>
+
+                                        <table class="table table-striped no-wrap">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-center">#</th>
-                                                    <th>Descripcion</th>
-                                                    <th class="text-right">Cantidad</th>
-                                                    <th class="text-right">Precio Unitario</th>
-                                                    <th class="text-right">Total</th>
+                                                    <th>Fecha</th>
+                                                    <th>Usuario</th>
+                                                    <th>A cuenta</th>
+                                                    <th style="width: 5%;"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($saco)): ?>
+                                                <?php foreach ($pagos as $p): ?>
+                                                <?php $total += $p['monto']; ?>
                                                     <tr>
-                                                        <td class="text-center">1</td>
-                                                        <td>Saco</td>
-                                                        <td class="text-right"><?php echo $saco['cantidad'] ?></td>
-                                                        <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
-                                                        <td class="text-right">
-                                                            <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
+                                                        <td><?php echo fechaEs($p['fecha']); ?></td>
+                                                        <td></td>
+                                                        <td><?php echo $p['monto']; ?></td>
+                                                        <td></td>
+                                                        <td align="left">
+                                                            <a href="<?php echo base_url() ?>/Trabajos/detalle_trabajo/<?php echo $p['id'] ?>">
+                                                                <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+                                                            </a>
+                                                            <a href="<?php echo base_url() ?>/Trabajos/registro_pagos/<?php echo $p['id'] ?>">
+                                                                <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                            </a>
                                                         </td>
                                                     </tr>
-                                                <?php else: ?>
-                                                    <?php $sub_saco = 0 ?>
-                                                <?php endif ?>
-
-                                                <?php if (!empty($pantalon)): ?>
-                                                    <tr>
-                                                        <td class="text-center">2</td>
-                                                        <td>Pantalon</td>
-                                                        <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
-                                                        <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
-                                                        <td class="text-right">
-                                                            <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php else: ?>
-                                                    <?php $sub_pantalon = 0 ?>
-                                                <?php endif ?>
-
-                                                <?php if (!empty($chaleco)): ?>
-                                                    <tr>
-                                                        <td class="text-center">3</td>
-                                                        <td>Chaleco</td>
-                                                        <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
-                                                        <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
-                                                        <td class="text-right">
-                                                            <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
-                                                        </td>
-                                                    </tr>
-                                                <?php else: ?>
-                                                    <?php $sub_chaleco = 0 ?>
-                                                <?php endif ?>
+                                                <?php endforeach; ?>
                                             </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th class="text-info">Costo Total: <?php echo $trabajo['total'] ?></th>
+                                                    <th align="right"></th>
+                                                    <th><?php echo $total; ?></th>
+                                                    <th><span class="text-danger">Saldo: <?php echo $trabajo['saldo']; ?></span></th>
+                                                </tr>
+                                            </tfoot>
                                         </table>
                                     </div>
-                                </div>
-                            </div>
 
-
-                            <div class="col-md-12">
-                                <div class="float-right mt-4 text-right">
-                                    <?php $sub_total = $sub_saco + $sub_pantalon + $sub_chaleco ?>
-                                    <p>Sub - Total : <?php echo $sub_total ?></p>
-                                    <p>Precio - Tela : <?php echo $trabajo['costo_tela'] ?> </p>
-                                    <hr>
-                                    <h3><b>Total :</b> <?php echo $trabajo['costo_tela'] + $sub_total ?></h3>
-                                    <h3 class="text-info"><b>Saldo :</b> <?php echo $trabajo['saldo'] ?></h3>
-                                </div>
-                                <div class="clearfix"></div>
-                                <hr>
-                                <!-- <div class="text-right">
-                                    <button class="btn btn-danger" type="submit"> Proceed to payment </button>
-                                    <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
-                                </div> -->
-                            </div>
-                        </div>
-
-                        <div class="row">
-
-                            <div class="col-md-3">
-                            <!-- comenzamos el formulario -->
-                                <div class="form-body">
-                                    <div class="row pt-3">
-                                        <div class="col-md-5">
-                                            <input type="hidden" name="cod_cliente" id="cod_cliente">
-                                            <label class="control-label">Nombre del cliente</label>
-                                            <div class="input-group mb-3">
-                                                <input type="text" name="nombre" id="nombre" class="form-control"
-                                                    placeholder="Ej: Cristiam J. Herrera Daza"
-                                                    aria-describedby="emailHelp">
-                                            </div>
-                                        </div>
                                     </div>
-                                </div>
+
 
                             </div>
-                            <!-- fin formulario -->
-                            <div class="col-md-9">
-                                                    
-                            </div>
+
                         </div>
-
                     </div>
                 </div>
-
-                                                    
-
             </div>
-            
-            
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <footer class="footer">
-            © 2019 Monster Admin by wrappixel.com
-        </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
     </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
+
+
+
+
+
+
+
+
+                <table class="table table-hover" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th class="text-center">#</th>
+                            <th>Descripcion</th>
+                            <th class="text-right">Cantidad</th>
+                            <th class="text-right">Precio Unitario</th>
+                            <th class="text-right">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php if (!empty($saco)): ?>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>Saco</td>
+                                <td class="text-right"><?php echo $saco['cantidad'] ?></td>
+                                <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
+                                <td class="text-right">
+                                    <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php $sub_saco = 0 ?>
+                        <?php endif ?>
+
+                        <?php if (!empty($pantalon)): ?>
+                            <tr>
+                                <td class="text-center">2</td>
+                                <td>Pantalon</td>
+                                <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
+                                <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
+                                <td class="text-right">
+                                    <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php $sub_pantalon = 0 ?>
+                        <?php endif ?>
+
+                        <?php if (!empty($chaleco)): ?>
+                            <tr>
+                                <td class="text-center">3</td>
+                                <td>Chaleco</td>
+                                <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
+                                <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
+                                <td class="text-right">
+                                    <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
+                                </td>
+                            </tr>
+                        <?php else: ?>
+                            <?php $sub_chaleco = 0 ?>
+                        <?php endif ?>
+                    </tbody>
+                </table>

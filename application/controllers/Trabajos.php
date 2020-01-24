@@ -381,7 +381,7 @@ class Trabajos extends CI_Controller {
 
 	public function registro_pagos($id_trabajo)
 	{
-		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->select('c.id, c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$this->db->where('t.id', $id_trabajo);
@@ -420,6 +420,8 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ex.trabajo_id', $id_trabajo);
 		$data['extras'] = $this->db->get()->row_array();
 
+		$data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo))->result_array();
+
 		// vdebug($data['chaleco'], false, false, true);
 
 		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
@@ -429,6 +431,38 @@ class Trabajos extends CI_Controller {
 		// $this->load->view('trabajos/nuevo', $data);
 		$this->load->view('trabajos/registro_pagos', $data);
 		$this->load->view('template/footer');
+	}
+
+	public function guarda_pago()
+	{
+		// vdebug($this->input->post(), true, false, true);
+		$fecha_hora = $this->input->post('fecha').' '.date('H:i:s');
+		$id_trabajo = $this->input->post('trabajo_id');
+		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+
+		$datos_pago = array(
+			'cliente_id'        => $this->input->post('cliente_id'),
+			'trabajo_id'        => $this->input->post('trabajo_id'),
+			'fecha'             => $fecha_hora,
+			'monto'             => $this->input->post('monto'),
+		);
+
+		$this->db->insert('pagos', $datos_pago);
+
+		$this->db->select_sum('monto');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$suma_pagos = $this->db->get('pagos')->row_array();
+		$total_trabajo = $detalle_trabajo['total'];
+		$saldo = $total_trabajo-$suma_pagos['monto'];
+
+		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
+		
+		if(!empty($this->input->post('entregado')))
+		{
+			$this->db->update('trabajos', array('entregado'=>'Si'), "id=$id_trabajo");
+		}
+
+		redirect("Trabajos/registro_pagos/$id_trabajo");
 	}
 
 }
