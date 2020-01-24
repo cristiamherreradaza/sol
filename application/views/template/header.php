@@ -18,6 +18,10 @@
     <link href="<?php echo base_url('/public/main/css/style.css'); ?>" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="<?php echo base_url('/public/main/css/colors/megna-dark.css'); ?>" id="theme" rel="stylesheet">
+    <!--alerts CSS -->
+    <!-- <link href="<?php echo base_url(); ?>public/assets/plugins/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

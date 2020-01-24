@@ -989,7 +989,13 @@
         datos_cliente = JSON.parse(data);
         if(datos_cliente == 1)
         {
-          $("#error_cliente_duplicado").show('slow');  
+          // $("#error_cliente_duplicado").show('slow');  
+          swal.fire({
+            type: 'error',
+            title: 'Oops...',
+            text: 'El cliente ya existe!',
+            // footer: '<a href>Why do I have this issue?</a>'
+          })
         }
       }
     });

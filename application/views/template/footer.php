@@ -72,7 +72,10 @@ function cargarmodal(urll)
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-    
+    <!-- Sweet-Alert  -->
+   <script src="<?php echo base_url(); ?>public/assets/plugins/sweetalert2/dist/sweetalert2.all.min.js" charset="UTF-8"></script>
+   <!-- <script src="<?php //echo base_url(); ?>public/assets/plugins/sweetalert2/sweet-alert.init.js"></script> -->
+   <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
 </body>
 
 </html>

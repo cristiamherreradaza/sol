@@ -76,7 +76,6 @@
                                     </div>
                                     <?php //vdebug($pagos, false, false, true) ?>
                                     <?php $total=0; ?>
-
                                         <table class="table table-striped no-wrap">
                                             <thead>
                                                 <tr>
@@ -95,12 +94,7 @@
                                                         <td><?php echo $p['monto']; ?></td>
                                                         <td></td>
                                                         <td align="left">
-                                                            <a href="<?php echo base_url() ?>/Trabajos/detalle_trabajo/<?php echo $p['id'] ?>">
-                                                                <button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-                                                            </a>
-                                                            <a href="<?php echo base_url() ?>/Trabajos/registro_pagos/<?php echo $p['id'] ?>">
-                                                                <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
-                                                            </a>
+                                                            <button type="button" class="btn btn-danger" onclick="alerta(<?php echo $p['id'] ?>, <?php echo $p['monto'] ?>, <?php echo $p['trabajo_id'] ?>)"><i class="fas fa-times"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -128,64 +122,28 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
-                <table class="table table-hover" style="display: none;">
-                    <thead>
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th>Descripcion</th>
-                            <th class="text-right">Cantidad</th>
-                            <th class="text-right">Precio Unitario</th>
-                            <th class="text-right">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (!empty($saco)): ?>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>Saco</td>
-                                <td class="text-right"><?php echo $saco['cantidad'] ?></td>
-                                <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
-                                <td class="text-right">
-                                    <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
-                                </td>
-                            </tr>
-                        <?php else: ?>
-                            <?php $sub_saco = 0 ?>
-                        <?php endif ?>
-
-                        <?php if (!empty($pantalon)): ?>
-                            <tr>
-                                <td class="text-center">2</td>
-                                <td>Pantalon</td>
-                                <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
-                                <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
-                                <td class="text-right">
-                                    <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
-                                </td>
-                            </tr>
-                        <?php else: ?>
-                            <?php $sub_pantalon = 0 ?>
-                        <?php endif ?>
-
-                        <?php if (!empty($chaleco)): ?>
-                            <tr>
-                                <td class="text-center">3</td>
-                                <td>Chaleco</td>
-                                <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
-                                <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
-                                <td class="text-right">
-                                    <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
-                                </td>
-                            </tr>
-                        <?php else: ?>
-                            <?php $sub_chaleco = 0 ?>
-                        <?php endif ?>
-                    </tbody>
-                </table>
+<script type="text/javascript">
+    function alerta(id_pago, monto, id_trabajo){
+        //console.log(id_pago);
+        Swal.fire({
+          title: 'Quieres borrar '+monto+'?',
+          text: "Luego no podras recuperarlo!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, estoy seguro!',
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            );
+            // console.log("el id es "+id_pago);
+            window.location.href = "<?php echo base_url() ?>Trabajos/borra_pago/"+id_pago+"/"+id_trabajo;
+          }
+        })
+    }
+</script>

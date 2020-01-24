@@ -441,10 +441,10 @@ class Trabajos extends CI_Controller {
 		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 
 		$datos_pago = array(
-			'cliente_id'        => $this->input->post('cliente_id'),
-			'trabajo_id'        => $this->input->post('trabajo_id'),
-			'fecha'             => $fecha_hora,
-			'monto'             => $this->input->post('monto'),
+			'cliente_id' => $this->input->post('cliente_id'),
+			'trabajo_id' => $this->input->post('trabajo_id'),
+			'fecha'      => $fecha_hora,
+			'monto'      => $this->input->post('monto'),
 		);
 
 		$this->db->insert('pagos', $datos_pago);
@@ -463,6 +463,26 @@ class Trabajos extends CI_Controller {
 		}
 
 		redirect("Trabajos/registro_pagos/$id_trabajo");
+	}
+
+	public function borra_pago($id_pago = null, $id_trabajo = null)
+	{
+		// $id_trabajo = $this->input->post('trabajo_id');
+		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+		$this->db->delete('pagos', array('id' => $id_pago));
+
+		$this->db->select_sum('monto');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$suma_pagos = $this->db->get('pagos')->row_array();
+		$total_trabajo = $detalle_trabajo['total'];
+		$saldo = $total_trabajo-$suma_pagos['monto'];
+
+		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
+
+		redirect("Trabajos/registro_pagos/$id_trabajo");
+
+		// vdebug($id_pago, true, false, true);
+
 	}
 
 }
