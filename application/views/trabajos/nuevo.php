@@ -107,220 +107,201 @@
               </select>
             </div>
           </div>
-                  <!-- <div class="col-md-2">
+        </div>
+        
+        <div class="row">
+          <!-- medidas saco -->
+          <div class="col-md-5">
+            <div class="card card-outline-info">
+              <div class="card-header">
+                <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
+              </div>
+              <div class="card-body" style="background-color: #e6f2ff;">
+                <div class="bloque_saco">
+
+                <div class="row">
+                  <div class="col-md-3">
                     <div class="form-group">
-                      <label class="control-label">Fecha</label>
-                      <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
+                      <label class="control-label">Talle</label>
+                      <input name="s_talla" type="number" id="s_talla" class="form-control" min="0" step="any">
                     </div>
-                  </div> -->
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Largo</label>
+                      <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Hombro</label>
+                      <input name="s_hombro" type="number" id="s_hombro" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Espalda</label>
+                      <input name="s_espalda" type="number" id="s_espalda" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
                 </div>
 
                 <div class="row">
-                  <!--<div class="col-md-12">
-                    <button type="button" class="btn waves-effect waves-light btn-block btn-dark">Varon</button>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Pecho</label>
+                      <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any">
+                    </div>
                   </div>
-                   <div class="col-md-6">
-                    <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
-                  </div> -->
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Estomago</label>
+                      <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Medio Brazo</label>
+                      <input name="s_mbrazo" type="number" id="s_mbrazo" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">L. Manga</label>
+                      <input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
                 </div>
 
-                <div id="bloque_varon" style="display: block;">
+              </div>
+            </div>
+          </div>
+          </div>
+          <!-- fin medidas saco -->
 
-                  <p></p>
-                  <div class="row">
-                    <!-- medidas saco -->
-                    <div class="col-md-5">
-                      <div class="card card-outline-info">
-                        <div class="card-header">
-                          <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
-                        </div>
-                        <div class="card-body" style="background-color: #e6f2ff;">
+          <!-- inicia modelos sacos -->
+          <div class="col-md-7">
+            <div class="card card-outline-info">
+              <div class="card-header">
+                <h4 class="mb-0 text-white">CARACTERISTICAS SACO</h4>
+              </div>
+              <div class="card-body" style="background-color: #e6f2ff;">
 
-                          <div class="row">
+                <div class="row">
 
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Talle</label>
-                                <input name="s_talla" type="number" id="s_talla" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Largo</label>
-                                <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Hombro</label>
-                                <input name="s_hombro" type="number" id="s_hombro" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Espalda</label>
-                                <input name="s_espalda" type="number" id="s_espalda" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                          </div>
-
-                          <div class="row">
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Pecho</label>
-                                <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Estomago</label>
-                                <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Medio Brazo</label>
-                                <input name="s_mbrazo" type="number" id="s_mbrazo" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">L. Manga</label>
-                                <input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                          </div>
-
-                        </div>
-                      </div>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <?php //vdebug($modelos_varon, false, false, true); ?>
+                      <label class="control-label">Modelo</label>
+                      <select name="sd_modelo" class="form-control custom-select">
+                        <option value="">Seleccione</option>
+                        <?php foreach ($modelos_varon_saco as $mv):?>
+                          <option value="<?php echo $mv['id']?>"><?php echo $mv['nombre']?></option>
+                        <?php endforeach?>
+                      </select>
                     </div>
-                    <!-- fin medidas saco -->
-
-                    <!-- inicia modelos sacos -->
-                    <div class="col-md-7">
-                      <div class="card card-outline-info">
-                        <div class="card-header">
-                          <h4 class="mb-0 text-white">CARACTERISTICAS SACO</h4>
-                        </div>
-                        <div class="card-body" style="background-color: #e6f2ff;">
-
-                          <div class="row">
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <?php //vdebug($modelos_varon, false, false, true); ?>
-                                <label class="control-label">Modelo</label>
-                                <select name="sd_modelo" class="form-control custom-select">
-                                  <option value="">Seleccione</option>
-                                  <?php foreach ($modelos_varon_saco as $mv):?>
-                                    <option value="<?php echo $mv['id']?>"><?php echo $mv['nombre']?></option>
-                                  <?php endforeach?>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                <label class="control-label">Botones</label>
-                                <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                              </div>
-                            </div>
-
-                            <div class="col-md-3">
-                              <div class="form-group">
-                                <label class="control-label">Aberturas</label>
-                                <select name="sd_aberturas" class="form-control custom-select">
-                                  <option value="">Seleccione</option>
-                                  <?php foreach ($aberturas_varon_saco as $a):?>
-                                    <option value="<?php echo $a['id']?>"><?php echo $a['nombre']?></option>
-                                  <?php endforeach?>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label class="control-label">Detalle</label>
-                                <select name="sd_detalle" class="form-control custom-select">
-                                  <option value="">Seleccione</option>
-                                  <?php foreach ($detalles_varon_saco as $d):?>
-                                    <option value="<?php echo $d['id']?>"><?php echo $d['nombre']?></option>
-                                  <?php endforeach?>
-                                </select>
-                              </div>
-                            </div>
-
-                          </div>
-
-                          <div class="row">
-
-                            <div class="col">
-                              <div class="form-group">
-                                <label class="control-label">Color</label>
-                                <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
-                              </div>
-                            </div>
-
-                            <div class="col-md-2">
-                              <div class="form-group">
-                                <label class="control-label">Ojal Pu&ntilde;o</label>
-                                <select name="sd_ojal" class="form-control custom-select">
-                                  <option value="Si">Si</option>
-                                  <option value="No">No</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div class="col">
-                              <div class="form-group">
-                                <label class="control-label">Color Ojal</label>
-                                <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label class="control-label"><b>Cantidad</b></label>
-                                <input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
-                              </div>
-                            </div>
-
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label class="control-label"><b>Precio Unitario</b></label>
-                                <input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
-                              </div>
-                            </div>
-
-                            <div class="col-md-4">
-                              <div class="form-group">
-                                <label class="control-label"><b>Subtotal</b></label>
-                                <input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
-                              </div>
-                            </div>
-                            
-                          </div>
-
-                        </div>
-                      </div>
-                    </div>
-                    <!-- fin modelos sacos -->
-
                   </div>
 
-                  <div class="row">
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="control-label">Botones</label>
+                      <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                    </div>
+                  </div>
+
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      <label class="control-label">Aberturas</label>
+                      <select name="sd_aberturas" class="form-control custom-select">
+                        <option value="">Seleccione</option>
+                        <?php foreach ($aberturas_varon_saco as $a):?>
+                          <option value="<?php echo $a['id']?>"><?php echo $a['nombre']?></option>
+                        <?php endforeach?>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label">Detalle</label>
+                      <select name="sd_detalle" class="form-control custom-select">
+                        <option value="">Seleccione</option>
+                        <?php foreach ($detalles_varon_saco as $d):?>
+                          <option value="<?php echo $d['id']?>"><?php echo $d['nombre']?></option>
+                        <?php endforeach?>
+                      </select>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="row">
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Color</label>
+                      <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="form-group">
+                      <label class="control-label">Ojal Pu&ntilde;o</label>
+                      <select name="sd_ojal" class="form-control custom-select">
+                        <option value="Si">Si</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Color Ojal</label>
+                      <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><b>Cantidad</b></label>
+                      <input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><b>Precio Unitario</b></label>
+                      <input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><b>Subtotal</b></label>
+                      <input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
+                    </div>
+                  </div>
+                  
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <!-- fin modelos sacos -->
+
+        <div class="row">
 
                     <!-- medidas pantalon -->
                     <div class="col-md-5">

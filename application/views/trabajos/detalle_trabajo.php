@@ -39,7 +39,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         
-                                        <div class="table-responsive mt-5" style="clear: both;">
+                                        <div class="table-responsive" style="clear: both;">
                                             <?php if (!empty($saco)): ?>
                                                 <div class="card card-outline-info">
                                                     <div class="card-header">
