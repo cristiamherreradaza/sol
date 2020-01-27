@@ -38,12 +38,12 @@
                                     <form action="<?php echo base_url() ?>Trabajos/guarda_pago" method="POST">
                                         <div class="row">
 
-                                            <div class="col-md-5">
+                                            <div class="col-md-5" style="display: none;">
                                                 <div class="form-group">
                                                     <label class="control-label">Monto </label>
                                                     <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">
                                                     <input type="hidden" name="cliente_id" value="<?php echo $trabajo['cliente_id'] ?>">
-                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" required>
+                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" value="25" required>
                                                 </div>
                                             </div>
 

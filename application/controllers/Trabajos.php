@@ -37,13 +37,13 @@ class Trabajos extends CI_Controller {
 
 	public function nuevo() {
 
-		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'saco', 'genero'   => 'varon'))->result_array();
-		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'genero' => 'varon'))->result_array();
+		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'saco'))->result_array();
+		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco'))->result_array();
 		$detalles_varon_saco  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'saco', 'genero'  => 'varon'))->result_array();
 
-		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon', 'genero'   => 'varon'))->result_array();
+		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon'))->result_array();
 		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'genero'    => 'varon'))->result_array();
-		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon', 'genero' => 'varon'))->result_array();
+		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon'))->result_array();
 
 		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'genero'   => 'varon'))->result_array();
 		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'genero'  => 'varon'))->result_array();
@@ -140,6 +140,7 @@ class Trabajos extends CI_Controller {
 				'estomago'        => $this->input->post('s_estomago'),
 				'medio_brazo'     => $this->input->post('s_mbrazo'),
 				'largo_manga'     => $this->input->post('s_lmanga'),
+				'altura_busto'    => $this->input->post('s_abusto'),
 				'precio_unitario' => $this->input->post('saco_pu'),
 				'cantidad'        => $this->input->post('saco_cantidad'),
 			);
@@ -435,7 +436,7 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_pago()
 	{
-		// vdebug($this->input->post(), true, false, true);
+		vdebug($this->input->post(), true, false, true);
 		$fecha_hora = $this->input->post('fecha').' '.date('H:i:s');
 		$id_trabajo = $this->input->post('trabajo_id');
 		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
