@@ -50,10 +50,10 @@
 										<td align="right"><?php echo $t['saldo'] ?></td>
 										<td><?php echo $t['entregado'] ?></td>
 										<td>
-											<a href="<?php echo base_url() ?>/Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
+											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-warning"><i class="fas fa-eye"></i></button>
 											</a>
-											<a href="<?php echo base_url() ?>/Trabajos/registro_pagos/<?php echo $t['id'] ?>">
+											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-success"><i class="fas fa-money-bill-alt"></i></button>
 											</a>
 										</td>

@@ -31,10 +31,6 @@ class Trabajos extends CI_Controller {
 		$this->load->view('welcome_message');
 	}
 
-	public function hola() {
-		echo 'Holas desde code';
-	}
-
 	public function nuevo() {
 
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'saco'))->result_array();
@@ -162,8 +158,10 @@ class Trabajos extends CI_Controller {
 				'bota_pie'        => $this->input->post('p_bpie'),
 				'tiro_delantero'  => $this->input->post('p_tdelantero'),
 				'tiro_atras'      => $this->input->post('p_tatras'),
+				'cadera'          => $this->input->post('p_cadera'),
 				'bragueta'        => $this->input->post('pd_bragueta'),
 				'bota_pie_des'    => $this->input->post('pd_bpie'),
+				'pretina'         => $this->input->post('pd_pretina'),
 				'precio_unitario' => $this->input->post('pantalon_pu'),
 				'cantidad'        => $this->input->post('pantalon_cantidad'),
 			);
@@ -172,15 +170,15 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('ch_estomago'))) {
 			$datos_chaleco = array(
-				'cliente_id'   => $id_cliente,
-				'trabajo_id'   => $id_trabajo,
-				'modelo_id'    => $this->input->post('ch_modelo'),
-				'detalle_id'   => $this->input->post('ch_detalle'),
-				'largo'        => $this->input->post('ch_largo'),
-				'pecho'        => $this->input->post('ch_pecho'),
-				'estomago'     => $this->input->post('ch_estomago'),
-				'botones'      => $this->input->post('ch_botones'),
-				'color_ojales' => $this->input->post('ch_color'),
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('ch_modelo'),
+				'detalle_id'      => $this->input->post('ch_detalle'),
+				'largo'           => $this->input->post('ch_largo'),
+				'pecho'           => $this->input->post('ch_pecho'),
+				'estomago'        => $this->input->post('ch_estomago'),
+				'botones'         => $this->input->post('ch_botones'),
+				'color_ojales'    => $this->input->post('ch_color'),
 				'precio_unitario' => $this->input->post('ch_pu'),
 				'cantidad'        => $this->input->post('ch_cantidad'),
 			);

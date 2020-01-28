@@ -38,7 +38,7 @@
                                     <form action="<?php echo base_url() ?>Trabajos/guarda_pago" method="POST">
                                         <div class="row">
 
-                                            <div class="col-md-5" style="display: none;">
+                                            <div class="col-md-5">
                                                 <div class="form-group">
                                                     <label class="control-label">Monto </label>
                                                     <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">

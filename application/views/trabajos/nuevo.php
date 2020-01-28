@@ -1003,8 +1003,9 @@
         console.log(datos_cliente);
         // console.log(datos_cliente.cliente.nombre);
         if(datos_cliente.cliente.genero == 'Mujer'){
+          $("#genero").val('Mujer');
           cambia_genero();
-          console.log('entro');
+          // console.log('entro');
         }
 
         $("#cod_cliente").val(datos_cliente.cliente.id);
@@ -1035,6 +1036,7 @@
           $("#p_bpie").val(datos_cliente.pantalones.bota_pie);
           $("#p_tdelantero").val(datos_cliente.pantalones.tiro_delantero);
           $("#p_tatras").val(datos_cliente.pantalones.tiro_atras);
+          $("#p_cadera").val(datos_cliente.pantalones.cadera);
         }
         if(datos_cliente.chalecos != null)
         {
