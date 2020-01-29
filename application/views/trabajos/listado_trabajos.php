@@ -51,10 +51,10 @@
 										<td><?php echo $t['entregado'] ?></td>
 										<td>
 											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-warning"><i class="fas fa-eye"></i></button>
+												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
 											</a>
 											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-success"><i class="fas fa-money-bill-alt"></i></button>
+												<button type="button" class="btn btn-success"><i class="fas fa-star"></i></button>
 											</a>
 										</td>
 									</tr>
