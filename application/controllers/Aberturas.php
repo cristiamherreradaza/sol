@@ -35,7 +35,7 @@ class Aberturas extends CI_Controller {
 
 	public function listado()
 	{
-		$data['aberturas'] = $this->db->get('aberturas')->result_array();		
+		$data['aberturas'] = $this->db->get_where('aberturas', array('borrado ='=>NULL))->result_array();		
 		// echo 'Holas desde listado';
 		// vdebug($clientes, true, false, true);
 		$this->load->view('template/header');
@@ -43,6 +43,24 @@ class Aberturas extends CI_Controller {
 		// $this->load->view('trabajos/nuevo', $data);
 		$this->load->view('aberturas/listado', $data);
 		$this->load->view('template/footer');
+	}
 
+	public function guarda()
+	{
+		// vdebug($this->input->post(), true, false, true);
+		$datos = array(
+			'nombre' => $this->input->post('nombre'),
+			'tipo'   => $this->input->post('tipo'),
+			'genero' => $this->input->post('genero'),
+		);
+		$this->db->insert('aberturas', $datos);
+		redirect("aberturas/listado");
+	}
+
+	public function eliminar($id_abertura = null)
+	{
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('aberturas', array('borrado'=>$hoy), "id=$id_abertura");
+		redirect("aberturas/listado");
 	}
 }

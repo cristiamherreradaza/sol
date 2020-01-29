@@ -137,8 +137,8 @@
         }).then((result) => {
           if (result.value) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Excelente!',
+              'Tu monto fue borrado.',
               'success'
             );
             // console.log("el id es "+id_pago);
