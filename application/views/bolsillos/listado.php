@@ -17,35 +17,30 @@
 				<div class="card">
 					<div class="card-body">
 						<?php //vdebug($trabajos, true, false, true) ?>
-						<h4 class="card-title">Listado de clientes </h4>
-						<h6 class="card-subtitle">Clientes</h6>
+						<h4 class="card-title">Listado de bolsillos</h4>
 						<div class="table-responsive m-t-40">
 							<table id="config-table" class="table display table-bordered table-striped no-wrap">
 								<thead>
 									<tr>
 										<th>No.</th>
 										<th>Nombre</th>
-										<th>Carnet</th>
-										<th>Celulares</th>
-										<th>Email</th>
-										<th>Direccion</th>
+										<th>Tipo</th>
+										<th>Genero</th>
 										<th>Acciones</th>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach ($clientes as $c): ?>
+									<?php foreach ($bolsillos as $b): ?>
 									<tr>
-										<td><?php echo $c['id'] ?></td>
-										<td><?php echo $c['nombre'] ?></td>
-										<td><?php echo $c['ci'] ?></td>
-										<td><?php echo $c['celulares'] ?></td>
-										<td><?php echo $c['email'] ?></td>
-										<td><?php echo $c['direccion'] ?></td>
+										<td><?php echo $b['id'] ?></td>
+										<td><?php echo $b['nombre'] ?></td>
+										<td><?php echo $b['tipo'] ?></td>
+										<td><?php echo $b['genero'] ?></td>
 										<td>
-											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $c['id'] ?>">
+											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $b['id'] ?>">
 												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
 											</a>
-											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $c['id'] ?>">
+											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $b['id'] ?>">
 												<button type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button>
 											</a>
 										</td>
@@ -82,8 +77,6 @@
 </script>
 <script>
 	$(function () {
-		$('#myTable').DataTable();
-		// responsive table
 		$('#config-table').DataTable({
 			responsive: true,
 			"order": [
