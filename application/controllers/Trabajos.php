@@ -36,13 +36,20 @@ class Trabajos extends CI_Controller {
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'saco'))->result_array();
 		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco'))->result_array();
 		$detalles_varon_saco  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'saco', 'genero'  => 'varon'))->result_array();
-
+		
 		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon'))->result_array();
 		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'genero'    => 'varon'))->result_array();
 		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon'))->result_array();
-
-		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'genero'   => 'varon'))->result_array();
-		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'genero'  => 'varon'))->result_array();
+		
+		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco'))->result_array();
+		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco'))->result_array();
+		
+		$modelos_faldas  = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'falda'))->result_array();
+		$aberturas_falda = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'falda'))->result_array();
+		
+		$modelos_jumper   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'jumper'))->result_array();
+		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper'))->result_array();
+		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper'))->result_array();
 
 		$data['modelos_varon_saco']       = $modelos_varon_saco;
 		$data['modelos_varon_pantalon']   = $modelos_varon_pantalon;
@@ -52,6 +59,11 @@ class Trabajos extends CI_Controller {
 		$data['detalles_varon_chalecos']  = $detalles_varon_chalecos;
 		$data['pinzas_varon_pantalon']    = $pinzas_varon_pantalon;
 		$data['bolsillos_varon_pantalon'] = $bolsillos_varon_pantalon;
+		$data['modelos_faldas']           = $modelos_faldas;
+		$data['aberturas_falda']           = $aberturas_falda;
+		$data['modelos_jumper']            = $modelos_jumper;
+		$data['aberturas_jumper']          = $aberturas_jumper;
+		$data['bolsillos_jumper']          = $bolsillos_jumper;
 		// vdebug($modelos_varon_pantalon, true, false, true);
 		// echo 'la vista desde trabajos';
 		$this->load->view('template/header');
@@ -179,6 +191,7 @@ class Trabajos extends CI_Controller {
 				'estomago'        => $this->input->post('ch_estomago'),
 				'botones'         => $this->input->post('ch_botones'),
 				'color_ojales'    => $this->input->post('ch_color'),
+				'altura_busto'    => $this->input->post('ch_abusto'),
 				'precio_unitario' => $this->input->post('ch_pu'),
 				'cantidad'        => $this->input->post('ch_cantidad'),
 			);
@@ -197,6 +210,40 @@ class Trabajos extends CI_Controller {
 			);
 			$this->db->insert('camisas', $datos_camisa);
 		}
+
+		if (!empty($this->input->post('fa_largo'))) {
+			$datos_falda = array(
+				'cliente_id'  => $id_cliente,
+				'trabajo_id'  => $id_trabajo,
+				'modelo_id'   => $this->input->post('fa_modelo'),
+				'abertura_id' => $this->input->post('fa_abertura'),
+				'largo'       => $this->input->post('fa_largo'),
+				'cintura'     => $this->input->post('fa_cintura'),
+				'cadera'      => $this->input->post('fa_cadera'),
+				'vasta'       => $this->input->post('fa_vasta'),
+				'pretina'     => $this->input->post('fa_pretina'),
+			);
+			$this->db->insert('faldas', $datos_falda);
+		}
+
+		if (!empty($this->input->post('fa_largo'))) {
+			$datos_jumper = array(
+				'cliente_id'  => $id_cliente,
+				'trabajo_id'  => $id_trabajo,
+				'modelo_id'   => $this->input->post('j_modelo'),
+				'abertura_id' => $this->input->post('j_abertura'),
+				'bolsillo_id' => $this->input->post('j_bolsillo'),
+				'talle'       => $this->input->post('j_talle'),
+				'largo'       => $this->input->post('j_largo'),
+				'cintura'     => $this->input->post('j_cintura'),
+				'cadera'      => $this->input->post('j_cadera'),
+				'pecho'       => $this->input->post('j_pecho'),
+				'estomago'     => $this->input->post('j_estomago'),
+				'altura_busto'     => $this->input->post('j_abusto'),
+			);
+			$this->db->insert('jumpers', $datos_jumper);
+		}
+
 
 		$sw = 0;
 		if (!empty($this->input->post('corbaton_color')))
