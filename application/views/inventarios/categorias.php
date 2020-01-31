@@ -1,3 +1,4 @@
+
 <!-- chartist CSS -->
     <link href="<?php echo base_url('/public/assets/plugins/chartist-js/dist/chartist.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo base_url('/public/assets/plugins/chartist-js/dist/chartist-init.css'); ?>" rel="stylesheet">
@@ -18,6 +19,18 @@
     })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
     ga('create', 'UA-85622565-1', 'auto');
     ga('send', 'pageview');
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#guarda').click(function(){
+                $('#contenido').load("<?php echo base_url('/application/views/inventarios/prueba.html'); ?>");
+            });
+
+        });
+
+
+
     </script>
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -65,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive mt-5">
-                                    <table class="table stylish-table">
+                                    <table class="table stylish-table" id="recargar">
                                     	<?php $var = $this->db->order_by('id', 'ASC')->get_where('categorias')->result();?>
                                         <thead>
                                             <tr>
@@ -135,7 +148,9 @@ function buscar()
             // data: {param1: cod_catastral},
             success:function(data, textStatus, jqXHR) {
             	if (data.estado == 'registrado') {
+                    $("#recargar").load();
             		alerta_edad();
+                    
 	            }
 	            	// $('#nombres').val(data.nombre);
 	            // $('#nombres').val(data[3].nombre);
