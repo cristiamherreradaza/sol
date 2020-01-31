@@ -43,7 +43,7 @@
                                                     <label class="control-label">Monto </label>
                                                     <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">
                                                     <input type="hidden" name="cliente_id" value="<?php echo $trabajo['cliente_id'] ?>">
-                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" required>
+                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" value="25" required>
                                                 </div>
                                             </div>
 
@@ -137,8 +137,8 @@
         }).then((result) => {
           if (result.value) {
             Swal.fire(
-              'Deleted!',
-              'Your file has been deleted.',
+              'Excelente!',
+              'Tu monto fue borrado.',
               'success'
             );
             // console.log("el id es "+id_pago);

@@ -27,10 +27,23 @@
                     <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">Control Panel</span></a>
                 </li>    
                 <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">TRABAJOS</span></a>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
                         <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
+                </li>
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
+                        <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
+                        <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
+                        <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
+                        <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
                     </ul>
                 </li>
                 <li>
