@@ -35,7 +35,8 @@
                             <div class="row">
 
                                 <div class="col-md-3">
-                                    <form action="<?php echo base_url() ?>Trabajos/guarda_pago" method="POST">
+                                    <!-- <form action="<?php //echo base_url() ?>Trabajos/guarda_pago" method="POST"> -->
+                                    <?php echo form_open('trabajos/guarda_pago'); ?>
                                         <div class="row">
 
                                             <div class="col-md-5">
@@ -43,7 +44,7 @@
                                                     <label class="control-label">Monto </label>
                                                     <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">
                                                     <input type="hidden" name="cliente_id" value="<?php echo $trabajo['cliente_id'] ?>">
-                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" value="25" required>
+                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" required>
                                                 </div>
                                             </div>
 

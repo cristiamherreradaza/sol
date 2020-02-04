@@ -19,6 +19,7 @@
          <div class="card-header">
           <h4 class="mb-0 text-white">NUEVO TRABAJO</h4>
         </div>
+        <?php vdebug($this->session->nombre, false, false, true); ?>
         <div class="card-body">
 
           <div class="row">

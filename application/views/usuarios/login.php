@@ -39,17 +39,18 @@
     <section id="wrapper">
         <div class="login-register" style="background-image:url(<?php echo base_url(); ?>public/assets/images/background/login-register.jpg);">        
             <div class="login-box card">
+            <?php echo form_open('usuarios/valida'); ?>
             <div class="card-body">
                 <div class="form-horizontal form-material">
                     <center><h3 class="box-title mb-3">SOLIZ&MENDOZA</h3></center>
                     <div class="form-group ">
                       <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Usuario">
+                        <input class="form-control" name="usuario" type="text" required="" placeholder="Usuario">
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Password">
+                        <input class="form-control" name="pass" type="password" required="" placeholder="Password">
                       </div>
                     </div>
                     <div class="form-group text-center mt-3">
@@ -61,6 +62,7 @@
                     </div>
                   </div>
             </div>
+            </form>
           </div>
         </div>
         
