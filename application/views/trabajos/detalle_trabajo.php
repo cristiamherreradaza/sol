@@ -146,9 +146,72 @@
                                                 </tbody>
                                             </table>
                                             <?php endif ?>
+                                            
+                                            <?php if (!empty($falda)): ?>                                            
+                                            <?php //vdebug($falda, false, false, true); ?>
+                                            <div class="card card-outline-warning">
+                                                <div class="card-header">
+                                                    <h4 class="mb-0 text-white">MEDIDAS FALDA</h4>
+                                                </div>
+                                            </div>
+
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Largo</th>
+                                                        <th>Cintura</th>
+                                                        <th>Cadera</th>
+                                                        <th>Vasta</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php echo $falda['largo']; ?></td>
+                                                        <td><?php echo $falda['cintura']; ?></td>
+                                                        <td><?php echo $falda['cadera']; ?></td>
+                                                        <td><?php echo $falda['vasta']; ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($jumper)): ?>                                            
+                                            <?php //vdebug($jumper, false, false, true); ?>
+                                            <div class="card card-outline-warning">
+                                                <div class="card-header">
+                                                    <h4 class="mb-0 text-white">MEDIDAS FALDA</h4>
+                                                </div>
+                                            </div>
+
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Talle</th>
+                                                        <th>Largo</th>
+                                                        <th>Cintura</th>
+                                                        <th>Cadera</th>
+                                                        <th>Pecho</th>
+                                                        <th>Estomago</th>
+                                                        <th>Altura Busto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><?php echo $jumper['talle']; ?></td>
+                                                        <td><?php echo $jumper['largo']; ?></td>
+                                                        <td><?php echo $jumper['cintura']; ?></td>
+                                                        <td><?php echo $jumper['cadera']; ?></td>
+                                                        <td><?php echo $jumper['pecho']; ?></td>
+                                                        <td><?php echo $jumper['estomago']; ?></td>
+                                                        <td><?php echo $jumper['altura_busto']; ?></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <?php endif ?>
+
                                         </div>
                                     </div>
-                                    </div>
+                                </div>
 
                                     <div class="row">
                                     <?php if (!empty($saco)): ?>
@@ -230,7 +293,7 @@
                                     </div>
 
 
-                                    <div class="row">
+                                <div class="row">
                                     <?php if (!empty($chaleco['modelo_nombre'])): ?>
                                         <div class="col-md-6">
                                             <div class="table-responsive mt-5" style="clear: both;">
@@ -246,6 +309,73 @@
                                                             <td class="text-primary">Modelo</td>
                                                             <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
                                                             <td class="text-primary">Botones</td>
+                                                            <td class="text-right"><?php echo $chaleco['botones']; ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-primary">Detalle</td>
+                                                            <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
+                                                            <td class="text-primary">Color ojales</td>
+                                                            <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+                                        </div>
+                                        <?php endif ?>
+
+                                        <?php if (!empty($camisa)): ?>
+                                        <div class="col-md-6">
+
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-inverse">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES CAMISA</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Cuello</td>
+                                                            <td class="text-right"><?php echo $camisa['cuello']; ?> </td>
+                                                            <td>Largo Manga</td>
+                                                            <td class="text-right"><?php echo $camisa['largo_manga']; ?></td>
+                                                            <td>Color</td>
+                                                            <td class="text-right"><?php echo $camisa['color']; ?> </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Cuello combinado</td>
+                                                            <td class="text-right"><?php echo $camisa['cuello_combinado']; ?></td>
+                                                            <td>Cantidad</td>
+                                                            <td class="text-right"><?php echo $camisa['cantidad']; ?> </td>
+                                                            <td>Modelo cuello</td>
+                                                            <td class="text-right"><?php echo $camisa['modelo_cuello']; ?></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                
+                                            </div>
+                                        </div>
+                                        <?php endif ?>
+                                    </div>
+
+                                    <div class="row">
+                                    <?php if (!empty($falda['modelo_nombre'])): ?>
+                                        <div class="col-md-6">
+                                            <div class="table-responsive mt-5" style="clear: both;">
+                                                <div class="card card-outline-warning">
+                                                    <div class="card-header">
+                                                        <h4 class="mb-0 text-white">DETALLES FALDA</h4>
+                                                    </div>
+                                                </div>
+
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-primary">Modelo</td>
+                                                            <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
+                                                            <td class="text-primary">Abertura</td>
                                                             <td class="text-right"><?php echo $chaleco['botones']; ?></td>
                                                         </tr>
                                                         <tr>

@@ -5,9 +5,10 @@
 <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="<?php echo base_url() ?>aberturas/guarda" method="POST">
+			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
+			<?php echo form_open('aberturas/guarda'); ?>
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE NUEVA ABERTURA</h4>
+					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				</div>
 				<div class="modal-body">
@@ -25,9 +26,9 @@
 							<div class="form-group">
 								<label class="control-label">Tipo</label>
 								<select name="tipo" id="tipo" class="form-control custom-select" required>
-									<option value="falda">falda</option>
-									<option value="jumper">jumper</option>
-									<option value="saco">saco</option>
+									<option value="saco">SACO</option>
+									<option value="falda">FALDA</option>
+									<option value="jumper">JUMPER</option>
 								</select>
 							</div>
 						</div>
@@ -35,8 +36,8 @@
 							<div class="form-group">
 								<label class="control-label">Genero</label>
 								<select name="genero" id="genero" class="form-control custom-select" required>
-									<option value="varon">varon</option>
-									<option value="mujer">mujer</option>
+									<option value="varon">VARON</option>
+									<option value="mujer">MUJER</option>
 								</select>
 							</div>
 						</div>
@@ -145,7 +146,7 @@
 	function abre_modal()
 	{
 		$('#nombre').val("");
-		$('#tipo').val("falda");
+		$('#tipo').val("saco");
 		$('#genero').val("varon");
 		$("#myModal").modal('show');
 

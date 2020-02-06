@@ -19,7 +19,7 @@
          <div class="card-header">
           <h4 class="mb-0 text-white">NUEVO TRABAJO</h4>
         </div>
-        <?php vdebug($this->session->nombre, false, false, true); ?>
+        <?php //vdebug($this->session->nombre, false, false, true); ?>
         <div class="card-body">
 
           <div class="row">
@@ -421,7 +421,6 @@
                       <div class="form-group">
                         <label class="control-label">Bragueta</label>
                         <select name="pd_bragueta" class="form-control custom-select">
-                          <option value="">Seleccione</option>
                           <option value="Cierre">Cierre</option>
                           <option value="Boton">Boton</option>
                         </select>
@@ -434,7 +433,11 @@
                         <select name="pd_batras" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
-                            <option value="<?php echo $bvp['id']?>"><?php echo $bvp['nombre']?></option>
+                            <?php if ($bvp['id']==1): ?>
+                              <option value="<?php echo $bvp['id']?>" selected><?php echo $bvp['nombre']?></option>
+                            <?php else: ?>
+                              <option value="<?php echo $bvp['id']?>"><?php echo $bvp['nombre']?></option>
+                            <?php endif ?>
                           <?php endforeach?>
                         </select>
                       </div>
@@ -444,7 +447,6 @@
                       <div class="form-group">
                         <label class="control-label">Bota pie</label>
                         <select name="pd_bpie" class="form-control custom-select">
-                          <option value="">Seleccione</option>
                           <option value="Normal">Normal</option>
                           <option value="Dobles">Dobles</option>
                           <option value="Abertura">Abertura</option>
@@ -984,7 +986,7 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Hora Prueba</label>
-                      <input type="time" id="hora_prueba" name="hora_prueba" class="form-control" value="15:00:00">
+                      <input type="time" id="hora_prueba" name="hora_prueba" class="form-control" value="16:00:00">
                     </div>
                   </div>
 
@@ -998,16 +1000,16 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Hora Entrega</label>
-                      <input type="time" id="hora_entrega" name="hora_entrega" class="form-control" value="15:00:00">
+                      <input type="time" id="hora_entrega" name="hora_entrega" class="form-control" value="18:00:00">
                     </div>
                   </div>
 
                   <div class="col">
                     <div class="form-group">
-                      <label class="control-label">Tela Propia</label>
+                      <label class="control-label">Tela</label>
                       <select name="tela_propia" class="form-control custom-select">
-                        <option value="NO">NO</option>
-                        <option value="SI">SI</option>
+                        <option value="NO">Sin Tela</option>
+                        <option value="SI">Con Tela</option>
                       </select>
                     </div>
                   </div>

@@ -35,7 +35,7 @@ class Modelos extends CI_Controller {
 
 	public function listado()
 	{
-		$data['modelos'] = $this->db->get('modelos')->result_array();		
+		$data['modelos'] = $this->db->get_where('modelos', array('borrado ='=>NULL))->result_array();		
 		// echo 'Holas desde listado';
 		// vdebug($clientes, true, false, true);
 		$this->load->view('template/header');
@@ -45,4 +45,24 @@ class Modelos extends CI_Controller {
 		$this->load->view('template/footer');
 
 	}
+
+	public function guarda()
+	{
+		// vdebug($this->input->post(), true, false, true);
+		$datos = array(
+			'nombre' => $this->input->post('nombre'),
+			'tipo'   => $this->input->post('tipo'),
+			'genero' => $this->input->post('genero'),
+		);
+		$this->db->insert('modelos', $datos);
+		redirect("modelos/listado");
+	}
+
+	public function eliminar($id_abertura = null)
+	{
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('modelos', array('borrado'=>$hoy), "id=$id_abertura");
+		redirect("modelos/listado");
+	}
+
 }
