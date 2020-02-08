@@ -374,15 +374,15 @@
                                                     <tbody>
                                                         <tr>
                                                             <td class="text-primary">Modelo</td>
-                                                            <td class="text-right"><?php echo $chaleco['modelo_nombre']; ?> </td>
+                                                            <td class="text-right"><?php echo $falda['modelo_nombre']; ?> </td>
                                                             <td class="text-primary">Abertura</td>
-                                                            <td class="text-right"><?php echo $chaleco['botones']; ?></td>
+                                                            <td class="text-right"><?php echo $falda['abertura_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="text-primary">Detalle</td>
-                                                            <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
-                                                            <td class="text-primary">Color ojales</td>
-                                                            <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
+                                                            <td class="text-primary">Pretina</td>
+                                                            <td class="text-right"><?php echo $falda['pretina']; ?></td>
+                                                            <td class="text-primary"></td>
+                                                            <td class="text-right"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -391,33 +391,29 @@
                                         </div>
                                         <?php endif ?>
 
-                                        <?php if (!empty($camisa)): ?>
+                                        <?php if (!empty($jumper)): ?>
                                         <div class="col-md-6">
 
                                             <div class="table-responsive mt-5" style="clear: both;">
-                                                <div class="card card-outline-inverse">
+                                                <div class="card card-outline-warning">
                                                     <div class="card-header">
-                                                        <h4 class="mb-0 text-white">DETALLES CAMISA</h4>
+                                                        <h4 class="mb-0 text-white">DETALLES JUMPER</h4>
                                                     </div>
                                                 </div>
 
                                                 <table class="table table-hover">
                                                     <tbody>
                                                         <tr>
-                                                            <td>Cuello</td>
-                                                            <td class="text-right"><?php echo $camisa['cuello']; ?> </td>
-                                                            <td>Largo Manga</td>
-                                                            <td class="text-right"><?php echo $camisa['largo_manga']; ?></td>
-                                                            <td>Color</td>
-                                                            <td class="text-right"><?php echo $camisa['color']; ?> </td>
+                                                            <td class="text-primary">Modelo</td>
+                                                            <td class="text-right"><?php echo $jumper['modelo_nombre']; ?> </td>
+                                                            <td class="text-primary">Abertura</td>
+                                                            <td class="text-right"><?php echo $jumper['abertura_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Cuello combinado</td>
-                                                            <td class="text-right"><?php echo $camisa['cuello_combinado']; ?></td>
-                                                            <td>Cantidad</td>
-                                                            <td class="text-right"><?php echo $camisa['cantidad']; ?> </td>
-                                                            <td>Modelo cuello</td>
-                                                            <td class="text-right"><?php echo $camisa['modelo_cuello']; ?></td>
+                                                            <td class="text-primary">Bolsillo</td>
+                                                            <td class="text-right"><?php echo $jumper['bolsillo_nombre']; ?></td>
+                                                            <td class="text-primary"></td>
+                                                            <td class="text-right"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

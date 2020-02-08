@@ -58,7 +58,7 @@
               <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
               <div class="input-group mb-3">
-                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" aria-describedby="emailHelp">
+                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autofocus>
                 <!-- <div class="input-group-append">
                   <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
                 </div> -->
