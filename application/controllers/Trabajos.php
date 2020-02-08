@@ -534,4 +534,104 @@ class Trabajos extends CI_Controller {
 
 	}
 
+	public function form_edicion($id_trabajo = null)
+	{
+
+		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
+		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
+		$detalles_varon_saco  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'saco', 'borrado ='=>NULL, 'genero'  => 'varon'))->result_array();
+		
+		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon', 'borrado ='=>NULL))->result_array();
+		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'borrado ='=>NULL, 'genero'    => 'varon'))->result_array();
+		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon', 'borrado ='=>NULL))->result_array();
+		
+		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'borrado ='=>NULL))->result_array();
+		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'borrado ='=>NULL))->result_array();
+		
+		$modelos_faldas  = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
+		$aberturas_falda = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
+		
+		$modelos_jumper   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
+		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
+		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
+
+		$data['modelos_varon_saco']       = $modelos_varon_saco;
+		$data['modelos_varon_pantalon']   = $modelos_varon_pantalon;
+		$data['modelos_varon_chalecos']   = $modelos_varon_chalecos;
+		$data['aberturas_varon_saco']     = $aberturas_varon_saco;
+		$data['detalles_varon_saco']      = $detalles_varon_saco;
+		$data['detalles_varon_chalecos']  = $detalles_varon_chalecos;
+		$data['pinzas_varon_pantalon']    = $pinzas_varon_pantalon;
+		$data['bolsillos_varon_pantalon'] = $bolsillos_varon_pantalon;
+		$data['modelos_faldas']           = $modelos_faldas;
+		$data['aberturas_falda']           = $aberturas_falda;
+		$data['modelos_jumper']            = $modelos_jumper;
+		$data['aberturas_jumper']          = $aberturas_jumper;
+		$data['bolsillos_jumper']          = $bolsillos_jumper;
+		// vdebug($modelos_varon_pantalon, true, false, true);
+		// echo 'la vista desde trabajos';
+
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
+		$data['trabajo'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
+		$this->db->from('sacos as sa');
+		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
+		$this->db->where('sa.trabajo_id', $id_trabajo);
+		$data['saco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
+		$this->db->from('pantalones as pa');
+		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
+		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
+		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
+		$this->db->where('pa.trabajo_id', $id_trabajo);
+		$data['pantalon'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
+		$this->db->from('chalecos as ch');
+		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
+		$this->db->where('ch.trabajo_id', $id_trabajo);
+		$data['chaleco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
+		$this->db->from('faldas as f');
+		$this->db->join('modelos as mo', 'mo.id = f.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = f.abertura_id', 'left');
+		$this->db->where('f.trabajo_id', $id_trabajo);
+		$data['falda'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, b.nombre as bolsillo_nombre, j.*');
+		$this->db->from('jumpers as j');
+		$this->db->join('modelos as mo', 'mo.id = j.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = j.abertura_id', 'left');
+		$this->db->join('bolsillos as b', 'b.id = j.bolsillo_id', 'left');
+		$this->db->where('j.trabajo_id', $id_trabajo);
+		$data['jumper'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('camisas as ca');
+		$this->db->where('ca.trabajo_id', $id_trabajo);
+		$data['camisa'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('extras as ex');
+		$this->db->where('ex.trabajo_id', $id_trabajo);
+		$data['extras'] = $this->db->get()->row_array();
+
+		// vdebug($data['chaleco'], false, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('trabajos/form_edicion', $data);
+		$this->load->view('template/footer');
+
+	}
+
 }

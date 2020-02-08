@@ -659,7 +659,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Color</label>
-                            <input name="cam_color" type="number" id="cam_color" class="form-control" min="0" step="any">
+                            <input name="cam_color" type="text" id="cam_color" class="form-control" min="0" step="any">
                           </div>
                         </div>
 

@@ -53,9 +53,15 @@
 											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
 											</a>
+
 											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-success"><i class="fas fa-star"></i></button>
 											</a>
+
+											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $t['id'] ?>">
+												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+											</a>
+
 										</td>
 									</tr>
 									<?php endforeach ?>
