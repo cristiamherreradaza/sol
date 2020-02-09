@@ -194,7 +194,9 @@ class Trabajos extends CI_Controller {
 				'modelo_cuello'    => $this->input->post('cam_mcuello'),
 				'cuello_combinado' => $this->input->post('cam_ccombinado'),
 				'largo_manga'      => $this->input->post('cam_lmanga'),
+				'ancho'            => $this->input->post('cam_ancho'),
 				'color'            => $this->input->post('cam_color'),
+				'cantidad'         => $this->input->post('cam_cantidad'),
 			);
 			$this->db->insert('camisas', $datos_camisa);
 		}

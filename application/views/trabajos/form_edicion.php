@@ -291,28 +291,28 @@
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Largo</label>
-                        <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any">
+                        <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any" value="<?php echo $pantalon['largo']; ?>">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Entrepierna</label>
-                        <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any">
+                        <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any" value="<?php echo $pantalon['entre_pierna']; ?>">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Cintura</label>
-                        <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any">
+                        <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any" value="<?php echo $pantalon['cintura']; ?>">
                       </div>
                     </div>
 
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Muslo</label>
-                        <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any">
+                        <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any" value="<?php echo $pantalon['muslo']; ?>">
                       </div>
                     </div>
 
@@ -323,35 +323,35 @@
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Rodilla</label>
-                        <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any">
+                        <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any" value="<?php echo $pantalon['rodilla']; ?>">
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Bota Pie</label>
-                        <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any">
+                        <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any" value="<?php echo $pantalon['bota_pie']; ?>">
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">T. Delantero</label>
-                        <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any">
+                        <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_delantero']; ?>">
                       </div>
                     </div>
 
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Tiro Atras</label>
-                        <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any">
+                        <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_atras']; ?>">
                       </div>
                     </div>
 
                     <div class="col" id="pantalon_cadera" style="display: none;">
                       <div class="form-group">
                         <label class="control-label">Cadera</label>
-                        <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any">
+                        <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any" value="<?php echo $pantalon['cadera']; ?>">
                       </div>
                     </div>
 
@@ -379,7 +379,7 @@
                         <select name="pd_modelo" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($modelos_varon_pantalon as $mvp):?>
-                            <option value="<?php echo $mvp['id']?>"><?php echo $mvp['nombre']?></option>
+                            <option value="<?php echo $mvp['id']?>" <?php echo ($mvp['id'] == $pantalon['modelo_id'])?'selected':'' ?>><?php echo $mvp['nombre']?></option>
                           <?php endforeach?>
                         </select>
                       </div>
@@ -391,7 +391,7 @@
                         <select name="pd_pinzas" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($pinzas_varon_pantalon as $pvp):?>
-                            <option value="<?php echo $pvp['id']?>"><?php echo $pvp['nombre']?></option>
+                            <option value="<?php echo $pvp['id']?>" <?php echo ($pvp['id'] == $pantalon['pinza_id'])?'selected':'' ?>><?php echo $pvp['nombre']?></option>
                           <?php endforeach?>
                         </select>
                       </div>
@@ -401,8 +401,8 @@
                       <div class="form-group">
                         <label class="control-label">Bragueta</label>
                         <select name="pd_bragueta" class="form-control custom-select">
-                          <option value="Cierre">Cierre</option>
-                          <option value="Boton">Boton</option>
+                          <option value="Cierre" <?php echo ($pantalon['bragueta']=='Cierre')?'selected':'' ?>>Cierre</option>
+                          <option value="Boton" <?php echo ($pantalon['bragueta']=='Boton')?'selected':'' ?>>Boton</option>
                         </select>
                       </div>
                     </div>
@@ -413,11 +413,7 @@
                         <select name="pd_batras" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
-                            <?php if ($bvp['id']==1): ?>
-                              <option value="<?php echo $bvp['id']?>" selected><?php echo $bvp['nombre']?></option>
-                            <?php else: ?>
-                              <option value="<?php echo $bvp['id']?>"><?php echo $bvp['nombre']?></option>
-                            <?php endif ?>
+                            <option value="<?php echo $bvp['id']?>" <?php echo ($bvp['id'] == $pantalon['bolsillo_id'])?'selected':'' ?>><?php echo $bvp['nombre']?></option>
                           <?php endforeach?>
                         </select>
                       </div>
@@ -427,9 +423,9 @@
                       <div class="form-group">
                         <label class="control-label">Bota pie</label>
                         <select name="pd_bpie" class="form-control custom-select">
-                          <option value="Normal">Normal</option>
-                          <option value="Dobles">Dobles</option>
-                          <option value="Abertura">Abertura</option>
+                          <option value="Normal" <?php echo ($pantalon['bota_pie_des']=='Normal')?'selected':'' ?>>Normal</option>
+                          <option value="Dobles" <?php echo ($pantalon['bota_pie_des']=='Dobles')?'selected':'' ?>>Dobles</option>
+                          <option value="Abertura" <?php echo ($pantalon['bota_pie_des']=='Abertura')?'selected':'' ?>>Abertura</option>
                         </select>
                       </div>
                     </div>
@@ -439,8 +435,8 @@
                         <label class="control-label">Pretina</label>
                         <select name="pd_pretina" class="form-control custom-select">
                           <option value="">Seleccione</option>
-                          <option value="Normal">Normal</option>
-                          <option value="Ancho">Ancho</option>
+                          <option value="Normal" <?php echo ($pantalon['pretina']=='Normal')?'selected':'' ?>>Normal</option>
+                          <option value="Ancho" <?php echo ($pantalon['pretina']=='Ancho')?'selected':'' ?>>Ancho</option>
                         </select>
                       </div>
                     </div>
@@ -452,21 +448,24 @@
                     <div class="col-md-4">
                       <div class="form-group">
                         <label class="control-label"><b>Cantidad</b></label>
-                        <input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="1">
+                        <input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="<?php echo $pantalon['cantidad']; ?>">
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label class="control-label"><b>Precio Unitario</b></label>
-                        <input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" placeholder="Ej: 150">
+                        <input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" value="<?php echo $pantalon['precio_unitario']; ?>">
                       </div>
                     </div>
 
                     <div class="col-md-4">
                       <div class="form-group">
                         <label class="control-label"><b>Subtotal</b></label>
-                        <input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" readonly>
+                        <?php 
+                          $subtotal_pant = $pantalon['cantidad']*$pantalon['precio_unitario'];
+                        ?>
+                        <input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" value="<?php echo $subtotal_pant; ?>" readonly>
                       </div>
                     </div>
                     
@@ -493,28 +492,28 @@
                       <div class="col">
                         <div class="form-group">
                           <label class="control-label">Largo</label>
-                          <input name="ch_largo" type="number" id="ch_largo" class="form-control" min="0" step="any">
+                          <input name="ch_largo" type="number" id="ch_largo" class="form-control" min="0" step="any"  value="<?php echo $chaleco['largo']; ?>">
                         </div>
                       </div>
 
                       <div class="col">
                         <div class="form-group">
                           <label class="control-label">Pecho</label>
-                          <input name="ch_pecho" type="number" id="ch_pecho" class="form-control" min="0" step="any">
+                          <input name="ch_pecho" type="number" id="ch_pecho" class="form-control" min="0" step="any"  value="<?php echo $chaleco['pecho']; ?>">
                         </div>
                       </div>
 
                       <div class="col">
                         <div class="form-group">
                           <label class="control-label">Estomago</label>
-                          <input name="ch_estomago" type="number" id="ch_estomago" class="form-control" min="0" step="any">
+                          <input name="ch_estomago" type="number" id="ch_estomago" class="form-control" min="0" step="any"  value="<?php echo $chaleco['estomago']; ?>">
                         </div>
                       </div>
 
                       <div class="col" id="ch_abusto" style="display: none;">
                         <div class="form-group">
                           <label class="control-label">Altura busto</label>
-                          <input name="ch_abusto" type="number" id="ch_abusto" class="form-control" min="0" step="any">
+                          <input name="ch_abusto" type="number" id="ch_abusto" class="form-control" min="0" step="any"  value="<?php echo $chaleco['altura_busto']; ?>">
                         </div>
                       </div>
 
@@ -542,7 +541,7 @@
                           <select name="ch_modelo" class="form-control custom-select">
                             <option value="">Seleccione</option>
                             <?php foreach ($modelos_varon_chalecos as $mvch):?>
-                              <option value="<?php echo $mvch['id']?>"><?php echo $mvch['nombre']?></option>
+                              <option value="<?php echo $mvch['id']?>" <?php echo ($mvch['id'] == $chaleco['modelo_id'])?'selected':'' ?>><?php echo $mvch['nombre']?></option>
                             <?php endforeach?>
                           </select>
                         </div>
@@ -551,7 +550,7 @@
                       <div class="col-md-2">
                         <div class="form-group">
                           <label class="control-label">Botones</label>
-                          <input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any">
+                          <input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any"  value="<?php echo $chaleco['botones']; ?>">
                         </div>
                       </div>
 
@@ -561,7 +560,7 @@
                           <select name="ch_detalle" class="form-control custom-select">
                             <option value="">Seleccione</option>
                             <?php foreach ($detalles_varon_chalecos as $dvch):?>
-                              <option value="<?php echo $dvch['id']?>"><?php echo $dvch['nombre']?></option>
+                              <option value="<?php echo $dvch['id']?>" <?php echo ($dvch['id'] == $chaleco['detalle_id'])?'selected':'' ?>><?php echo $dvch['nombre']?></option>
                             <?php endforeach?>
                           </select>
                         </div>
@@ -570,7 +569,7 @@
                       <div class="col">
                         <div class="form-group">
                           <label class="control-label">Color Ojales</label>
-                          <input name="ch_color" type="text" id="ch_color" class="form-control" placeholder="">
+                          <input name="ch_color" type="text" id="ch_color" class="form-control" value="<?php echo $chaleco['color_ojales']; ?>">
                         </div>
                       </div>
 
@@ -581,21 +580,23 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label"><b>Cantidad</b></label>
-                          <input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="1">
+                          <input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="<?php echo $chaleco['cantidad']; ?>">
                         </div>
                       </div>
 
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label"><b>Precio Unitario</b></label>
-                          <input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150">
+                          <input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150" value="<?php echo $chaleco['precio_unitario']; ?>">
                         </div>
                       </div>
-
+                      <?php 
+                        $sub_chaleco = $chaleco['cantidad']*$chaleco['precio_unitario'];
+                      ?>
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label"><b>Subtotal</b></label>
-                          <input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" readonly>
+                          <input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" value="<?php echo $sub_chaleco; ?>" readonly>
                         </div>
                       </div>
                       
@@ -625,21 +626,21 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Cuello</label>
-                            <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any">
+                            <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any" value="<?php echo $camisa['cuello']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Largo manga</label>
-                            <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any">
+                            <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any" value="<?php echo $camisa['largo_manga']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Color</label>
-                            <input name="cam_color" type="number" id="cam_color" class="form-control" min="0" step="any">
+                            <input name="cam_color" type="text" id="cam_color" class="form-control" value="<?php echo $camisa['color']; ?>">
                           </div>
                         </div>
 
@@ -651,8 +652,8 @@
                             <label class="control-label">Modelo cuello</label>
                             <select name="cam_mcuello" class="form-control custom-select">
                               <option value="">Seleccione</option>
-                              <option value="Pajarito">Pajarito</option>
-                              <option value="Normal">Normal</option>
+                              <option value="Pajarito" <?php echo ($camisa['modelo_cuello']=='Pajarito')?'selected':'' ?>>Pajarito</option>
+                              <option value="Normal" <?php echo ($camisa['modelo_cuello']=='Normal')?'selected':'' ?>>Normal</option>
                             </select>
                           </div>
                         </div>
@@ -662,8 +663,8 @@
                             <label class="control-label">Ancho</label>
                             <select name="cam_ancho" class="form-control custom-select">
                               <option value="">Seleccione</option>
-                              <option value="Normal">Normal</option>
-                              <option value="Slim">Slim</option>
+                              <option value="Normal" <?php echo ($camisa['ancho']=='Normal')?'selected':'' ?>>Normal</option>
+                              <option value="Slim" <?php echo ($camisa['ancho']=='Slim')?'selected':'' ?>>Slim</option>
                             </select>
                           </div>
                         </div>
@@ -673,8 +674,8 @@
                             <label class="control-label">Cuello Combi</label>
                             <select name="cam_ccombinado" class="form-control custom-select">
                               <option value="">Seleccione</option>
-                              <option value="Si">Si</option>
-                              <option value="No">No</option>
+                              <option value="Si" <?php echo ($camisa['cuello_combinado']=='Si')?'selected':'' ?>>Si</option>
+                              <option value="No" <?php echo ($camisa['cuello_combinado']=='No')?'selected':'' ?>>No</option>
                             </select>
                           </div>
                         </div>
@@ -682,7 +683,7 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="control-label">Cantidad</label>
-                            <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" min="0" step="any">
+                            <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" min="0" step="any" value="<?php echo $camisa['cantidad']; ?>">
                           </div>
                         </div>
                         
@@ -706,21 +707,21 @@
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Corbaton</label>
-                            <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro">
+                            <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbaton']; ?>">
                           </div>
                         </div>
 
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Corbata gato</label>
-                            <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro">
+                            <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbata_gato']; ?>">
                           </div>
                         </div>
 
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Faja</label>
-                            <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro">
+                            <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['faja']; ?>">
                           </div>
                         </div>
 
@@ -952,14 +953,20 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Fecha Registro</label>
-                      <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo date('Y-m-d');?>">
+                      <?php 
+                        $fechar = explode(" ", $trabajo['fecha']);  
+                        $fechap = explode(" ", $trabajo['fecha_prueba']);  
+                        $fechae = explode(" ", $trabajo['fecha_entrega']);  
+                        // echo $fechar[0];
+                      ?>
+                      <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo $fechar[0];?>">
                     </div>
                   </div>
 
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Fecha Prueba</label>
-                      <input type="date" name="fecha_prueba" id="fecha_prueba" class="form-control" value="<?php echo date('Y-m-d');?>">
+                      <input type="date" name="fecha_prueba" id="fecha_prueba" class="form-control" value="<?php echo $fechap[0] ?>">
                     </div>
                   </div>
 
@@ -973,7 +980,7 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Fecha Entrega</label>
-                      <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control" value="<?php echo date('Y-m-d');?>">
+                      <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control" value="<?php echo $fechae[0]; ?>">
                     </div>
                   </div>                                
 
@@ -988,8 +995,8 @@
                     <div class="form-group">
                       <label class="control-label">Tela</label>
                       <select name="tela_propia" class="form-control custom-select">
-                        <option value="NO">Sin Tela</option>
-                        <option value="SI">Con Tela</option>
+                        <option value="NO" <?php echo ($trabajo['tela_propia']=='SI')?'selected':'' ?>>Sin Tela</option>
+                        <option value="SI" <?php echo ($trabajo['tela_propia']=='NO')?'selected':'' ?>>Con Tela</option>
                       </select>
                     </div>
                   </div>
@@ -997,7 +1004,7 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Marca</label>
-                      <input type="text" name="marca" id="marca" class="form-control">
+                      <input type="text" name="marca" id="marca" class="form-control" value="<?php echo $trabajo['marca_tela']; ?>">
                     </div>
                   </div>
                   </div>
@@ -1006,35 +1013,39 @@
                   <div class="col-md-2">
                     <div class="form-group has-success">
                       <label class="control-label">Costo Tela</label>
-                      <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" required>
+                      <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['costo_tela']; ?>" required>
                     </div>
                   </div>
 
                   <div class="col-md-2 has-success">
                     <div class="form-group">
                       <label class="control-label">Costo Confeccion</label>
-                      <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any" required>
+                      <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['costo_confeccion']; ?>" required>
                     </div>
                   </div>
 
                   <div class="col-md-4">
                     <div class="form-group has-danger">
                       <label class="control-label"><b>TOTAL</b></label>
-                      <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" step="any" readonly>
+                      <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['total']; ?>" readonly>
                     </div>
                   </div>
 
                   <div class="col-md-2">
                     <div class="form-group has-warning">
                       <label class="control-label">A cuenta</label>
-                      <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" required>
+                      <?php 
+                        $saldo_mod = $trabajo['total']-$trabajo['saldo'];
+
+                      ?>
+                      <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" value="<?php echo $saldo_mod; ?>" readonly>
                     </div>
                   </div>
 
                   <div class="col-md-2">
                     <div class="form-group has-primary">
                       <label class="control-label">Saldo</label>
-                      <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" step="any" readonly>
+                      <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['saldo']; ?>" readonly>
                     </div>
                   </div>
 
