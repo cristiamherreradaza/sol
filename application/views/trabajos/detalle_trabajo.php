@@ -537,6 +537,10 @@
                                 </div> -->
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -564,3 +568,17 @@
 <!-- ============================================================== -->
 <!-- End Wrapper -->
 <!-- ============================================================== -->
+<script src="<?php echo base_url(); ?>public/main/js/jquery.PrintArea.js" type="text/JavaScript"></script>
+<script>
+   $(document).ready(function() {
+       $("#print").click(function() {
+           var mode = 'iframe'; //popup
+           var close = mode == "popup";
+           var options = {
+               mode: mode,
+               popClose: close
+           };
+           $("div.printableArea").printArea(options);
+       });
+   });
+</script>
