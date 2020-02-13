@@ -45,8 +45,8 @@
                                                 <td><?php echo $trabajo['celulares'] ?></td>
                                             </tr>
                                             <tr>
-                                                <td><b>Entrega: </b></td>
-                                                <td><?php echo fechaEs($trabajo['fecha_entrega']); ?></td>
+                                                <td><b>Registro: </b></td>
+                                                <td><?php echo fechaEs($trabajo['fecha']); ?></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Entregado: </b></td>
@@ -88,7 +88,7 @@
                                             </table>
                                         <?php endif ?>
 
-                                        <?php if (!empty($saco['modelo_nombre'])): ?>
+                                        <?php if (!empty($pantalon['modelo_nombre'])): ?>
                                             <br />
                                             <b>DETALLE PANTALON</b>
 

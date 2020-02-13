@@ -44,7 +44,7 @@
                                                     <label class="control-label">Monto </label>
                                                     <input type="hidden" name="trabajo_id" value="<?php echo $trabajo['id'] ?>">
                                                     <input type="hidden" name="cliente_id" value="<?php echo $trabajo['cliente_id'] ?>">
-                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" required>
+                                                    <input type="number" name="monto" id="monto" class="form-control" placeholder="Ej: 200" step="any" max="<?php echo $trabajo['saldo']; ?>" autofocus required>
                                                 </div>
                                             </div>
 
@@ -64,7 +64,14 @@
 
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">Guardar Pago</button>
+                                                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA PAGO</button>
+                                                <p></p>
+                                                <a 
+                                                    href="<?php echo base_url() ?>trabajos/impresion_recibo/<?php echo $trabajo['id']; ?>"
+                                                    class="btn waves-effect waves-light btn-block btn-info"
+                                                >
+                                                    IMPRIME RECIBO
+                                                </a>
                                             </div>
                                         </div>
                                     </form>

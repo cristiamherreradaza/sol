@@ -703,4 +703,24 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function impresion_recibo($id_trabajo = null)
+	{
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
+		$data['trabajo'] = $this->db->get()->row_array();
+
+		$data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo))->result_array();
+		// vdebug($data['pagos'], true, false, true);
+
+		$fecha = fechaEs($data['trabajo']['fecha']);
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('trabajos/impresion_recibo', $data);
+		$this->load->view('template/footer');
+
+	}
+
 }

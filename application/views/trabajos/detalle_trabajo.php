@@ -544,7 +544,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <a href="<?php echo base_url(); ?>trabajos/impresion_cliente/<?php echo $trabajo['id'] ?>">
-                                <button id="print" class="btn waves-effect waves-light btn-block btn-info" type="button"> <span><i class="fa fa-print"></i> Impresion Cliente</span> </button>
+                                <button class="btn waves-effect waves-light btn-block btn-info" type="button"> <span><i class="fa fa-print"></i> Impresion Cliente</span> </button>
                             </a>
                         </div>
                         <div class="col-md-6">
