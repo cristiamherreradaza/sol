@@ -538,11 +538,22 @@
                             </div>
                         </div>
 
-                        <div class="col-md-12">
-                            <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="<?php echo base_url(); ?>trabajos/impresion_cliente/<?php echo $trabajo['id'] ?>">
+                                <button id="print" class="btn waves-effect waves-light btn-block btn-info" type="button"> <span><i class="fa fa-print"></i> Impresion Cliente</span> </button>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <button id="print" class="btn waves-effect waves-light btn-block btn-dark" type="button"> <span><i class="fa fa-print"></i> Impresion Empresa</span> </button>
                         </div>
                     </div>
+                    
                 </div>
+
             </div>
             <!-- ============================================================== -->
             <!-- End PAge Content -->

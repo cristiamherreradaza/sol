@@ -319,11 +319,17 @@
 
                         </div>
 
+                        
+                    </div>
+
+                    <div class="row">
                         <div class="col-md-12">
-                            <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                            <button id="print" class="btn waves-effect waves-light btn-block btn-info" type="button"> <span><i class="fa fa-print"></i> Imprimir</span> </button>
                         </div>
                     </div>
+
                 </div>
+
             </div>
             <!-- ============================================================== -->
             <!-- End PAge Content -->
