@@ -30,7 +30,8 @@
                                     <td>
                                         <table border="0" class="impresion">
                                             <tr>
-                                                <td colspan="2" style="text-align: center;"><h4><b>TRABAJO <span class="text-info"># <?php echo $trabajo['id']; ?></span></b></h4></td>
+                                                <td style="text-align: center;"><h6><b>TRABAJO <span class="text-info"># <?php echo $trabajo['id']; ?></span></b></h6></td>
+                                                <td style="text-align: center;"><h6><b>RECIBO <span class="text-info"># <?php echo $pagos[0]['id']; ?></span></b></h6></td>
                                             </tr>
                                             <tr>
                                                 <td><b>Cliente: </b></td>
@@ -55,12 +56,12 @@
                                         </table>
 
                                         <?php $total=0; ?>
-                                        <table class="table detalle">
+                                        <table class="table detalle" border="0">
                                             <thead>
                                                 <tr>
                                                     <th>Fecha</th>
                                                     <th>Usuario</th>
-                                                    <th>A cuenta</th>
+                                                    <th>Monto</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -69,19 +70,26 @@
                                                     <tr>
                                                         <td><?php echo fechaEs($p['fecha']); ?></td>
                                                         <td></td>
-                                                        <td><?php echo $p['monto']; ?></td>
-                                                        <td></td>
+                                                        <td class="text-right"><?php echo number_format($p['monto'], 2); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
-                                            </tbody>
-                                            <tfoot>
                                                 <tr>
-                                                    <th class="text-info">Costo Total: <?php echo $trabajo['total'] ?></th>
-                                                    <th align="right"></th>
-                                                    <th><?php echo $total; ?></th>
-                                                    <!-- <th><span class="text-danger">Saldo: <?php echo $trabajo['saldo']; ?></span></th> -->
+                                                    <td class="text-right">Total Adelanto</td>
+                                                    <td></td>
+                                                    <td class="text-right"><?php echo number_format($total, 2); ?></td>
                                                 </tr>
-                                            </tfoot>
+                                                <tr>
+                                                    <td class="text-right">Costo Trabajo</td>
+                                                    <td></td>
+                                                    <td class="text-right"><?php echo number_format($trabajo['total'], 2); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-right"><b>Saldo</b></td>
+                                                    <td></td>
+                                                    <?php //$saldo = $total[] ?>
+                                                    <td class="text-right"><b><?php echo number_format($trabajo['total']-$total, 2); ?></b></td>
+                                                </tr>
+                                            </tbody>
                                         </table>
 
                                     </td>
