@@ -31,6 +31,7 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
                         <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
                     </ul>
                 </li>
                 <li>
