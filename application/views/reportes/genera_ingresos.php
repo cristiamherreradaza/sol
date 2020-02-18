@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
                         <center><h1><b>REPORTE <span class="text-info">INGRESOS</span></b></h1></center>
-                        <?php //vdebug($trabajo, false, false, true); ?>
+                        <?php //vdebug($tela_confeccion, false, false, true); ?>
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
@@ -23,13 +23,60 @@
                                     FIN: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
                                 </div>
                             </div>
+                            <p>&nbsp;</p>
 
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
+                                    <div class="col-md-4">
+
+                                        <div class="card card-outline-success">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">RESUMEN INGRESOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="piechart_3d" style="width: 100%; height: 300px;"></div>
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th>INGRESOS</th>
+                                                        <th>SALDOS</th>
+                                                        <th>COBRADO</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?php echo $totales['total']; ?></td>
+                                                        <td><?php echo $totales['saldo']; ?></td>
+                                                        <td><?php echo $totales['total']-$totales['saldo']; ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
-                                    <div class="col-md-6">2</div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="card card-outline-success">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">POR TIPO</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="donutchart" style="width: 100%; height: 300px;"></div>
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th>TELA</th>
+                                                        <th>CONFECCION</th>
+                                                        <th>TOTAL</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?php echo $tela_confeccion['tela']; ?></td>
+                                                        <td><?php echo $tela_confeccion['confeccion']; ?></td>
+                                                        <td><?php echo $tela_confeccion['confeccion']+$tela_confeccion['tela']; ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
 
                                 <div class="table-responsive mt-5" style="clear: both;">
@@ -138,11 +185,30 @@
     ]);
 
     var options = {
-      title: 'TOTAL INGRESOS',
       is3D: true,
+      chartArea:{width:'90%',height:'100%'}
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
     chart.draw(data, options);
   }
+</script>
+<script type="text/javascript">
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+        ['MONTOS', 'TOTALES'],
+        ['TELA', <?php echo $tela_confeccion['tela']; ?>],
+        ['CONFECCION', <?php echo $tela_confeccion['confeccion']; ?>]
+    ]);
+
+    var options = {
+        pieHole: 0.4,
+        chartArea:{width:'90%',height:'100%'}
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+    }
 </script>

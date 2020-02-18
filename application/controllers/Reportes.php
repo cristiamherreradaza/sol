@@ -80,6 +80,14 @@ class Reportes extends CI_Controller {
 						AND fecha <= ?
 						";
 		$data['totales'] = $this->db->query($sql_totales, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+
+		$sql_tela_confeccion = "SELECT SUM(costo_tela) as tela, SUM(costo_confeccion) as confeccion 
+						FROM trabajos
+						WHERE fecha >= ?
+						AND fecha <= ?
+						";
+		$data['tela_confeccion'] = $this->db->query($sql_tela_confeccion, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+
 		// vdebug($consulta_totales, true, false, true);
 		$data['inicio'] = $fecha_hora_inicio;
 		$data['fin'] = $fecha_hora_fin;
