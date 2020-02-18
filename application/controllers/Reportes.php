@@ -73,9 +73,19 @@ class Reportes extends CI_Controller {
 		$this->db->where('t.fecha >=', $fecha_hora_inicio);
 		$this->db->where('t.fecha <=', $fecha_hora_fin);
 		$this->db->where('t.borrado =', NULL);
+
+		$sql_totales = "SELECT SUM(total) as total, SUM(saldo) as saldo 
+						FROM trabajos
+						WHERE fecha >= ?
+						AND fecha <= ?
+						";
+		$data['totales'] = $this->db->query($sql_totales, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+		// vdebug($consulta_totales, true, false, true);
 		$data['inicio'] = $fecha_hora_inicio;
 		$data['fin'] = $fecha_hora_fin;
 		$data['trabajos'] = $this->db->get()->result_array();
+
+		
 		// vdebug($data['trabajo'], true, false, true);
 		$this->load->view('template/header');
 		$this->load->view('template/menu');

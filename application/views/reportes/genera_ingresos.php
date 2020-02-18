@@ -17,15 +17,20 @@
                         <hr>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="float-left">
-                                    <address>
-                                        <h3>DESDE: <b class="text-info"> <?php echo $inicio; ?></b></h3>
-                                        <h3>FIN: <b class="text-info"> <?php echo $fin; ?></b></h3>
-                                    </address>
+                                <div class="text-center">
+                                    DESDE: <b class="text-info"> <?php echo fechaEs($inicio); ?></b>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    FIN: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
                                 </div>
                             </div>
 
                             <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="piechart_3d" style="width: 100%; height: 500px;"></div>
+                                    </div>
+                                    <div class="col-md-6">2</div>
+                                </div>
 
                                 <div class="table-responsive mt-5" style="clear: both;">
                                 <?php //vdebug($trabajos, false, false, true); ?>
@@ -120,4 +125,24 @@
            $("div.printableArea").printArea(options);
        });
    });
+</script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load("current", {packages:["corechart"]});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['MONTOS',   'TOTALES'],
+      ['INGRESOS', <?php echo $totales['total'] ?>],
+      ['SALDOS',   <?php echo $totales['saldo'] ?>]
+    ]);
+
+    var options = {
+      title: 'TOTAL INGRESOS',
+      is3D: true,
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    chart.draw(data, options);
+  }
 </script>
