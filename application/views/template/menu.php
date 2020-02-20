@@ -52,8 +52,8 @@
                         <li><a href="#">Inventarios</a>
                              <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
-                                <li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
-                                <!-- <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
+                                <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
+                                 <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
                             </ul>
                         </li>
                     </ul>
