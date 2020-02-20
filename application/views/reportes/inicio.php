@@ -55,6 +55,12 @@
 										</div>
 
 										</form>
+										<hr>
+										<div class="row">
+											<div class="col-md-12">
+												<button type="submit" class="btn waves-effect waves-light btn-block btn-dark">GENERA DEUDAS</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -65,7 +71,7 @@
 										<h4 class="mb-0 text-white">INGRESOS</h4>
 									</div>
 									<div class="card-body" style="background-color: #e6f2ff;">
-										<?php echo form_open('reportes/genera_ingresos') ?>
+										<?php //echo form_open('reportes/genera_ingresos') ?>
 
 										<div class="row">
 											<div class="col-md-4">

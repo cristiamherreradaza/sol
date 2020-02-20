@@ -119,4 +119,13 @@ class Reportes extends CI_Controller {
 		$this->load->view('reportes/genera_ingresos', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function reporte_deudas()
+	{
+		$sql_deudores = "SELECT id, cliente_id, fecha, saldo, DATEDIFF(CURDATE(), fecha) AS dias 
+						FROM trabajos 
+						WHERE saldo > 0 
+						ORDER BY dias DESC";
+
+	}
 }
