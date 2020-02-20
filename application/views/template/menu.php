@@ -40,20 +40,35 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
-                        <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
-                        <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
-                        <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
-                        <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
+                        <li><a href="#">Confecciones</a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
+                                <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
+                                <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
+                                <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
+                                <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Inventarios</a>
+                             <ul aria-expanded="false" class="collapse">
+                                <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
+                                <li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
+                                <!-- <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios/categorias">Categorias</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Sacar Material</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/membrete">Membrete</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/reporte">Reporte</a></li>
                     </ul>
                 </li>
                 <li>

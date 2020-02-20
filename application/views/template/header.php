@@ -30,6 +30,7 @@
     <![endif]-->
     <!-- libreria jquery -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
+    <link href="<?php echo base_url(); ?>public/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body class="fix-header card-no-border fix-sidebar">
