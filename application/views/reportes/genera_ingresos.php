@@ -20,7 +20,7 @@
                                 <div class="text-center">
                                     DESDE: <b class="text-info"> <?php echo fechaEs($inicio); ?></b>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    FIN: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
+                                    HASTA: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
                                 </div>
                             </div>
                             <p>&nbsp;</p>
@@ -54,7 +54,7 @@
 
                                     <div class="col-md-4">
 
-                                        <div class="card card-outline-success">
+                                        <div class="card card-outline-info">
                                             <div class="card-header">
                                                 <h4 class="mb-0 text-white">POR TIPO</h4>
                                             </div>
@@ -77,10 +77,35 @@
                                         
                                     </div>
 
+                                    <div class="col-md-4">
+
+                                        <div class="card card-outline-primary">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">ENTREGADOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div id="piechart" style="width: 100%; height: 300px;"></div>
+                                                <table class="table table-hover">
+                                                    <tr>
+                                                        <th>ENTREGADOS</th>
+                                                        <th>NO ENTREGADOS</th>
+                                                        <th>TOTAL</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?php echo $entregados['cantidad']; ?></td>
+                                                        <td><?php echo $no_entregados['cantidad']; ?></td>
+                                                        <td><?php echo $entregados['cantidad']+$no_entregados['cantidad']; ?></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
                                 </div>
 
                                 <div class="table-responsive mt-5" style="clear: both;">
-                                <?php //vdebug($trabajos, false, false, true); ?>
+                                <?php //vdebug($entregados, false, false, true); ?>
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
@@ -209,6 +234,28 @@
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+    chart.draw(data, options);
+    }
+</script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['MONTOS', 'TOTALES'],
+      ['ENTREGADOS', <?php echo $entregados['cantidad'] ?>],
+      ['SIN ENTREGAR', <?php echo $no_entregados['cantidad'] ?>]
+      ]);
+
+    var options = {
+      // title: 'My Daily Activities'
+      chartArea:{width:'90%',height:'100%'}
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
     chart.draw(data, options);
     }
 </script>

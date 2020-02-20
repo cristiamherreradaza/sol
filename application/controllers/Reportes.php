@@ -88,6 +88,24 @@ class Reportes extends CI_Controller {
 						";
 		$data['tela_confeccion'] = $this->db->query($sql_tela_confeccion, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
 
+		$sql_entregados = "SELECT COUNT(id) as cantidad 
+						FROM trabajos
+						WHERE fecha >= ?
+						AND fecha <= ?
+						AND entregado = 'Si'
+						";
+		$data['entregados'] = $this->db->query($sql_entregados, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+
+		$sql_no_entregados = "SELECT COUNT(id) as cantidad 
+						FROM trabajos
+						WHERE fecha >= ?
+						AND fecha <= ?
+						AND entregado = 'No'
+						";
+		$data['no_entregados'] = $this->db->query($sql_no_entregados, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+
+
+
 		// vdebug($consulta_totales, true, false, true);
 		$data['inicio'] = $fecha_hora_inicio;
 		$data['fin'] = $fecha_hora_fin;

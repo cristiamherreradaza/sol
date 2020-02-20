@@ -59,7 +59,7 @@
 								</div>
 							</div>
 
-              <div class="col-md-6">
+			                <!-- <div class="col-md-6">
 								<div class="card card-outline-primary">
 									<div class="card-header">
 										<h4 class="mb-0 text-white">INGRESOS</h4>
@@ -95,18 +95,18 @@
 										</form>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 						</div>
 
-						<div class="row">
+						<!-- <div class="row">
 							<div class="col-md-6">
 								<button type="submit" class="btn waves-effect waves-light btn-block btn-success">Guardar Trabajo</button>
 							</div>
 							<div class="col-md-6">
 								<button type="button" class="btn waves-effect waves-light btn-block btn-inverse">Cancelar</button>
 							</div>
-						</div>
+						</div> -->
 
 					</div>
 				</div>
