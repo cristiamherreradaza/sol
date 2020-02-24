@@ -6,9 +6,9 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
-			<?php echo form_open('aberturas/guarda'); ?>
+			<?php echo form_open('modelos/guarda'); ?>
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>
+					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE MODELOS</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<input type="hidden" name="ida" id="ida" value="">
 				</div>
@@ -46,7 +46,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA ABERTURA</button>
+					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA MODELO</button>
 				</div>
 			</form>
 
@@ -148,6 +148,7 @@
 		$('#nombre').val("");
 		$('#tipo').val("saco");
 		$('#genero').val("varon");
+		$('#ida').val("");
 		$("#myModal").modal('show');
 
 	}
@@ -162,6 +163,7 @@
 		$('#nombre').val(nombre)
 		$('#tipo').val(tipo)
 		$('#genero').val(genero)
+		$('#ida').val(id)
 		$("#myModal").modal('show');
 	}
 

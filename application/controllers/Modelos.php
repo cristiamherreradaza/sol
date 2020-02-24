@@ -48,13 +48,19 @@ class Modelos extends CI_Controller {
 
 	public function guarda()
 	{
-		// vdebug($this->input->post(), true, false, true);
+		$id = $this->input->post('ida');
+		// vdebug($this->input->post('ida'), true, false, true);
 		$datos = array(
 			'nombre' => $this->input->post('nombre'),
 			'tipo'   => $this->input->post('tipo'),
 			'genero' => $this->input->post('genero'),
 		);
-		$this->db->insert('modelos', $datos);
+		if (empty($id)) {
+			$this->db->insert('modelos', $datos);
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('modelos', $datos);
+		}
 		redirect("modelos/listado");
 	}
 
