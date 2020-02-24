@@ -35,7 +35,7 @@ class Bolsillos extends CI_Controller {
 
 	public function listado()
 	{
-		$data['bolsillos'] = $this->db->get('bolsillos')->result_array();		
+		$data['bolsillos'] = $this->db->get_where('bolsillos', array('borrado ='=>NULL))->result_array();		
 		// echo 'Holas desde listado';
 		// vdebug($clientes, true, false, true);
 		$this->load->view('template/header');
@@ -43,6 +43,31 @@ class Bolsillos extends CI_Controller {
 		// $this->load->view('trabajos/nuevo', $data);
 		$this->load->view('bolsillos/listado', $data);
 		$this->load->view('template/footer');
-
 	}
+
+	public function guarda()
+	{
+		$id = $this->input->post('ida');
+		// vdebug($this->input->post('ida'), true, false, true);
+		$datos = array(
+			'nombre' => $this->input->post('nombre'),
+			'tipo'   => $this->input->post('tipo'),
+			'genero' => $this->input->post('genero'),
+		);
+		if (empty($id)) {
+			$this->db->insert('bolsillos', $datos);
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('bolsillos', $datos);
+		}
+		redirect("bolsillos/listado");
+	}
+
+	public function eliminar($id_abertura = null)
+	{
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('bolsillos', array('borrado'=>$hoy), "id=$id_abertura");
+		redirect("bolsillos/listado");
+	}
+
 }

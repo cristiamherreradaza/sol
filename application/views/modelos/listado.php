@@ -5,18 +5,18 @@
 <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<!-- <form action="<?php //echo base_url() ?>modelos/guarda" method="POST"> -->
-			<?php echo form_open('modelos/guarda'); ?>
+			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
+			<?php echo form_open('aberturas/guarda'); ?>
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE MODELO</h4>
+					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<input type="hidden" name="ida" id="ida" value="">
 				</div>
 				<div class="modal-body">
 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-
 								<label class="control-label">Nombre</label>
 								<input name="nombre" type="text" id="nombre" class="form-control" required>
 							</div>
@@ -26,7 +26,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Tipo</label>
-								<select name="tipo" id="tipo" class="form-control custom-select">
+								<select name="tipo" id="tipo" class="form-control custom-select" required>
 									<option value="saco">SACO</option>
 									<option value="falda">FALDA</option>
 									<option value="jumper">JUMPER</option>
@@ -36,7 +36,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="control-label">Genero</label>
-								<select name="genero" id="genero" class="form-control custom-select">
+								<select name="genero" id="genero" class="form-control custom-select" required>
 									<option value="varon">VARON</option>
 									<option value="mujer">MUJER</option>
 								</select>
@@ -46,7 +46,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA MODELO</button>
+					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA ABERTURA</button>
 				</div>
 			</form>
 

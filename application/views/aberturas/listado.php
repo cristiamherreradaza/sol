@@ -169,28 +169,28 @@
 	}
 
 
-	function eliminar(id, nombre){
-	    //console.log(id_pago);
-	    Swal.fire({
-	      title: 'Quieres borrar '+nombre+'?',
-	      text: "Luego no podras recuperarlo!",
-	      type: 'warning',
-	      showCancelButton: true,
-	      confirmButtonColor: '#3085d6',
-	      cancelButtonColor: '#d33',
-	      confirmButtonText: 'Si, estoy seguro!',
-	      cancelButtonText: "Cancelar",
-	    }).then((result) => {
-	      if (result.value) {
-	        Swal.fire(
-	          'Excelente!',
-	          'Tu monto fue borrado.',
-	          'success'
-	        );
-	        // console.log("el id es "+id_pago);
-	        window.location.href = "<?php echo base_url() ?>aberturas/eliminar/"+id;
-	      }
-	    })
+	function eliminar(id, nombre) {
+		//console.log(id_pago);
+		Swal.fire({
+			title: 'Quieres borrar ' + nombre + '?',
+			text: "Luego no podras recuperarlo!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, estoy seguro!',
+			cancelButtonText: "Cancelar",
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire(
+					'Excelente!',
+					'Tu monto fue borrado.',
+					'success'
+				);
+				// console.log("el id es "+id_pago);
+				window.location.href = "<?php echo base_url() ?>aberturas/eliminar/" + id;
+			}
+		})
 	}
 
 </script>
