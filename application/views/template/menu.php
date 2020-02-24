@@ -40,7 +40,8 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="#">Confecciones</a>
+                        <!-- <li><a href="#">Confecciones</a> -->
+                        <li><a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Trabajos</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
                                 <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>

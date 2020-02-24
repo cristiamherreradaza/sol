@@ -60,6 +60,17 @@
 											<div class="col-md-12">
 												<button type="submit" class="btn waves-effect waves-light btn-block btn-dark">GENERA DEUDAS</button>
 											</div>
+
+
+											 <select id="selectCountry">
+													<option value="usa">USA</option>
+													<option value="uk">UK</option>
+													<option value="bm">Bermuda</option>
+													<option value="swedish">Sweden</option>
+												</select>
+												<pre id="output"></pre>
+												<script type="text/javascript"> </script>
+											
 										</div>
 									</div>
 								</div>
@@ -120,3 +131,21 @@
 		</div>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$("#selectCountry").change(function (e) {
+	$("#output").html("Loading...");
+	var country = $("#selectCountry").val();
+	var calendarUrl = 'https://www.googleapis.com/calendar/v3/calendars/en.' + country + '%23holiday%40group.v.calendar.google.com/events?key=AIzaSyDBgV5Zaou2iKcm-gAhbLClUfUHJ-jJF4s';
+	$.getJSON(calendarUrl).success(function (data) {
+		console.log(data);
+		$("#output").empty();
+		for (item in data.items) {
+			$("#output").append("<hr><h3>" + data.items[item].summary + "<h3>" + "<h4>" + data.items[item].start.date + "<h4>");
+		}
+	}).error(function (error) {
+		$("#output").html("An error occurnetworking.");
+	})
+});
+$("#selectCountry").trigger("change");
+</script>
