@@ -10,11 +10,9 @@
             <!-- User profile text-->
             <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><?php echo $this->session->nombre; ?> <span class="caret"></span></a>
                 <div class="dropdown-menu animated flipInY">
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-                    <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-                    <div class="dropdown-divider"></div> <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                    <div class="dropdown-divider"></div> <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+                    <a href="#" class="dropdown-item"><i class="ti-user"></i> Mi Perfil</a>
+                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> Cambio Pass</a>
+                    <div class="dropdown-divider"></div> <a href="<?php echo base_url() ?>usuarios/logout" class="dropdown-item"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
             </div>
         </div>
@@ -41,7 +39,7 @@
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <!-- <li><a href="#">Confecciones</a> -->
-                        <li><a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Trabajos</span></a>
+                        <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Trabajos</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
                                 <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
@@ -50,13 +48,17 @@
                                 <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Inventarios</a>
+                        <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
                              <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
                                 <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
                                  <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
                             </ul>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url() ?>usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
+                        </li>
+
                     </ul>
                 </li>
                 <li>
