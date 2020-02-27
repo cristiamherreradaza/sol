@@ -10,6 +10,7 @@ class Usuarios extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->helper('vayes_helper');
 		$this->load->helper('form');
+		$this->load->library('user_agent');
 
         // load url helper
         $this->load->helper('url');
@@ -56,7 +57,7 @@ class Usuarios extends CI_Controller {
 	{
 		$data['usuarios'] = $this->db->get_where('usuarios', array('borrado ='=>NULL))->result_array();		
 		// echo 'Holas desde listado';
-		// vdebug($clientes, true, false, true);
+		// vdebug($this->agent->referrer(), true, false, true);
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
@@ -68,24 +69,36 @@ class Usuarios extends CI_Controller {
 	{
 		$id = $this->input->post('ida');
 		$pass = $this->input->post('pass');
-		$pass_encriptado = sha1($pass);
+		if (!empty($pass)) {
+			$pass_encriptado = sha1($pass);
+			$datos = array(
+				'nombre' => $this->input->post('nombre'),
+				'celulares' => $this->input->post('celulares'),
+				'direccion' => $this->input->post('direccion'),
+				'email' => $this->input->post('email'),
+				'rol'   => $this->input->post('rol'),
+				'usuario' => $this->input->post('usuario'),
+				'pass' => $pass_encriptado
+			);
+		} else {
+			$datos = array(
+				'nombre' => $this->input->post('nombre'),
+				'celulares' => $this->input->post('celulares'),
+				'direccion' => $this->input->post('direccion'),
+				'email' => $this->input->post('email'),
+				'rol'   => $this->input->post('rol'),
+				'usuario' => $this->input->post('usuario')
+			);
+		}
+				
 		// vdebug($this->input->post('ida'), true, false, true);
-		$datos = array(
-			'nombre' => $this->input->post('nombre'),
-			'celulares' => $this->input->post('celulares'),
-			'direccion' => $this->input->post('direccion'),
-			'email' => $this->input->post('email'),
-			'rol'   => $this->input->post('rol'),
-			'usuario' => $this->input->post('usuario'),
-			'pass' => $pass_encriptado
-		);
 		if (empty($id)) {
 			$this->db->insert('usuarios', $datos);
 		} else {
 			$this->db->where('id', $id);
 			$this->db->update('usuarios', $datos);
 		}
-		redirect("usuarios/listado");
+		redirect($this->agent->referrer());
 	}
 
 	public function eliminar($id_abertura = null)

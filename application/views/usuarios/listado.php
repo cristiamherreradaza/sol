@@ -64,7 +64,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label class="control-label">Password</label>
-								<input name="pass" type="text" id="pass" class="form-control" required>
+								<input name="pass" type="text" id="pass" class="form-control">
 							</div>
 						</div>
 					</div>
@@ -108,6 +108,7 @@
 									<tr>
 										<th>No.</th>
 										<th>Nombre</th>
+										<th>Celulares</th>
 										<th>Usuario</th>
 										<th>Rol</th>
 										<th>Acciones</th>
@@ -118,6 +119,7 @@
 									<tr>
 										<td><?php echo $u['id'] ?></td>
 										<td><?php echo $u['nombre'] ?></td>
+										<td><?php echo $u['celulares'] ?></td>
 										<td><?php echo $u['usuario'] ?></td>
 										<td><?php echo $u['rol'] ?></td>
 										<td>
@@ -169,6 +171,18 @@
 
 	});
 
+	function editar(id, nombre, celulares, direccion, email, usuario, rol)
+	{
+		$('#ida').val(id);
+		$('#nombre').val(nombre);
+		$('#celulares').val(celulares);
+		$('#direccion').val(direccion);
+		$('#email').val(email);
+		$('#usuario').val(usuario);
+		$('#rol').val(rol);
+		$("#myModal").modal('show');
+	}
+
 	function abre_modal()
 	{
 		$('#nombre').val("");
@@ -183,16 +197,6 @@
 	{
 		$("#myModal").modal('hide');
 	}
-
-	function editar(id, nombre, tipo, genero)
-	{
-		$('#nombre').val(nombre);
-		$('#tipo').val(tipo);
-		$('#genero').val(genero);
-		$('#ida').val(id);
-		$("#myModal").modal('show');
-	}
-
 
 	function eliminar(id, nombre) {
 		//console.log(id_pago);

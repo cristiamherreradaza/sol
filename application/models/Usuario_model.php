@@ -9,23 +9,26 @@ class Usuario_model extends CI_Model {
         $this->load->model("usuario_model");
     }
 
-    public function valida($usuario, $pass){
-    	
-         $this->db->select('id, nombre, usuario, rol');
-         $this->db->from('usuarios');
-         $this->db->where('usuario', $usuario);
-         $this->db->where('pass', $pass);
-         $consulta = $this->db->get();
-         $resultado = $consulta->row_array();
-         $datos_sesion = array(
-         	'id_usuario'=>$resultado['id'],
-         	'nombre'=>$resultado['nombre'],
-         	'usuario'=>$resultado['usuario'],
-         	'rol'=>$resultado['rol'],
-         );
-         $this->session->set_userdata($datos_sesion);
-         return $resultado;
-
-      }
+    public function valida($usuario, $pass)
+    {
+        $this->db->select('id, nombre, usuario, rol');
+        $this->db->from('usuarios');
+        $this->db->where('usuario', $usuario);
+        $this->db->where('pass', $pass);
+        $this->db->where('borrado =', NULL);
+        $consulta = $this->db->get();
+        $resultado = $consulta->row_array();
+        $datos_sesion = array(
+            'id_usuario'=>$resultado['id'],
+            'nombre'    =>$resultado['nombre'],
+            'usuario'   =>$resultado['usuario'],
+            'celulares' =>$resultado['celulares'],
+            'email'     =>$resultado['email'],
+            'direccion' =>$resultado['direccion'],
+            'rol'       =>$resultado['rol'],
+        );
+        $this->session->set_userdata($datos_sesion);
+        return $resultado;
+    }
 
 }

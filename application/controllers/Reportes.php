@@ -122,10 +122,50 @@ class Reportes extends CI_Controller {
 
 	public function reporte_deudas()
 	{
-		$sql_deudores = "SELECT id, cliente_id, fecha, saldo, DATEDIFF(CURDATE(), fecha) AS dias 
-						FROM trabajos 
-						WHERE saldo > 0 
+		$sql_mode = "set session sql_mode=''";
+		$this->db->query($sql_mode);
+
+		$sql_deudores = "SELECT t.id, c.nombre, t.fecha, t.saldo, t.entregado, DATEDIFF(CURDATE(), t.fecha) AS dias 
+						FROM trabajos as t
+						LEFT JOIN clientes as c ON t.cliente_id = c.id
+						WHERE t.saldo > 0 
+						AND t.borrado IS NULL
 						ORDER BY dias DESC";
+
+		$data['deudores'] = $this->db->query($sql_deudores)->result_array();
+		// vdebug($data['deudores'], true, true, true);
+		
+		$sql_clientes = "SELECT t.id, c.nombre, t.fecha, SUM(t.saldo) AS saldo_total
+						FROM trabajos as t
+						LEFT JOIN clientes as c ON t.cliente_id = c.id
+						WHERE t.saldo > 0
+						AND t.borrado IS NULL 
+						GROUP BY c.nombre
+						ORDER BY saldo_total DESC";
+		$data['clientes'] = $this->db->query($sql_clientes)->result_array();
+		
+		$sql_total = "SELECT COUNT(id) AS total 
+					FROM trabajos 
+					WHERE saldo > 0 
+					AND borrado IS NULL";
+		$data['total'] = $this->db->query($sql_total)->row_array();
+
+
+		$sql_total_entregados = "SELECT COUNT(id) AS total 
+								FROM trabajos 
+								WHERE saldo > 0 
+								AND borrado IS NULL 
+								AND entregado = 'SI'";
+		$data['total_entregados'] = $this->db->query($sql_total_entregados)->row_array();
+		$data['total_sin_entregar'] = $data['total']['total']-$data['total_entregados']['total'];
+		// vdebug($deudores_clientes, true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('reportes/genera_deudores', $data);
+		$this->load->view('template/footer');
+
 
 	}
 }

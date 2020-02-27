@@ -1,5 +1,78 @@
 <!-- Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
+
+<!-- inicio modal content -->
+
+<div id="modal_usuario" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
+			<?php echo form_open('usuarios/guarda'); ?>
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE USUARIOS</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<input type="hidden" name="ida" id="u_ida" value="<?php echo $this->session->id_usuario; ?>">
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+						<div class="col-md-7">
+							<div class="form-group">
+								<label class="control-label">Nombre</label>
+								<input name="nombre" type="text" id="u_nombre" class="form-control" value="<?php echo $this->session->nombre; ?>" required>
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label class="control-label">Celulares</label>
+								<input name="celulares" type="text" id="u_celulares" class="form-control" value="<?php echo $this->session->celulares; ?>">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-7">
+							<div class="form-group">
+								<label class="control-label">Direccion</label>
+								<input name="direccion" type="text" id="u_direccion" class="form-control" value="<?php echo $this->session->direccion; ?>">
+							</div>
+						</div>
+						<div class="col-md-5">
+							<div class="form-group">
+								<label class="control-label">Email</label>
+								<input name="email" type="text" id="u_email" class="form-control" value="<?php echo $this->session->email; ?>">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Usuario</label>
+								<input name="usuario" type="text" id="u_usuario" class="form-control" value="<?php echo $this->session->usuario; ?>" required>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label">Password</label>
+								<input name="pass" type="text" id="u_pass" class="form-control">
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA USUARIO</button>
+				</div>
+			</form>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- fin modal -->
+
 <aside class="left-sidebar">
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar">
@@ -10,8 +83,8 @@
             <!-- User profile text-->
             <div class="profile-text"> <a href="#" class="dropdown-toggle link u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><?php echo $this->session->nombre; ?> <span class="caret"></span></a>
                 <div class="dropdown-menu animated flipInY">
-                    <a href="#" class="dropdown-item"><i class="ti-user"></i> Mi Perfil</a>
-                    <a href="#" class="dropdown-item"><i class="ti-wallet"></i> Cambio Pass</a>
+                    <a href="#" class="dropdown-item" onclick="abre_modal_usuario();"><i class="ti-user"></i> Mi Perfil</a>
+                    <!-- <a href="#" class="dropdown-item"><i class="ti-wallet"></i> Cambio Pass</a> -->
                     <div class="dropdown-divider"></div> <a href="<?php echo base_url() ?>usuarios/logout" class="dropdown-item"><i class="fa fa-power-off"></i> Salir</a>
                 </div>
             </div>
@@ -49,10 +122,10 @@
                             </ul>
                         </li>
                         <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
-                             <ul aria-expanded="false" class="collapse">
+                            <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
                                 <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
-                                 <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
+                                <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
                             </ul>
                         </li>
                         <li>
@@ -109,4 +182,10 @@
 </aside>
 <!-- ============================================================== -->
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ==============================================================
+<!-- ============================================================== -->
+<script>
+    function abre_modal_usuario()
+	{
+		$("#modal_usuario").modal('show');
+	}
+</script>
