@@ -20,6 +20,15 @@ class Trabajos extends CI_Controller {
 
 		// $valor = $this->encrypt->encode('123456');
 		// vdebug($valor, true, false, true);
+		$this->db->select('g.nombre, g.celulares, g.direccion, c.*');
+		$this->db->from('contratos as c');
+		$this->db->order_by('c.id', 'desc');
+		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		$this->db->where('c.borrado =', NULL);
+		$this->db->where('c.terminado', 'No');
+		// $this->db->limit(100);
+		$data['contratos'] = $this->db->get()->result_array();
+		// vdebug($data['contratos'], true, false, true);
 
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
@@ -38,6 +47,8 @@ class Trabajos extends CI_Controller {
 		$modelos_jumper   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
+
+
 
 		$data['modelos_varon_saco']       = $modelos_varon_saco;
 		$data['modelos_varon_pantalon']   = $modelos_varon_pantalon;

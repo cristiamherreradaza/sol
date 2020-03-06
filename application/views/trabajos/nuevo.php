@@ -54,7 +54,7 @@
            <div class="form-body">
             <div class="row pt-3">
 
-             <div class="col-md-5">
+             <div class="col-md-4">
               <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
               <div class="input-group mb-3">
@@ -72,7 +72,7 @@
               </div>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-2">
               <div class="form-group">
                <label class="control-label">Celulares</label>
                <input type="text" name="celulares" id="celulares" class="form-control" placeholder="Ej: 73254787, 79845632">
@@ -88,6 +88,19 @@
               </select>
             </div>
           </div>
+
+           <div class="col-md-2">
+            <div class="form-group">
+              <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
+              <select name="contrato_id" id="contrato_id" class="form-control custom-select">
+                <option value="">Seleccione</option>
+                <?php foreach ($contratos as $key => $c): ?>
+                  <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> (<?php echo $c['cantidad'] ?>)</option>
+                <?php endforeach ?>
+              </select>
+            </div>
+          </div>
+
         </div>
 
 
@@ -1188,7 +1201,7 @@
       // var idposmod = dv.attr('data-idposimod');
 
       $.ajax({
-        url: '<?php echo base_url() ?>/Trabajos/ajax_busca_cliente/' + nombre_cliente,
+        url: '<?php echo base_url() ?>Trabajos/ajax_busca_cliente/' + nombre_cliente,
         type: 'GET',
         success: function (data) {
           $("#datos_cliente_ajax").html(data);
@@ -1203,7 +1216,7 @@
     // console.log(id_cliente);  
     $("#bloque_busqueda").toggle('slow');  
     $.ajax({
-      url: '<?php echo base_url() ?>/Trabajos/ajax_medidas_cliente/' + id_cliente,
+      url: '<?php echo base_url() ?>Trabajos/ajax_medidas_cliente/' + id_cliente,
       type: 'GET',
       success: function (data) {
         // dv.html(data);

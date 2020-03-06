@@ -108,9 +108,7 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">CONTRATOS </span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>contratos/nuevo">Nuevo</a></li>
-                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
+                        <li><a href="<?php echo base_url(); ?>contratos/listado">Listado</a></li>
                     </ul>
                 </li>
                 <li>
