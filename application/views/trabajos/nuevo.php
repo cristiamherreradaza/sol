@@ -79,7 +79,7 @@
              </div>
            </div>
 
-           <div class="col-md-2">
+           <div class="col-md-1">
             <div class="form-group">
               <label class="control-label" style="color: #ad3939; font-weight: bold;">Genero</label>
               <select name="genero" id="genero" class="form-control custom-select" onchange="cambia_genero();">
@@ -89,13 +89,13 @@
             </div>
           </div>
 
-           <div class="col-md-2">
+           <div class="col-md-3">
             <div class="form-group">
               <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
               <select name="contrato_id" id="contrato_id" class="form-control custom-select">
                 <option value="">Seleccione</option>
                 <?php foreach ($contratos as $key => $c): ?>
-                  <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> (<?php echo $c['cantidad'] ?>)</option>
+                  <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> - <?php echo $c['descripcion'] ?> (<?php echo $c['cantidad'] ?>)</option>
                 <?php endforeach ?>
               </select>
             </div>

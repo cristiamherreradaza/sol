@@ -14,20 +14,28 @@
 				<div class="modal-body">
 
 					<div class="row">
-						<div class="col-md-5">
+						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Nombre</label>
+								<label class="control-label">Nombre Grupo</label>
 								<input name="nombre" type="text" id="busca_grupo" class="form-control" required autocomplete="off">
 								<div id="muestra_grupos_ajax"></div>
 							</div>
 						</div>
 
-						<div class="col-md-7">
+						<div class="col-md-4">
 							<div class="form-group">
 								<label class="control-label">Direccion</label>
 								<input name="direccion" type="text" id="direccion" class="form-control">
 							</div>
 						</div>
+
+						<div class="col-md-4">
+							<div class="form-group">
+								<label class="control-label">Descripcion Contrato</label>
+								<input name="descripcion" type="text" id="descripcion" class="form-control">
+							</div>
+						</div>
+
 					</div>
 					<div class="row">
 						<div class="col-md-4">
@@ -93,7 +101,7 @@
 										<th>No.</th>
 										<th>Nombre</th>
 										<th>Celulares</th>
-										<th>Direccion</th>
+										<th>Descripcion</th>
 										<th>Fecha</th>
 										<th>Cantidad</th>
 										<th>Finalizado</th>
@@ -106,7 +114,7 @@
 										<td><?php echo $c['id'] ?></td>
 										<td><?php echo $c['nombre'] ?></td>
 										<td><?php echo $c['celulares'] ?></td>
-										<td><?php echo $c['direccion'] ?></td>
+										<td><?php echo $c['descripcion'] ?></td>
 										<td><?php echo $c['fecha'] ?></td>
 										<td><?php echo $c['cantidad'] ?></td>
 										<td><?php echo $c['terminado'] ?></td>

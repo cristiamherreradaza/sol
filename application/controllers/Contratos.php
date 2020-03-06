@@ -36,6 +36,7 @@ class Contratos extends CI_Controller {
 				'usuario_id'=>$usuario_id,
 				'fecha'=>$this->input->post('fecha'),
 				'cantidad'=>$this->input->post('cantidad'),
+				'descripcion'=>$this->input->post('descripcion'),
 			);
 			$this->db->insert('contratos', $datos_contrato);
 
@@ -45,6 +46,7 @@ class Contratos extends CI_Controller {
 				'usuario_id' => $usuario_id,
 				'fecha'      => $this->input->post('fecha'),
 				'cantidad'   => $this->input->post('cantidad'),
+				'descripcion'   => $this->input->post('descripcion'),
 			);
 			$this->db->insert('contratos', $datos_contrato);
 		}
