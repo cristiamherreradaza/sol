@@ -95,7 +95,7 @@
             <ul id="sidebarnav">
                 <li class="nav-small-cap">MENU PRINCIPAL</li>
                 <li>
-                    <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">Control Panel</span></a>
+                    <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
                 </li>    
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
@@ -106,7 +106,18 @@
                     </ul>
                 </li>
                 <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">CONTRATOS </span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php echo base_url(); ?>contratos/nuevo">Nuevo</a></li>
+                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
+                    </ul>
+                </li>
+                <li>
                     <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
                 </li>
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
@@ -145,23 +156,6 @@
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Sacar Material</a></li>
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra/membrete">Membrete</a></li>
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra/reporte">Reporte</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="javascript:void(0)">item 1.1</a></li>
-                        <li><a href="javascript:void(0)">item 1.2</a></li>
-                        <li>
-                            <a class="has-arrow" href="#" aria-expanded="false">Menu 1.3</a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="javascript:void(0)">item 1.3.1</a></li>
-                                <li><a href="javascript:void(0)">item 1.3.2</a></li>
-                                <li><a href="javascript:void(0)">item 1.3.3</a></li>
-                                <li><a href="javascript:void(0)">item 1.3.4</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">item 1.4</a></li>
                     </ul>
                 </li>
             </ul>
