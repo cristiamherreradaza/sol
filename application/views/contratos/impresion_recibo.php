@@ -121,7 +121,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2019 Monster Admin by wrappixel.com
+            2020 desarrollado por GoGhu
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

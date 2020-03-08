@@ -752,28 +752,28 @@
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="control-label">Largo</label>
-                            <input name="fa_largo" type="number" id="fa_largo" class="form-control" min="0" step="any">
+                            <input name="fa_largo" type="number" id="fa_largo" class="form-control" min="0" step="any" value="<?php echo $falda['largo']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="control-label">Cintura</label>
-                            <input name="fa_cintura" type="number" id="fa_cintura" class="form-control" min="0" step="any">
+                            <input name="fa_cintura" type="number" id="fa_cintura" class="form-control" min="0"  value="<?php echo $falda['cintura']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="control-label">Cadera</label>
-                            <input name="fa_cadera" type="number" id="fa_cadera" class="form-control" min="0" step="any">
+                            <input name="fa_cadera" type="number" id="fa_cadera" class="form-control" min="0"  value="<?php echo $falda['cadera']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-3">
                           <div class="form-group">
                             <label class="control-label">Vasta</label>
-                            <input name="fa_vasta" type="number" id="fa_vasta" class="form-control" min="0" step="any">
+                            <input name="fa_vasta" type="number" id="fa_vasta" class="form-control" min="0"  value="<?php echo $falda['vasta']; ?>">
                           </div>
                         </div>
 
@@ -786,7 +786,7 @@
                             <select name="fa_modelo" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($modelos_faldas as $m):?>
-                                <option value="<?php echo $m['id']?>"><?php echo $m['nombre']?></option>
+                                <option value="<?php echo $m['id']?>" <?php echo ($m['id'] == $falda['modelo_id'])?'selected':'' ?>><?php echo $m['nombre']?></option>
                               <?php endforeach?>
                             </select>
                           </div>
@@ -798,7 +798,7 @@
                             <select name="fa_abertura" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($aberturas_falda as $af):?>
-                                <option value="<?php echo $af['id']?>"><?php echo $af['nombre']?></option>
+                                <option value="<?php echo $af['id']?>" <?php echo ($af['id'] == $falda['abertura_id'])?'selected':'' ?>><?php echo $af['nombre']?></option>
                               <?php endforeach?>
                             </select>
                           </div>
@@ -809,8 +809,8 @@
                             <label class="control-label">Pretina</label>
                             <select name="fa_pretina" class="form-control custom-select">
                               <option value="">Seleccione</option>
-                              <option value="Normal">Normal</option>
-                              <option value="Ancho">Ancho</option>
+                              <option value="Normal" <?php echo ($falda['pretina']=='Normal')?'selected':'' ?>>Normal</option>
+                              <option value="Ancho" <?php echo ($falda['pretina']=='Ancho')?'selected':'' ?>>Ancho</option>
                             </select>
                           </div>
                         </div>
@@ -835,28 +835,28 @@
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Talle</label>
-                            <input type="number" name="j_talle" id="j_talle" class="form-control" step="any">
+                            <input type="number" name="j_talle" id="j_talle" class="form-control" step="any" value="<?php echo $jumper['talle']; ?>">
                           </div>
                         </div>
 
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Largo</label>
-                            <input name="j_largo" type="number" id="j_largo" class="form-control" step="any">
+                            <input name="j_largo" type="number" id="j_largo" class="form-control" step="any" value="<?php echo $jumper['largo']; ?>">
                           </div>
                         </div>
 
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Cintura</label>
-                            <input name="j_cintura" type="number" id="j_cintura" class="form-control" step="any">
+                            <input name="j_cintura" type="number" id="j_cintura" class="form-control" step="any" value="<?php echo $jumper['cintura']; ?>">
                           </div>
                         </div>
 
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Cadera</label>
-                            <input name="j_cadera" type="number" id="j_cadera" class="form-control" step="any">
+                            <input name="j_cadera" type="number" id="j_cadera" class="form-control" step="any" value="<?php echo $jumper['cadera']; ?>">
                           </div>
                         </div>
 
@@ -867,21 +867,21 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Pecho</label>
-                            <input type="number" name="j_pecho" id="j_pecho" class="form-control" step="any">
+                            <input type="number" name="j_pecho" id="j_pecho" class="form-control" step="any" value="<?php echo $jumper['pecho']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Estomago</label>
-                            <input name="j_estomago" type="number" id="j_estomago" class="form-control" step="any">
+                            <input name="j_estomago" type="number" id="j_estomago" class="form-control" step="any" value="<?php echo $jumper['estomago']; ?>">
                           </div>
                         </div>
 
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Altura Busto</label>
-                            <input name="j_abusto" type="number" id="j_abusto" class="form-control" step="any">
+                            <input name="j_abusto" type="number" id="j_abusto" class="form-control" step="any" value="<?php echo $jumper['altura_busto']; ?>">
                           </div>
                         </div>
 
@@ -895,7 +895,7 @@
                             <select name="j_modelo" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($modelos_jumper as $mj):?>
-                                <option value="<?php echo $mj['id']?>"><?php echo $mj['nombre']?></option>
+                                <option value="<?php echo $mj['id']?>" <?php echo ($mj['id'] == $jumper['modelo_id'])?'selected':'' ?>><?php echo $mj['nombre']?></option>
                               <?php endforeach?>
                             </select>
                           </div>
@@ -907,7 +907,7 @@
                             <select name="j_abertura" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($aberturas_jumper as $aj):?>
-                                <option value="<?php echo $aj['id']?>"><?php echo $aj['nombre']?></option>
+                                <option value="<?php echo $aj['id']?>" <?php echo ($aj['id'] == $jumper['abertura_id'])?'selected':'' ?>><?php echo $aj['nombre']?></option>
                               <?php endforeach?>
                             </select>
                           </div>
@@ -919,7 +919,7 @@
                             <select name="j_bolsillo" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($bolsillos_jumper as $bj):?>
-                                <option value="<?php echo $bj['id']?>"><?php echo $bj['nombre']?></option>
+                                <option value="<?php echo $bj['id']?>" <?php echo ($bj['id'] == $jumper['bolsillo_id'])?'selected':'' ?>><?php echo $bj['nombre']?></option>
                               <?php endforeach?>
                             </select>
                           </div>
@@ -1099,6 +1099,15 @@
   var subtotal_saco     = 0;
   var subtotal_pantalon = 0;
   var subtotal_ch       = 0;
+  var estado_genero = '<?php echo $trabajo['genero'] ?>';
+
+  $(function()
+  {
+    if(estado_genero == 'Mujer')
+    {
+      cambia_genero();
+    }
+  });
 
   $("#saco_pu, #saco_cantidad").keyup(function(){
 

@@ -277,12 +277,6 @@ class Trabajos extends CI_Controller {
 
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
-		// vdebug($datos_chaleco, true, false, true);
-
-		// guardamos saco
-		// fin guardamos saco
-
-		// vdebug($id_cliente, true, false, true);
 	}
 
 	public function detalle_trabajo($id_trabajo = null)
@@ -577,10 +571,10 @@ class Trabajos extends CI_Controller {
 		$data['pinzas_varon_pantalon']    = $pinzas_varon_pantalon;
 		$data['bolsillos_varon_pantalon'] = $bolsillos_varon_pantalon;
 		$data['modelos_faldas']           = $modelos_faldas;
-		$data['aberturas_falda']           = $aberturas_falda;
-		$data['modelos_jumper']            = $modelos_jumper;
-		$data['aberturas_jumper']          = $aberturas_jumper;
-		$data['bolsillos_jumper']          = $bolsillos_jumper;
+		$data['aberturas_falda']          = $aberturas_falda;
+		$data['modelos_jumper']           = $modelos_jumper;
+		$data['aberturas_jumper']         = $aberturas_jumper;
+		$data['bolsillos_jumper']         = $bolsillos_jumper;
 		// vdebug($modelos_varon_pantalon, true, false, true);
 		// echo 'la vista desde trabajos';
 

@@ -158,6 +158,13 @@
                       </div>
                     </div>
 
+                    <div class="col" id="saco_albusto" style="display: none;">
+                      <div class="form-group">
+                        <label class="control-label">Alt Busto</label>
+                        <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any">
+                      </div>
+                    </div>
+
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Estomago</label>
@@ -176,13 +183,6 @@
                       <div class="form-group">
                         <label class="control-label">L. Manga</label>
                         <input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
-                      </div>
-                    </div>
-
-                    <div class="col" id="saco_albusto" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Alt Busto</label>
-                        <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any">
                       </div>
                     </div>
 
@@ -342,6 +342,13 @@
                       </div>
                     </div>
 
+                    <div class="col" id="pantalon_cadera" style="display: none;">
+                      <div class="form-group">
+                        <label class="control-label">Cadera</label>
+                        <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any">
+                      </div>
+                    </div>
+
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Muslo</label>
@@ -378,13 +385,6 @@
                       <div class="form-group">
                         <label class="control-label">Tiro Atras</label>
                         <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any">
-                      </div>
-                    </div>
-
-                    <div class="col" id="pantalon_cadera" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Cadera</label>
-                        <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any">
                       </div>
                     </div>
 
@@ -430,12 +430,23 @@
                       </div>
                     </div>
 
-                    <div class="col">
+                    <div class="col" id="select_bragueta" style="display: block;">
                       <div class="form-group">
                         <label class="control-label">Bragueta</label>
                         <select name="pd_bragueta" class="form-control custom-select">
                           <option value="Cierre">Cierre</option>
                           <option value="Boton">Boton</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="col" id="pd_pretina" style="display: none;">
+                      <div class="form-group">
+                        <label class="control-label">Pretina</label>
+                        <select name="pd_pretina" class="form-control custom-select">
+                          <option value="">Seleccione</option>
+                          <option value="Normal">Normal</option>
+                          <option value="Ancho">Ancho</option>
                         </select>
                       </div>
                     </div>
@@ -463,17 +474,6 @@
                           <option value="Normal">Normal</option>
                           <option value="Dobles">Dobles</option>
                           <option value="Abertura">Abertura</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="col" id="pd_pretina" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Pretina</label>
-                        <select name="pd_pretina" class="form-control custom-select">
-                          <option value="">Seleccione</option>
-                          <option value="Normal">Normal</option>
-                          <option value="Ancho">Ancho</option>
                         </select>
                       </div>
                     </div>
@@ -1190,6 +1190,7 @@
     $("#ch_abusto").toggle('slow');
     $("#bloque_extras").toggle('slow');
     $("#bloque_mujer").toggle('slow');
+    $("#select_bragueta").toggle('slow');
   }
 
   $(document).on('keyup', '#busca_cliente', function(e){

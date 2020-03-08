@@ -54,12 +54,12 @@
                                                             <th>Hombro</th>
                                                             <th>Espalda</th>
                                                             <th>Pecho</th>
-                                                            <th>Estomago</th>
-                                                            <th>Medio Brazo</th>
-                                                            <th>Largo Maga</th>
                                                             <?php if ($saco['altura_busto'] != 0): ?>
                                                                 <th>Altura Busto</th>
                                                             <?php endif ?>
+                                                            <th>Estomago</th>
+                                                            <th>Medio Brazo</th>
+                                                            <th>Largo Maga</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -69,12 +69,12 @@
                                                             <td><?php echo $saco['hombro']; ?></td>
                                                             <td><?php echo $saco['espalda']; ?></td>
                                                             <td><?php echo $saco['pecho']; ?></td>
-                                                            <td><?php echo $saco['estomago']; ?></td>
-                                                            <td><?php echo $saco['medio_brazo']; ?></td>
-                                                            <td><?php echo $saco['largo_manga']; ?></td>
                                                             <?php if ($saco['altura_busto'] != 0): ?>
                                                                 <td><?php echo $saco['altura_busto']; ?></td>
                                                             <?php endif ?>
+                                                            <td><?php echo $saco['estomago']; ?></td>
+                                                            <td><?php echo $saco['medio_brazo']; ?></td>
+                                                            <td><?php echo $saco['largo_manga']; ?></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -93,14 +93,14 @@
                                                             <th>Largo</th>
                                                             <th>Entrepierna</th>
                                                             <th>Cintura</th>
+                                                            <?php if ($pantalon['cadera'] != 0): ?>
+                                                                <th>Cadera</th>
+                                                            <?php endif ?>
                                                             <th>Muslo</th>
                                                             <th>Rodilla</th>
                                                             <th>Bota pie</th>
                                                             <th>Tiro delantero</th>
                                                             <th>Tiro atras</th>
-                                                            <?php if ($pantalon['cadera'] != 0): ?>
-                                                                <th>Cadera</th>
-                                                            <?php endif ?>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -108,15 +108,14 @@
                                                             <td><?php echo $pantalon['largo']; ?></td>
                                                             <td><?php echo $pantalon['entre_pierna']; ?></td>
                                                             <td><?php echo $pantalon['cintura']; ?></td>
+                                                            <?php if ($pantalon['cadera'] != 0): ?>
+                                                                <td><?php echo $pantalon['cadera']; ?></td>
+                                                            <?php endif ?>
                                                             <td><?php echo $pantalon['muslo']; ?></td>
                                                             <td><?php echo $pantalon['rodilla']; ?></td>
                                                             <td><?php echo $pantalon['bota_pie']; ?></td>
                                                             <td><?php echo $pantalon['tiro_delantero']; ?></td>
                                                             <td><?php echo $pantalon['tiro_atras']; ?></td>
-                                                            <?php if ($pantalon['cadera'] != 0): ?>
-                                                                <td><?php echo $pantalon['cadera']; ?></td>
-                                                            <?php endif ?>
-
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -179,7 +178,7 @@
                                             <?php //vdebug($jumper, false, false, true); ?>
                                             <div class="card card-outline-warning">
                                                 <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MEDIDAS FALDA</h4>
+                                                    <h4 class="mb-0 text-white">MEDIDAS JUMPER</h4>
                                                 </div>
                                             </div>
 
@@ -566,7 +565,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            © 2019 Monster Admin by wrappixel.com
+            2020 desarrollado por GoGhu
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
