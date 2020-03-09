@@ -213,7 +213,7 @@
                                 </div>
 
                                     <div class="row">
-                                    <?php if (!empty($saco)): ?>
+                                    <?php if (!empty($saco['modelo_nombre'])): ?>
                                         <div class="col-md-6">
                                             <div class="table-responsive mt-5" style="clear: both;">
                                                 <div class="card card-outline-info">
@@ -474,35 +474,35 @@
                                                     <td class="text-right"><?php echo $saco['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
                                                     <td class="text-right">
-                                                        <?php echo $sub_saco = $saco['cantidad'] * $saco['precio_unitario'] ?>
+                                                        <?php echo $sub_saco = number_format($saco['cantidad'] * $saco['precio_unitario'], 2) ?>
                                                     </td>
                                                 </tr>
                                             <?php else: ?>
                                                 <?php $sub_saco = 0 ?>
                                             <?php endif ?>
 
-                                            <?php if (!empty($pantalon)): ?>
+                                            <?php if (!empty($pantalon['modelo_nombre'])): ?>
                                                 <tr>
                                                     <td class="text-center">2</td>
                                                     <td>Pantalon</td>
                                                     <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
                                                     <td class="text-right">
-                                                        <?php echo $sub_pantalon = $pantalon['cantidad'] * $pantalon['precio_unitario'] ?>
+                                                        <?php echo $sub_pantalon = number_format($pantalon['cantidad'] * $pantalon['precio_unitario'], 2) ?>
                                                     </td>
                                                 </tr>
                                             <?php else: ?>
                                                 <?php $sub_pantalon = 0 ?>
                                             <?php endif ?>
 
-                                            <?php if (!empty($chaleco)): ?>
+                                            <?php if (!empty($chaleco['modelo_nombre'])): ?>
                                                 <tr>
                                                     <td class="text-center">3</td>
                                                     <td>Chaleco</td>
                                                     <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
                                                     <td class="text-right">
-                                                        <?php echo $sub_chaleco = $chaleco['cantidad'] * $chaleco['precio_unitario'] ?>
+                                                        <?php echo $sub_chaleco = number_format($chaleco['cantidad'] * $chaleco['precio_unitario'], 2) ?>
                                                     </td>
                                                 </tr>
                                             <?php else: ?>
@@ -516,11 +516,13 @@
 
                             <div class="col-md-12">
                                 <div class="float-right mt-4 text-right">
-                                    <?php $sub_total = $sub_saco + $sub_pantalon + $sub_chaleco ?>
-                                    <p>Sub - Total : <?php echo $sub_total ?></p>
-                                    <p>Precio - Tela : <?php echo $trabajo['costo_tela'] ?> </p>
+                                    <?php if ($trabajo['rebaja'] != 0): ?>
+                                        <h4 style="color: red;">Rebaja (<?php echo $trabajo['motivo_rebaja'] ?>) : <?php echo number_format($trabajo['rebaja'], 2); ?></h4>
+                                    <?php endif ?>
+                                    <p>Sub - Total : <?php echo number_format($trabajo['costo_confeccion'], 2) ?></p>
+                                    <p>Precio - Tela : <?php echo number_format($trabajo['costo_tela'], 2) ;?> </p>
                                     <hr>
-                                    <?php $total = $trabajo['costo_tela'] + $sub_total ?>
+                                    <?php $total = $trabajo['costo_tela'] + $trabajo['costo_confeccion'] ?>
                                     <h3><b>Total :</b> <?php echo number_format($total, 2); ?></h3>
                                     <?php 
                                         $a_cuenta = ($trabajo['costo_tela']+$trabajo['costo_confeccion']) - $trabajo['saldo']

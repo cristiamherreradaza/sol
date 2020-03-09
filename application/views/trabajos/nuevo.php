@@ -1036,35 +1036,58 @@
                   </div>
                   <div class="row">
 
-                  <div class="col-md-2">
+                  <div class="col">
                     <div class="form-group has-success">
                       <label class="control-label">Costo Tela</label>
                       <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" required>
                     </div>
                   </div>
 
-                  <div class="col-md-2 has-success">
+                  <div class="col has-success">
                     <div class="form-group">
                       <label class="control-label">Costo Confeccion</label>
                       <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any" required>
                     </div>
                   </div>
 
-                  <div class="col-md-4">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="control-label">Motivo Rebaja</label>
+                      <select name="motivo_rebaja" class="form-control custom-select">
+                        <option value="">Seleccione</option>
+                        <option value="Comision">Comision</option>
+                        <option value="Familiar">Familiar</option>
+                        <option value="Contacto">Contacto</option>
+                        <option value="Amistad">Amistad</option>
+                        <option value="Cliente">Cliente</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="col-md">
+                    <div class="form-group has-danger">
+                      <label class="control-label"><b>Rebaja</b></label>
+                      <input type="number" name="rebaja" id="rebaja" class="form-control" min="0" step="any" readonly>
+                      <input type="hidden" name="monto_rebaja" id="monto_rebaja">
+                      <input type="hidden" name="costo_confeccion_calculado" id="costo_confeccion_calculado">
+                    </div>
+                  </div>
+
+                  <div class="col-md">
                     <div class="form-group has-danger">
                       <label class="control-label"><b>TOTAL</b></label>
                       <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" step="any" readonly>
                     </div>
                   </div>
 
-                  <div class="col-md-2">
+                  <div class="col">
                     <div class="form-group has-warning">
                       <label class="control-label">A cuenta</label>
                       <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" required>
                     </div>
                   </div>
 
-                  <div class="col-md-2">
+                  <div class="col">
                     <div class="form-group has-primary">
                       <label class="control-label">Saldo</label>
                       <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" step="any" readonly>
@@ -1112,24 +1135,27 @@
 </div>
 <script type="text/javascript">
 
-  var costo_tela        = 0;
-  var costo_confeccion  = 0;
-  var suma              = 0;
-  var monto_total       = 0;
-  var a_cuenta          = 0;
-  var saldo             = 0;
-  var subtotal_saco     = 0;
-  var subtotal_pantalon = 0;
-  var subtotal_ch       = 0;
+  var costo_tela                 = 0;
+  var costo_confeccion           = 0;
+  var suma                       = 0;
+  var monto_total                = 0;
+  var a_cuenta                   = 0;
+  var saldo                      = 0;
+  var subtotal_saco              = 0;
+  var subtotal_pantalon          = 0;
+  var subtotal_ch                = 0;
+  var costo_confeccion_calculado = 0;
 
   $("#saco_pu, #saco_cantidad").keyup(function(){
 
     cantidad_saco = parseFloat($("#saco_cantidad").val());
     precio_saco   = parseFloat($("#saco_pu").val());
-    subtotal_saco      = cantidad_saco * precio_saco;
+    subtotal_saco = cantidad_saco * precio_saco;
 
+    costo_confeccion_calculado = parseFloat(subtotal_saco+subtotal_pantalon+subtotal_ch);
     $('#saco_subtotal').val(subtotal_saco);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
     
   });
 
@@ -1155,18 +1181,17 @@
     
   });
 
+  $("#costo_confeccion").keyup(function(){
+    ccc = parseFloat(costo_confeccion_calculado);
+    cc  = parseFloat($("#costo_confeccion").val());
+    if (cc < ccc) {
+      calculo_rebaja = ccc-cc;
+      $('#rebaja').val(calculo_rebaja);
+    }else{
+      $('#rebaja').val(0);
+    }
+  });
 
-  /*$('.saco-cal').keyup(function () {
-    alert('entro'); 
-    var sum = 0;
-
-    $('.saco-cal').each(function() {
-      sum += Number($(this).val());
-    });
-
-    $('#saco_subtotal').val(sum);
-
-  });*/
 
   $(".calculo").change(function() {
 
@@ -1178,7 +1203,7 @@
     a_cuenta = parseFloat($("#a_cuenta").val());
     saldo = suma - a_cuenta
     $("#saldo").val(saldo);
-    console.log("Costo: "+suma);
+    // console.log("Costo: "+suma);
     // console.log("Costo de tela: "+costo_tela);
   });
 
