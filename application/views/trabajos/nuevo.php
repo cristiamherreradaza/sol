@@ -321,21 +321,21 @@
 
                   <div class="row">
 
-                    <div class="col-md-3">
+                    <div class="col">
                       <div class="form-group">
                         <label class="control-label">Largo</label>
                         <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any">
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col">
                       <div class="form-group">
                         <label class="control-label">Entrepierna</label>
                         <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any">
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col">
                       <div class="form-group">
                         <label class="control-label">Cintura</label>
                         <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any">
@@ -349,7 +349,7 @@
                       </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col">
                       <div class="form-group">
                         <label class="control-label">Muslo</label>
                         <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any">
@@ -1167,6 +1167,7 @@
 
     $('#pantalon_subtotal').val(subtotal_pantalon);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
 
   });
 
@@ -1178,12 +1179,16 @@
 
     $('#ch_subtotal').val(subtotal_ch);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
     
   });
 
   $("#costo_confeccion").keyup(function(){
-    ccc = parseFloat(costo_confeccion_calculado);
+    ccc = parseFloat($("#costo_confeccion_calculado").val());
+    console.log(ccc);
     cc  = parseFloat($("#costo_confeccion").val());
+    console.log(cc);
+
     if (cc < ccc) {
       calculo_rebaja = ccc-cc;
       $('#rebaja').val(calculo_rebaja);
@@ -1209,13 +1214,18 @@
 
   function cambia_genero()
   {
-    $("#saco_albusto").toggle('slow');
-    $("#pantalon_cadera").toggle('slow');
-    $("#pd_pretina").toggle('slow');
-    $("#ch_abusto").toggle('slow');
-    $("#bloque_extras").toggle('slow');
-    $("#bloque_mujer").toggle('slow');
-    $("#select_bragueta").toggle('slow');
+    var genero = $("#genero").val();
+    // console.log(genero);
+    if(genero == 'Mujer')
+    {
+      $("#saco_albusto").toggle('slow');
+      $("#pantalon_cadera").toggle('slow');
+      $("#pd_pretina").toggle('slow');
+      $("#ch_abusto").toggle('slow');
+      $("#bloque_extras").toggle('slow');
+      $("#bloque_mujer").toggle('slow');
+      $("#select_bragueta").toggle('slow');
+    }
   }
 
   $(document).on('keyup', '#busca_cliente', function(e){
@@ -1247,10 +1257,11 @@
       success: function (data) {
         // dv.html(data);
         datos_cliente = JSON.parse(data);
-        console.log(datos_cliente);
+        // console.log(datos_cliente);
         // console.log(datos_cliente.cliente.nombre);
         if(datos_cliente.cliente.genero == 'Mujer'){
           $("#genero").val('Mujer');
+          $("#genero").attr("disabled", true);
           cambia_genero();
           // console.log('entro');
         }
