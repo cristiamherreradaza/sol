@@ -508,6 +508,62 @@
                                             <?php else: ?>
                                                 <?php $sub_chaleco = 0 ?>
                                             <?php endif ?>
+
+                                             <?php if (!empty($camisa['cuello'])): ?>
+                                                <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>camisa</td>
+                                                    <td class="text-right"><?php echo $camisa['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $camisa['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_camisa = number_format($camisa['cantidad'] * $camisa['precio_unitario'], 2) ?>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php $sub_falda = 0 ?>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($extras['trabajo_id'])): ?>
+                                                <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>extras</td>
+                                                    <td class="text-right"><?php echo $extras['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $extras['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_extras = number_format($extras['cantidad'] * $extras['precio_unitario'], 2) ?>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php $sub_falda = 0 ?>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($falda['modelo_nombre'])): ?>
+                                                <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>Falda</td>
+                                                    <td class="text-right"><?php echo $falda['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $falda['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_falda = number_format($falda['cantidad'] * $falda['precio_unitario'], 2) ?>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php $sub_falda = 0 ?>
+                                            <?php endif ?>
+
+                                            <?php if (!empty($jumper['modelo_nombre'])): ?>
+                                                <tr>
+                                                    <td class="text-center">3</td>
+                                                    <td>Jumper</td>
+                                                    <td class="text-right"><?php echo $jumper['cantidad'] ?></td>
+                                                    <td class="text-right"><?php echo $jumper['precio_unitario'] ?></td>
+                                                    <td class="text-right">
+                                                        <?php echo $sub_jumper = number_format($jumper['cantidad'] * $jumper['precio_unitario'], 2) ?>
+                                                    </td>
+                                                </tr>
+                                            <?php else: ?>
+                                                <?php $sub_jumper = 0 ?>
+                                            <?php endif ?>
                                         </tbody>
                                     </table>
                                 </div>

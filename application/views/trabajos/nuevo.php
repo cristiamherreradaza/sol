@@ -562,7 +562,7 @@
               <div class="col-md-7">
                 <div class="card card-outline-primary">
                   <div class="card-header">
-                    <h4 class="mb-0 text-white">CHALECO</h4>
+                    <h4 class="mb-0 text-white">CARACTERISTICAS CHALECO</h4>
                   </div>
                   <div class="card-body" style="background-color: #f0e7fe;">
 
@@ -679,7 +679,7 @@
                       </div>
                       <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Modelo cuello</label>
                             <select name="cam_mcuello" class="form-control custom-select">
@@ -690,7 +690,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Ancho</label>
                             <select name="cam_ancho" class="form-control custom-select">
@@ -701,7 +701,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Cuello Combi</label>
                             <select name="cam_ccombinado" class="form-control custom-select">
@@ -712,14 +712,32 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label class="control-label">Cantidad</label>
-                            <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" min="0" step="any">
-                          </div>
-                        </div>
-                        
                       </div>
+
+                      <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Cantidad</b></label>
+                          <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" value="1">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Precio Unitario</b></label>
+                          <input name="cam_pu" type="number" id="cam_pu" class="form-control" placeholder="Ej: 150">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Subtotal</b></label>
+                          <input name="cam_subtotal" type="number" id="cam_subtotal" class="form-control" readonly>
+                        </div>
+                      </div>
+                      
+                    </div>
 
                     </div>
                   </div>
@@ -758,6 +776,31 @@
                         </div>
 
                       </div>
+
+                      <div class="row">
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Cantidad</b></label>
+                          <input name="ext_cantidad" type="number" id="ext_cantidad" class="form-control" value="1">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Precio Unitario</b></label>
+                          <input name="ext_pu" type="number" id="ext_pu" class="form-control" placeholder="Ej: 150">
+                        </div>
+                      </div>
+
+                      <div class="col-md-4">
+                        <div class="form-group">
+                          <label class="control-label"><b>Subtotal</b></label>
+                          <input name="ext_subtotal" type="number" id="ext_subtotal" class="form-control" readonly>
+                        </div>
+                      </div>
+                      
+                    </div>
 
                     </div>
                   </div>
@@ -844,6 +887,31 @@
                               <option value="Normal">Normal</option>
                               <option value="Ancho">Ancho</option>
                             </select>
+                          </div>
+                        </div>
+                        
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Cantidad</b></label>
+                            <input name="fa_cantidad" type="number" id="fa_cantidad" class="form-control" value="1">
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Precio Unitario</b></label>
+                            <input name="fa_pu" type="number" id="fa_pu" class="form-control" placeholder="Ej: 150">
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Subtotal</b></label>
+                            <input name="fa_subtotal" type="number" id="fa_subtotal" class="form-control" readonly>
                           </div>
                         </div>
                         
@@ -954,6 +1022,31 @@
                                 <option value="<?php echo $bj['id']?>"><?php echo $bj['nombre']?></option>
                               <?php endforeach?>
                             </select>
+                          </div>
+                        </div>
+                        
+                      </div>
+
+                      <div class="row">
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Cantidad</b></label>
+                            <input name="jam_cantidad" type="number" id="jam_cantidad" class="form-control" value="1">
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Precio Unitario</b></label>
+                            <input name="jam_pu" type="number" id="jam_pu" class="form-control" placeholder="Ej: 150">
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group">
+                            <label class="control-label"><b>Subtotal</b></label>
+                            <input name="jam_subtotal" type="number" id="jam_subtotal" class="form-control" readonly>
                           </div>
                         </div>
                         
@@ -1144,6 +1237,10 @@
   var subtotal_saco              = 0;
   var subtotal_pantalon          = 0;
   var subtotal_ch                = 0;
+  var subtotal_fa                = 0;
+  var subtotal_jam               = 0;
+  var subtotal_cam               = 0;
+  var subtotal_ext               = 0;
   var costo_confeccion_calculado = 0;
 
   $("#saco_pu, #saco_cantidad").keyup(function(){
@@ -1171,7 +1268,7 @@
 
   });
 
-  $("#ch_pu, ch_cantidad").keyup(function(){
+  $("#ch_pu, #ch_cantidad").keyup(function(){
 
     cantidad_ch = parseFloat($("#ch_cantidad").val());
     precio_ch   = parseFloat($("#ch_pu").val());
@@ -1181,6 +1278,53 @@
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
     
+  });
+
+  $("#cam_pu, #cam_cantidad").keyup(function(){
+
+    cantidad_cam = parseFloat($("#cam_cantidad").val());
+    precio_cam   = parseFloat($("#cam_pu").val());
+    subtotal_cam = cantidad_cam * precio_cam;
+
+    $('#cam_subtotal').val(subtotal_cam);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam);
+    
+  });
+
+  $("#ext_pu, #ext_cantidad").keyup(function(){
+
+    cantidad_ext = parseFloat($("#ext_cantidad").val());
+    precio_ext   = parseFloat($("#ext_pu").val());
+    subtotal_ext = cantidad_ext * precio_ext;
+
+    $('#ext_subtotal').val(subtotal_ext);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam+subtotal_ext)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam+subtotal_ext);
+    
+  });
+
+  $("#fa_pu, #fa_cantidad").keyup(function(){
+
+    cantidad_fa = parseFloat($("#fa_cantidad").val());
+    precio_fa   = parseFloat($("#fa_pu").val());
+    subtotal_fa = cantidad_fa * precio_fa;
+
+    $('#fa_subtotal').val(subtotal_fa);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa);
+    
+  });
+
+  $("#jam_pu, jam_cantidad").keyup(function(){
+
+    cantidad_jam = parseFloat($("#jam_cantidad").val());
+    precio_jam   = parseFloat($("#jam_pu").val());
+    subtotal_jam = cantidad_jam * precio_jam;
+
+    $('#jam_subtotal').val(subtotal_jam);
+    $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa+subtotal_jam)
+    $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa+subtotal_jam);
   });
 
   $("#costo_confeccion").keyup(function(){

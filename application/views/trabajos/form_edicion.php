@@ -584,7 +584,7 @@
                       </div>
                       <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Modelo cuello</label>
                             <select name="cam_mcuello" class="form-control custom-select">
@@ -595,7 +595,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Ancho</label>
                             <select name="cam_ancho" class="form-control custom-select">
@@ -606,7 +606,7 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Cuello Combi</label>
                             <select name="cam_ccombinado" class="form-control custom-select">
@@ -617,13 +617,6 @@
                           </div>
                         </div>
 
-                        <div class="col-md-3">
-                          <div class="form-group">
-                            <label class="control-label">Cantidad</label>
-                            <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" min="0" step="any" value="<?php echo $camisa['cantidad']; ?>">
-                          </div>
-                        </div>
-                        
                       </div>
 
                     </div>

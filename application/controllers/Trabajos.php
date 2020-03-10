@@ -199,40 +199,46 @@ class Trabajos extends CI_Controller {
 				'largo_manga'      => $this->input->post('cam_lmanga'),
 				'ancho'            => $this->input->post('cam_ancho'),
 				'color'            => $this->input->post('cam_color'),
+				'precio_unitario'  => $this->input->post('cam_pu'),
 				'cantidad'         => $this->input->post('cam_cantidad'),
+
 			);
 			$this->db->insert('camisas', $datos_camisa);
 		}
 
 		if (!empty($this->input->post('fa_largo'))) {
 			$datos_falda = array(
-				'cliente_id'  => $id_cliente,
-				'trabajo_id'  => $id_trabajo,
-				'modelo_id'   => $this->input->post('fa_modelo'),
-				'abertura_id' => $this->input->post('fa_abertura'),
-				'largo'       => $this->input->post('fa_largo'),
-				'cintura'     => $this->input->post('fa_cintura'),
-				'cadera'      => $this->input->post('fa_cadera'),
-				'vasta'       => $this->input->post('fa_vasta'),
-				'pretina'     => $this->input->post('fa_pretina'),
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('fa_modelo'),
+				'abertura_id'     => $this->input->post('fa_abertura'),
+				'largo'           => $this->input->post('fa_largo'),
+				'cintura'         => $this->input->post('fa_cintura'),
+				'cadera'          => $this->input->post('fa_cadera'),
+				'vasta'           => $this->input->post('fa_vasta'),
+				'pretina'         => $this->input->post('fa_pretina'),
+				'precio_unitario' => $this->input->post('fa_pu'),
+				'cantidad'        => $this->input->post('fa_cantidad'),
 			);
 			$this->db->insert('faldas', $datos_falda);
 		}
 
 		if (!empty($this->input->post('j_talle'))) {
 			$datos_jumper = array(
-				'cliente_id'  => $id_cliente,
-				'trabajo_id'  => $id_trabajo,
-				'modelo_id'   => $this->input->post('j_modelo'),
-				'abertura_id' => $this->input->post('j_abertura'),
-				'bolsillo_id' => $this->input->post('j_bolsillo'),
-				'talle'       => $this->input->post('j_talle'),
-				'largo'       => $this->input->post('j_largo'),
-				'cintura'     => $this->input->post('j_cintura'),
-				'cadera'      => $this->input->post('j_cadera'),
-				'pecho'       => $this->input->post('j_pecho'),
-				'estomago'     => $this->input->post('j_estomago'),
-				'altura_busto'     => $this->input->post('j_abusto'),
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('j_modelo'),
+				'abertura_id'     => $this->input->post('j_abertura'),
+				'bolsillo_id'     => $this->input->post('j_bolsillo'),
+				'talle'           => $this->input->post('j_talle'),
+				'largo'           => $this->input->post('j_largo'),
+				'cintura'         => $this->input->post('j_cintura'),
+				'cadera'          => $this->input->post('j_cadera'),
+				'pecho'           => $this->input->post('j_pecho'),
+				'estomago'        => $this->input->post('j_estomago'),
+				'altura_busto'    => $this->input->post('j_abusto'),
+				'precio_unitario' => $this->input->post('jam_pu'),
+				'cantidad'        => $this->input->post('jam_cantidad'),
 			);
 			$this->db->insert('jumpers', $datos_jumper);
 		}
@@ -258,11 +264,13 @@ class Trabajos extends CI_Controller {
 		}
 		if($sw == 1){
 			$datos_extras = array(
-				'cliente_id'   => $id_cliente,
-				'trabajo_id'   => $id_trabajo,
-				'corbaton'     => $corbaton_color,
-				'corbata_gato' => $cg_color,
-				'faja'         => $faja_color,
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'corbaton'        => $corbaton_color,
+				'corbata_gato'    => $cg_color,
+				'faja'            => $faja_color,
+				'precio_unitario' => $this->input->post('ext_pu'),
+				'cantidad'        => $this->input->post('ext_cantidad'),
 			);
 			$this->db->insert('extras', $datos_extras);
 		}
