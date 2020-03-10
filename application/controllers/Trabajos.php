@@ -354,6 +354,7 @@ class Trabajos extends CI_Controller {
 		$this->db->from('trabajos as t');
 		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.borrado', NULL);
 		$this->db->limit(100);
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajo'], true ,false, true);
@@ -435,44 +436,16 @@ class Trabajos extends CI_Controller {
 		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
-		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
-		$this->db->from('sacos as sa');
-		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
-		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
-		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
-		$this->db->where('sa.trabajo_id', $id_trabajo);
-		$data['saco'] = $this->db->get()->row_array();
+		$this->db->select('u.nombre, p.*');
+		$this->db->from('pagos as p');
+		$this->db->join('usuarios as u', 'u.id = p.usuario_id', 'left');
+		$this->db->where('p.trabajo_id', $id_trabajo);
+		$this->db->where('p.borrado', NULL);
+		$data['pagos'] = $this->db->get()->result_array();
+		// vdebug($data['pagos'], true, false, true);
 
-		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
-		$this->db->from('pantalones as pa');
-		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
-		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
-		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
-		$this->db->where('pa.trabajo_id', $id_trabajo);
-		$data['pantalon'] = $this->db->get()->row_array();
+		// $data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo))->result_array();
 
-		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
-		$this->db->from('chalecos as ch');
-		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
-		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
-		$this->db->where('ch.trabajo_id', $id_trabajo);
-		$data['chaleco'] = $this->db->get()->row_array();
-
-		$this->db->select('*');
-		$this->db->from('camisas as ca');
-		$this->db->where('ca.trabajo_id', $id_trabajo);
-		$data['camisa'] = $this->db->get()->row_array();
-
-		$this->db->select('*');
-		$this->db->from('extras as ex');
-		$this->db->where('ex.trabajo_id', $id_trabajo);
-		$data['extras'] = $this->db->get()->row_array();
-
-		$data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo))->result_array();
-
-		// vdebug($data['chaleco'], false, false, true);
-
-		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 		$fecha = fechaEs($data['trabajo']['fecha']);
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
@@ -483,6 +456,7 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_pago()
 	{
+		$usuario_id = $this->session->id_usuario;
 		// vdebug($this->input->post(), true, false, true);
 		$fecha_hora = $this->input->post('fecha').' '.date('H:i:s');
 		$id_trabajo = $this->input->post('trabajo_id');
@@ -491,12 +465,12 @@ class Trabajos extends CI_Controller {
 		$datos_pago = array(
 			'cliente_id' => $this->input->post('cliente_id'),
 			'trabajo_id' => $this->input->post('trabajo_id'),
+			'usuario_id' => $usuario_id,
 			'fecha'      => $fecha_hora,
 			'monto'      => $this->input->post('monto'),
 		);
 
 		$this->db->insert('pagos', $datos_pago);
-
 		$this->db->select_sum('monto');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$suma_pagos = $this->db->get('pagos')->row_array();
@@ -1074,5 +1048,12 @@ class Trabajos extends CI_Controller {
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
 	}	
+
+	public function eliminar($id_trabajo = null)
+	{
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('trabajos', array('borrado'=>$hoy), "id=$id_trabajo");
+		redirect("trabajos/listado_trabajos");
+	}
 
 }

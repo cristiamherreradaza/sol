@@ -89,7 +89,7 @@
                                                 <tr>
                                                     <th>Fecha</th>
                                                     <th>Usuario</th>
-                                                    <th>A cuenta</th>
+                                                    <th>Monto</th>
                                                     <th style="width: 5%;"></th>
                                                 </tr>
                                             </thead>
@@ -98,7 +98,7 @@
                                                 <?php $total += $p['monto']; ?>
                                                     <tr>
                                                         <td><?php echo fechaEs($p['fecha']); ?></td>
-                                                        <td></td>
+                                                        <td><?php echo $p['nombre']; ?></td>
                                                         <td><?php echo $p['monto']; ?></td>
                                                         <td></td>
                                                         <td align="left">

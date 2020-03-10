@@ -17,8 +17,7 @@
 				<div class="card">
 					<div class="card-body">
 						<?php //vdebug($trabajos, true, false, true) ?>
-						<h4 class="card-title">Listado de trabajos </h4>
-						<h6 class="card-subtitle">Trabajos</h6>
+						<h4 class="card-title">LISTADO DE TRABAJOS</h4>
 						<div class="table-responsive m-t-40">
 							<table id="config-table" class="table display table-bordered table-striped no-wrap">
 								<thead>
@@ -61,7 +60,7 @@
 											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
 											</a>
-
+											<button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $t['id'] ?>, '<?php echo $t['nombre'] ?>')"><i class="fas fa-trash"></i></button>
 										</td>
 									</tr>
 									<?php endforeach ?>
@@ -108,5 +107,29 @@
         	}
 		});
 	});
+
+	function eliminar(id, nombre) {
+		//console.log(id_pago);
+		Swal.fire({
+			title: 'Quieres borrar el trabajo de ' + nombre + '?',
+			text: "Luego no podras recuperarlo!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, estoy seguro!',
+			cancelButtonText: "Cancelar",
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire(
+					'Excelente!',
+					'El trabajo fue borrado.',
+					'success'
+				);
+				// console.log("el id es "+id_pago);
+				window.location.href = "<?php echo base_url() ?>trabajos/eliminar/" + id;
+			}
+		})
+	}
 
 </script>
