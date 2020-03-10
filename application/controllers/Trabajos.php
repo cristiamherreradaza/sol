@@ -73,6 +73,8 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo() 
 	{
+		$usuario_id = $this->session->id_usuario;
+
 		if (!empty($this->input->post('cod_cliente'))) {
 			$id_cliente = $this->input->post('cod_cliente');
 		} else {
@@ -94,6 +96,7 @@ class Trabajos extends CI_Controller {
 
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
+			'usuario_id'       => $usuario_id,
 			'fecha'            => $fecha_hora_trabajo,
 			'fecha_prueba'     => $fecha_hora_prueba,
 			'fecha_entrega'    => $fecha_hora_entrega,
@@ -921,13 +924,14 @@ class Trabajos extends CI_Controller {
 		// vdebug($this->input->post(), true, false, true);
 		$id_cliente = $this->input->post('id_cliente');
 		$id_trabajo = $this->input->post('id_trabajo');
-
-
+		$fecha_hora_edicion = date('Y-m-d H:i:s');
 		$hora_registro = date('H:i:s');
 		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
 
 		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
 		$fecha_hora_entrega = $this->input->post('fecha_entrega').' '.$this->input->post('hora_entrega');
+
+		$this->db->update('trabajos', ['modified_at'=>$fecha_hora_edicion], ['id'=>$id_trabajo]);
 
 		if (!empty($this->input->post('saco_id'))) {
 			$datos_saco = array(
