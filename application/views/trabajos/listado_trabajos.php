@@ -60,7 +60,14 @@
 											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
 											</a>
+
 											<button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $t['id'] ?>, '<?php echo $t['nombre'] ?>')"><i class="fas fa-trash"></i></button>
+
+											<a href="<?php echo base_url() ?>Inventarios_Venta/retira_material/<?php echo $t['id'] ?>">
+												<button type="button" class="btn btn-dark"><i class="fas fa-cart-arrow-down"></i></button>
+											</a>
+
+
 										</td>
 									</tr>
 									<?php endforeach ?>

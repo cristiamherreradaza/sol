@@ -138,7 +138,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="<?php echo base_url() ?>usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
+                            <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
                         </li>
 
                     </ul>
