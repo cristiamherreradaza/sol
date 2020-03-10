@@ -491,8 +491,9 @@ class Trabajos extends CI_Controller {
 	{
 		// $id_trabajo = $this->input->post('trabajo_id');
 		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
-		$this->db->delete('pagos', array('id' => $id_pago));
-
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('pagos', array('borrado'=>$hoy), "id=$id_pago");
+	
 		$this->db->select_sum('monto');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$suma_pagos = $this->db->get('pagos')->row_array();
@@ -502,9 +503,6 @@ class Trabajos extends CI_Controller {
 		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
 
 		redirect("Trabajos/registro_pagos/$id_trabajo");
-
-		// vdebug($id_pago, true, false, true);
-
 	}
 
 	public function form_edicion($id_trabajo = null)

@@ -150,7 +150,7 @@
               'success'
             );
             // console.log("el id es "+id_pago);
-            window.location.href = "<?php echo base_url() ?>Trabajos/borra_pago/"+id_pago+"/"+id_trabajo;
+            window.location.href = "<?php echo base_url() ?>trabajos/borra_pago/"+id_pago+"/"+id_trabajo;
           }
         })
     }
