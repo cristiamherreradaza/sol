@@ -1225,6 +1225,14 @@
       $("#bloque_extras").toggle('slow');
       $("#bloque_mujer").toggle('slow');
       $("#select_bragueta").toggle('slow');
+    }else{
+      $("#saco_albusto").toggle('slow');
+      $("#pantalon_cadera").toggle('slow');
+      $("#pd_pretina").toggle('slow');
+      $("#ch_abusto").toggle('slow');
+      $("#bloque_extras").toggle('slow');
+      $("#bloque_mujer").toggle('slow');
+      $("#select_bragueta").toggle('slow');
     }
   }
 

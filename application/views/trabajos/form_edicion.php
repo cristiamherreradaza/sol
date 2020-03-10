@@ -13,7 +13,7 @@
 		<!-- Row -->
 		<div class="row">
 
-      <?php echo form_open('Trabajos/guarda_trabajo')?>
+      <?php echo form_open('Trabajos/guarda_edicion')?>
       <div class="col-lg-12">
         <div class="card card-outline-info">
          <div class="card-header">
@@ -26,10 +26,10 @@
             <div class="row pt-3">
 
              <div class="col-md-5">
-              <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente</label>
               <div class="input-group mb-3">
                 <input type="hidden" name="id_trabajo" value="<?php echo $trabajo['id']; ?>">
+                <input type="hidden" name="id_cliente" value="<?php echo $trabajo['cliente_id']; ?>">
                 <input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo $trabajo['nombre']; ?>" readonly>
                 <!-- <div class="input-group-append">
                   <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
@@ -67,6 +67,7 @@
         <div class="bloque_varon">
 
         <!-- saco -->
+          
         <div class="row">
           <!-- medidas saco -->
            
@@ -75,7 +76,9 @@
                 <div class="card-header">
                   <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
                 </div>
+
                 <div class="card-body" style="background-color: #e6f2ff;">
+                  <input type="hidden" name="saco_id" value="<?php echo $saco['id'] ?>">
 
                   <div class="row">
                     <div class="col-md-3">
@@ -117,6 +120,13 @@
                       </div>
                     </div>
 
+                    <div class="col" id="saco_albusto" style="display: none;">
+                      <div class="form-group">
+                        <label class="control-label">Alt Busto</label>
+                        <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any" value="<?php echo $saco['altura_busto']; ?>">
+                      </div>
+                    </div>
+
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Estomago</label>
@@ -138,13 +148,6 @@
                       </div>
                     </div>
 
-                    <div class="col" id="saco_albusto" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Alt Busto</label>
-                        <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any" value="<?php echo $saco['altura_busto']; ?>">
-                      </div>
-                    </div>
-
                   </div>
 
                 </div>
@@ -154,6 +157,7 @@
           <!-- fin medidas saco -->
 
           <!-- inicia modelos sacos -->
+          <?php if ($saco['modelo_id']): ?>
           <div class="col-md-7">
             <div class="card card-outline-info">
               <div class="card-header">
@@ -240,46 +244,21 @@
                   </div>
                 </div>
 
-                <div class="row">
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="control-label"><b>Cantidad</b></label>
-                      <input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="<?php echo $saco['cantidad']; ?>">
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="control-label"><b>Precio Unitario</b></label>
-                      <input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" value="<?php echo $saco['precio_unitario']; ?>">
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group">
-                      <label class="control-label"><b>Subtotal</b></label>
-                      <?php 
-                        $subtotal_saco = 0;
-                        $subtotal_saco = $saco['cantidad']*$saco['precio_unitario'];
-                      ?>
-                      <input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" value="<?php echo $subtotal_saco; ?>">
-                    </div>
-                  </div>
-                  
-                </div>
-
               </div>
             </div>
           </div>
+          <?php endif ?>
         </div>
+
         <!-- fin sacos -->
 
         <!-- pantalon -->
         <div class="row">
 
           <!-- medidas pantalon -->
+            
           <div class="col-md-5">
+
             <div class="card card-outline-success">
               <div class="card-header">
                 <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
@@ -287,7 +266,7 @@
                 <div class="card-body" style="background-color: #e6ffe6;">
 
                   <div class="row">
-
+                    <input type="hidden" name="pantalon_id" value="<?php echo $pantalon['id'] ?>">
                     <div class="col-md-3">
                       <div class="form-group">
                         <label class="control-label">Largo</label>
@@ -362,6 +341,7 @@
             </div>
             <!-- fin medidas pantalon -->
 
+            <?php if ($pantalon['modelo_id']): ?>
             <!-- modelos pantalon -->
             <div class="col-md-7">
               <div class="card card-outline-success">
@@ -443,39 +423,13 @@
 
                   </div>
 
-                  <div class="row">
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="control-label"><b>Cantidad</b></label>
-                        <input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="<?php echo $pantalon['cantidad']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="control-label"><b>Precio Unitario</b></label>
-                        <input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" value="<?php echo $pantalon['precio_unitario']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label class="control-label"><b>Subtotal</b></label>
-                        <?php 
-                          $subtotal_pant = $pantalon['cantidad']*$pantalon['precio_unitario'];
-                        ?>
-                        <input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" value="<?php echo $subtotal_pant; ?>" readonly>
-                      </div>
-                    </div>
-                    
-                  </div>
-
                 </div>
               </div>
             </div>
             <!-- fin medidas pantalon -->
+            <?php endif ?>
           </div>
+
           <!-- fin pantalon -->
 
           <!-- chalecos -->
@@ -488,6 +442,8 @@
                   <div class="card-body" style="background-color: #f0e7fe;">
 
                     <div class="row">
+                      <input type="hidden" name="chaleco_id" value="<?php echo $chaleco['id'] ?>">
+
 
                       <div class="col">
                         <div class="form-group">
@@ -525,14 +481,17 @@
               <!-- fin chaleco medidas -->
 
               <!-- chalecos -->
+              <?php if ($chaleco['modelo_id']): ?>
+                
               <div class="col-md-7">
                 <div class="card card-outline-primary">
                   <div class="card-header">
-                    <h4 class="mb-0 text-white">CHALECO</h4>
+                    <h4 class="mb-0 text-white">CARACTERISTICAS CHALECO</h4>
                   </div>
                   <div class="card-body" style="background-color: #f0e7fe;">
 
                     <div class="row">
+                      <input type="hidden" name="chaleco_id" value="<?php echo $chaleco['id'] ?>">
 
                       <div class="col">
                         <div class="form-group">
@@ -575,36 +534,11 @@
 
                     </div>
 
-                    <div class="row">
-
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="control-label"><b>Cantidad</b></label>
-                          <input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="<?php echo $chaleco['cantidad']; ?>">
-                        </div>
-                      </div>
-
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="control-label"><b>Precio Unitario</b></label>
-                          <input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150" value="<?php echo $chaleco['precio_unitario']; ?>">
-                        </div>
-                      </div>
-                      <?php 
-                        $sub_chaleco = $chaleco['cantidad']*$chaleco['precio_unitario'];
-                      ?>
-                      <div class="col-md-4">
-                        <div class="form-group">
-                          <label class="control-label"><b>Subtotal</b></label>
-                          <input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" value="<?php echo $sub_chaleco; ?>" readonly>
-                        </div>
-                      </div>
-                      
-                    </div>
-
                   </div>
                 </div>
               </div>
+              <?php endif ?>
+
               <!-- fin chalecos -->
 
           </div>
@@ -616,12 +550,15 @@
 
               <!-- camisa medidas -->
               <div class="col-md-5">
+                <?php if ($camisa['cuello']): ?>
+                  
                 <div class="card card-outline-inverse">
                   <div class="card-header">
                     <h4 class="mb-0 text-white">CAMISA</h4></div>
                     <div class="card-body" style="background-color: #f0e7fe;">
 
                       <div class="row">
+                        <input type="hidden" name="camisa_id" value="<?php echo $camisa['id'] ?>">
 
                         <div class="col-md-4">
                           <div class="form-group">
@@ -691,10 +628,12 @@
 
                     </div>
                   </div>
+                <?php endif ?>
                 </div>
                 <!-- fin camisa medidas -->
 
                 <!-- extras -->
+                <?php if ($extras['corbaton']): ?>
                 <div class="col-md-7">
                   <div class="card card-outline-inverse">
                     <div class="card-header">
@@ -703,7 +642,7 @@
                     <div class="card-body" style="background-color: #f0e7fe;">
 
                       <div class="row">
-
+                        <input type="hidden" name="extras_id" value="<?php echo $extras['id'] ?>">
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Corbaton</label>
@@ -730,6 +669,7 @@
                     </div>
                   </div>
                 </div>
+                <?php endif ?>
                 <!-- fin extras -->
 
             </div>
@@ -741,6 +681,8 @@
             <div class="row">
 
               <!-- falda medidas -->
+              <?php if ($falda['modelo_id']): ?>
+                
               <div class="col-md-5">
                 <div class="card card-outline-warning">
                   <div class="card-header">
@@ -748,6 +690,7 @@
                     <div class="card-body" style="background-color: #ffffcc;">
 
                       <div class="row">
+                        <input type="hidden" name="falda_id" value="<?php echo $falda['id']; ?>">
 
                         <div class="col-md-3">
                           <div class="form-group">
@@ -820,9 +763,11 @@
                     </div>
                   </div>
                 </div>
+                <?php endif ?>
                 <!-- fin camisa medidas -->
 
                 <!-- jumper -->
+                <?php if ($jumper['talle']): ?>
                 <div class="col-md-7">
                   <div class="card card-outline-warning">
                     <div class="card-header">
@@ -831,6 +776,7 @@
                     <div class="card-body" style="background-color: #ffffcc;">
 
                       <div class="row">
+                        <input type="hidden" name="jumper_id" value="<?php echo $jumper['id']; ?>">
 
                         <div class="col">
                           <div class="form-group">
@@ -930,140 +876,16 @@
                     </div>
                   </div>
                 </div>
+                <?php endif ?>
+
                 <!-- fin jumper -->
 
             </div>
           </div>
-          <!-- fin camisa y extras -->
+          <!-- fin falda y jumper -->
 
         </div>
         <!-- fin falda y jumper -->
-
-        <!-- detalles trabajo -->
-        <div class="row justify-content-md-center">
-          <div class="col-md-12">
-            <div class="card card-outline-danger">
-              <div class="card-header">
-                <h4 class="mb-0 text-white">DATOS DEL TRABAJO</h4>
-              </div>
-              <div class="card-body" style="background-color: #f0e7fe;">
-
-                <div class="row">
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Fecha Registro</label>
-                      <?php 
-                        $fechar = explode(" ", $trabajo['fecha']);  
-                        $fechap = explode(" ", $trabajo['fecha_prueba']);  
-                        $fechae = explode(" ", $trabajo['fecha_entrega']);  
-                        // echo $fechar[0];
-                      ?>
-                      <input type="date" name="fecha" id="fecha" class="form-control" value="<?php echo $fechar[0];?>">
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Fecha Prueba</label>
-                      <input type="date" name="fecha_prueba" id="fecha_prueba" class="form-control" value="<?php echo $fechap[0] ?>">
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Hora Prueba</label>
-                      <input type="time" id="hora_prueba" name="hora_prueba" class="form-control" value="16:00:00">
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Fecha Entrega</label>
-                      <input type="date" name="fecha_entrega" id="fecha_entrega" class="form-control" value="<?php echo $fechae[0]; ?>">
-                    </div>
-                  </div>                                
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Hora Entrega</label>
-                      <input type="time" id="hora_entrega" name="hora_entrega" class="form-control" value="18:00:00">
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Tela</label>
-                      <select name="tela_propia" class="form-control custom-select">
-                        <option value="NO" <?php echo ($trabajo['tela_propia']=='SI')?'selected':'' ?>>Sin Tela</option>
-                        <option value="SI" <?php echo ($trabajo['tela_propia']=='NO')?'selected':'' ?>>Con Tela</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div class="col">
-                    <div class="form-group">
-                      <label class="control-label">Marca</label>
-                      <input type="text" name="marca" id="marca" class="form-control" value="<?php echo $trabajo['marca_tela']; ?>">
-                    </div>
-                  </div>
-                  </div>
-                  <div class="row">
-
-                  <div class="col-md-2">
-                    <div class="form-group has-success">
-                      <label class="control-label">Costo Tela</label>
-                      <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['costo_tela']; ?>" required>
-                    </div>
-                  </div>
-
-                  <div class="col-md-2 has-success">
-                    <div class="form-group">
-                      <label class="control-label">Costo Confeccion</label>
-                      <input type="number" name="costo_confeccion" id="costo_confeccion" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['costo_confeccion']; ?>" required>
-                    </div>
-                  </div>
-
-                  <div class="col-md-4">
-                    <div class="form-group has-danger">
-                      <label class="control-label"><b>TOTAL</b></label>
-                      <input type="number" name="monto_total" id="monto_total" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['total']; ?>" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-2">
-                    <div class="form-group has-warning">
-                      <label class="control-label">A cuenta</label>
-                      <?php 
-                        $saldo_mod = $trabajo['total']-$trabajo['saldo'];
-
-                      ?>
-                      <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" value="<?php echo $saldo_mod; ?>" readonly>
-                    </div>
-                  </div>
-
-                  <div class="col-md-2">
-                    <div class="form-group has-primary">
-                      <label class="control-label">Saldo</label>
-                      <input type="number" name="saldo" id="saldo" class="form-control calculo" min="0" step="any" value="<?php echo $trabajo['saldo']; ?>" readonly>
-                    </div>
-                  </div>
-
-                </div>
-
-                <!-- <div class="row">
-                  <div class="col-md-10">
-                  </div>
-                  <div class="col-md-2">
-                    <div class="float-right"><div style="color: #000000; font-weight: bold;font-size: 16pt">TOTAL : <span id="precio_total">1500</span></div></div><br>
-                  </div>
-                </div> -->
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- fin detalles trabajo -->
 
       </div>
 
@@ -1105,6 +927,7 @@
   {
     if(estado_genero == 'Mujer')
     {
+      // alert('es mujer');
       cambia_genero();
     }
   });
@@ -1165,18 +988,19 @@
     a_cuenta = parseFloat($("#a_cuenta").val());
     saldo = suma - a_cuenta
     $("#saldo").val(saldo);
-    console.log("Costo: "+suma);
+    // console.log("Costo: "+suma);
     // console.log("Costo de tela: "+costo_tela);
   });
 
   function cambia_genero()
   {
-    $("#saco_albusto").toggle('slow');
-    $("#pantalon_cadera").toggle('slow');
-    $("#pd_pretina").toggle('slow');
-    $("#ch_abusto").toggle('slow');
-    $("#bloque_extras").toggle('slow');
-    $("#bloque_mujer").toggle('slow');
+      $("#saco_albusto").toggle('slow');
+      $("#pantalon_cadera").toggle('slow');
+      $("#pd_pretina").toggle('slow');
+      $("#ch_abusto").toggle('slow');
+      $("#bloque_extras").toggle('slow');
+      $("#bloque_mujer").toggle('slow');
+      $("#select_bragueta").toggle('slow');
   }
 
   $(document).on('keyup', '#busca_cliente', function(e){
@@ -1302,6 +1126,7 @@
 <script>
 jQuery(document).ready(function() {
         // Switchery
+        // cambia_genero();
         var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
         $('.js-switch').each(function() {
             new Switchery($(this)[0], $(this).data());

@@ -91,10 +91,6 @@ class Trabajos extends CI_Controller {
 
 		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
 		$fecha_hora_entrega = $this->input->post('fecha_entrega').' '.$this->input->post('hora_entrega');
-		// $fecha_mas_dias = strtotime($this->input->post('fecha_prueba'));
-		// $fecha_mas_dias = strtotime("+7 day", $fecha_mas_dias);
-		// $fecha_mas_transformado = date('Y-m-d', $fecha_mas_dias);
-		// $fh_entrega = $fecha_mas_transformado.' 16:00:00';
 
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
@@ -220,7 +216,7 @@ class Trabajos extends CI_Controller {
 			$this->db->insert('faldas', $datos_falda);
 		}
 
-		if (!empty($this->input->post('fa_largo'))) {
+		if (!empty($this->input->post('j_talle'))) {
 			$datos_jumper = array(
 				'cliente_id'  => $id_cliente,
 				'trabajo_id'  => $id_trabajo,
@@ -919,5 +915,160 @@ class Trabajos extends CI_Controller {
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
 	}
+
+	public function guarda_edicion() 
+	{
+		// vdebug($this->input->post(), true, false, true);
+		$id_cliente = $this->input->post('id_cliente');
+		$id_trabajo = $this->input->post('id_trabajo');
+
+
+		$hora_registro = date('H:i:s');
+		$fecha_hora_trabajo = $this->input->post('fecha').' '.$hora_registro;
+
+		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
+		$fecha_hora_entrega = $this->input->post('fecha_entrega').' '.$this->input->post('hora_entrega');
+
+		if (!empty($this->input->post('saco_id'))) {
+			$datos_saco = array(
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('sd_modelo'),
+				'abertura_id'     => $this->input->post('sd_aberturas'),
+				'detalle_id'      => $this->input->post('sd_detalle'),
+				'color'           => $this->input->post('sd_color'),
+				'color_ojal'      => $this->input->post('sd_color_ojal'),
+				'ojal_puno'       => $this->input->post('sd_ojal'),
+				'botones'         => $this->input->post('sd_botones'),
+				'talla'           => $this->input->post('s_talla'),
+				'largo'           => $this->input->post('s_largo'),
+				'hombro'          => $this->input->post('s_hombro'),
+				'espalda'         => $this->input->post('s_espalda'),
+				'pecho'           => $this->input->post('s_pecho'),
+				'estomago'        => $this->input->post('s_estomago'),
+				'medio_brazo'     => $this->input->post('s_mbrazo'),
+				'largo_manga'     => $this->input->post('s_lmanga'),
+				'altura_busto'    => $this->input->post('s_abusto'),
+				'precio_unitario' => $this->input->post('saco_pu'),
+				'cantidad'        => $this->input->post('saco_cantidad'),
+			);
+			// $this->db->insert('sacos', $datos_saco);
+			$this->db->where('id', $this->input->post('saco_id'));
+			$this->db->update('sacos', $datos_saco);
+
+		}
+
+		if (!empty($this->input->post('pantalon_id'))) {
+			$datos_pantalon = array(
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('pd_modelo'),
+				'pinza_id'        => $this->input->post('pd_pinzas'),
+				'bolsillo_id'     => $this->input->post('pd_batras'),
+				'largo'           => $this->input->post('p_largo'),
+				'entre_pierna'    => $this->input->post('p_entrepierna'),
+				'cintura'         => $this->input->post('p_cintura'),
+				'muslo'           => $this->input->post('p_muslo'),
+				'rodilla'         => $this->input->post('p_rodilla'),
+				'bota_pie'        => $this->input->post('p_bpie'),
+				'tiro_delantero'  => $this->input->post('p_tdelantero'),
+				'tiro_atras'      => $this->input->post('p_tatras'),
+				'cadera'          => $this->input->post('p_cadera'),
+				'bragueta'        => $this->input->post('pd_bragueta'),
+				'bota_pie_des'    => $this->input->post('pd_bpie'),
+				'pretina'         => $this->input->post('pd_pretina'),
+				'precio_unitario' => $this->input->post('pantalon_pu'),
+				'cantidad'        => $this->input->post('pantalon_cantidad'),
+			);
+			$this->db->where('id', $this->input->post('pantalon_id'));
+			$this->db->update('pantalones', $datos_pantalon);
+		}
+
+		if (!empty($this->input->post('chaleco_id'))) {
+			$datos_chaleco = array(
+				'cliente_id'      => $id_cliente,
+				'trabajo_id'      => $id_trabajo,
+				'modelo_id'       => $this->input->post('ch_modelo'),
+				'detalle_id'      => $this->input->post('ch_detalle'),
+				'largo'           => $this->input->post('ch_largo'),
+				'pecho'           => $this->input->post('ch_pecho'),
+				'estomago'        => $this->input->post('ch_estomago'),
+				'botones'         => $this->input->post('ch_botones'),
+				'color_ojales'    => $this->input->post('ch_color'),
+				'altura_busto'    => $this->input->post('ch_abusto'),
+				'precio_unitario' => $this->input->post('ch_pu'),
+				'cantidad'        => $this->input->post('ch_cantidad'),
+			);
+			$this->db->where('id', $this->input->post('chaleco_id'));
+			$this->db->update('chalecos', $datos_chaleco);
+		}
+
+		if (!empty($this->input->post('camisa_id'))) {
+			$datos_camisa = array(
+				'cliente_id'       => $id_cliente,
+				'trabajo_id'       => $id_trabajo,
+				'cuello'           => $this->input->post('cam_cuello'),
+				'modelo_cuello'    => $this->input->post('cam_mcuello'),
+				'cuello_combinado' => $this->input->post('cam_ccombinado'),
+				'largo_manga'      => $this->input->post('cam_lmanga'),
+				'ancho'            => $this->input->post('cam_ancho'),
+				'color'            => $this->input->post('cam_color'),
+				'cantidad'         => $this->input->post('cam_cantidad'),
+			);
+			$this->db->where('id', $this->input->post('camisa_id'));
+			$this->db->update('camisas', $datos_camisa);
+		}
+
+		if (!empty($this->input->post('falda_id'))) {
+			$datos_falda = array(
+				'cliente_id'  => $id_cliente,
+				'trabajo_id'  => $id_trabajo,
+				'modelo_id'   => $this->input->post('fa_modelo'),
+				'abertura_id' => $this->input->post('fa_abertura'),
+				'largo'       => $this->input->post('fa_largo'),
+				'cintura'     => $this->input->post('fa_cintura'),
+				'cadera'      => $this->input->post('fa_cadera'),
+				'vasta'       => $this->input->post('fa_vasta'),
+				'pretina'     => $this->input->post('fa_pretina'),
+			);
+			$this->db->where('id', $this->input->post('falda_id'));
+			$this->db->update('faldas', $datos_falda);
+		}
+
+		if (!empty($this->input->post('j_talle'))) {
+			$datos_jumper = array(
+				'cliente_id'  => $id_cliente,
+				'trabajo_id'  => $id_trabajo,
+				'modelo_id'   => $this->input->post('j_modelo'),
+				'abertura_id' => $this->input->post('j_abertura'),
+				'bolsillo_id' => $this->input->post('j_bolsillo'),
+				'talle'       => $this->input->post('j_talle'),
+				'largo'       => $this->input->post('j_largo'),
+				'cintura'     => $this->input->post('j_cintura'),
+				'cadera'      => $this->input->post('j_cadera'),
+				'pecho'       => $this->input->post('j_pecho'),
+				'estomago'     => $this->input->post('j_estomago'),
+				'altura_busto'     => $this->input->post('j_abusto'),
+			);
+			$this->db->where('id', $this->input->post('jumper_id'));
+			$this->db->update('jumpers', $datos_jumper);
+		}
+
+		if(!empty($this->input->post('extras_id')))
+		{
+			$datos_extras = array(
+				'cliente_id'   => $id_cliente,
+				'trabajo_id'   => $id_trabajo,
+				'corbaton'     => $this->input->post('corbaton_color'),
+				'corbata_gato' => $this->input->post('cg_color'),
+				'faja'         => $this->input->post('faja_color'),
+			);
+			$this->db->where('id', $this->input->post('extras_id'));
+			$this->db->update('extras', $datos_extras);
+		}
+
+		redirect("Trabajos/detalle_trabajo/$id_trabajo");
+
+	}	
 
 }
