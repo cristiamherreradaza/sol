@@ -92,7 +92,7 @@
            <div class="col-md-3">
             <div class="form-group">
               <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
-              <select name="contrato_id" id="contrato_id" class="form-control custom-select">
+              <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
                 <option value="">Seleccione</option>
                 <?php foreach ($contratos as $key => $c): ?>
                   <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> - <?php echo $c['descripcion'] ?> (<?php echo $c['cantidad'] ?>)</option>
@@ -208,7 +208,7 @@
                     <div class="form-group">
                       <?php //vdebug($modelos_varon, false, false, true); ?>
                       <label class="control-label">Modelo</label>
-                      <select name="sd_modelo" class="form-control custom-select">
+                      <select name="sd_modelo" id="sd_modelo" class="form-control custom-select">
                         <option value="">Seleccione</option>
                         <?php foreach ($modelos_varon_saco as $mv):?>
                           <option value="<?php echo $mv['id']?>"><?php echo $mv['nombre']?></option>
@@ -227,7 +227,7 @@
                   <div class="col-md-3">
                     <div class="form-group">
                       <label class="control-label">Aberturas</label>
-                      <select name="sd_aberturas" class="form-control custom-select">
+                      <select name="sd_aberturas" id="sd_aberturas" class="form-control custom-select">
                         <option value="">Seleccione</option>
                         <?php foreach ($aberturas_varon_saco as $a):?>
                           <option value="<?php echo $a['id']?>"><?php echo $a['nombre']?></option>
@@ -239,7 +239,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                       <label class="control-label">Detalle</label>
-                      <select name="sd_detalle" class="form-control custom-select">
+                      <select name="sd_detalle" id="sd_detalle" class="form-control custom-select">
                         <option value="">Seleccione</option>
                         <?php foreach ($detalles_varon_saco as $d):?>
                           <option value="<?php echo $d['id']?>"><?php echo $d['nombre']?></option>
@@ -262,7 +262,7 @@
                   <div class="col-md-2">
                     <div class="form-group">
                       <label class="control-label">Ojal Pu&ntilde;o</label>
-                      <select name="sd_ojal" class="form-control custom-select">
+                      <select name="sd_ojal" id="sd_ojal" class="form-control custom-select">
                         <option value="Si">Si</option>
                         <option value="No">No</option>
                       </select>
@@ -1127,6 +1127,7 @@
                     </div>
                   </div>
                   </div>
+
                   <div class="row">
 
                   <div class="col">
@@ -1498,6 +1499,90 @@
           return false;
       }
   });
+// extrae datos del contrato y setea form
+function extraer_datos_contrato()
+{
+  var contrato_id = $("#contrato_id").val();
+  console.log(contrato_id);  
+  $.ajax({
+    url: '<?php echo base_url() ?>contratos/ajax_extrae_modelos/' + contrato_id,
+    type: 'GET',
+    success: function (data) {
+      datos_modelos = JSON.parse(data);
+        console.log(datos_modelos);
+        if(datos_modelos.sacos != null)
+        {
+          $("#sd_modelo").val(datos_modelos.sacos.modelo_id);
+          $("#sd_botones").val(datos_modelos.sacos.botones);
+          $("#sd_aberturas").val(datos_modelos.sacos.abertura_id);
+          $("#sd_detalle").val(datos_modelos.sacos.detalle_id);
+          $("#sd_color").val(datos_modelos.sacos.color);
+          $("#sd_ojal").val(datos_modelos.sacos.ojal_puno);
+          $("#sd_color_ojal").val(datos_modelos.sacos.color_ojal);
+        }else{
+          $("#sd_modelo").val("");
+        }
+      }
+  });
+
+  
+
+  /*$("#bloque_busqueda").toggle('slow');  
+  $.ajax({
+    url: '<?php //echo base_url() ?>Trabajos/ajax_medidas_cliente/' + id_cliente,
+    type: 'GET',
+    success: function (data) {
+      datos_cliente = JSON.parse(data);
+      if(datos_cliente.cliente.genero == 'Mujer'){
+        $("#genero").val('Mujer');
+        $("#genero").attr("disabled", true);
+        cambia_genero();
+        // console.log('entro');
+      }
+
+      $("#cod_cliente").val(datos_cliente.cliente.id);
+      $("#nombre").val(datos_cliente.cliente.nombre);
+      $("#ci").val(datos_cliente.cliente.ci);
+      $("#celulares").val(datos_cliente.cliente.celulares);
+
+      if(datos_cliente.sacos != null)
+      {
+        $("#s_talla").val(datos_cliente.sacos.talla);
+        $("#s_largo").val(datos_cliente.sacos.largo);
+        $("#s_hombro").val(datos_cliente.sacos.hombro);
+        $("#s_espalda").val(datos_cliente.sacos.espalda);
+        $("#s_pecho").val(datos_cliente.sacos.pecho);
+        $("#s_estomago").val(datos_cliente.sacos.estomago);
+        $("#s_mbrazo").val(datos_cliente.sacos.medio_brazo);
+        $("#s_lmanga").val(datos_cliente.sacos.largo_manga);
+        $("#s_abusto").val(datos_cliente.sacos.altura_busto);
+      }
+      
+      if(datos_cliente.pantalones != null)
+      {
+        $("#p_largo").val(datos_cliente.pantalones.largo);
+        $("#p_entrepierna").val(datos_cliente.pantalones.entre_pierna);
+        $("#p_cintura").val(datos_cliente.pantalones.cintura);
+        $("#p_muslo").val(datos_cliente.pantalones.muslo);
+        $("#p_rodilla").val(datos_cliente.pantalones.rodilla);
+        $("#p_bpie").val(datos_cliente.pantalones.bota_pie);
+        $("#p_tdelantero").val(datos_cliente.pantalones.tiro_delantero);
+        $("#p_tatras").val(datos_cliente.pantalones.tiro_atras);
+        $("#p_cadera").val(datos_cliente.pantalones.cadera);
+      }
+      if(datos_cliente.chalecos != null)
+      {
+        $("#ch_largo").val(datos_cliente.chalecos.largo);
+        $("#ch_pecho").val(datos_cliente.chalecos.pecho);
+        $("#ch_estomago").val(datos_cliente.chalecos.estomago);
+      }
+
+    }
+  });*/
+}
+
+// fin extrae datos del contrato
+
 </script>
 <script src="<?php echo base_url() ?>public/assets/plugins/switchery/dist/switchery.min.js"></script>
 <script src="<?php echo base_url() ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>

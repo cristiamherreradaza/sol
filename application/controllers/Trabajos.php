@@ -97,6 +97,7 @@ class Trabajos extends CI_Controller {
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'usuario_id'       => $usuario_id,
+			'contrato_id'       => $this->input->post('contrato_id'),
 			'fecha'            => $fecha_hora_trabajo,
 			'fecha_prueba'     => $fecha_hora_prueba,
 			'fecha_entrega'    => $fecha_hora_entrega,
@@ -124,6 +125,7 @@ class Trabajos extends CI_Controller {
 			$datos_saco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('sd_modelo'),
 				'abertura_id'     => $this->input->post('sd_aberturas'),
 				'detalle_id'      => $this->input->post('sd_detalle'),
@@ -150,6 +152,7 @@ class Trabajos extends CI_Controller {
 			$datos_pantalon = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('pd_modelo'),
 				'pinza_id'        => $this->input->post('pd_pinzas'),
 				'bolsillo_id'     => $this->input->post('pd_batras'),
@@ -175,6 +178,7 @@ class Trabajos extends CI_Controller {
 			$datos_chaleco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('ch_modelo'),
 				'detalle_id'      => $this->input->post('ch_detalle'),
 				'largo'           => $this->input->post('ch_largo'),
@@ -193,6 +197,7 @@ class Trabajos extends CI_Controller {
 			$datos_camisa = array(
 				'cliente_id'       => $id_cliente,
 				'trabajo_id'       => $id_trabajo,
+				'contrato_id'      => $this->input->post('contrato_id'),
 				'cuello'           => $this->input->post('cam_cuello'),
 				'modelo_cuello'    => $this->input->post('cam_mcuello'),
 				'cuello_combinado' => $this->input->post('cam_ccombinado'),
@@ -210,6 +215,7 @@ class Trabajos extends CI_Controller {
 			$datos_falda = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('fa_modelo'),
 				'abertura_id'     => $this->input->post('fa_abertura'),
 				'largo'           => $this->input->post('fa_largo'),
@@ -227,6 +233,7 @@ class Trabajos extends CI_Controller {
 			$datos_jumper = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('j_modelo'),
 				'abertura_id'     => $this->input->post('j_abertura'),
 				'bolsillo_id'     => $this->input->post('j_bolsillo'),
@@ -266,6 +273,7 @@ class Trabajos extends CI_Controller {
 			$datos_extras = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'corbaton'        => $corbaton_color,
 				'corbata_gato'    => $cg_color,
 				'faja'            => $faja_color,

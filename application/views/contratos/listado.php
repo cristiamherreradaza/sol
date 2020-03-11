@@ -7,7 +7,7 @@
 		<div class="modal-content">
 			<?php echo form_open('contratos/guarda'); ?>
 				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel" onclick="function_jquery();">FORMULARIO DE ABERTURA</h4>
+					<h4 class="modal-title" id="myModalLabel" onclick="function_jquery();">FORMULARIO DE CONTRATO</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<input type="hidden" name="ida" id="ida" value="">
 				</div>
@@ -59,6 +59,81 @@
 							</div>
 						</div>
 						
+					</div>
+
+					<div class="row">
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Precio Saco</label>
+						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any">
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Precio Pantalon</label>
+						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any">
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Precio Chaleco</label>
+						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any">
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Precio Falda</label>
+						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any">
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Costo Confeccion</label>
+						    <input name="costo_confeccion" type="number" id="costo_confeccion" class="form-control calculo" min="0" step="any" readonly>
+						  </div>
+						</div>
+						
+					</div>
+
+					<div class="row">
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Tela</label>
+						    <select name="tela_propia" class="form-control custom-select">
+						      <option value="NO">Sin Tela</option>
+						      <option value="SI">Con Tela</option>
+						    </select>
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Marca</label>
+						    <input type="text" name="marca" id="marca" class="form-control">
+						  </div>
+						</div>
+
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Precio Tela</label>
+						    <input name="costo_tela" type="number" id="costo_tela" class="form-control" min="0" step="any">
+						  </div>
+						</div>
+
+						<div class="col">
+						  <div class="form-group">
+						    <label class="control-label">Costo Total</label>
+						    <input name="total" type="number" id="total" class="form-control calculo" min="0" step="any" readonly>
+						  </div>
+						</div>
+
 					</div>
 
 				</div>
@@ -119,18 +194,9 @@
 										<td><?php echo $c['cantidad'] ?></td>
 										<td><?php echo $c['terminado'] ?></td>
 										<td>
-											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $c['id'] ?>">
-												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
-											</a>
-
-											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $c['id'] ?>">
-												<button type="button" class="btn btn-success"><i class="fas fa-star"></i></button>
-											</a>
-
 											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $c['id'] ?>">
 												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
 											</a>
-
 										</td>
 									</tr>
 									<?php endforeach ?>
@@ -181,6 +247,23 @@
 	    });
 	  }
 
+	});
+
+	$(".calculo").keyup(function(){
+
+		var saco = parseFloat($("#costo_saco").val());
+		var pantalon = parseFloat($("#costo_pantalon").val());
+		var chaleco = parseFloat($("#costo_chaleco").val());
+		var falda = parseFloat($("#costo_falda").val());
+		costo_confeccion = saco + pantalon + chaleco + falda;
+		$("#costo_confeccion").val(costo_confeccion);
+	});
+
+	$("#costo_tela").keyup(function(){
+		var costo_confeccion = parseFloat($("#costo_confeccion").val());
+		var costo_tela = parseFloat($("#costo_tela").val());
+		total = costo_confeccion+costo_tela;
+		$("#total").val(total);
 	});
 
 	$(function () {
