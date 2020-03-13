@@ -54,7 +54,7 @@
            <div class="form-body">
             <div class="row pt-3">
 
-             <div class="col-md-4">
+             <div class="col-md-3">
               <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
               <div class="input-group mb-3">
@@ -65,7 +65,7 @@
               </div>
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
               <div class="form-group">
                 <label class="control-label">Carnet</label>
                 <input type="number" name="ci" id="ci" class="form-control" placeholder="Ej: 4356987">
@@ -89,7 +89,7 @@
             </div>
           </div>
 
-           <div class="col-md-3">
+           <div class="col-md-5">
             <div class="form-group">
               <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
               <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
@@ -98,11 +98,11 @@
                   <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> - <?php echo $c['descripcion'] ?> (<?php echo $c['cantidad'] ?>)</option>
                 <?php endforeach ?>
               </select>
+              <input type="hidden" name="grupo_id" id="grupo_id">
             </div>
           </div>
 
         </div>
-
 
         <!-- bloque varon -->
         <div class="bloque_varon">
@@ -409,7 +409,7 @@
                       <div class="form-group">
                         <?php //vdebug($modelos_varon, false, false, true); ?>
                         <label class="control-label">Modelo</label>
-                        <select name="pd_modelo" class="form-control custom-select">
+                        <select name="pd_modelo" id="pd_modelo" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($modelos_varon_pantalon as $mvp):?>
                             <option value="<?php echo $mvp['id']?>"><?php echo $mvp['nombre']?></option>
@@ -421,7 +421,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Pinzas</label>
-                        <select name="pd_pinzas" class="form-control custom-select">
+                        <select name="pd_pinzas" id="pd_pinzas" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($pinzas_varon_pantalon as $pvp):?>
                             <option value="<?php echo $pvp['id']?>"><?php echo $pvp['nombre']?></option>
@@ -433,7 +433,7 @@
                     <div class="col" id="select_bragueta" style="display: block;">
                       <div class="form-group">
                         <label class="control-label">Bragueta</label>
-                        <select name="pd_bragueta" class="form-control custom-select">
+                        <select name="pd_bragueta" name="pd_bragueta" class="form-control custom-select">
                           <option value="Cierre">Cierre</option>
                           <option value="Boton">Boton</option>
                         </select>
@@ -443,7 +443,7 @@
                     <div class="col" id="pd_pretina" style="display: none;">
                       <div class="form-group">
                         <label class="control-label">Pretina</label>
-                        <select name="pd_pretina" class="form-control custom-select">
+                        <select name="pd_pretina" name="pd_pretina" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <option value="Normal">Normal</option>
                           <option value="Ancho">Ancho</option>
@@ -454,7 +454,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Bolsillo</label>
-                        <select name="pd_batras" class="form-control custom-select">
+                        <select name="pd_batras" name="pd_batras" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
                             <?php if ($bvp['id']==1): ?>
@@ -470,7 +470,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Bota pie</label>
-                        <select name="pd_bpie" class="form-control custom-select">
+                        <select name="pd_bpie" id="pd_bpie" class="form-control custom-select">
                           <option value="Normal">Normal</option>
                           <option value="Dobles">Dobles</option>
                           <option value="Abertura">Abertura</option>
@@ -572,7 +572,7 @@
                         <div class="form-group">
                           <?php //vdebug($modelos_varon, false, false, true); ?>
                           <label class="control-label">Modelo</label>
-                          <select name="ch_modelo" class="form-control custom-select">
+                          <select name="ch_modelo" id="ch_modelo" class="form-control custom-select">
                             <option value="">Seleccione</option>
                             <?php foreach ($modelos_varon_chalecos as $mvch):?>
                               <option value="<?php echo $mvch['id']?>"><?php echo $mvch['nombre']?></option>
@@ -591,7 +591,7 @@
                       <div class="col-md-4">
                         <div class="form-group">
                           <label class="control-label">Detalle</label>
-                          <select name="ch_detalle" class="form-control custom-select">
+                          <select name="ch_detalle" id="ch_detalle" class="form-control custom-select">
                             <option value="">Seleccione</option>
                             <?php foreach ($detalles_varon_chalecos as $dvch):?>
                               <option value="<?php echo $dvch['id']?>"><?php echo $dvch['nombre']?></option>
@@ -858,7 +858,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Modelo</label>
-                            <select name="fa_modelo" class="form-control custom-select">
+                            <select name="fa_modelo" id="fa_modelo" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($modelos_faldas as $m):?>
                                 <option value="<?php echo $m['id']?>"><?php echo $m['nombre']?></option>
@@ -870,7 +870,7 @@
                         <div class="col-md-4">
                           <div class="form-group">
                             <label class="control-label">Aberturas</label>
-                            <select name="fa_abertura" class="form-control custom-select">
+                            <select name="fa_abertura" id="fa_abertura" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <?php foreach ($aberturas_falda as $af):?>
                                 <option value="<?php echo $af['id']?>"><?php echo $af['nombre']?></option>
@@ -882,7 +882,7 @@
                         <div class="col">
                           <div class="form-group">
                             <label class="control-label">Pretina</label>
-                            <select name="fa_pretina" class="form-control custom-select">
+                            <select name="fa_pretina" id="fa_pretina" class="form-control custom-select">
                               <option value="">Seleccione</option>
                               <option value="Normal">Normal</option>
                               <option value="Ancho">Ancho</option>
@@ -1113,7 +1113,7 @@
                   <div class="col">
                     <div class="form-group">
                       <label class="control-label">Tela</label>
-                      <select name="tela_propia" class="form-control custom-select">
+                      <select name="tela_propia" id="tela_propia" class="form-control custom-select">
                         <option value="NO">Sin Tela</option>
                         <option value="SI">Con Tela</option>
                       </select>
@@ -1245,7 +1245,11 @@
   var costo_confeccion_calculado = 0;
 
   $("#saco_pu, #saco_cantidad").keyup(function(){
+    calcula_precio_saco();
+  });
 
+  function calcula_precio_saco()
+  {
     cantidad_saco = parseFloat($("#saco_cantidad").val());
     precio_saco   = parseFloat($("#saco_pu").val());
     subtotal_saco = cantidad_saco * precio_saco;
@@ -1254,11 +1258,14 @@
     $('#saco_subtotal').val(subtotal_saco);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
-    
-  });
+  }
 
   $("#pantalon_pu, #pantalon_cantidad").keyup(function(){
+    calcula_precio_pantalon();
+  });
 
+  function calcula_precio_pantalon()
+  {
     cantidad_pantalon = parseFloat($("#pantalon_cantidad").val());
     precio_pantalon   = parseFloat($("#pantalon_pu").val());
     subtotal_pantalon = cantidad_pantalon * precio_pantalon;
@@ -1266,11 +1273,14 @@
     $('#pantalon_subtotal').val(subtotal_pantalon);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
-
-  });
+  }
 
   $("#ch_pu, #ch_cantidad").keyup(function(){
+    calcula_precio_chaleco();
+  });
 
+  function calcula_precio_chaleco()
+  {
     cantidad_ch = parseFloat($("#ch_cantidad").val());
     precio_ch   = parseFloat($("#ch_pu").val());
     subtotal_ch = cantidad_ch * precio_ch;
@@ -1278,11 +1288,15 @@
     $('#ch_subtotal').val(subtotal_ch);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch);
-    
-  });
+
+  }
 
   $("#cam_pu, #cam_cantidad").keyup(function(){
+    calcula_precio_camisa();
+  });
 
+  function calcula_precio_camisa()
+  {
     cantidad_cam = parseFloat($("#cam_cantidad").val());
     precio_cam   = parseFloat($("#cam_pu").val());
     subtotal_cam = cantidad_cam * precio_cam;
@@ -1290,11 +1304,14 @@
     $('#cam_subtotal').val(subtotal_cam);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam);
-    
-  });
+  }
 
   $("#ext_pu, #ext_cantidad").keyup(function(){
+    calcula_precio_extras();
+  });
 
+  function calcula_precio_extras()
+  {
     cantidad_ext = parseFloat($("#ext_cantidad").val());
     precio_ext   = parseFloat($("#ext_pu").val());
     subtotal_ext = cantidad_ext * precio_ext;
@@ -1302,11 +1319,14 @@
     $('#ext_subtotal').val(subtotal_ext);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam+subtotal_ext)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_cam+subtotal_ext);
-    
-  });
+  }
 
   $("#fa_pu, #fa_cantidad").keyup(function(){
+    calcula_precio_falda();
+  });
 
+  function calcula_precio_falda()
+  {
     cantidad_fa = parseFloat($("#fa_cantidad").val());
     precio_fa   = parseFloat($("#fa_pu").val());
     subtotal_fa = cantidad_fa * precio_fa;
@@ -1314,11 +1334,14 @@
     $('#fa_subtotal').val(subtotal_fa);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa);
-    
-  });
+  }
 
   $("#jam_pu, jam_cantidad").keyup(function(){
+    calcula_precio_jumper();
+  });
 
+  function calcula_precio_jumper()
+  {
     cantidad_jam = parseFloat($("#jam_cantidad").val());
     precio_jam   = parseFloat($("#jam_pu").val());
     subtotal_jam = cantidad_jam * precio_jam;
@@ -1326,7 +1349,7 @@
     $('#jam_subtotal').val(subtotal_jam);
     $('#costo_confeccion').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa+subtotal_jam)
     $('#costo_confeccion_calculado').val(subtotal_saco+subtotal_pantalon+subtotal_ch+subtotal_fa+subtotal_jam);
-  });
+  }
 
   $("#costo_confeccion").keyup(function(){
     ccc = parseFloat($("#costo_confeccion_calculado").val());
@@ -1455,11 +1478,18 @@
           $("#ch_pecho").val(datos_cliente.chalecos.pecho);
           $("#ch_estomago").val(datos_cliente.chalecos.estomago);
         }
-
+        if(datos_cliente.faldas != null)
+        {
+          $("#fa_largo").val(datos_cliente.faldas.largo);
+          $("#fa_cintura").val(datos_cliente.faldas.cintura);
+          $("#fa_cadera").val(datos_cliente.faldas.cadera);
+          $("#fa_vasta").val(datos_cliente.faldas.vasta);
+        }
       }
     });
   }
 
+  // validamos que el nombre del cliente no sea repetido
   $(document).on('change', '#nombre', function(e){
     var nombre_cliente = $('#nombre').val();
     $.ajax({
@@ -1486,43 +1516,126 @@
     $("#bloque_busqueda").toggle('slow');  
   }
 
-  $('body').on('keydown', 'input, select', function(e) {
-      if (e.key === "Enter") {
-          var self = $(this), form = self.parents('form:eq(0)'), focusable, next;
-          focusable = form.find('input,a,select,button,textarea').filter(':visible');
-          next = focusable.eq(focusable.index(this)+1);
-          if (next.length) {
-              next.focus();
-          } else {
-              form.submit();
+  // validamos que el cliente no se repita en el contrato
+  function valida_cliente_contrato(contrato_id)
+  {
+    var cliente_id = $('#cod_cliente').val();
+    // console.log('entro');
+    if(cliente_id){
+      // alert('entro');
+      $.ajax({
+        url: '<?php echo base_url() ?>contratos/ajax_valida_cliente/' + cliente_id + '/' + contrato_id,
+        type: 'GET',
+        success: function (data) {
+          console.log(data);
+          if(data == 1)
+          {
+            $("#contrato_id").val("");
+            swal.fire({
+              type: 'error',
+              title: 'Oops...',
+              text: 'El cliente ya esta en el contrato!',
+              // footer: '<a href>Why do I have this issue?</a>'
+            })
           }
-          return false;
-      }
-  });
+        }
+      });  
+    }
+    
+  }
+
+
 // extrae datos del contrato y setea form
 function extraer_datos_contrato()
 {
   var contrato_id = $("#contrato_id").val();
-  console.log(contrato_id);  
+  valida_cliente_contrato(contrato_id);
+  // var cliente_id = $("#cod_cliente").val();
+  // console.log(contrato_id);  
+
   $.ajax({
     url: '<?php echo base_url() ?>contratos/ajax_extrae_modelos/' + contrato_id,
     type: 'GET',
     success: function (data) {
       datos_modelos = JSON.parse(data);
-        console.log(datos_modelos);
-        if(datos_modelos.sacos != null)
-        {
-          $("#sd_modelo").val(datos_modelos.sacos.modelo_id);
-          $("#sd_botones").val(datos_modelos.sacos.botones);
-          $("#sd_aberturas").val(datos_modelos.sacos.abertura_id);
-          $("#sd_detalle").val(datos_modelos.sacos.detalle_id);
-          $("#sd_color").val(datos_modelos.sacos.color);
-          $("#sd_ojal").val(datos_modelos.sacos.ojal_puno);
-          $("#sd_color_ojal").val(datos_modelos.sacos.color_ojal);
-        }else{
-          $("#sd_modelo").val("");
-        }
+      $("#grupo_id").val(datos_modelos.contrato.grupo_id);
+      console.log(datos_modelos);
+
+      $("#saco_pu").val(datos_modelos.contrato.costo_saco);
+      $("#pantalon_pu").val(datos_modelos.contrato.costo_pantalon);
+      $("#ch_pu").val(datos_modelos.contrato.costo_chaleco);
+      $("#fa_pu").val(datos_modelos.contrato.costo_falda);
+      calcula_precio_saco();
+      calcula_precio_pantalon();
+      calcula_precio_chaleco();
+      calcula_precio_falda();
+
+      //llenamos datos del trabajo
+      $("#costo_tela").val(datos_modelos.contrato.costo_tela);
+      $("#monto_total").val(datos_modelos.contrato.total);
+      $("#tela_propia").val(datos_modelos.contrato.tela_propia);
+      $("#marca").val(datos_modelos.contrato.marca);
+      //fin llenamos datos del trabajo
+
+      if(datos_modelos.sacos != null)
+      {
+        $("#sd_modelo").val(datos_modelos.sacos.modelo_id);
+        $("#sd_botones").val(datos_modelos.sacos.botones);
+        $("#sd_aberturas").val(datos_modelos.sacos.abertura_id);
+        $("#sd_detalle").val(datos_modelos.sacos.detalle_id);
+        $("#sd_color").val(datos_modelos.sacos.color);
+        $("#sd_ojal").val(datos_modelos.sacos.ojal_puno);
+        $("#sd_color_ojal").val(datos_modelos.sacos.color_ojal);
+      }else{
+        $("#sd_modelo").val("");
+        $("#sd_botones").val("");
+        $("#sd_aberturas").val("");
+        $("#sd_detalle").val("");
+        $("#sd_color").val("");
+        $("#sd_ojal").val("");
+        $("#sd_color_ojal").val("");
       }
+
+      if(datos_modelos.pantalones != null)
+      {
+        $("#pd_modelo").val(datos_modelos.pantalones.modelo_id);
+        $("#pd_pinzas").val(datos_modelos.pantalones.pinza_id);
+        $("#pd_bragueta").val(datos_modelos.pantalones.bragueta);
+        $("#pd_batras").val(datos_modelos.pantalones.bolsillo_id);
+        $("#pd_bpie").val(datos_modelos.pantalones.bota_pie_des);
+      }else{
+        $("#pd_modelo").val("");
+        $("#pd_botones").val("");
+        $("#pd_bragueta").val("");
+        $("#pd_batras").val("");
+        $("#pd_bpie").val("");
+      }
+
+      if(datos_modelos.chalecos != null)
+      {
+        $("#ch_modelo").val(datos_modelos.chalecos.modelo_id);
+        $("#ch_botones").val(datos_modelos.chalecos.botones);
+        $("#ch_detalle").val(datos_modelos.chalecos.detalle_id);
+        $("#ch_color").val(datos_modelos.chalecos.color_ojales);
+      }else{
+        $("#ch_modelo").val("");
+        $("#ch_botones").val("");
+        $("#ch_detalle").val("");
+        $("#ch_color").val("");
+      }
+
+      if(datos_modelos.faldas != null)
+      {
+        $("#fa_modelo").val(datos_modelos.faldas.modelo_id);
+        $("#fa_abertura").val(datos_modelos.faldas.abertura_id);
+        $("#fa_pretina").val(datos_modelos.faldas.pretina);
+      }else{
+        $("#fa_modelo").val("");
+        $("#fa_abertura").val("");
+        $("#fa_pretina").val("");
+      }
+
+    }
   });
 
   

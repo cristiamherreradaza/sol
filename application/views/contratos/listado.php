@@ -66,28 +66,28 @@
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Saco</label>
-						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any">
+						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any" required>
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Pantalon</label>
-						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any">
+						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any" required>
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Chaleco</label>
-						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any">
+						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any" required>
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Falda</label>
-						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any">
+						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any" required>
 						  </div>
 						</div>
 
@@ -194,8 +194,8 @@
 										<td><?php echo $c['cantidad'] ?></td>
 										<td><?php echo $c['terminado'] ?></td>
 										<td>
-											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $c['id'] ?>">
-												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
+											<a href="<?php echo base_url() ?>contratos/detalle/<?php echo $c['id'] ?>">
+												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
 											</a>
 										</td>
 									</tr>

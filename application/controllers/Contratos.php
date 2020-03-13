@@ -101,7 +101,7 @@ class Contratos extends CI_Controller {
 
 	public function ajax_extrae_modelos($id_contrato =null)
 	{
-		$data['trabajo'] = $this->db->get_where('trabajos', array(
+		$data['contrato'] = $this->db->get_where('contratos', array(
 			'id'=>$id_contrato
 		))->row_array();
 
@@ -123,7 +123,51 @@ class Contratos extends CI_Controller {
 			->limit(1)
 			->get('chalecos')->row_array();
 
+		$data['faldas'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('contrato_id', $id_contrato)
+			->limit(1)
+			->get('faldas')->row_array();
+
 		echo json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function ajax_valida_cliente($cliente_id = null, $contrato_id = null)
+	{
+		// echo ('cliente: '.$cliente_id.' contrato :'.$contrato_id);
+		$sw = 0;
+		$consulta_trabajos = $this->db->get_where('trabajos', ['cliente_id'=>$cliente_id, 'contrato_id'=>$contrato_id])->row_array();
+		if(!empty($consulta_trabajos)) $sw = 1;
+		echo $sw;
+
+	}
+
+	public function detalle($contrato_id = null)
+	{
+
+		$this->db->select('g.nombre, g.celulares, c.*');
+		$this->db->from('contratos as c');
+		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		$this->db->where('c.borrado', NULL);
+		$this->db->where('c.id', $contrato_id);
+		$data['contrato'] = $this->db->get()->row_array();
+		// vdebug($data['contrato'], false, false, true);
+
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->order_by('t.id', 'desc');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.borrado', NULL);
+		$this->db->where('t.contrato_id', $contrato_id);
+		$data['trabajos'] = $this->db->get()->result_array();
+		// vdebug($data['trabajos'], true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('contratos/detalle', $data);
+		$this->load->view('template/footer');
+
+
 	}
 
 }

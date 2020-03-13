@@ -97,7 +97,8 @@ class Trabajos extends CI_Controller {
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'usuario_id'       => $usuario_id,
-			'contrato_id'       => $this->input->post('contrato_id'),
+			'contrato_id'      => $this->input->post('contrato_id'),
+			'grupo_id'         => $this->input->post('grupo_id'),
 			'fecha'            => $fecha_hora_trabajo,
 			'fecha_prueba'     => $fecha_hora_prueba,
 			'fecha_entrega'    => $fecha_hora_entrega,
@@ -433,6 +434,13 @@ class Trabajos extends CI_Controller {
 			->where('cliente_id', $id_cliente)
 			->limit(1)
 			->get('chalecos')->row_array();
+
+		$data['faldas'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('cliente_id', $id_cliente)
+			->limit(1)
+			->get('faldas')->row_array();
+
 
 		echo json_encode($data, JSON_PRETTY_PRINT);
 
