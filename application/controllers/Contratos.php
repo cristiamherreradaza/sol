@@ -73,14 +73,21 @@ class Contratos extends CI_Controller {
 
 	public function listado()
 	{
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('g.nombre, g.celulares, g.direccion, c.*');
 		$this->db->from('contratos as c');
 		$this->db->order_by('c.id', 'desc');
-		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'right');
 		$this->db->where('c.borrado =', NULL);
 		$this->db->where('c.terminado', 'No');
+		$this->db->group_by('c.grupo_id');
 		$this->db->limit(100);
+		// $this->db->select('*');
+		// $this->db->from('grupos');
+		// $this->db->where('borrado', NULL);
+		// $this->db->limit(100);
 		$data['contratos'] = $this->db->get()->result_array();
+		// vdebug($data['grupos'], true, false, true);
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');

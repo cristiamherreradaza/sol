@@ -194,7 +194,7 @@
 										<td><?php echo $c['cantidad'] ?></td>
 										<td><?php echo $c['terminado'] ?></td>
 										<td>
-											<a href="<?php echo base_url() ?>contratos/detalle/<?php echo $c['id'] ?>">
+											<a href="<?php echo base_url() ?>contratos/detalle/<?php echo $c['cliente_id'] ?>">
 												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
 											</a>
 										</td>
