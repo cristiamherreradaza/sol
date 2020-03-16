@@ -87,7 +87,7 @@ class Contratos extends CI_Controller {
 		// $this->db->where('borrado', NULL);
 		// $this->db->limit(100);
 		$data['contratos'] = $this->db->get()->result_array();
-		// vdebug($data['grupos'], true, false, true);
+		// vdebug($data['contratos'], true, false, true);
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
@@ -149,23 +149,27 @@ class Contratos extends CI_Controller {
 
 	}
 
-	public function detalle($contrato_id = null)
+	public function detalle($grupo_id = null)
 	{
-
-		$this->db->select('g.nombre, g.celulares, c.*');
-		$this->db->from('contratos as c');
-		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
-		$this->db->where('c.borrado', NULL);
-		$this->db->where('c.id', $contrato_id);
-		$data['contrato'] = $this->db->get()->row_array();
-		// vdebug($data['contrato'], false, false, true);
+		// $this->db->select('g.nombre, g.celulares, c.*');
+		// $this->db->from('contratos as c');
+		// $this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		// $this->db->where('c.borrado', NULL);
+		// $this->db->where('c.id', $contrato_id);
+		// $data['contrato'] = $this->db->get()->row_array();		
+		$data['contratos'] = $this->db->get_where('contratos', array('grupo_id'=>$grupo_id, 'borrado'=>NULL))->result_array();
+		
+		$contrato_id = $data['contratos'][0]['id'];
+		$grupo_id = $data['contratos'][0]['grupo_id'];
+		$data['grupo'] = $this->db->get_where('grupos', array('id'=>$grupo_id, 'borrado'=>NULL))->row_array();;
+		// vdebug($data['grupo'], true, false, true);
 
 		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
 		$this->db->from('trabajos as t');
 		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$this->db->where('t.borrado', NULL);
-		$this->db->where('t.contrato_id', $contrato_id);
+		$this->db->where('t.grupo_id', $grupo_id);
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajos'], true, false, true);
 
