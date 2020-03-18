@@ -1098,9 +1098,19 @@ class Trabajos extends CI_Controller {
 			$sub_array = array();  
 			$sub_array[] = $row->id;  
 			$sub_array[] = $row->nombre;  
-			$sub_array[] = $row->ci;  
-			$sub_array[] = '<button type="button" name="update" id="'.$row->id.'" class="btn btn-warning btn-xs">Update</button>';  
-			$sub_array[] = '<button type="button" name="delete" id="'.$row->id.'" class="btn btn-danger btn-xs">Delete</button>';  
+			$sub_array[] = $row->celulares;  
+			$sub_array[] = $row->fecha_prueba;  
+			$sub_array[] = $row->fecha_entrega;  
+			$sub_array[] = $row->costo_tela;  
+			$sub_array[] = $row->costo_confeccion;  
+			$sub_array[] = $row->total;  
+			$sub_array[] = $row->saldo;  
+			$sub_array[] = $row->entregado;  
+			$sub_array[] = '<a href="'.base_url().'trabajos/detalle_trabajo/'.$row->id.'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a>
+							<a href="'.base_url().'Trabajos/registro_pagos/'.$row->id.'"><button type="button" class="btn btn-success"><i class="fas fa-star"></i></button></a>
+							<a href="'.base_url().'Trabajos/form_edicion/'.$row->id.'"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a>
+							<button type="button" data-nombre="'.$row->nombre.'" id="bte_'.$row->id.'" onclick="eliminar('.$row->id.')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+							';  
 			$data[] = $sub_array;  
 		}  
 		$output = array(  

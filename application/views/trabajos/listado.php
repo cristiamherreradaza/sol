@@ -25,14 +25,13 @@
 										<th>No.</th>
 										<th>Cliente</th>
 										<th>Celular</th>
-										<!-- <th>Fecha Prueba</th>
+										<th>Fecha Prueba</th>
 										<th>Fecha Entrega</th>
 										<th>$. Tela</th>
 										<th>$.Conf</th>
 										<th>Total</th>
 										<th>Saldo</th>
-										<th>Ent</th> -->
-										<th>Acciones</th>
+										<th>Ent</th>
 										<th>Acciones</th>
 									</tr>
 								</thead>
@@ -77,24 +76,29 @@ $(document).ready(function(){
     });
 
 	var dataTable = $('#listado_trabajos').DataTable({  
+		"iDisplayLength": 10,
 		"processing":true,  
 		"serverSide":true,  
 		"order":[],  
+		"language": {
+			"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+		},
 		"ajax":{  
 			url:"<?php echo base_url().'trabajos/get_trabajos'; ?>",  
 			type:"POST"  
 		},  
 		"columnDefs":[  
 			{  
-					"targets":[0, 3, 4],  
-					"orderable":false,  
+				"targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],  
+				"orderable":false,  
 			},  
 		],  
 	});  
 });  
 
-	function eliminar(id, nombre) {
-		//console.log(id_pago);
+	function eliminar(id) {
+		var nombre = $("#bte_"+id).data('nombre');
+		// console.log(nombre);
 		Swal.fire({
 			title: 'Quieres borrar el trabajo de ' + nombre + '?',
 			text: "Luego no podras recuperarlo!",
