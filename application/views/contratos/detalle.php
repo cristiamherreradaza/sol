@@ -9,6 +9,63 @@
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
+
+            <!-- inicio modal content -->
+            <div id="modal_grupo" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
+                        <?php echo form_open('contratos/edita_grupo'); ?>
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">FORMULARIO DE GRUPO</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <input type="hidden" name="ida" id="ida" value="">
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Nombre</label>
+                                            <input name="nombre" type="text" id="nombre" class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Tipo</label>
+                                            <select name="tipo" id="tipo" class="form-control custom-select" required>
+                                                <option value="saco">SACO</option>
+                                                <option value="falda">FALDA</option>
+                                                <option value="jumper">JUMPER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label">Genero</label>
+                                            <select name="genero" id="genero" class="form-control custom-select" required>
+                                                <option value="varon">VARON</option>
+                                                <option value="mujer">MUJER</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA ABERTURA</button>
+                            </div>
+                        </form>
+
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- fin modal -->
+
             <div class="row">
 
                 <div class="col-md-12">
@@ -26,6 +83,9 @@
                                             <td><span class="font-bold">Nombre: </span> <?php echo $grupo['nombre'] ?></td>
                                             <td><span class="font-bold">Celulares: </span> <?php echo $grupo['celulares'] ?></td>
                                             <td><span class="font-bold">Direccion: </span> <?php echo $grupo['direccion'] ?></td>
+                                            <td>
+                                                <button type="button" class="btn btn-warning" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-edit"></i></button>
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -94,7 +154,8 @@
                                                         <td><?php echo $c['costo_tela'] ?></td>
                                                         <td><?php echo $c['total'] ?></td>
                                                         <td align="left">
-                                                            <!-- <button type="button" class="btn btn-danger" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-times"></i></button> -->
+                                                            <button type="button" class="btn btn-warning" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-edit"></i></button>
+                                                            <button type="button" class="btn btn-danger" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-times"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -151,7 +212,7 @@
                                                         <td><?php echo $t['motivo_rebaja'] ?></td>
                                                         <td><?php echo $t['entregado'] ?></td>
                                                         <td align="left">
-                                                            <!-- <button type="button" class="btn btn-danger" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-times"></i></button> -->
+                                                            <button type="button" class="btn btn-danger" onclick="alerta(<?php //echo $p['id'] ?>, <?php //echo $p['monto'] ?>, <?php //echo $p['trabajo_id'] ?>)"><i class="fas fa-times"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>

@@ -1078,4 +1078,38 @@ class Trabajos extends CI_Controller {
 		redirect("trabajos/listado_trabajos");
 	}
 
+	public function listado()
+	{
+
+	    $this->load->view('template/header');
+	    $this->load->view('template/menu');
+	    $this->load->view("trabajos/listado");
+	    $this->load->view('template/footer');
+	}
+
+	public function get_trabajos()
+	{
+		$this->load->model('trabajo_model');
+		$fetch_data = $this->trabajo_model->make_datatables();  
+		// vdebug($fetch_data, true, false, true);  
+		$data = array();  
+		foreach($fetch_data as $row)  
+		{  
+			$sub_array = array();  
+			$sub_array[] = $row->id;  
+			$sub_array[] = $row->nombre;  
+			$sub_array[] = $row->ci;  
+			$sub_array[] = '<button type="button" name="update" id="'.$row->id.'" class="btn btn-warning btn-xs">Update</button>';  
+			$sub_array[] = '<button type="button" name="delete" id="'.$row->id.'" class="btn btn-danger btn-xs">Delete</button>';  
+			$data[] = $sub_array;  
+		}  
+		$output = array(  
+			"draw"           =>intval($_POST["draw"]),  
+			"recordsTotal"   =>$this->trabajo_model->get_all_data(),  
+			"recordsFiltered"=>$this->trabajo_model->get_filtered_data(),  
+			"data"           =>$data  
+		);  
+		echo json_encode($output);
+	}  
+
 }

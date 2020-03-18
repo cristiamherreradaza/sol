@@ -178,7 +178,11 @@ class Contratos extends CI_Controller {
 		$this->load->view('contratos/detalle', $data);
 		$this->load->view('template/footer');
 
+	}
 
+	public function edita_grupo()
+	{
+		
 	}
 
 }
