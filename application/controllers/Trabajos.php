@@ -97,6 +97,8 @@ class Trabajos extends CI_Controller {
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'usuario_id'       => $usuario_id,
+			'contrato_id'      => $this->input->post('contrato_id'),
+			'grupo_id'         => $this->input->post('grupo_id'),
 			'fecha'            => $fecha_hora_trabajo,
 			'fecha_prueba'     => $fecha_hora_prueba,
 			'fecha_entrega'    => $fecha_hora_entrega,
@@ -124,6 +126,7 @@ class Trabajos extends CI_Controller {
 			$datos_saco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('sd_modelo'),
 				'abertura_id'     => $this->input->post('sd_aberturas'),
 				'detalle_id'      => $this->input->post('sd_detalle'),
@@ -150,6 +153,7 @@ class Trabajos extends CI_Controller {
 			$datos_pantalon = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('pd_modelo'),
 				'pinza_id'        => $this->input->post('pd_pinzas'),
 				'bolsillo_id'     => $this->input->post('pd_batras'),
@@ -175,6 +179,7 @@ class Trabajos extends CI_Controller {
 			$datos_chaleco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('ch_modelo'),
 				'detalle_id'      => $this->input->post('ch_detalle'),
 				'largo'           => $this->input->post('ch_largo'),
@@ -193,6 +198,7 @@ class Trabajos extends CI_Controller {
 			$datos_camisa = array(
 				'cliente_id'       => $id_cliente,
 				'trabajo_id'       => $id_trabajo,
+				'contrato_id'      => $this->input->post('contrato_id'),
 				'cuello'           => $this->input->post('cam_cuello'),
 				'modelo_cuello'    => $this->input->post('cam_mcuello'),
 				'cuello_combinado' => $this->input->post('cam_ccombinado'),
@@ -210,6 +216,7 @@ class Trabajos extends CI_Controller {
 			$datos_falda = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('fa_modelo'),
 				'abertura_id'     => $this->input->post('fa_abertura'),
 				'largo'           => $this->input->post('fa_largo'),
@@ -227,6 +234,7 @@ class Trabajos extends CI_Controller {
 			$datos_jumper = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'modelo_id'       => $this->input->post('j_modelo'),
 				'abertura_id'     => $this->input->post('j_abertura'),
 				'bolsillo_id'     => $this->input->post('j_bolsillo'),
@@ -266,6 +274,7 @@ class Trabajos extends CI_Controller {
 			$datos_extras = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
+				'contrato_id'     => $this->input->post('contrato_id'),
 				'corbaton'        => $corbaton_color,
 				'corbata_gato'    => $cg_color,
 				'faja'            => $faja_color,
@@ -425,6 +434,13 @@ class Trabajos extends CI_Controller {
 			->where('cliente_id', $id_cliente)
 			->limit(1)
 			->get('chalecos')->row_array();
+
+		$data['faldas'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('cliente_id', $id_cliente)
+			->limit(1)
+			->get('faldas')->row_array();
+
 
 		echo json_encode($data, JSON_PRETTY_PRINT);
 
@@ -1061,5 +1077,49 @@ class Trabajos extends CI_Controller {
 		$this->db->update('trabajos', array('borrado'=>$hoy), "id=$id_trabajo");
 		redirect("trabajos/listado_trabajos");
 	}
+
+	public function listado()
+	{
+
+	    $this->load->view('template/header');
+	    $this->load->view('template/menu');
+	    $this->load->view("trabajos/listado");
+	    $this->load->view('template/footer');
+	}
+
+	public function get_trabajos()
+	{
+		$this->load->model('trabajo_model');
+		$fetch_data = $this->trabajo_model->make_datatables();  
+		// vdebug($fetch_data, true, false, true);  
+		$data = array();  
+		foreach($fetch_data as $row)  
+		{  
+			$sub_array = array();  
+			$sub_array[] = $row->id;  
+			$sub_array[] = $row->nombre;  
+			$sub_array[] = $row->celulares;  
+			$sub_array[] = $row->fecha_prueba;  
+			$sub_array[] = $row->fecha_entrega;  
+			$sub_array[] = $row->costo_tela;  
+			$sub_array[] = $row->costo_confeccion;  
+			$sub_array[] = $row->total;  
+			$sub_array[] = $row->saldo;  
+			$sub_array[] = $row->entregado;  
+			$sub_array[] = '<a href="'.base_url().'trabajos/detalle_trabajo/'.$row->id.'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a>
+							<a href="'.base_url().'Trabajos/registro_pagos/'.$row->id.'"><button type="button" class="btn btn-success"><i class="fas fa-star"></i></button></a>
+							<a href="'.base_url().'Trabajos/form_edicion/'.$row->id.'"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a>
+							<button type="button" data-nombre="'.$row->nombre.'" id="bte_'.$row->id.'" onclick="eliminar('.$row->id.')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
+							';  
+			$data[] = $sub_array;  
+		}  
+		$output = array(  
+			"draw"           =>intval($_POST["draw"]),  
+			"recordsTotal"   =>$this->trabajo_model->get_all_data(),  
+			"recordsFiltered"=>$this->trabajo_model->get_filtered_data(),  
+			"data"           =>$data  
+		);  
+		echo json_encode($output);
+	}  
 
 }

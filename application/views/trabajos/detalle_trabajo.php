@@ -459,7 +459,6 @@
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th class="text-center">#</th>
                                                 <th>Descripcion</th>
                                                 <th class="text-right">Cantidad</th>
                                                 <th class="text-right">Precio Unitario</th>
@@ -469,7 +468,6 @@
                                         <tbody>
                                             <?php if (!empty($saco)): ?>
                                                 <tr>
-                                                    <td class="text-center">1</td>
                                                     <td>Saco</td>
                                                     <td class="text-right"><?php echo $saco['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
@@ -483,7 +481,6 @@
 
                                             <?php if (!empty($pantalon['modelo_nombre'])): ?>
                                                 <tr>
-                                                    <td class="text-center">2</td>
                                                     <td>Pantalon</td>
                                                     <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
@@ -497,7 +494,6 @@
 
                                             <?php if (!empty($chaleco['modelo_nombre'])): ?>
                                                 <tr>
-                                                    <td class="text-center">3</td>
                                                     <td>Chaleco</td>
                                                     <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
@@ -511,7 +507,6 @@
 
                                              <?php if (!empty($camisa['cuello'])): ?>
                                                 <tr>
-                                                    <td class="text-center">3</td>
                                                     <td>camisa</td>
                                                     <td class="text-right"><?php echo $camisa['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $camisa['precio_unitario'] ?></td>
@@ -525,7 +520,6 @@
 
                                             <?php if (!empty($extras['trabajo_id'])): ?>
                                                 <tr>
-                                                    <td class="text-center">3</td>
                                                     <td>extras</td>
                                                     <td class="text-right"><?php echo $extras['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $extras['precio_unitario'] ?></td>
@@ -539,7 +533,6 @@
 
                                             <?php if (!empty($falda['modelo_nombre'])): ?>
                                                 <tr>
-                                                    <td class="text-center">3</td>
                                                     <td>Falda</td>
                                                     <td class="text-right"><?php echo $falda['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $falda['precio_unitario'] ?></td>
@@ -553,7 +546,6 @@
 
                                             <?php if (!empty($jumper['modelo_nombre'])): ?>
                                                 <tr>
-                                                    <td class="text-center">3</td>
                                                     <td>Jumper</td>
                                                     <td class="text-right"><?php echo $jumper['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $jumper['precio_unitario'] ?></td>

@@ -32,21 +32,39 @@ class Contratos extends CI_Controller {
 			$grupo_id = $this->db->insert_id();
 
 			$datos_contrato = array(
-				'grupo_id'=>$grupo_id,
-				'usuario_id'=>$usuario_id,
-				'fecha'=>$this->input->post('fecha'),
-				'cantidad'=>$this->input->post('cantidad'),
-				'descripcion'=>$this->input->post('descripcion'),
+				'grupo_id'         => $grupo_id,
+				'usuario_id'       => $usuario_id,
+				'fecha'            => $this->input->post('fecha'),
+				'cantidad'         => $this->input->post('cantidad'),
+				'descripcion'      => $this->input->post('descripcion'),
+				'costo_saco'       => $this->input->post('costo_saco'),
+				'costo_pantalon'   => $this->input->post('costo_pantalon'),
+				'costo_chaleco'    => $this->input->post('costo_chaleco'),
+				'costo_falda'      => $this->input->post('costo_falda'),
+				'tela_propia'      => $this->input->post('tela_propia'),
+				'marca'            => $this->input->post('marca'),
+				'costo_tela'       => $this->input->post('costo_tela'),
+				'costo_confeccion' => $this->input->post('costo_confeccion'),
+				'total'            => $this->input->post('total'),
 			);
 			$this->db->insert('contratos', $datos_contrato);
 
 		}else{
 			$datos_contrato = array(
-				'grupo_id'   => $this->input->post('ida'),
-				'usuario_id' => $usuario_id,
-				'fecha'      => $this->input->post('fecha'),
-				'cantidad'   => $this->input->post('cantidad'),
-				'descripcion'   => $this->input->post('descripcion'),
+				'grupo_id'         => $this->input->post('ida'),
+				'usuario_id'       => $usuario_id,
+				'fecha'            => $this->input->post('fecha'),
+				'cantidad'         => $this->input->post('cantidad'),
+				'descripcion'      => $this->input->post('descripcion'),
+				'costo_saco'       => $this->input->post('costo_saco'),
+				'costo_pantalon'   => $this->input->post('costo_pantalon'),
+				'costo_chaleco'    => $this->input->post('costo_chaleco'),
+				'costo_falda'      => $this->input->post('costo_falda'),
+				'tela_propia'      => $this->input->post('tela_propia'),
+				'marca'            => $this->input->post('marca'),
+				'costo_tela'       => $this->input->post('costo_tela'),
+				'costo_confeccion' => $this->input->post('costo_confeccion'),
+				'total'            => $this->input->post('total'),
 			);
 			$this->db->insert('contratos', $datos_contrato);
 		}
@@ -55,14 +73,21 @@ class Contratos extends CI_Controller {
 
 	public function listado()
 	{
+		$this->db->query("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''));");
 		$this->db->select('g.nombre, g.celulares, g.direccion, c.*');
 		$this->db->from('contratos as c');
 		$this->db->order_by('c.id', 'desc');
-		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'right');
 		$this->db->where('c.borrado =', NULL);
 		$this->db->where('c.terminado', 'No');
+		$this->db->group_by('c.grupo_id');
 		$this->db->limit(100);
+		// $this->db->select('*');
+		// $this->db->from('grupos');
+		// $this->db->where('borrado', NULL);
+		// $this->db->limit(100);
 		$data['contratos'] = $this->db->get()->result_array();
+		// vdebug($data['contratos'], true, false, true);
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
@@ -79,6 +104,85 @@ class Contratos extends CI_Controller {
 		// vdebug($res, true, false, true);
 		$this->load->view('contratos/ajax_muestra_grupos', $data);
 		// return $nombre_cliente;
+	}
+
+	public function ajax_extrae_modelos($id_contrato =null)
+	{
+		$data['contrato'] = $this->db->get_where('contratos', array(
+			'id'=>$id_contrato
+		))->row_array();
+
+		$data['sacos'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('contrato_id', $id_contrato)
+			->limit(1)
+			->get('sacos')->row_array();
+
+		$data['pantalones'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('contrato_id', $id_contrato)
+			->limit(1)
+			->get('pantalones')->row_array();
+
+		$data['chalecos'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('contrato_id', $id_contrato)
+			->limit(1)
+			->get('chalecos')->row_array();
+
+		$data['faldas'] = $this->db->select('*')
+			->order_by('id','desc')
+			->where('contrato_id', $id_contrato)
+			->limit(1)
+			->get('faldas')->row_array();
+
+		echo json_encode($data, JSON_PRETTY_PRINT);
+	}
+
+	public function ajax_valida_cliente($cliente_id = null, $contrato_id = null)
+	{
+		// echo ('cliente: '.$cliente_id.' contrato :'.$contrato_id);
+		$sw = 0;
+		$consulta_trabajos = $this->db->get_where('trabajos', ['cliente_id'=>$cliente_id, 'contrato_id'=>$contrato_id])->row_array();
+		if(!empty($consulta_trabajos)) $sw = 1;
+		echo $sw;
+
+	}
+
+	public function detalle($grupo_id = null)
+	{
+		// $this->db->select('g.nombre, g.celulares, c.*');
+		// $this->db->from('contratos as c');
+		// $this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		// $this->db->where('c.borrado', NULL);
+		// $this->db->where('c.id', $contrato_id);
+		// $data['contrato'] = $this->db->get()->row_array();		
+		$data['contratos'] = $this->db->get_where('contratos', array('grupo_id'=>$grupo_id, 'borrado'=>NULL))->result_array();
+		
+		$contrato_id = $data['contratos'][0]['id'];
+		$grupo_id = $data['contratos'][0]['grupo_id'];
+		$data['grupo'] = $this->db->get_where('grupos', array('id'=>$grupo_id, 'borrado'=>NULL))->row_array();;
+		// vdebug($data['grupo'], true, false, true);
+
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->order_by('t.id', 'desc');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.borrado', NULL);
+		$this->db->where('t.grupo_id', $grupo_id);
+		$data['trabajos'] = $this->db->get()->result_array();
+		// vdebug($data['trabajos'], true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('contratos/detalle', $data);
+		$this->load->view('template/footer');
+
+	}
+
+	public function edita_grupo()
+	{
+		
 	}
 
 }
