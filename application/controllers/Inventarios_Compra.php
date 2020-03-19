@@ -146,8 +146,13 @@ class Inventarios_Compra extends CI_Controller {
 	public function eliminar($id = null)
 	{
 		$hoy = date("Y-m-d H:i:s");
-		$this->db->update('compras', array('borrado'=>$hoy, 'estado' => 0), "id=$id");
-		redirect("Inventarios_Compra");
+		$data = array(
+            'estado' => 0,
+            'borrado' => $hoy
+        );
+        $this->db->where('id', $id);
+        $this->db->update('compras', $data);
+        redirect("Inventarios_Compra");
 	}
 
 	public function membrete()
@@ -193,7 +198,8 @@ class Inventarios_Compra extends CI_Controller {
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
-											WHERE cate.id = com.categoria_id")->result();
+											WHERE cate.id = com.categoria_id
+											AND cate.estado = 1")->result();
 		// $data['venta'] = $this->db->query("SELECT categoria_id, SUM(cantidad) as suma
 		// 									FROM ventas
 		// 									WHERE estado = 1

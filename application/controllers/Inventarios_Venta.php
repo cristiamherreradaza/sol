@@ -31,10 +31,10 @@ class Inventarios_Venta extends CI_Controller {
 	public function index()
 	{
 		$data['categorias'] = $this->db->get_where('categorias', array('estado' => 1))->result();
-		$data['compras'] = $this->db->get_where('compras', array('estado' => 1))->result();
+		$data['ventas'] = $this->db->get_where('ventas', array('estado' => 1))->result();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
-		$this->load->view('inventarios/compra', $data);
+		$this->load->view('inventarios/venta', $data);
 		$this->load->view('template/footer');
     }
 
@@ -46,6 +46,7 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
+
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
 		$this->db->from('sacos as sa');
 		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
@@ -53,6 +54,7 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
 		$this->db->where('sa.trabajo_id', $id_trabajo);
 		$data['saco'] = $this->db->get()->row_array();
+
 
 		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
 		$this->db->from('pantalones as pa');
@@ -98,26 +100,205 @@ class Inventarios_Venta extends CI_Controller {
 
 		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 		// $fecha = fechaEs($data['trabajo']['fecha']);
+
+		// DATOS PARA EL SACO
+		$data['entre_tela'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'ENTRE TELA'")->row();
+		$data['forro'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'FORRO'")->row();
+		$data['plaston'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'PLASTON'")->row();
+		$data['hombrera_v'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'HOMBRERA (VARON)'")->row();
+		$data['pellon'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'PELLON (BLANCO)'")->row();
+
+		$data['fusionable'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'TELA FUSIONABLE'")->row();
+		$data['boton_g'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'BOTON GRANDE'")->row();
+		$data['boton_p'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'BOTON PEQUEÑO'")->row();
+
+		// DATOS PARA EL PANTALON
+		$data['bonye'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'BONYE'")->row();
+
+		$data['cierre'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'CIERRE'")->row();
+		$data['bocha'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'BOCHA'")->row();
+
+		$data['liga'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'LIGA (PARA PRETINA)'")->row();
+
+		// DATOS PARA EL CHALECO
+
+		$data['hebilla'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'HEVILLA (CHALECO)'")->row();
+
+		// DATOS PANTALON DAMAS
+		$data['bolsillo'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'BOLSILLO'")->row();
+		$data['hombrera_d'] = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras com
+																							WHERE estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id
+											AND cate.nombre like 'HOMBRERA (DAMA)'")->row();
+
+
+		// var_dump($data);
+		// exit();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
-		$this->load->view('inventarios/sacar_material', $data);
+		$this->load->view('inventarios/retira_material', $data);
 		$this->load->view('template/footer');
 	
     }
 
 
-     public function ajax_verifica(){
+     public function ajax_verifica_categoria(){
 
 		$id = $this->input->get("param1");
-		$nom = $this->db->get_where('categorias', array('id' => $id, 'estado' => 1))->row();
-		$tipo = $nom->tipo;
+		$nom1 = $this->db->get_where('categorias', array('id' => $id, 'estado' => 1))->row();
+		$nombre = $nom1->nombre;
+		$nom = $this->db->get_where('compras', array('categoria_id' => $id, 'estado' => 1))->row();
+		$tipo = $nom1->tipo;
+		// var_dump($nom);
+		// exit();
 
 		if ($nom) {
-			$respuesta = array('estado'=>'registrado', 'tipo'=>$tipo);
+			$respuesta = array('estado'=>'registrado', 'nombre' => $nombre, 'tipo' => $tipo);
+			echo json_encode($respuesta);
+		}
+		else{
+			$respuesta = array('estado'=>'no', 'nombre' => $nombre, 'tipo' => $tipo);
 			echo json_encode($respuesta);
 		}
 		
+	}
+
+	public function ajax_verifica_cantidad(){
+
+		$cantidad = $this->input->get("param1");
+		$categoria_id = $this->input->get("param2");
+		$nom1 = $this->db->get_where('categorias', array('id' => $categoria_id, 'estado' => 1))->row();
+		$tipo = $nom1->tipo;
+		$compra = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(stock) as suma
+																							FROM compras
+																							WHERE categoria_id = $categoria_id
+																							AND estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id")->row();
+		$pre_vent = $compra->precio_venta;
+		$pr_total = $cantidad * $pre_vent;
+
+		$venta = $this->db->query("SELECT cate.*, com.*
+											FROM categorias cate, (SELECT *, SUM(cantidad) as suma
+																							FROM ventas
+																							WHERE categoria_id = $categoria_id
+																							AND estado = 1
+																							GROUP BY (categoria_id))com
+											WHERE cate.id = com.categoria_id")->row();
+
+		if (!empty($venta)){
+			$valor = $compra->suma - $venta->suma;
+			if ($valor >= $cantidad) {
+				$respuesta = array('estado'=>'si', 'precio_venta' => $pre_vent, 'precio_total' => $pr_total);
+				echo json_encode($respuesta);
+			}
+			else{
+				$respuesta = array('estado'=>'no', 'valor' => $valor, 'tipo' => $tipo);
+				echo json_encode($respuesta);
+			}
+			
+
+		}
+		else{
+			if($compra->stock >= $cantidad){
+				$respuesta = array('estado'=>'si', 'precio_venta' => $pre_vent, 'precio_total' => $pr_total);
+				echo json_encode($respuesta);
+			}
+			else{
+				$respuesta = array('estado'=>'no', 'valor' => $compra->stock, 'tipo' => $tipo);
+				echo json_encode($respuesta);
+			}
+			
+		}
 	}
 
 	public function ajax_datos(){
@@ -136,15 +317,14 @@ class Inventarios_Venta extends CI_Controller {
 
 		$datos = array(
 			'categoria_id' => $this->input->get('param1'),
-			'stock'   => $this->input->get('param2'),
-			'precio_unidad' => $this->input->get('param3'),
-			'precio_venta'   => $this->input->get('param4'),
-			'precio_total' => $this->input->get('param5'),
-			'fecha'   => $this->input->get('param6'),
-			'detalle'   => $this->input->get('param7'),
+			'cantidad'   => $this->input->get('param2'),
+			'precio_venta'   => $this->input->get('param3'),
+			'precio_total' => $this->input->get('param4'),
+			'fecha'   => $this->input->get('param5'),
+			'detalle'   => $this->input->get('param6'),
 			'estado'   => 1
 		);
-		$this->db->insert('compras', $datos);
+		$this->db->insert('ventas', $datos);
 
 		$respuesta = array('estado'=>'registrado');
 		echo json_encode($respuesta);
@@ -191,19 +371,18 @@ class Inventarios_Venta extends CI_Controller {
 
 	public function editar1(){
 
-		$id = $this->input->post("param1");
+		$id = $this->input->get("param1");
 		$data = array(
-			'categoria_id' => $this->input->post("param2"),
-			'stock'   => $this->input->post("param3"),
-			'precio_unidad' => $this->input->post("param4"),
-			'precio_venta'   => $this->input->post("param5"),
-			'precio_total' => $this->input->post("param6"),
-			'fecha'   => $this->input->post("param7"),
-			'detalle' => $this->input->post("param8"),
+			'categoria_id' => $this->input->get("param2"),
+			'cantidad'   => $this->input->get("param3"),
+			'precio_venta'   => $this->input->get("param4"),
+			'precio_total' => $this->input->get("param5"),
+			'fecha'   => $this->input->get("param6"),
+			'detalle' => $this->input->get("param7"),
 			'estado'   => 1
 		);
         $this->db->where('id', $id);
-        $this->db->update('compras', $data);
+        $this->db->update('ventas', $data);
 
 		$respuesta = array('estado'=>'editado');
 		echo json_encode($respuesta);
@@ -214,8 +393,8 @@ class Inventarios_Venta extends CI_Controller {
 	public function eliminar($id = null)
 	{
 		$hoy = date("Y-m-d H:i:s");
-		$this->db->update('compras', array('borrado'=>$hoy, 'estado' => 0), "id=$id");
-		redirect("Inventarios_Compra");
+		$this->db->update('ventas', array('borrado'=>$hoy, 'estado' => 0), "id=$id");
+		redirect("Inventarios_Venta");
 	}
 
 	public function membrete()

@@ -16,25 +16,61 @@ class Personal extends CI_Controller {
 		$this->load->model("Usuario_model");
 	}
 
-	public function login()
+	public function lista()
 	{
-		$this->load->view('usuarios/login');	
+
+		$data['personal'] = $this->db->get_where('personal', array('borrado='=>NULL))->result();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('personal/lista', $data);
+		$this->load->view('template/footer');	
 	}
 
-	public function valida()
+	public function registra()
 	{
-		// vdebug($this->input->post(), true, false, true);
-		$usuario = $this->input->post('usuario');
-		$password = $this->input->post('pass');
-		$pass_encriptado = sha1($password);
-		if($this->Usuario_model->valida($usuario, $pass_encriptado))
-		{
-			redirect("trabajos/nuevo");
-		}else{
-			// echo 'no';
-			$this->form_validation->set_message('verificar_usuario', 'Los datos son incorrectos.');
-			redirect(base_url());
-		}
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('personal/crea_personal');
+		$this->load->view('template/footer');	
+	}
+
+	public function guarda()
+	{
+		// vdebug($this->input->post('ida'), true, false, true);
+		$datos = array(
+			'nombre' => $this->input->post('nombre'),
+			'carnet' => $this->input->post('carnet'),
+			'direccion' => $this->input->post('direccion'),
+			'celulares' => $this->input->post('celulares'),
+			'fecha_ingreso' => $this->input->post('fecha_ingreso'),
+			'sueldo' => $this->input->post('sueldo'),
+			'estado' => 1
+		);
+			$this->db->insert('personal', $datos);
+		redirect("Personal/lista");
+	}
+
+	public function editar(){
+		$hoy = date("Y-m-d H:i:s");
+		$id = $this->input->post("id");
+		$data = array(
+			'nombre' => $this->input->post("nombre"),
+			'carnet'   => $this->input->post("carnet"),
+			'direccion' => $this->input->post("direccion"),
+			'celulares'   => $this->input->post("celulares"),
+			'fecha_ingreso' => $this->input->post("fecha_ingreso"),
+			'sueldo'   => $this->input->post("sueldo"),
+			'modified_at' => $hoy,
+			'estado'   => 1
+		);
+        $this->db->where('id', $id);
+        $this->db->update('personal', $data);
+
+		$respuesta = array('estado'=>'editado');
+		redirect("Personal/lista");
+				
 	}
 	
 	public function logout()
@@ -64,35 +100,18 @@ class Personal extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function guarda()
-	{
-		$id = $this->input->post('ida');
-		$pass = $this->input->post('pass');
-		$pass_encriptado = sha1($pass);
-		// vdebug($this->input->post('ida'), true, false, true);
-		$datos = array(
-			'nombre' => $this->input->post('nombre'),
-			'celulares' => $this->input->post('celulares'),
-			'direccion' => $this->input->post('direccion'),
-			'email' => $this->input->post('email'),
-			'rol'   => $this->input->post('rol'),
-			'usuario' => $this->input->post('usuario'),
-			'pass' => $pass_encriptado
-		);
-		if (empty($id)) {
-			$this->db->insert('usuarios', $datos);
-		} else {
-			$this->db->where('id', $id);
-			$this->db->update('usuarios', $datos);
-		}
-		redirect("usuarios/listado");
-	}
-
-	public function eliminar($id_abertura = null)
+	public function baja($id = null)
 	{
 		$hoy = date("Y-m-d H:i:s");
-		$this->db->update('usuarios', array('borrado'=>$hoy), "id=$id_abertura");
-		redirect("usuarios/listado");
+		$this->db->update('personal', array('fecha_retiro'=> $hoy, 'estado'=>0), "id=$id");
+		redirect("Personal/lista");
+	}
+
+	public function alta($id = null)
+	{
+		$hoy = '';
+		$this->db->update('personal', array('fecha_retiro'=> $hoy,'estado'=> 1), "id=$id");
+		redirect("Personal/lista");
 	}
 	
 }
