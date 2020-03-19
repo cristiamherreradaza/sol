@@ -182,7 +182,52 @@ class Contratos extends CI_Controller {
 
 	public function edita_grupo()
 	{
-		
+		// vdebug($this->input->post(), true, false, true);
+		$grupo_id = $this->input->post('grupo_id');
+		$datos_grupo = array(
+			'nombre'=>$this->input->post('nombre'),
+			'celulares'=>$this->input->post('celulares'),
+			'direccion'=>$this->input->post('direccion')
+		);
+		$this->db->where('id', $grupo_id);
+		$this->db->update('grupos', $datos_grupo);
+		redirect("contratos/detalle/$grupo_id");
+	}
+
+	public function edita_contrato()
+	{
+		// vdebug($this->input->post(), true, false, true);
+		$grupo_id = $this->input->post('contrato_grupo_id');
+		$contrato_id = $this->input->post('contrato_id');
+		$datos_contrato = array(
+			'fecha'            => $this->input->post('fecha'),
+			'cantidad'         => $this->input->post('cantidad'),
+			'descripcion'      => $this->input->post('descripcion'),
+			'costo_saco'       => $this->input->post('costo_saco'),
+			'costo_pantalon'   => $this->input->post('costo_pantalon'),
+			'costo_chaleco'    => $this->input->post('costo_chaleco'),
+			'costo_falda'      => $this->input->post('costo_falda'),
+			'tela_propia'      => $this->input->post('tela_propia'),
+			'marca'            => $this->input->post('marca'),
+			'costo_tela'       => $this->input->post('costo_tela'),
+			'costo_confeccion' => $this->input->post('costo_confeccion'),
+			'total'            => $this->input->post('total'),
+		);
+		$this->db->where('id', $contrato_id);
+		$this->db->update('contratos', $datos_contrato);
+		redirect("contratos/detalle/$grupo_id");
+	}
+
+	public function elimina_persona_contrato($id = null, $grupo_id = null)
+	{
+		$datos_trabajo = array(
+			'contrato_id'=>NULL,
+			'grupo_id'=>NULL,
+		);
+		$this->db->where('id', $id);
+		$this->db->update('trabajos', $datos_trabajo);
+		redirect("contratos/detalle/$grupo_id");
+
 	}
 
 }
