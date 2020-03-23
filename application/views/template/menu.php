@@ -143,7 +143,10 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="<?php echo base_url() ?>usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
+                            <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-account-multiple"></i> Telas</a>
                         </li>
 
                     </ul>
@@ -156,11 +159,27 @@
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
                         <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Sacar Material</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/membrete">Membrete</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/reporte">Reporte</a></li>
+                        <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
                     </ul>
                 </li>
+
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                        <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                        <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
+                    </ul>
+                </li>
+                <!-- <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">COTIZACIONES</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php echo base_url(); ?>Cotizacion/separados">Precios Separados</a></li>
+                        <li><a href="<?php echo base_url(); ?>Cotizacion/conjuntos">Precios Conjuntos</a></li>
+                    </ul>
+                </li> -->
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

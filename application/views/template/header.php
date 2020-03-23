@@ -87,8 +87,8 @@
                         <!-- Messages -->
                         <!-- ============================================================== -->
                         <li class="nav-item dropdown mega-dropdown"> 
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href=""><i class="mdi mdi-view-grid"></i></a>
-                            
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/separados"><i class="mdi mdi-library-books"></i></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/reporte/1"><i class="mdi mdi-lead-pencil"></i></a>
                         </li>
                         <!-- ============================================================== -->
                         <!-- End Messages -->

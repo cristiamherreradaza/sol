@@ -20,11 +20,8 @@
                                     <tr id="nombreVer">
 
                                     </tr>
-                                    <tr id="stockVer">
+                                    <tr id="cantidadVer">
 
-                                    </tr>
-                                    <tr id="precio_unidadVer">
-                                        
                                     </tr>
                                     <tr id="precio_ventaVer">
                                         
@@ -81,25 +78,14 @@
                                                             <?php } ?>
                                                         </select>
                                                 </div>
-                                                
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Cantidad</label>
-                                                            <input type="number" class="form-control" required step="0.1" id="stockEdit" name="stock">
+                                                            <input type="number" class="form-control" required step="0.1" id="cantidadEdit" name="cantidadedit">
                                                         </div>
                                                     </div>
                                                     <!--/span-->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Precio por Unidad</label>
-                                                            <input type="number" class="form-control" step="0.1" id="precio_unidadEdit" name="precio_unidad">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                </div>
-                                                <!--/row-->
-                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Precio de Venta</label>
@@ -107,15 +93,17 @@
                                                         </div>
                                                     </div>
                                                     <!--/span-->
+                                                </div>
+                                                <!--/row-->
+                                                <div class="row">
+                                                    
+                                                    <!--/span-->
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Precio Total</label>
                                                             <input type="number" class="form-control" required step="0.01" id="precio_totalEdit" name="precio_total">
                                                         </div>
                                                     </div>
-                                                    <!--/span-->
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Fecha</label>
@@ -123,7 +111,10 @@
                                                         </div>
                                                     </div>
                                                     <!--/span-->
-                                                    <div class="col-md-6">
+                                                </div>
+                                                <div class="row">
+                                                    <!--/span-->
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>Detalle</label>
                                                             <input type="text" class="form-control" id="detalleEdit" name="detalle">
@@ -171,7 +162,7 @@
                             <div class="col-lg-12">
                                 <div class="card card-outline-info">
                                     <div class="card-header">
-                                        <h4 class="mb-0 text-white">INGRESAR MATERIAL</h4>
+                                        <h4 class="mb-0 text-white">SACAR MATERIAL</h4>
                                     </div>
                                     <div class="card-body">
                                         <form>
@@ -191,38 +182,31 @@
                                                 
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <div class="form-group" id="cantidad">
+                                                        <div class="form-group-1">
                                                             <label>Cantidad en </label>
-                                                            <input type="number" class="form-control" required step="0.1" id="stock" name="stock">
+                                                            <input type="number" class="form-control" required step="0.1" id="cantidad" name="cantidad">
                                                         </div>
                                                     </div>
                                                     <!--/span-->
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label>Precio por Unidad</label>
-                                                            <input type="number" class="form-control" step="0.1" id="precio_unidad" name="precio_unidad">
+                                                            <label>Precio de Venta</label>
+                                                            <input type="number" class="form-control" readonly step="0.1" id="precio_venta" name="precio_venta">
                                                         </div>
                                                     </div>
                                                     <!--/span-->
                                                 </div>
                                                 <!--/row-->
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Precio de Venta</label>
-                                                            <input type="number" class="form-control" step="0.1" id="precio_venta" name="precio_venta">
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <!--/span-->
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Precio Total</label>
-                                                            <input type="number" class="form-control" required step="0.01" id="precio_total" name="precio_total">
+                                                            <input type="number" class="form-control" readonly step="0.01" id="precio_total" name="precio_total">
                                                         </div>
                                                     </div>
-                                                    <!--/span-->
-                                                </div>
-                                                <div class="row">
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label>Fecha</label>
@@ -230,7 +214,11 @@
                                                         </div>
                                                     </div>
                                                     <!--/span-->
-                                                    <div class="col-md-6">
+                                                </div>
+                                                <div class="row">
+                                                    
+                                                    <!--/span-->
+                                                    <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>Detalle</label>
                                                             <input type="text" class="form-control" id="detalle" name="detalle">
@@ -255,7 +243,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <?php //vdebug($trabajos, true, false, true) ?>
-                                <h3 class="card-title">LISTA DE MATERIALES INGRESADOS &nbsp;&nbsp;&nbsp;&nbsp; 
+                                <h3 class="card-title">LISTA DE MATERIALES SACADOS &nbsp;&nbsp;&nbsp;&nbsp; 
                                 </h3>
                                 <div class="table-responsive m-t-40" id="tabla">
                                         <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -264,6 +252,7 @@
                                                     <th>No.</th>
                                                     <th>Material</th>
                                                     <th>Cantidad</th>
+                                                    <th>Precio Venta</th>
                                                     <th>Precio Total</th>
                                                     <th>Fecha</th>
                                                     <th>Acciones</th>
@@ -272,19 +261,20 @@
                                             <tbody>
                                                 <?php
                                                 $nro = 1;
-                                                 foreach ($compras as $a): 
+                                                 foreach ($ventas as $a): 
                                                     $datos = $this->db->get_where('categorias', array('id' => $a->categoria_id,'estado' => 1))->row();
                                                     ?>
                                                 <tr>
                                                     <td><?php echo $nro ++ ?></td>
                                                     <td><?php echo $datos->nombre ?></td>
-                                                    <td><?php echo $a->stock ?> <?php echo $datos->tipo ?></td>
+                                                    <td><?php echo $a->cantidad ?> <?php echo $datos->tipo ?></td>
+                                                    <td><?php echo $a->precio_venta ?></td>
                                                     <td><?php echo $a->precio_total ?></td>
                                                     <td><?= date("Y-m-d",strtotime($a->fecha));?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-info" onclick="ver(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-warning" onclick="editar(<?php echo $a->id ?>, '<?php echo $a->categoria_id ?>', '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-edit"></i></button>
-                                                        <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>','<?php echo $a->categoria_id ?>')"><i class="fas fa-trash"></i></button>
+                                                        <button type="button" class="btn btn-info" onclick="ver(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $a->cantidad ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-eye"></i></button>
+                                                        <button type="button" class="btn btn-warning" onclick="editar(<?php echo $a->id ?>, '<?php echo $a->categoria_id ?>', '<?php echo $datos->nombre ?>', '<?php echo $a->cantidad ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-edit"></i></button>
+                                                        <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>')"><i class="fas fa-trash"></i></button>
                                                     </td>
                                                 </tr>
                                                 <?php endforeach ?>
@@ -326,16 +316,56 @@
      $('#categorias').on('change', function(e){
         var id = e.target.value;
             $.ajax({
-                url: '<?php echo base_url(); ?>Inventarios_Compra/ajax_verifica/',
+                url: '<?php echo base_url(); ?>Inventarios_Venta/ajax_verifica_categoria/',
                 type: 'GET',
                 dataType: 'json',
                 data: { param1: id },
                 // data: {param1: cod_catastral},
                 success:function(data, textStatus, jqXHR) {
-                    if (data.estado == 'registrado') {
+                    if (data.estado == 'no') {
                         // $('#tipo').val(data.tipo);
-                        $('#cantidad').html('<label>Cantidad en '+ data.tipo +'</label><input type="number" class="form-control" step="0.1" id="stock" name="stock">');
+                        Swal.fire(
+                          'No tiene ningun registro',
+                          'Con el material '+ data.nombre,
+                          'info'
+                        )
                     }
+                    // else{
+                    //     $('.form-group-1').html('<label>Cantidad en '+ data.tipo +'</label><input type="number" class="form-control" required step="0.1" id="cantidad" name="cantidad">');
+                    // }
+                },
+                error:function(jqXHR, textStatus, errorThrown) {
+                    alerta_ci();
+                }
+            });
+        });
+</script>
+
+<script>
+     $('#cantidad').on('change', function(e){
+        var cantidad = e.target.value;
+        // alert(cantidad);
+        var categorias = $("#categorias").val();
+            $.ajax({
+                url: '<?php echo base_url(); ?>Inventarios_Venta/ajax_verifica_cantidad/',
+                type: 'GET',
+                dataType: 'json',
+                data: { param1: cantidad, param2: categorias },
+                // data: {param1: cod_catastral},
+                success:function(data, textStatus, jqXHR) {
+                    if (data.estado == 'no') {
+                        // $('#tipo').val(data.tipo);
+                        Swal.fire(
+                          'No tiene el material requerido',
+                          'Solo cuenta con '+ data.valor + ' ' + data.tipo,
+                          'info'
+                        )
+                        }
+                        else{
+                            $('#precio_venta').val(data.precio_venta);
+                            $('#precio_total').val(data.precio_total);
+                        }
+                    
                 },
                 error:function(jqXHR, textStatus, errorThrown) {
                     alerta_ci();
@@ -357,14 +387,13 @@
 <script>
    function guarda(){
         var categorias = $("#categorias").val();
-        var stock = $("#stock").val();
-        var precio_unidad = $("#precio_unidad").val();
+        var cantidad = $("#cantidad").val();
         var precio_venta = $("#precio_venta").val();
         var precio_total = $("#precio_total").val();
         var fecha = $("#fecha").val();
         var detalle = $("#detalle").val();
 
-        if (categorias ==='' || stock === '' || precio_total ===''){
+        if (categorias ==='' || fecha ===''){
             Swal.fire(
                   'Debe llenar los datos requeridos',
                   'Antes de Guardar',
@@ -373,10 +402,10 @@
         }else
         {
             $.ajax({
-                url: '<?php echo base_url(); ?>Inventarios_Compra/guarda/',
+                url: '<?php echo base_url(); ?>Inventarios_Venta/guarda/',
                 type: 'get',
                 dataType: 'json',
-                data: {param1: categorias, param2: stock, param3: precio_unidad, param4: precio_venta, param5: precio_total, param6: fecha, param7: detalle },
+                data: {param1: categorias, param2: cantidad, param3: precio_venta, param4: precio_total, param5: fecha, param6: detalle },
                 // data: {param1: cod_catastral},
                 success:function(data, textStatus, jqXHR) {
                     if (data.estado == 'registrado') {
@@ -427,15 +456,13 @@
     {
         $("#myModal").modal('hide');
     }
-
-    function editar(id, categoria_id, nombre, stock, tipo, precio_unidad, precio_venta, precio_total, detalle, fecha)
+    function editar(id, categoria_id, nombre, cantidad, tipo, precio_venta, precio_total, detalle, fecha)
     {
       
         $('#categoriasEdit').html('<option class="prueba" value="' + categoria_id + '"> ' + nombre + ' </option>');
         $('#idEdit').val(id)
         // $('#categoriasEdit').val(categoria_id)
-        $('#stockEdit').val(stock)
-        $('#precio_unidadEdit').val(precio_unidad)
+        $('#cantidadEdit').val(cantidad)
         $('#precio_ventaEdit').val(precio_venta)
         $('#precio_totalEdit').val(precio_total)
         $('#fechaEdit').val(fecha)
@@ -443,16 +470,13 @@
         $("#myModaledit").modal('show');
     }
 
-    function ver(id, nombre, stock, tipo, precio_unidad, precio_venta, precio_total, detalle, fecha)
+    function ver(id, nombre, cantidad, tipo, precio_venta, precio_total, detalle, fecha)
     {
-
-        $('#stockVer').html('<td>Material</td><td class="font-medium">' + nombre + '</td>');
-        $('#stockVer').html('<td>Cantidad</td><td class="font-medium">' + stock + ' ' + tipo  + '</td>');
-        $('#precio_unidadVer').html('<td>Precio por Unidad</td><td class="font-medium">' + precio_unidad + ' Bs.</td>');
+        $('#cantidadVer').html('<td>Cantidad</td><td class="font-medium">' + cantidad + ' ' + tipo  + '</td>');
         $('#precio_ventaVer').html('<td>Precio de Venta</td><td class="font-medium">' + precio_venta + ' Bs.</td>');
         $('#precio_totalVer').html('<td>Precio Total</td><td class="font-medium">' + precio_total + ' Bs.</td>');
         $('#detalleVer').html('<td>Detalle</td><td class="font-medium">' + detalle + ' </td>');
-        $('#fechaVer').html('<td>Fecha de Ingreso</td><td class="font-medium">' + fecha + ' </td>');
+        $('#fechaVer').html('<td>Fecha de Salida</td><td class="font-medium">' + fecha + ' </td>');
         $("#myModalVer").modal('show');
     }
 
@@ -460,8 +484,7 @@
 
         var id = $("#idEdit").val();
         var categorias = $("#categoriasEdit").val();
-        var stock = $("#stockEdit").val();
-        var precio_unidad = $("#precio_unidadEdit").val();
+        var cantidad = $("#cantidadEdit").val();
         var precio_venta = $("#precio_ventaEdit").val();
         var precio_total = $("#precio_totalEdit").val();
         var fecha = $("#fechaEdit").val();
@@ -488,14 +511,14 @@
             );
 
             $.ajax({
-                url: '<?php echo base_url(); ?>Inventarios_Compra/editar1/',
-                type: 'POST',
+                url: '<?php echo base_url(); ?>Inventarios_Venta/editar1/',
+                type: 'GET',
                 dataType: 'json',
-                data: {csrfName: csrfHash, param1: id, param2: categorias, param3: stock, param4: precio_unidad, param5: precio_venta, param6: precio_total, param7: fecha, param8: detalle },
+                data: {csrfName: csrfHash, param1: id, param2: categorias, param3: cantidad, param4: precio_venta, param5: precio_total, param6: fecha, param7: detalle },
                 // data: {param1: cod_catastral},
                 success:function(data, textStatus, jqXHR) {
                     if (data.estado == 'editado') {
-                        window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
+                        window.location.href = "<?php echo base_url() ?>Inventarios_Venta/";
                     }
                 },
                 error:function(jqXHR, textStatus, errorThrown) {
@@ -508,7 +531,7 @@
         })
     }
 
-    function eliminar(id, nombre, categoria_id){
+    function eliminar(id, nombre){
 
         Swal.fire({
           title: 'Quieres borrar '+nombre+'?',
@@ -527,7 +550,7 @@
               'success'
             );
             // console.log("el id es "+id_pago);
-            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/eliminar/"+id;
+            window.location.href = "<?php echo base_url() ?>Inventarios_Venta/eliminar/"+id;
           }
         })
     }
@@ -560,10 +583,10 @@ function alerta_bien(){
           confirmButtonText: 'OK!',
         }).then((result) => {
           if (result.value) {
-            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
+            window.location.href = "<?php echo base_url() ?>Inventarios_Venta/";
           }
           else{
-            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
+            window.location.href = "<?php echo base_url() ?>Inventarios_Venta/";
           }
         })
 

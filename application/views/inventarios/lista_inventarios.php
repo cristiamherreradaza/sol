@@ -1,5 +1,7 @@
 <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
+<link rel="stylesheet" href="<?php echo base_url(); ?>public/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
 <!-- chartist CSS -->
 <link href="<?php echo base_url(); ?>public/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
@@ -59,8 +61,13 @@
                                                 <tr>
                                                     <td><?php echo $nro ++ ?></td>
                                                     <td><?php echo $a->nombre ?></td>
+                                                    <?php if (!empty($venta)) { ?>
                                                     <td><?php $total = $a->suma - $venta->suma;
                                                         echo $total;?> <?php echo $a->tipo ?></td>
+                                                    <?php }else {?>
+                                                    <td><?php $total = $a->suma;
+                                                        echo $total;?> <?php echo $a->tipo ?></td>
+                                                    <?php }  ?>
                                                     <td><?php echo $a->precio_unidad ?></td>
                                                     <td><?php echo $a->precio_venta ?></td>
                                                     <td><?= date("Y-m-d",strtotime($a->fecha));?></td>
@@ -122,27 +129,47 @@
                                         </select>
                                     </div> -->
                                 </div>
-                                <div id="m-piechart" style="width:100%; height:278px"></div>
-                                <div class="text-center">
-                                    <ul class="list-inline mt-3">
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-success"></i>FORRO</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-primary"></i>TAFETA</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-danger"></i>BONYE</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-muted"></i>PELLON</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-warning"></i>ENTRE TELA</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-dark"></i>HOMBRERA (VARON)</h6> </li>
-                                        <li>
-                                            <h6 class="text-muted"><i class="fa fa-circle mr-1 text-ligth"></i>HILO</h6> </li>
-                                    </ul>
-                                </div>
+                                <!-- <div id="piechart_3d" style="width: 100%; height: 300px;"></div> -->
+                                <div id="chart"></div>
                             </div>
                         </div>
+                        
+
+                        
+                       <!--  <div class="bar-chart-block block">
+                            <h2 class='titular'>Cantidad de los MAteriales</h2>
+                            <div class='grafico bar-chart'>
+                               <ul class='eje-y'>
+                                <li data-ejeY='135'></li>
+                                 <li data-ejeY='120'></li>
+                                 <li data-ejeY='105'></li>
+                                 <li data-ejeY='90'></li>
+                                 <li data-ejeY='75'></li>
+                                 <li data-ejeY='60'></li>
+                                 <li data-ejeY='45'></li>
+                                 <li data-ejeY='30'></li>
+                                 <li data-ejeY='15'></li>
+                                 <li data-ejeY='0'></li>
+                               </ul>
+                               <ul class='eje-x'>
+                                <?php foreach ($compra as $val) {
+                                   $venta = $this->db->query("SELECT categoria_id, SUM(cantidad) as suma
+                                                                 FROM ventas
+                                                                 WHERE categoria_id = $a->categoria_id
+                                                                 AND estado = 1
+                                                                 GROUP BY (categoria_id)")->row();
+                                    if (!empty($venta)) { ?>
+                                    ?>
+                                 <li data-ejeX='<?php $total = $a->suma - $venta->suma;
+                                echo $total;?> <?php echo $a->tipo ?>'><i><?php echo $a->nombre ?></i></li>
+                                <?php }else {?>
+                                    <li data-ejeX='<?php $total = $a->suma;
+                                echo $total;?> <?php echo $a->tipo ?>'><i><?php echo $a->nombre ?></i></li>
+                                <?php }  ?>
+                                <?php } ?>
+                               </ul>
+                            </div>
+                          </div> -->
                         <!-- <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
@@ -207,6 +234,7 @@
 <script src="<?php echo base_url(); ?>public/assets/plugins/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
 <script src="<?php echo base_url(); ?>public/main/js/dashboard3.js"></script>
 <!-- ============================================================== -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
     $(function () {
         $('#config-table').DataTable({
@@ -220,5 +248,103 @@
         });
 
     });
+</script>
+
+<script type="text/javascript">
+    /**
+ * Selector for chart element.
+ */
+var chartSelector = '#chart';
+
+/**
+ * Selector used to get label elements inside the rendered chart.
+ * Your mileage may vary if you configure your chart different than
+ * me. Use Firebug or Developer Tools to step through the SVG and
+ * determine your label selector.
+ */
+var labelSelector = '> g:eq(1) g text';
+
+/**
+ * This is our data. For simplicity sake, doing inline and not AJAX.
+ */
+
+var data = [
+  <?php foreach ($compra as $val) {
+       $venta = $this->db->query("SELECT categoria_id, SUM(cantidad) as suma
+                                     FROM ventas
+                                     WHERE categoria_id = $val->categoria_id
+                                     AND estado = 1
+                                     GROUP BY (categoria_id)")->row();
+      
+        // $totales = $val->suma - $venta->suma;
+
+        ?>
+    [ '<?php echo $val->nombre ?>', 22],
+<?php } ?>
+];
+
+// Load Google Charts 
+google.load('visualization', '1.1', { packages: ['corechart', 'line'] });
+
+// Callback when API is ready
+google.setOnLoadCallback(function() {
+ 
+  /*
+   * Setup the data table with your data. 
+   */
+  var table = new google.visualization.DataTable({
+    cols : [
+      { id : 'name', label : 'Name', type : 'string' },
+      { id : 'value', label : 'Value', type : 'number' }
+    ]
+  });
+  
+  // Add data to the table
+  table.addRows( data );
+  
+  // Google Charts needs a raw element. I'm using jQuery to get the chart
+  // Container, then indexing into it to get the raw element.
+  var chartContainer = $(chartSelector)[0];
+  
+  // Create the Google Pie Chart
+  var chart = new google.visualization.PieChart(chartContainer);
+  
+  // Draw the chart.
+  chart.draw(table, { title : 'Detalles de Materiales en Almacen' });
+  
+  /*
+   * This is the meat and potatoes of the operation. We really require
+   * two things: #1) A selector that will get us a list of labels in the
+   * legend, and #2) The DataTable powering the chart.  We'll cycle
+   * through the labels, and use their index to lookup their value.
+   * If you have some higher-level math you need to do to display a
+   * different value, you can just replace my logic to get the count
+   * with your's.
+   */
+  
+  // The <svg/> element rendered by Google Charts
+  var svg = $('svg', chartContainer );
+  
+  /*
+   * Step through all the labels in the legend.
+   */
+  $(labelSelector, svg).each(function (i, v) {
+  
+    /*
+     * I'm retrieving the value of the second column in my data table,
+     * which contains the number that I want to display. If your logic
+     * is more complicated, change this line to calculate a new total.
+     */
+    var total = table.getValue(i, 1);
+    
+    // The new label text.
+    var newLabel = $(this).text() + '(' + total + ')';
+    
+    // Update the label text.
+    $(this).text( newLabel );
+  });
+  
+});
+
 </script>
 
