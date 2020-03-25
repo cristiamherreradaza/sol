@@ -4,71 +4,72 @@
 <!-- inicio modal content -->
 
 <div id="modal_usuario" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
-			<?php echo form_open('usuarios/guarda'); ?>
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE USUARIOS</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<input type="hidden" name="ida" id="u_ida" value="<?php echo $this->session->id_usuario; ?>">
-				</div>
-				<div class="modal-body">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- <form action="<?php //echo base_url() 
+                                ?>aberturas/guarda" method="POST"> -->
+            <?php echo form_open('usuarios/guarda'); ?>
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">FORMULARIO DE USUARIOS</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <input type="hidden" name="ida" id="u_ida" value="<?php echo $this->session->id_usuario; ?>">
+            </div>
+            <div class="modal-body">
 
-					<div class="row">
-						<div class="col-md-7">
-							<div class="form-group">
-								<label class="control-label">Nombre</label>
-								<input name="nombre" type="text" id="u_nombre" class="form-control" value="<?php echo $this->session->nombre; ?>" required>
-							</div>
-						</div>
-						<div class="col-md-5">
-							<div class="form-group">
-								<label class="control-label">Celulares</label>
-								<input name="celulares" type="text" id="u_celulares" class="form-control" value="<?php echo $this->session->celulares; ?>">
-							</div>
-						</div>
-					</div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="control-label">Nombre</label>
+                            <input name="nombre" type="text" id="u_nombre" class="form-control" value="<?php echo $this->session->nombre; ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Celulares</label>
+                            <input name="celulares" type="text" id="u_celulares" class="form-control" value="<?php echo $this->session->celulares; ?>">
+                        </div>
+                    </div>
+                </div>
 
-					<div class="row">
-						<div class="col-md-7">
-							<div class="form-group">
-								<label class="control-label">Direccion</label>
-								<input name="direccion" type="text" id="u_direccion" class="form-control" value="<?php echo $this->session->direccion; ?>">
-							</div>
-						</div>
-						<div class="col-md-5">
-							<div class="form-group">
-								<label class="control-label">Email</label>
-								<input name="email" type="text" id="u_email" class="form-control" value="<?php echo $this->session->email; ?>">
-							</div>
-						</div>
-					</div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="form-group">
+                            <label class="control-label">Direccion</label>
+                            <input name="direccion" type="text" id="u_direccion" class="form-control" value="<?php echo $this->session->direccion; ?>">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label class="control-label">Email</label>
+                            <input name="email" type="text" id="u_email" class="form-control" value="<?php echo $this->session->email; ?>">
+                        </div>
+                    </div>
+                </div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Usuario</label>
-								<input name="usuario" type="text" id="u_usuario" class="form-control" value="<?php echo $this->session->usuario; ?>" required>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="form-group">
-								<label class="control-label">Password</label>
-								<input name="pass" type="text" id="u_pass" class="form-control">
-							</div>
-						</div>
-					</div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Usuario</label>
+                            <input name="usuario" type="text" id="u_usuario" class="form-control" value="<?php echo $this->session->usuario; ?>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input name="pass" type="text" id="u_pass" class="form-control">
+                        </div>
+                    </div>
+                </div>
 
-				</div>
-				<div class="modal-footer">
-					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA USUARIO</button>
-				</div>
-			</form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA USUARIO</button>
+            </div>
+            </form>
 
-		</div>
-		<!-- /.modal-content -->
-	</div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
     <!-- /.modal-dialog -->
 </div>
 <!-- fin modal -->
@@ -96,7 +97,7 @@
                 <li class="nav-small-cap">MENU PRINCIPAL</li>
                 <li>
                     <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
-                </li>    
+                </li>
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -114,14 +115,19 @@
                 <li>
                     <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
                 </li>
+
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php //echo base_url(); ?>trabajos/nuevo">Subir Excel</a></li>
-                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                        <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                        <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
+                        <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                     </ul>
                 </li>
+
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -163,16 +169,6 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
-                        <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
-                        <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
-                    </ul>
-                </li>
                 <!-- <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">COTIZACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
@@ -200,8 +196,7 @@
 <!-- End Left Sidebar - style you can find in sidebar.scss  -->
 <!-- ============================================================== -->
 <script>
-    function abre_modal_usuario()
-	{
-		$("#modal_usuario").modal('show');
-	}
+    function abre_modal_usuario() {
+        $("#modal_usuario").modal('show');
+    }
 </script>
