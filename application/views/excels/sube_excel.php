@@ -76,18 +76,22 @@
                                            <thead>
                                                <tr>
                                                    <th>Excel</th>
+                                                   <th>Mes</th>
                                                    <th>Fecha</th>
-                                                   <th style="width: 5%;">Acciones</th>
+                                                   <th class="text-center">Acciones</th>
                                                </tr>
                                            </thead>
                                            <tbody>
                                                <?php foreach ($excels_subidos as $e) : ?>
                                                    <tr>
                                                        <td><?php echo $e->nombre_archivo; ?></td>
+                                                       <td><?php echo $e->mes; ?></td>
                                                        <td><?php echo fechaEs($e->fecha); ?></td>
-                                                       <td></td>
-                                                       <td align="left">
-                                                           <button type="button" class="btn btn-danger"><i class="fas fa-times"></i></button>
+                                                       <td class="text-center">
+                                                           <a href="<?php echo base_url() ?>Excels/detalle/<?php echo $e->id; ?>">
+                                                               <button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
+                                                           </a>
+                                                           <button type="button" class="btn btn-danger" onclick="elimina_excel(<?php echo $e->id ?>, '<?php echo $e->nombre_archivo ?>')"><i class="fas fa-times"></i></button>
                                                        </td>
                                                    </tr>
                                                <?php endforeach; ?>
@@ -108,10 +112,10 @@
    </div>
 
    <script type="text/javascript">
-       function alerta(id_pago, monto, id_trabajo) {
+       function elimina_excel(id, nombre) {
            //console.log(id_pago);
            Swal.fire({
-               title: 'Quieres borrar ' + monto + '?',
+               title: 'Quieres borrar ' + nombre + '?',
                text: "Luego no podras recuperarlo!",
                type: 'warning',
                showCancelButton: true,
@@ -123,11 +127,10 @@
                if (result.value) {
                    Swal.fire(
                        'Excelente!',
-                       'Tu monto fue borrado.',
+                       'El archivo fue eliminado.',
                        'success'
                    );
-                   // console.log("el id es "+id_pago);
-                   window.location.href = "<?php echo base_url() ?>trabajos/borra_pago/" + id_pago + "/" + id_trabajo;
+                   window.location.href = "<?php echo base_url() ?>excels/elimina/"+id;
                }
            })
        }

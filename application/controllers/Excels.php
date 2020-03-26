@@ -71,13 +71,80 @@ class Excels extends CI_Controller {
 			);
 			$this->db->insert('excels', $datos_excel);
 
-			echo '<h1>Datos del Excel.xslx</h1><pre>';
 			if ($xlsx = SimpleXLSX::parse("./archivos/$nombre_archivo")) {
-				print_r($xlsx->rows());
+				foreach ($xlsx->rows() as $key => $r) {
+					if ($key > 0) {
+						if ($key == 1) {
+							if ($r[3] == 'mañana') {
+								$datos_marcaciones = array(
+									'excel_id' => 1,
+									'carnet'   => $r[0],
+									'fecha'    => $r[2],
+									'man_hi'   => $r[6],
+									'man_hs'   => $r[7],
+								);
+							} else {
+								$datos_marcaciones = array(
+									'excel_id' => 1,
+									'carnet'   => $r[0],
+									'fecha'    => $r[2],
+									'tar_hi'   => $r[6],
+									'tar_hs'   => $r[7],
+								);
+							}
+							$this->db->insert('asistencias', $datos_marcaciones);
+						} else {
+							$consulta_persona  = $this->db->order_by('id', 'DESC')->get_where('asistencias', array('carnet' => $r[0], 'borrado =' => NULL, 'fecha' => $r[2]))->row_array();
+							if ($consulta_persona) {
+								// vdebug($consulta_persona, true, false, true);
+								if ($r[3] == 'mañana') {
+									// echo $r[3];
+									$datos_marcaciones = array(
+										'excel_id' => 1,
+										'carnet'   => $r[0],
+										'fecha'    => $r[2],
+										'man_hi'   => $r[6],
+										'man_hs'   => $r[7],
+									);
+								} else {
+									$datos_marcaciones = array(
+										'excel_id' => 1,
+										'carnet'   => $r[0],
+										'fecha'    => $r[2],
+										'tar_hi'   => $r[6],
+										'tar_hs'   => $r[7],
+									);
+								}
+								$this->db->where('id', $consulta_persona['id']);
+								$this->db->update('asistencias', $datos_marcaciones);
+							} else {
+								if ($r[3] == 'mañana') {
+									$datos_marcaciones = array(
+										'excel_id' => 1,
+										'carnet'   => $r[0],
+										'fecha'    => $r[2],
+										'man_hi'   => $r[6],
+										'man_hs'   => $r[7],
+									);
+								} else {
+									$datos_marcaciones = array(
+										'excel_id' => 1,
+										'carnet'   => $r[0],
+										'fecha'    => $r[2],
+										'tar_hi'   => $r[6],
+										'tar_hs'   => $r[7],
+									);
+								}
+								$this->db->insert('asistencias', $datos_marcaciones);
+							}
+						}
+					}
+				}
 			} else {
 				echo SimpleXLSX::parseError();
 			}
-			echo '<pre>';
+			redirect("Excels/sube_excel");
+
 
 			// redirect("excels/sube_excel");
 
@@ -173,7 +240,6 @@ class Excels extends CI_Controller {
 		} else {
 			echo SimpleXLSX::parseError();
 		}
-		echo '<pre>';
 		// output worsheet 1
 		// $xlsx = SimpleXLSX::parse("./archivos/abril_20206.xlsx");
 
@@ -198,6 +264,33 @@ class Excels extends CI_Controller {
 			}
 		}*/
 
+	}
+
+	public function detalle($excel_id = null)
+	{
+		// $data['datos_excel'] = $this->db->get_where('asistencias', array('excel_id' => $excel_id))->row_array();
+
+		$this->db->select('p.nombre, a.*');
+		$this->db->from('asistencias as a');
+		$this->db->join('personal as p', 'p.carnet = a.carnet', 'left');
+		$this->db->where('a.excel_id', $excel_id);
+		$data['datos_excel'] = $this->db->get()->result_array();
+		// vdebug($data['datos_excel'], true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('excels/detalle', $data);
+		$this->load->view('template/footer');
+	}
+
+	public function elimina($excel_id = null)
+	{
+		$this->db->where('id', $excel_id);
+		$this->db->delete('excels');
+
+		$this->db->where('excel_id', $excel_id);
+		$this->db->delete('asistencias');
+		redirect("Excels/sube_excel");
 	}
 	
 }

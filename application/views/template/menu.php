@@ -106,12 +106,15 @@
                         <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
                     </ul>
                 </li>
+                
                 <li>
                     <a href="<?php echo base_url(); ?>contratos/listado" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i>CONTRATOS</a>
                 </li>
+
                 <li>
                     <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
                 </li>
+
                 <li>
                     <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
                 </li>
@@ -119,10 +122,7 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
                         <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
                         <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
                         <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                     </ul>
