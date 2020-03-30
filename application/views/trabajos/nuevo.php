@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-md-3">
                 <div class="form-group">
-                  <label class="control-label">Nombre cliente</label>
+                <br />
                   <input type="text" name="busca_cliente" id="busca_cliente" class="form-control" placeholder="Ej: Cristiam Herrera">
                 </div>
               </div>
@@ -58,14 +58,14 @@
               <input type="hidden" name="cod_cliente" id="cod_cliente">
               <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
               <div class="input-group mb-3">
-                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autofocus>
+                <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autofocus required>
                 <!-- <div class="input-group-append">
                   <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
                 </div> -->
               </div>
             </div>
 
-            <div class="col-md-1">
+            <div class="col-md-2">
               <div class="form-group">
                 <label class="control-label">Carnet</label>
                 <input type="number" name="ci" id="ci" class="form-control" placeholder="Ej: 4356987">
@@ -89,7 +89,7 @@
             </div>
           </div>
 
-           <div class="col-md-5">
+           <div class="col-md-4">
             <div class="form-group">
               <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
               <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">

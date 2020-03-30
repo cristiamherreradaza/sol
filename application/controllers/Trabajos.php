@@ -147,10 +147,19 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('saco_cantidad'),
 			);
 			$this->db->insert('sacos', $datos_saco);
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_saco = $this->db->get_where('costos', array('id'=>1))->row();
+			$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->monto;
 			$datos_costos_produccion = array(
-				'trabajo_id'=>$id_trabajo,
-				'costo_id'=>$id_trabajo,
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 1,
+				'cantidad'   => $this->input->post('saco_cantidad'),
+				'precio'     => $datos_costo_saco->monto,
+				'total'      => $total_costo_saco,
 			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion);
+			//60647842
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
