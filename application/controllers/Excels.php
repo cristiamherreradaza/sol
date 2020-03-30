@@ -20,7 +20,7 @@ class Excels extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
-	public function __construct() 
+	public function __construct()
 	{
 		parent::__construct();
 		// $this->load->helper('url_helper');
@@ -37,7 +37,6 @@ class Excels extends CI_Controller {
 		$this->load->view('template/menu');
 		$this->load->view('excels/sube_excel', $data);
 		$this->load->view('template/footer');
-
 	}
 
 	public function guarda_excel()
@@ -47,13 +46,13 @@ class Excels extends CI_Controller {
 		$config['upload_path']   = './archivos/';
 		$config['allowed_types'] = 'xlsx';
 		$config['max_size']      = 5000;
-		
+
 		$this->load->library('upload', $config);
-		
+
 		if (!$this->upload->do_upload('archivo')) {
-			
+
 			$error = array('error' => $this->upload->display_errors());
-			
+
 			// $this->load->view('upload_form', $error);
 		} else {
 			$gestion = date('Y');
@@ -158,7 +157,7 @@ class Excels extends CI_Controller {
 		}
 	}
 
-	public function index() 
+	public function index()
 	{
 		$this->load->view('welcome_message');
 	}
@@ -291,6 +290,7 @@ class Excels extends CI_Controller {
 		$this->db->where('excel_id', $excel_id);
 		$this->db->delete('asistencias');
 		redirect("Excels/sube_excel");
+
 	}
-	
+
 }

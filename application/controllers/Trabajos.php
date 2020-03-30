@@ -33,17 +33,17 @@ class Trabajos extends CI_Controller {
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$detalles_varon_saco  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'saco', 'borrado ='=>NULL, 'genero'  => 'varon'))->result_array();
-		
+
 		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon', 'borrado ='=>NULL))->result_array();
 		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'borrado ='=>NULL, 'genero'    => 'varon'))->result_array();
 		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'borrado ='=>NULL))->result_array();
 		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_faldas  = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
 		$aberturas_falda = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_jumper   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
@@ -71,7 +71,7 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function guarda_trabajo() 
+	public function guarda_trabajo()
 	{
 		$usuario_id = $this->session->id_usuario;
 
@@ -147,6 +147,10 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('saco_cantidad'),
 			);
 			$this->db->insert('sacos', $datos_saco);
+			$datos_costos_produccion = array(
+				'trabajo_id'=>$id_trabajo,
+				'costo_id'=>$id_trabajo,
+			);
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
@@ -355,7 +359,7 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function ajax_listado_clientes() 
+	public function ajax_listado_clientes()
 	{
 		$listado_clientes = $this->db->get('Clientes')->result_array();
 		// vdebug($d,);
@@ -388,7 +392,7 @@ class Trabajos extends CI_Controller {
 		// $nombre_cliente='juan';
 		// $consulta_cliente = $this->db->get_where;
 		$cliente_limpio = str_replace("%20"," ",$nombre_cliente);
-		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);		
+		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);
 		$this->db->limit(10);
 		$data['clientes_encontrados'] = $this->db->get('clientes')->result_array();
 		// vdebug($res, true, false, true);
@@ -399,7 +403,7 @@ class Trabajos extends CI_Controller {
 	public function ajax_valida_cliente($nombre_cliente = null)
 	{
 		$cliente_limpio     = str_replace("%20"," ",$nombre_cliente);
-		$consulta_cliente   = $this->db->like('nombre', $cliente_limpio);		
+		$consulta_cliente   = $this->db->like('nombre', $cliente_limpio);
 		$cliente_encontrado = $this->db->get('clientes')->result_array();
 		if(!empty($cliente_encontrado)){
 			$resultado = 1;
@@ -502,7 +506,7 @@ class Trabajos extends CI_Controller {
 		$saldo = $total_trabajo-$suma_pagos['monto'];
 
 		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
-		
+
 		if(!empty($this->input->post('entregado')))
 		{
 			$this->db->update('trabajos', array('entregado'=>'Si'), "id=$id_trabajo");
@@ -517,7 +521,7 @@ class Trabajos extends CI_Controller {
 		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 		$hoy = date("Y-m-d H:i:s");
 		$this->db->update('pagos', array('borrado'=>$hoy), "id=$id_pago");
-	
+
 		$this->db->select_sum('monto');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$suma_pagos = $this->db->get('pagos')->row_array();
@@ -535,17 +539,17 @@ class Trabajos extends CI_Controller {
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$detalles_varon_saco  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'saco', 'borrado ='=>NULL, 'genero'  => 'varon'))->result_array();
-		
+
 		$modelos_varon_pantalon   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo'   => 'pantalon', 'borrado ='=>NULL))->result_array();
 		$pinzas_varon_pantalon    = $this->db->order_by('nombre', 'ASC')->get_where('pinzas', array('tipo'    => 'pantalon', 'borrado ='=>NULL, 'genero'    => 'varon'))->result_array();
 		$bolsillos_varon_pantalon = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'pantalon', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_varon_chalecos   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'chaleco', 'borrado ='=>NULL))->result_array();
 		$detalles_varon_chalecos  = $this->db->order_by('nombre', 'ASC')->get_where('detalles', array('tipo'  => 'chaleco', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_faldas  = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
 		$aberturas_falda = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'falda', 'borrado ='=>NULL))->result_array();
-		
+
 		$modelos_jumper   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
@@ -915,7 +919,7 @@ class Trabajos extends CI_Controller {
 
 	}
 
-	public function guarda_edicion() 
+	public function guarda_edicion()
 	{
 		// vdebug($this->input->post(), true, false, true);
 		$id_cliente = $this->input->post('id_cliente');
@@ -1069,7 +1073,7 @@ class Trabajos extends CI_Controller {
 
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
 
-	}	
+	}
 
 	public function eliminar($id_trabajo = null)
 	{
@@ -1090,36 +1094,36 @@ class Trabajos extends CI_Controller {
 	public function get_trabajos()
 	{
 		$this->load->model('trabajo_model');
-		$fetch_data = $this->trabajo_model->make_datatables();  
-		// vdebug($fetch_data, true, false, true);  
-		$data = array();  
-		foreach($fetch_data as $row)  
-		{  
-			$sub_array = array();  
-			$sub_array[] = $row->id;  
-			$sub_array[] = $row->nombre;  
-			$sub_array[] = $row->celulares;  
-			$sub_array[] = $row->fecha_prueba;  
-			$sub_array[] = $row->fecha_entrega;  
-			$sub_array[] = $row->costo_tela;  
-			$sub_array[] = $row->costo_confeccion;  
-			$sub_array[] = $row->total;  
-			$sub_array[] = $row->saldo;  
-			$sub_array[] = $row->entregado;  
+		$fetch_data = $this->trabajo_model->make_datatables();
+		// vdebug($fetch_data, true, false, true);
+		$data = array();
+		foreach($fetch_data as $row)
+		{
+			$sub_array = array();
+			$sub_array[] = $row->id;
+			$sub_array[] = $row->nombre;
+			$sub_array[] = $row->celulares;
+			$sub_array[] = $row->fecha_prueba;
+			$sub_array[] = $row->fecha_entrega;
+			$sub_array[] = $row->costo_tela;
+			$sub_array[] = $row->costo_confeccion;
+			$sub_array[] = $row->total;
+			$sub_array[] = $row->saldo;
+			$sub_array[] = $row->entregado;
 			$sub_array[] = '<a href="'.base_url().'trabajos/detalle_trabajo/'.$row->id.'"><button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button></a>
 							<a href="'.base_url().'Trabajos/registro_pagos/'.$row->id.'"><button type="button" class="btn btn-success"><i class="fas fa-star"></i></button></a>
 							<a href="'.base_url().'Trabajos/form_edicion/'.$row->id.'"><button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button></a>
 							<button type="button" data-nombre="'.$row->nombre.'" id="bte_'.$row->id.'" onclick="eliminar('.$row->id.')" class="btn btn-danger"><i class="fas fa-trash"></i></button>
-							';  
-			$data[] = $sub_array;  
-		}  
-		$output = array(  
-			"draw"           =>intval($_POST["draw"]),  
-			"recordsTotal"   =>$this->trabajo_model->get_all_data(),  
-			"recordsFiltered"=>$this->trabajo_model->get_filtered_data(),  
-			"data"           =>$data  
-		);  
+							';
+			$data[] = $sub_array;
+		}
+		$output = array(
+			"draw"           =>intval($_POST["draw"]),
+			"recordsTotal"   =>$this->trabajo_model->get_all_data(),
+			"recordsFiltered"=>$this->trabajo_model->get_filtered_data(),
+			"data"           =>$data
+		);
 		echo json_encode($output);
-	}  
+	}
 
 }

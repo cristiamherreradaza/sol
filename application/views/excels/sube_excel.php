@@ -69,7 +69,7 @@
                                        <div class="card-header">
                                            <h4 class="mb-0 text-white">LISTADO DE ARCHIVOS</h4>
                                        </div>
-                                       <?php //vdebug($eagos, false, false, true) 
+                                       <?php //vdebug($eagos, false, false, true)
                                         ?>
                                        <?php $total = 0; ?>
                                        <table class="table table-striped no-wrap">
