@@ -159,7 +159,6 @@ class Trabajos extends CI_Controller {
 				'total'      => $total_costo_saco,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion);
-			//60647842
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
@@ -186,6 +185,18 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('pantalon_cantidad'),
 			);
 			$this->db->insert('pantalones', $datos_pantalon);
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_pantalon = $this->db->get_where('costos', array('id'=>2))->row();
+			$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->monto;
+			$datos_costos_produccion_pantalon = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 2,
+				'cantidad'   => $this->input->post('pantalon_cantidad'),
+				'precio'     => $datos_costo_pantalon->monto,
+				'total'      => $total_costo_pantalon,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_pantalon);
 		}
 
 		if (!empty($this->input->post('ch_estomago'))) {
@@ -205,6 +216,18 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('ch_cantidad'),
 			);
 			$this->db->insert('chalecos', $datos_chaleco);
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_chaleco = $this->db->get_where('costos', array('id'=>3))->row();
+			$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->monto;
+			$datos_costos_produccion_chaleco = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 3,
+				'cantidad'   => $this->input->post('ch_cantidad'),
+				'precio'     => $datos_costo_chaleco->monto,
+				'total'      => $total_costo_chaleco,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_chaleco);
 		}
 
 		if (!empty($this->input->post('cam_cuello'))) {
@@ -223,6 +246,18 @@ class Trabajos extends CI_Controller {
 
 			);
 			$this->db->insert('camisas', $datos_camisa);
+
+			// insertamos los datos de costos de produccion con id 5 por el valor de la tabal costos
+			$datos_costo_camisa = $this->db->get_where('costos', array('id'=>5))->row();
+			$total_costo_camisa = $this->input->post('cam_cantidad')*$datos_costo_camisa->monto;
+			$datos_costos_produccion_camisa = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 5,
+				'cantidad'   => $this->input->post('cam_cantidad'),
+				'precio'     => $datos_costo_camisa->monto,
+				'total'      => $total_costo_camisa,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_camisa);
 		}
 
 		if (!empty($this->input->post('fa_largo'))) {
@@ -241,6 +276,18 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('fa_cantidad'),
 			);
 			$this->db->insert('faldas', $datos_falda);
+
+			// insertamos los datos de costos de produccion con id 4 por el valor de la tabal costos
+			$datos_costo_falda = $this->db->get_where('costos', array('id'=>4))->row();
+			$total_costo_falda = $this->input->post('fa_cantidad')*$datos_costo_falda->monto;
+			$datos_costos_produccion_falda = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 4,
+				'cantidad'   => $this->input->post('fa_cantidad'),
+				'precio'     => $datos_costo_falda->monto,
+				'total'      => $total_costo_falda,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_falda);
 		}
 
 		if (!empty($this->input->post('j_talle'))) {
@@ -262,26 +309,72 @@ class Trabajos extends CI_Controller {
 				'cantidad'        => $this->input->post('jam_cantidad'),
 			);
 			$this->db->insert('jumpers', $datos_jumper);
-		}
 
+			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
+			$datos_costo_jumper = $this->db->get_where('costos', array('id'=>9))->row();
+			$total_costo_jumper = $this->input->post('jam_cantidad')*$datos_costo_jumper->monto;
+			$datos_costos_produccion_jumper = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 9,
+				'cantidad'   => $this->input->post('jam_cantidad'),
+				'precio'     => $datos_costo_jumper->monto,
+				'total'      => $total_costo_jumper,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_jumper);
+		}
 
 		$sw = 0;
 		if (!empty($this->input->post('corbaton_color')))
 		{
 			$corbaton_color = $this->input->post('corbaton_color');
 			$sw = 1;
+			
+			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
+			$datos_costo_corbaton = $this->db->get_where('costos', array('id'=>6))->row();
+			$total_costo_corbaton = $this->input->post('ext_cantidad')*$datos_costo_corbaton->monto;
+			$datos_costos_produccion_corbaton = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 6,
+				'cantidad'   => $this->input->post('ext_cantidad'),
+				'precio'     => $datos_costo_corbaton->monto,
+				'total'      => $total_costo_corbaton,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_corbaton);
 		}
 
 		if (!empty($this->input->post('cg_color')))
 		{
 			$cg_color = $this->input->post('cg_color');
 			$sw = 1;
+
+			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
+			$datos_costo_corbata = $this->db->get_where('costos', array('id'=>7))->row();
+			$total_costo_corbata = $this->input->post('ext_cantidad')*$datos_costo_corbata->monto;
+			$datos_costos_produccion_corbata = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 7,
+				'cantidad'   => $this->input->post('ext_cantidad'),
+				'precio'     => $datos_costo_corbata->monto,
+				'total'      => $total_costo_corbata,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_corbata);
 		}
 
 		if (!empty($this->input->post('faja_color')))
 		{
 			$faja_color = $this->input->post('faja_color');
 			$sw = 1;
+			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
+			$datos_costo_faja = $this->db->get_where('costos', array('id'=>8))->row();
+			$total_costo_faja = $this->input->post('ext_cantidad')*$datos_costo_faja->monto;
+			$datos_costos_produccion_faja = array(
+				'trabajo_id' => $id_trabajo,
+				'costo_id'   => 8,
+				'cantidad'   => $this->input->post('ext_cantidad'),
+				'precio'     => $datos_costo_faja->monto,
+				'total'      => $total_costo_faja,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_faja);
 		}
 		if($sw == 1){
 			$datos_extras = array(
@@ -357,7 +450,7 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ex.trabajo_id', $id_trabajo);
 		$data['extras'] = $this->db->get()->row_array();
 
-		// vdebug($data['chaleco'], false, false, true);
+		// vdebug($data['chaleco'], fa);
 
 		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
 		$fecha = fechaEs($data['trabajo']['fecha']);
