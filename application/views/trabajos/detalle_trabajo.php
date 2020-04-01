@@ -507,7 +507,7 @@
 
                                              <?php if (!empty($camisa['cuello'])): ?>
                                                 <tr>
-                                                    <td>camisa</td>
+                                                    <td>Camisa</td>
                                                     <td class="text-right"><?php echo $camisa['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $camisa['precio_unitario'] ?></td>
                                                     <td class="text-right">
@@ -520,7 +520,7 @@
 
                                             <?php if (!empty($extras['trabajo_id'])): ?>
                                                 <tr>
-                                                    <td>extras</td>
+                                                    <td>Extras</td>
                                                     <td class="text-right"><?php echo $extras['cantidad'] ?></td>
                                                     <td class="text-right"><?php echo $extras['precio_unitario'] ?></td>
                                                     <td class="text-right">

@@ -150,12 +150,19 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion
 			$datos_costo_saco = $this->db->get_where('costos', array('id'=>1))->row();
-			$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->monto;
+			if ($this->input->post('genero') == 'Varon') {
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->varon;
+				$precio_saco = $datos_costo_saco->varon;
+			}else{
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->mujer;
+				$precio_saco = $datos_costo_saco->mujer;
+			}
 			$datos_costos_produccion = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 1,
 				'cantidad'   => $this->input->post('saco_cantidad'),
-				'precio'     => $datos_costo_saco->monto,
+				'precio'     => $precio_saco,
 				'total'      => $total_costo_saco,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion);
@@ -188,12 +195,19 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion
 			$datos_costo_pantalon = $this->db->get_where('costos', array('id'=>2))->row();
-			$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->monto;
+			if ($this->input->post('genero') == 'Varon') {
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->varon;
+				$precio_pantalon = $datos_costo_pantalon->varon;
+			}else{
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->mujer;
+				$precio_pantalon = $datos_costo_pantalon->mujer;
+			}
 			$datos_costos_produccion_pantalon = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 2,
 				'cantidad'   => $this->input->post('pantalon_cantidad'),
-				'precio'     => $datos_costo_pantalon->monto,
+				'precio'     => $precio_pantalon,
 				'total'      => $total_costo_pantalon,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_pantalon);
@@ -219,12 +233,19 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion
 			$datos_costo_chaleco = $this->db->get_where('costos', array('id'=>3))->row();
-			$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->monto;
+			if ($this->input->post('genero') == 'Varon') {
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->varon;
+				$precio_chaleco = $datos_costo_chaleco->varon;
+			}else{
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->mujer;
+				$precio_chaleco = $datos_costo_chaleco->mujer;
+			}
 			$datos_costos_produccion_chaleco = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 3,
 				'cantidad'   => $this->input->post('ch_cantidad'),
-				'precio'     => $datos_costo_chaleco->monto,
+				'precio'     => $precio_chaleco,
 				'total'      => $total_costo_chaleco,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_chaleco);
@@ -249,12 +270,20 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion con id 5 por el valor de la tabal costos
 			$datos_costo_camisa = $this->db->get_where('costos', array('id'=>5))->row();
-			$total_costo_camisa = $this->input->post('cam_cantidad')*$datos_costo_camisa->monto;
+			if ($this->input->post('genero') == 'Varon') {
+				$total_costo_camisa = $this->input->post('cam_cantidad')*$datos_costo_camisa->varon;
+				$precio_camisa = $datos_costo_camisa->varon;
+			}else{
+				$total_costo_camisa = $this->input->post('cam_cantidad')*$datos_costo_camisa->mujer;
+				$precio_camisa = $datos_costo_camisa->mujer;
+			}
+
 			$datos_costos_produccion_camisa = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 5,
 				'cantidad'   => $this->input->post('cam_cantidad'),
-				'precio'     => $datos_costo_camisa->monto,
+				'precio'     => $precio_camisa,
 				'total'      => $total_costo_camisa,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_camisa);
@@ -279,12 +308,13 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion con id 4 por el valor de la tabal costos
 			$datos_costo_falda = $this->db->get_where('costos', array('id'=>4))->row();
-			$total_costo_falda = $this->input->post('fa_cantidad')*$datos_costo_falda->monto;
+			$total_costo_falda = $this->input->post('fa_cantidad')*$datos_costo_falda->mujer;
 			$datos_costos_produccion_falda = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 4,
 				'cantidad'   => $this->input->post('fa_cantidad'),
-				'precio'     => $datos_costo_falda->monto,
+				'precio'     => $datos_costo_falda->mujer,
 				'total'      => $total_costo_falda,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_falda);
@@ -312,12 +342,13 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
 			$datos_costo_jumper = $this->db->get_where('costos', array('id'=>9))->row();
-			$total_costo_jumper = $this->input->post('jam_cantidad')*$datos_costo_jumper->monto;
+			$total_costo_jumper = $this->input->post('jam_cantidad')*$datos_costo_jumper->mujer;
 			$datos_costos_produccion_jumper = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 9,
 				'cantidad'   => $this->input->post('jam_cantidad'),
-				'precio'     => $datos_costo_jumper->monto,
+				'precio'     => $datos_costo_jumper->mujer,
 				'total'      => $total_costo_jumper,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_jumper);
@@ -331,12 +362,13 @@ class Trabajos extends CI_Controller {
 			
 			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
 			$datos_costo_corbaton = $this->db->get_where('costos', array('id'=>6))->row();
-			$total_costo_corbaton = $this->input->post('ext_cantidad')*$datos_costo_corbaton->monto;
+			$total_costo_corbaton = $this->input->post('ext_cantidad')*$datos_costo_corbaton->varon;
 			$datos_costos_produccion_corbaton = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 6,
 				'cantidad'   => $this->input->post('ext_cantidad'),
-				'precio'     => $datos_costo_corbaton->monto,
+				'precio'     => $datos_costo_corbaton->varon,
 				'total'      => $total_costo_corbaton,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_corbaton);
@@ -349,12 +381,13 @@ class Trabajos extends CI_Controller {
 
 			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
 			$datos_costo_corbata = $this->db->get_where('costos', array('id'=>7))->row();
-			$total_costo_corbata = $this->input->post('ext_cantidad')*$datos_costo_corbata->monto;
+			$total_costo_corbata = $this->input->post('ext_cantidad')*$datos_costo_corbata->varon;
 			$datos_costos_produccion_corbata = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 7,
 				'cantidad'   => $this->input->post('ext_cantidad'),
-				'precio'     => $datos_costo_corbata->monto,
+				'precio'     => $datos_costo_corbata->varon,
 				'total'      => $total_costo_corbata,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_corbata);
@@ -366,12 +399,13 @@ class Trabajos extends CI_Controller {
 			$sw = 1;
 			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
 			$datos_costo_faja = $this->db->get_where('costos', array('id'=>8))->row();
-			$total_costo_faja = $this->input->post('ext_cantidad')*$datos_costo_faja->monto;
+			$total_costo_faja = $this->input->post('ext_cantidad')*$datos_costo_faja->varon;
 			$datos_costos_produccion_faja = array(
 				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
 				'costo_id'   => 8,
 				'cantidad'   => $this->input->post('ext_cantidad'),
-				'precio'     => $datos_costo_faja->monto,
+				'precio'     => $datos_costo_faja->varon,
 				'total'      => $total_costo_faja,
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_faja);
@@ -389,9 +423,7 @@ class Trabajos extends CI_Controller {
 			);
 			$this->db->insert('extras', $datos_extras);
 		}
-
 		redirect("Trabajos/detalle_trabajo/$id_trabajo");
-
 	}
 
 	public function detalle_trabajo($id_trabajo = null)
