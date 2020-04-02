@@ -1213,12 +1213,19 @@ class Trabajos extends CI_Controller {
 	{
 		$hoy = date("Y-m-d H:i:s");
 		$this->db->update('trabajos', array('borrado'=>$hoy), "id=$id_trabajo");
-		redirect("trabajos/listado_trabajos");
+		// actualizamos todos los datos las tablas relacionadas a los trabajos
+		$this->db->update('sacos', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('pantalones', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('chalecos', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('faldas', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('jumpers', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('camisas', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		$this->db->update('extras', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
+		redirect("trabajos/listado");
 	}
 
 	public function listado()
 	{
-
 	    $this->load->view('template/header');
 	    $this->load->view('template/menu');
 	    $this->load->view("trabajos/listado");

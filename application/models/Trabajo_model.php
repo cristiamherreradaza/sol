@@ -16,7 +16,7 @@ class Trabajo_model extends CI_Model
 
     function make_query()  
     {  
-        $this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+        $this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.borrado, t.*');
 		$this->db->from('trabajos as t');
 		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
@@ -46,7 +46,7 @@ class Trabajo_model extends CI_Model
             $this->db->limit($_POST['length'], $_POST['start']);  
         }  
         $query = $this->db->get();  
-        // vdebug($query->result(), true, false, true);
+        vdebug($query->result(), true, false, true);
         return $query->result();  
     }  
 
@@ -58,8 +58,13 @@ class Trabajo_model extends CI_Model
 
     function get_all_data()  
     {  
-        $this->db->select("*");  
-        $this->db->from($this->table);  
+        // $this->db->select("*");  
+        // $this->db->from($this->table);
+        $this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+        $this->db->from('trabajos as t');
+        $this->db->order_by('t.id', 'desc');
+        $this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+        $this->db->where('t.borrado', NULL);  
         return $this->db->count_all_results();  
     }  
 
