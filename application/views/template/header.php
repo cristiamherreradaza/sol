@@ -150,7 +150,8 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="flag-icon flag-icon-us"></i></a>                            
+                                <!-- <i class="flag-icon flag-icon-us"></i> -->
+                            </a>                            
                             <div class="dropdown-menu dropdown-menu-right animated bounceInDown" id="cabecera_cliente_listado"> 
                                 <div id="datos_cabecera_cliente">
                                     
