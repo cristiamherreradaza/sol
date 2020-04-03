@@ -510,7 +510,7 @@ class Trabajos extends CI_Controller {
 		$this->db->order_by('t.id', 'desc');
 		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
 		$this->db->where('t.borrado', NULL);
-		$this->db->limit(100);
+		$this->db->limit(200);
 		$data['trabajos'] = $this->db->get()->result_array();
 		// vdebug($data['trabajo'], true ,false, true);
 
@@ -1265,6 +1265,35 @@ class Trabajos extends CI_Controller {
 			"data"           =>$data
 		);
 		echo json_encode($output);
+	}
+
+	public function ajax_cabecera_cliente($nombre_cliente = null)
+	{
+		$cliente_limpio = str_replace("%20"," ",$nombre_cliente);
+		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);
+		$this->db->limit(10);
+		$data['clientes_encontrados'] = $this->db->get('clientes')->result_array();
+		// vdebug($res, true, false, true);
+		$this->load->view('trabajos/ajax_cabecera_cliente', $data);
+	}
+
+	public function detalle_trabajos_cliente($cliente_id = null)
+	{
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->order_by('t.id', 'desc');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.borrado', NULL);
+		$this->db->where('t.cliente_id', $cliente_id);
+		$this->db->limit(200);
+		$data['trabajos'] = $this->db->get()->result_array();
+		// vdebug($data['trabajo'], true ,false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('trabajos/detalle_trabajos_cliente', $data);
+		$this->load->view('template/footer');
 	}
 
 }

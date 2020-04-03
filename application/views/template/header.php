@@ -31,6 +31,27 @@
     <!-- libreria jquery -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
     <link href="<?php echo base_url(); ?>public/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function busca_cliente()
+        {
+            var nombre_cabecera_cliente = $('#cabecera_cliente').val();
+            if (nombre_cabecera_cliente.length > 3) {
+              $.ajax({
+                url: '<?php echo base_url() ?>Trabajos/ajax_cabecera_cliente/' + nombre_cabecera_cliente,
+                type: 'GET',
+                success: function (data) {
+                    $("#datos_cabecera_cliente").html(data);
+                    $("#cabecera_cliente_listado").addClass('show');
+                }
+              });
+            }
+        }
+
+        function cierra_datos_cabecera()
+        {
+            $("#cabecera_cliente_listado").removeClass('show');
+        }
+    </script>
 </head>
 
 <body class="fix-header card-no-border fix-sidebar">
@@ -101,7 +122,8 @@
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item hidden-sm-down">
                             <form class="app-search">
-                                <input type="text" class="form-control" placeholder="Search for..."> <a class="srh-btn"><i class="ti-search"></i></a> </form>
+                                <input type="text" class="form-control" id="cabecera_cliente" nombre="cabecera_cliente" placeholder="Buscar Cliente..." onkeyup="busca_cliente();"> <a class="srh-btn"><i class="ti-search" onclick=""></i></a> 
+                            </form>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url(); ?>public/assets/images/users/1.jpg" alt="user" class="profile-pic" /></a>
@@ -127,8 +149,13 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="flag-icon flag-icon-us"></i></a>
-                            <div class="dropdown-menu  dropdown-menu-right animated bounceInDown"> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-in"></i> India</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-fr"></i> French</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-cn"></i> China</a> <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-de"></i> Dutch</a> </div>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="flag-icon flag-icon-us"></i></a>                            
+                            <div class="dropdown-menu dropdown-menu-right animated bounceInDown" id="cabecera_cliente_listado"> 
+                                <div id="datos_cabecera_cliente">
+                                    
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>

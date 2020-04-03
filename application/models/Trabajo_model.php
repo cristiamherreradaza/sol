@@ -46,7 +46,7 @@ class Trabajo_model extends CI_Model
             $this->db->limit($_POST['length'], $_POST['start']);  
         }  
         $query = $this->db->get();  
-        vdebug($query->result(), true, false, true);
+        // vdebug($query->result(), true, false, true);
         return $query->result();  
     }  
 
