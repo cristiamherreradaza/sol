@@ -25,6 +25,8 @@ class Inventarios_Venta extends CI_Controller {
 		// $this->load->helper('url_helper');
 		// $this->load->database();
 		$this->load->helper('vayes_helper');
+		$this->load->model("Inventarios_model");
+
 	}
 
 
@@ -46,6 +48,137 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
+		$this->db->select('cantidad');
+		$this->db->from('sacos');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$this->db->where('altura_busto', 0);
+		$data['saco_varon'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('pantalones');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$this->db->where('cadera', 0);
+		$data['pantalon_varon'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('chalecos');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$this->db->where('altura_busto', 0);
+		$data['chaleco_varon'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('sacos');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$data['saco_mujer'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('pantalones');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$data['pantalon_mujer'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('faldas');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$data['falda_mujer'] = $this->db->get()->row();
+
+		$this->db->select('cantidad');
+		$this->db->from('chalecos');
+		$this->db->where('trabajo_id', $id_trabajo);
+		$data['chaleco_mujer'] = $this->db->get()->row();
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('inventarios/retira_material', $data);
+		$this->load->view('template/footer');
+		
+	}
+
+	public function guarda_retiro()
+	{
+		$trabajo_id = $this->input->post('trabajo_id');
+		$fecha = $this->input->post('fecha');
+
+		// MATERIALES PARA EL SACO DEL VARON
+		if(!empty($this->input->post('etsv'))){
+			$etsv = $this->input->post('etsv');
+			$fsv = $this->input->post('fsv');
+			$psv = $this->input->post('psv');
+			$hsv = $this->input->post('hsv');
+			$pesv = $this->input->post('pesv');
+			$tfsv = $this->input->post('tfsv');
+			$bgsv = $this->input->post('bgsv');
+			$bpsv = $this->input->post('bpsv');
+			$this->Inventarios_model->insertar_material_saco_varon($trabajo_id, $fecha, $etsv, $fsv, $psv, $hsv, $pesv, $tfsv, $bgsv, $bpsv);
+		}
+
+		// MATERIALES PARA EL PANTALON DEL VARON
+		if(!empty($this->input->post('bpv'))){
+			$bpv = $this->input->post('bpv');
+			$cpv = $this->input->post('cpv');
+			$pbpv = $this->input->post('pbpv');
+			$bppv = $this->input->post('bppv');
+			$bropv = $this->input->post('bropv');
+			$ppv = $this->input->post('ppv');
+			$lpv = $this->input->post('lpv');
+			$this->Inventarios_model->insertar_material_pantalon_varon($trabajo_id, $fecha, $bpv, $cpv, $pbpv, $bppv, $bropv, $ppv, $lpv);
+		}
+		
+		// MATERIALES PARA EL PANTALON DEL VARON
+		if(!empty($this->input->post('fcv'))){
+			$fcv = $this->input->post('fcv');
+			$pcv = $this->input->post('pcv');
+			$hcv = $this->input->post('hcv');
+			$bgcv = $this->input->post('bgcv');
+			$bpcv = $this->input->post('bpcv');
+			$this->Inventarios_model->insertar_material_chaleco_varon($trabajo_id, $fecha, $fcv, $pcv, $hcv, $bgcv, $bpcv);
+		}
+
+		// MATERIALES PARA EL SACO DE LA MUJER
+		if(!empty($this->input->post('fsm'))){
+			$fsm = $this->input->post('fsm');
+			$fusm = $this->input->post('fusm');
+			$psm = $this->input->post('psm');
+			$tsm = $this->input->post('tsm');
+			$hmsm = $this->input->post('hmsm');
+			$bgsm = $this->input->post('bgsm');
+			$bpsm = $this->input->post('bpsm');
+			$this->Inventarios_model->insertar_material_saco_mujer($trabajo_id, $fecha, $fsm, $fusm, $psm, $tsm, $hmsm, $bgsm, $bpsm);
+		}
+
+		// MATERIALES PARA EL PANTALON DE LA MUJER
+		if(!empty($this->input->post('cpm'))){
+			$cpm = $this->input->post('cpm');
+			$pppm = $this->input->post('pppm');
+			$this->Inventarios_model->insertar_material_pantalon_mujer($trabajo_id, $fecha, $cpm, $pppm);
+		}
+
+		// MATERIALES PARA EL FALDA DE LA MUJER
+		if(!empty($this->input->post('cfm'))){
+			$cfm = $this->input->post('cfm');
+			$tfm = $this->input->post('tfm');
+			$ppfm = $this->input->post('ppfm');
+			$this->Inventarios_model->insertar_material_falda_mujer($trabajo_id, $fecha, $cfm, $tfm, $ppfm);
+		}
+
+		// MATERIALES PARA EL CHALECO DE LA MUJER
+		if(!empty($this->input->post('fcm'))){
+			$fcm = $this->input->post('fcm');
+			$pbcm = $this->input->post('pbcm');
+			$bpcm = $this->input->post('bpcm');
+			$this->Inventarios_model->insertar_material_cheleco_mujer($trabajo_id, $fecha, $fcm, $pbcm, $bpcm);
+		}
+		redirect("trabajos/listado_trabajos");
+		
+    }
+
+    public function retira_material1($id_trabajo = null)
+	{
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
+		$data['trabajo'] = $this->db->get()->row_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
 		$this->db->from('sacos as sa');
@@ -96,42 +229,38 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->where('ex.trabajo_id', $id_trabajo);
 		$data['extras'] = $this->db->get()->row_array();
 
-		// vdebug($data['chaleco'], false, false, true);
-
-		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
-		// $fecha = fechaEs($data['trabajo']['fecha']);
 
 		// DATOS PARA EL SACO
 		$data['entre_tela'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
-																							FROM compras com
-																							WHERE estado = 1
-																							GROUP BY (categoria_id))com
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
+																	FROM compras
+																	WHERE estado = 1
+																	GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'ENTRE TELA'")->row();
 		$data['forro'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'FORRO'")->row();
 		$data['plaston'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'PLASTON'")->row();
 		$data['hombrera_v'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'HOMBRERA (VARON)'")->row();
 		$data['pellon'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -139,21 +268,21 @@ class Inventarios_Venta extends CI_Controller {
 											AND cate.nombre like 'PELLON (BLANCO)'")->row();
 
 		$data['fusionable'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'TELA FUSIONABLE'")->row();
 		$data['boton_g'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'BOTON GRANDE'")->row();
 		$data['boton_p'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -162,7 +291,7 @@ class Inventarios_Venta extends CI_Controller {
 
 		// DATOS PARA EL PANTALON
 		$data['bonye'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -170,14 +299,14 @@ class Inventarios_Venta extends CI_Controller {
 											AND cate.nombre like 'BONYE'")->row();
 
 		$data['cierre'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'CIERRE'")->row();
 		$data['bocha'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -185,7 +314,7 @@ class Inventarios_Venta extends CI_Controller {
 											AND cate.nombre like 'BOCHA'")->row();
 
 		$data['liga'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -195,7 +324,7 @@ class Inventarios_Venta extends CI_Controller {
 		// DATOS PARA EL CHALECO
 
 		$data['hebilla'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -204,14 +333,14 @@ class Inventarios_Venta extends CI_Controller {
 
 		// DATOS PANTALON DAMAS
 		$data['bolsillo'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.nombre like 'BOLSILLO'")->row();
 		$data['hombrera_d'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
+											FROM categorias cate, (SELECT SUM(stock) as suma, categoria_id
 																							FROM compras com
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
@@ -228,6 +357,8 @@ class Inventarios_Venta extends CI_Controller {
 		$this->load->view('template/footer');
 	
     }
+
+
 
 
      public function ajax_verifica_categoria(){
@@ -329,6 +460,7 @@ class Inventarios_Venta extends CI_Controller {
 		$respuesta = array('estado'=>'registrado');
 		echo json_encode($respuesta);
     }
+
 
 
     public function registra()

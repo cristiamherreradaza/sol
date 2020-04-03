@@ -185,26 +185,13 @@ class Inventarios_Compra extends CI_Controller {
 
     public function lista()
     {
-  //   	$this->db->from("categorias");
-  //   	$this->db->where("estado", 1);
-		// $this->db->order_by("id", "asc");
-		// $query = $this->db->get(); 
-		// $data['categorias'] = $query->result();
-
-		// $data['categorias'] = $this->db->get_where('compras', array('estado' => 1))->result();
-		// $data['compras'] = $this->db->get_where('compras', array('estado' => 1))->result();
 		$data['compra'] = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
-																							FROM compras com
+											FROM categorias cate, (SELECT categoria_id, SUM(stock) as suma
+																							FROM compras
 																							WHERE estado = 1
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.estado = 1")->result();
-		// $data['venta'] = $this->db->query("SELECT categoria_id, SUM(cantidad) as suma
-		// 									FROM ventas
-		// 									WHERE estado = 1
-		// 									GROUP BY (categoria_id)")->result();
-
         $this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('inventarios/lista_inventarios', $data);

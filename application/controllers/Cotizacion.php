@@ -113,5 +113,19 @@ class Cotizacion extends CI_Controller {
         // target="_blank"   PARA ABRIR EN UNA PESTAÑA  NUEVA
     }
 
+    public function prueba()
+	{
+		
+		$this->load->view('cotizacion/prueba');
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+        $this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+        // target="_blank"   PARA ABRIR EN UNA PESTAÑA  NUEVA
+    }
+
 	
 }
