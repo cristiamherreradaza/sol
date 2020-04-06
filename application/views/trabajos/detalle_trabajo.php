@@ -441,7 +441,7 @@
                                                             <td class="text-right"><?php echo $extras['corbata_gato']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Detalle</td>
+                                                            <td>Faja</td>
                                                             <td class="text-right"><?php echo $extras['faja']; ?></td>
                                                             <td></td>
                                                             <td class="text-right"></td>
@@ -597,7 +597,9 @@
                             </a>
                         </div>
                         <div class="col-md-6">
-                            <button id="print" class="btn waves-effect waves-light btn-block btn-dark" type="button"> <span><i class="fa fa-print"></i> Impresion Empresa</span> </button>
+                            <a href="<?php echo base_url(); ?>trabajos/pdf_detalle_trabajo/<?php echo $trabajo['id'] ?>" target="_blank">
+                                <button class="btn waves-effect waves-light btn-block btn-dark" type="button"> <span><i class="fa fa-print"></i> Impresion Empresa</span> </button>
+                            </a>
                         </div>
                     </div>
                     

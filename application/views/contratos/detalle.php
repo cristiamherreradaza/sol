@@ -281,7 +281,7 @@
                                                         <td><?php echo $c['total'] ?></td>
                                                         <td align="left">
                                                             <button type="button" class="btn btn-warning" onclick="edita_detalle_contrato(<?php echo $c['id'] ?>)"><i class="fas fa-edit"></i></button>
-                                                            <!-- <button type="button" class="btn btn-danger" onclick="elimina(<?php echo $c['id'] ?>, <?php echo $c['descripcion'] ?>)"><i class="fas fa-times"></i></button> -->
+                                                            <button type="button" class="btn btn-danger" onclick="elimina_contrato(<?php echo $c['id'] ?>, '<?php echo $c['descripcion'] ?>', <?php echo $c['grupo_id'] ?>)"><i class="fas fa-times"></i></button>
                                                         </td>
                                                     </tr>
                                                 <?php endforeach; ?>
@@ -382,6 +382,30 @@
             window.location.href = "<?php echo base_url() ?>contratos/elimina_persona_contrato/"+id+"/"+grupo_id;
           }
         })
+    }
+
+    function elimina_contrato(id, nombre, grupo_id){
+        console.log(id + nombre + grupo_id);
+        /*Swal.fire({
+          title: 'Quieres borrar '+nombre+'?',
+          text: "Luego no podras recuperarlo!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Si, estoy seguro!',
+          cancelButtonText: "Cancelar",
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Excelente!',
+              'La persona fue borrada.',
+              'success'
+            );
+            // console.log("el id es "+id_pago);
+            window.location.href = "<?php echo base_url() ?>contratos/elimina_persona_contrato/"+id+"/"+grupo_id;
+          }
+        })*/
     }
 
     function edita_grupo()

@@ -102,9 +102,12 @@
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
-                        <li><a href="<?php echo base_url(); ?>trabajos/listado">Listado</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Reportes</a></li>
+                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
                     </ul>
+                </li>
+
+                <li>
+                    <a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false"><i class="mdi mdi-cash"></i>PAGOS</a>
                 </li>
                 
                 <li>
@@ -117,6 +120,14 @@
 
                 <li>
                     <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
+                </li>
+
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">REPORTES</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="<?php //echo base_url(); ?>reportes/inicio">Centralizado</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
+                    </ul>
                 </li>
 
                 <li>

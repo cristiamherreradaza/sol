@@ -36,7 +36,7 @@
                                                 <h4 class="mb-0 text-white">RESUMEN INGRESOS</h4>
                                             </div>
                                             <div class="card-body">
-                                                <div id="piechart_3d" style="width: 100%; height: 300px;"></div>
+                                                <div id="columnchart_material" style="width: 100%; height: 300px;"></div>
                                                 <table class="table table-hover">
                                                     <tr>
                                                         <th>INGRESOS</th>
@@ -44,9 +44,9 @@
                                                         <th>COBRADO</th>
                                                     </tr>
                                                     <tr>
-                                                        <td><?php echo $totales['total']; ?></td>
-                                                        <td><?php echo $totales['saldo']; ?></td>
-                                                        <td><?php echo $totales['total']-$totales['saldo']; ?></td>
+                                                        <td><?php echo $total_ingresos_trabajos['total']; ?></td>
+                                                        <td><?php echo $total_ingresos_trabajos['saldo']; ?></td>
+                                                        <td><?php echo $total_ingresos_trabajos['total']-$total_ingresos_trabajos['saldo']; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -58,7 +58,7 @@
 
                                         <div class="card card-outline-info">
                                             <div class="card-header">
-                                                <h4 class="mb-0 text-white">INGRESOS GASTOS</h4>
+                                                <h4 class="mb-0 text-white">POR TIPO</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div id="donutchart" style="width: 100%; height: 300px;"></div>
@@ -72,31 +72,6 @@
                                                         <td><?php echo $tela_confeccion['tela']; ?></td>
                                                         <td><?php echo $tela_confeccion['confeccion']; ?></td>
                                                         <td><?php echo $tela_confeccion['confeccion']+$tela_confeccion['tela']; ?></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-
-                                    <div class="col-md-4">
-
-                                        <div class="card card-outline-primary">
-                                            <div class="card-header">
-                                                <h4 class="mb-0 text-white">ENTREGADOS</h4>
-                                            </div>
-                                            <div class="card-body">
-                                                <div id="piechart" style="width: 100%; height: 300px;"></div>
-                                                <table class="table table-hover">
-                                                    <tr>
-                                                        <th>ENTREGADOS</th>
-                                                        <th>NO ENTREGADOS</th>
-                                                        <th>TOTAL</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><?php echo $entregados['cantidad']; ?></td>
-                                                        <td><?php echo $no_entregados['cantidad']; ?></td>
-                                                        <td><?php echo $entregados['cantidad']+$no_entregados['cantidad']; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -196,63 +171,27 @@ $(function () {
         }
     });
 });
-
-  google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['MONTOS',   'TOTALES'],
-      ['INGRESOS', <?php echo $totales['total'] ?>],
-      ['SALDOS',   <?php echo $totales['saldo'] ?>]
-    ]);
-
-    var options = {
-      is3D: true,
-      chartArea:{width:'90%',height:'100%'}
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
-  }
 </script>
-<script type="text/javascript">
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['MONTOS', 'TOTALES'],
-        ['TELA', <?php echo $tela_confeccion['tela']; ?>],
-        ['CONFECCION', <?php echo $tela_confeccion['confeccion']; ?>]
-    ]);
 
-    var options = {
-        pieHole: 0.4,
-        chartArea:{width:'90%',height:'100%'}
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
-    }
-</script>
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages':['bar']});
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-
     var data = google.visualization.arrayToDataTable([
-      ['MONTOS', 'TOTALES'],
-      ['ENTREGADOS', <?php echo $entregados['cantidad'] ?>],
-      ['SIN ENTREGAR', <?php echo $no_entregados['cantidad'] ?>]
-      ]);
+        ['-', 'INGRESOS', 'SALDOS'],
+        ['TRABAJOS', <?php echo $total_ingresos_trabajos['total'] ?>, <?php echo $total_ingresos_trabajos['saldo'] ?>],
+    ]);
 
     var options = {
-      // title: 'My Daily Activities'
-      chartArea:{width:'90%',height:'100%'}
+        chart: {
+            chartArea:{width:'90%',height:'100%'}
+        },
+        hAxis: {format: 'currency'},
     };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-    chart.draw(data, options);
+    chart.draw(data, google.charts.Bar.convertOptions(options));
     }
 </script>

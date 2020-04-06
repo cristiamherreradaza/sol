@@ -114,15 +114,19 @@ class Trabajos extends CI_Controller {
 		$this->db->insert('trabajos', $datos_trabajo);
 		$id_trabajo = $this->db->insert_id();
 
-		$datos_pago = array(
-			'cliente_id' => $id_cliente,
-			'trabajo_id' => $id_trabajo,
-			'fecha'      => $fecha_hora_trabajo,
-			'monto'      => $this->input->post('a_cuenta')
-		);
-		$this->db->insert('pagos', $datos_pago);
+		if ($this->input->post('a_cuenta') > 0) {
+			$datos_pago = array(
+				'cliente_id' => $id_cliente,
+				'trabajo_id' => $id_trabajo,
+				'usuario_id' => $usuario_id,
+				'fecha'      => $fecha_hora_trabajo,
+				'monto'      => $this->input->post('a_cuenta')
+			);
+			$this->db->insert('pagos', $datos_pago);
+		}
 
 		if (!empty($this->input->post('s_pecho'))) {
+
 			$datos_saco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
@@ -1293,6 +1297,101 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
 		$this->load->view('trabajos/detalle_trabajos_cliente', $data);
+		$this->load->view('template/footer');
+	}
+
+	public function pdf_detalle_trabajo($id_trabajo = null)
+	{
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
+		$data['trabajo'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
+		$this->db->from('sacos as sa');
+		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
+		$this->db->where('sa.trabajo_id', $id_trabajo);
+		$data['saco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
+		$this->db->from('pantalones as pa');
+		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
+		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
+		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
+		$this->db->where('pa.trabajo_id', $id_trabajo);
+		$data['pantalon'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
+		$this->db->from('chalecos as ch');
+		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
+		$this->db->where('ch.trabajo_id', $id_trabajo);
+		$data['chaleco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
+		$this->db->from('faldas as f');
+		$this->db->join('modelos as mo', 'mo.id = f.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = f.abertura_id', 'left');
+		$this->db->where('f.trabajo_id', $id_trabajo);
+		$data['falda'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, b.nombre as bolsillo_nombre, j.*');
+		$this->db->from('jumpers as j');
+		$this->db->join('modelos as mo', 'mo.id = j.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = j.abertura_id', 'left');
+		$this->db->join('bolsillos as b', 'b.id = j.bolsillo_id', 'left');
+		$this->db->where('j.trabajo_id', $id_trabajo);
+		$data['jumper'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('camisas as ca');
+		$this->db->where('ca.trabajo_id', $id_trabajo);
+		$data['camisa'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('extras as ex');
+		$this->db->where('ex.trabajo_id', $id_trabajo);
+		$data['extras'] = $this->db->get()->row_array();
+
+		// vdebug($data['chaleco'], fa);
+
+		// $data['trabajo'] = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+		$fecha = fechaEs($data['trabajo']['fecha']);
+		// $this->load->view('template/header');
+		// $this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		// $this->load->view('trabajos/detalle_trabajo', $data);
+		// $this->load->view('template/footer');
+
+		$this->load->view('trabajos/pdf_detalle_trabajo', $data);
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+        $this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+
+	}
+
+	public function listado_pagos()
+	{
+		$this->db->select('p.id, c.nombre as cliente, u.nombre, t.id as trabajo, p.fecha, p.monto');
+		$this->db->from('pagos as p');
+		$this->db->join('clientes as c', 'c.id = p.cliente_id', 'left');
+		$this->db->join('trabajos as t', 't.id = p.trabajo_id', 'left');
+		$this->db->join('usuarios as u', 'u.id = p.usuario_id', 'left');
+		$this->db->where('p.borrado', NULL);
+		$this->db->limit(200);
+		$data['pagos'] = $this->db->get()->result();
+		// vdebug($data['pagos'], true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('trabajos/listado_pagos', $data);
 		$this->load->view('template/footer');
 	}
 

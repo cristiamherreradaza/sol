@@ -1211,7 +1211,9 @@
                   <button type="submit" class="btn waves-effect waves-light btn-block btn-success">Guardar Trabajo</button>
                 </div>
                 <div class="col-md-6">
-                  <button type="button" class="btn waves-effect waves-light btn-block btn-inverse">Cancelar</button>
+                  <a href="<?php echo base_url() ?>trabajos/listado_trabajos">
+                    <button type="button" class="btn waves-effect waves-light btn-block btn-inverse">Cancelar</button>
+                  </a>
                 </div>
               </div>
 

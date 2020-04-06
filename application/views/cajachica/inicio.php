@@ -156,7 +156,7 @@
                                                     <?php foreach ($caja as $c): ?>
                                                     <tr>
                                                         <td><?php echo $c['id'] ?></td>
-                                                        <td><?php echo $c['fecha'] ?></td>
+                                                        <td><?php echo fechaEs($c['fecha']) ?></td>
                                                         <td><?php echo $c['descripcion'] ?></td>
                                                         <!-- <td><?php //echo $c['usuario_id'] ?></td> -->
                                                         <td><?php echo $c['ingreso'] ?></td>

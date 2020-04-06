@@ -30,6 +30,12 @@
                                     <td>
                                         <table border="0" class="impresion">
                                             <tr>
+                                                <td colspan="2">
+                                                    <img src="<?php echo base_url() ?>public/assets/images/reportes/impresion_cliente.jpg" width="300px">
+                                                    <p>&nbsp;</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td style="text-align: center;"><h6><b>TRABAJO <span class="text-info"># <?php echo $trabajo['id']; ?></span></b></h6></td>
                                                 <td style="text-align: center;"><h6><b>RECIBO <span class="text-info"># <?php echo $pagos[0]['id']; ?></span></b></h6></td>
                                             </tr>
@@ -90,6 +96,16 @@
                                                     <td class="text-right"><b><?php echo number_format($trabajo['total']-$total, 2); ?></b></td>
                                                 </tr>
                                             </tbody>
+                                        </table>
+
+                                        <p>&nbsp;</p>
+
+                                        <table style="width: 302px;" class="impresion" border="0">
+                                            <tr><td style="width: 80%; text-align: center;">Soliz & Mendoza</td></tr>
+                                            <tr><td style="width: 80%; text-align: center;">Calle Antonio Quijaro N° 911, Zona Garita de Lima La Paz - Bolivia</td></tr>
+                                            <tr><td style="width: 80%; text-align: center;">ventas@gmail.com</td></tr>
+                                            <tr><td style="width: 80%; text-align: center;">www.solizmendoza.com</td></tr>
+                                            <tr><td style="width: 80%; text-align: center;">(591)-79135112</td></tr>
                                         </table>
 
                                     </td>

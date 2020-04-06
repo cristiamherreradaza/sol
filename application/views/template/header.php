@@ -133,8 +133,8 @@
                                         <div class="dw-user-box">
                                             <div class="u-img"><img src="<?php echo base_url(); ?>public/assets/images/users/1.jpg" alt="user"></div>
                                             <div class="u-text">
-                                                <h4>Steave Jobs</h4>
-                                                <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <h4><?php echo $this->session->nombre ?></h4>
+                                                <p class="text-muted"></p><a href="#" class="btn btn-rounded btn-danger btn-sm" onclick="abre_modal_usuario();">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>

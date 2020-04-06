@@ -78,6 +78,7 @@ class Reportes extends CI_Controller {
 						FROM trabajos
 						WHERE fecha >= ?
 						AND fecha <= ?
+						AND borrado IS NULL
 						";
 		$data['totales'] = $this->db->query($sql_totales, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
 
@@ -85,6 +86,7 @@ class Reportes extends CI_Controller {
 						FROM trabajos
 						WHERE fecha >= ?
 						AND fecha <= ?
+						AND borrado IS NULL
 						";
 		$data['tela_confeccion'] = $this->db->query($sql_tela_confeccion, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
 
@@ -92,6 +94,7 @@ class Reportes extends CI_Controller {
 						FROM trabajos
 						WHERE fecha >= ?
 						AND fecha <= ?
+						AND borrado IS NULL
 						AND entregado = 'Si'
 						";
 		$data['entregados'] = $this->db->query($sql_entregados, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
@@ -100,6 +103,7 @@ class Reportes extends CI_Controller {
 						FROM trabajos
 						WHERE fecha >= ?
 						AND fecha <= ?
+						AND borrado IS NULL
 						AND entregado = 'No'
 						";
 		$data['no_entregados'] = $this->db->query($sql_no_entregados, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
@@ -122,6 +126,7 @@ class Reportes extends CI_Controller {
 
 	public function reporte_deudas()
 	{
+		// Esto hace que las consultas GROUP BY se generen de manera normal
 		$sql_mode = "set session sql_mode=''";
 		$this->db->query($sql_mode);
 
@@ -162,10 +167,66 @@ class Reportes extends CI_Controller {
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
-		// $this->load->view('trabajos/nuevo', $data);
 		$this->load->view('reportes/genera_deudores', $data);
 		$this->load->view('template/footer');
+	}
 
+	public function ingresos_gastos()
+	{
+		$fecha_hora_inicio = $this->input->post('fecha_inicio').' '.'00:00:00';
+		$fecha_hora_fin    = $this->input->post('fecha_fin').' '.'23:59:00';
+
+		$data['inicio'] = $fecha_hora_inicio;
+		$data['fin'] = $fecha_hora_fin;
+
+		$this->input->post('name');
+
+		$sql_total_ingreso_trabajos = "SELECT SUM(total) as total, SUM(saldo) as saldo 
+						FROM trabajos
+						WHERE fecha >= ?
+						AND fecha <= ?
+						AND borrado IS NULL
+						";
+		$data['total_ingresos_trabajos'] = $this->db->query($sql_total_ingreso_trabajos, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+		//vdebug($data['total_ingresos_trabajos'], false, false, true);
+
+		$sql_total_gastos = "SELECT SUM(salida) as total
+						FROM cajachica
+						WHERE fecha >= ?
+						AND fecha <= ?
+						AND borrado IS NULL
+						";
+		$data['total_gastos'] = $this->db->query($sql_total_gastos, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
+		//vdebug($data['total_gastos'], true, false, true);
+
+		$this->db->select('p.id, c.nombre as cliente, u.nombre, t.id as trabajo, p.fecha, p.monto');
+		$this->db->from('pagos as p');
+		$this->db->join('clientes as c', 'c.id = p.cliente_id', 'left');
+		$this->db->join('trabajos as t', 't.id = p.trabajo_id', 'left');
+		$this->db->join('usuarios as u', 'u.id = p.usuario_id', 'left');
+		$this->db->where('t.fecha >=', $fecha_hora_inicio);
+		$this->db->where('t.fecha <=', $fecha_hora_fin);
+		$this->db->where('t.borrado =', NULL);
+		$data['listado_pagos'] = $this->db->get()->result();
+		//vdebug($data['pagos'], false, false, true);
+		
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.fecha >=', $fecha_hora_inicio);
+		$this->db->where('t.fecha <=', $fecha_hora_fin);
+		$this->db->where('t.borrado =', NULL);
+		$data['listado_trabajos'] = $this->db->get()->result();
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('reportes/ingresos_gastos', $data);
+		$this->load->view('template/footer');
+
+	}
+
+	public function centralizado()
+	{
 
 	}
 }
