@@ -15,6 +15,7 @@
                         <center><h1><b>MATERIALES PERTENECIENTES AL TRABAJO N° <?php echo $trabajo['id']; ?></b></h1></center>
                         <?php //vdebug($trabajo, false, false, true); ?>
                         <hr>
+                        <?php echo form_open_multipart('Inventarios_Venta/guarda_retiro', array('method'=>'POST')); ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="float-left">
@@ -32,44 +33,48 @@
                                 </div>
                             </div>
 
-
+							<input type="text" name="trabajo_id" id="trabajo_id" hidden value="<?php echo $trabajo['id']; ?>">
+							<!-- <input type="text" name="cliente_id" id="cliente_id" hidden value="<?php echo $trabajo['cliente_id'] ?>"> -->
+							<input type="text" name="fecha" id="fecha" hidden value="<?php echo date("Y-m-d") ?>">
+							<!-- INICIO DATOS PARA EL VARON -->
+							<?php if (!empty($saco_varon->cantidad)) { ?>
                                 <div class="col-md-12">
 
                                         <div class="row">
-                                        <?php if (!empty($saco['modelo_nombre'])): ?>
+                                        <?php if (!empty($saco_varon->cantidad)): ?>
                                             <div class="col-md-6">
                                                 <div class="card card-outline-info">
                                                   <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL SACO</h4>
+                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL SACO (cantidad <?php echo $saco_varon->cantidad; ?>)</h4>
                                                   </div>
                                                   <div class="card-body" style="background-color: #e6f2ff;">
 
                                                     <div class="row">
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $entre_tela->nombre ?></label>
-                                                          <input name="entre_tela_saco" type="number" id="entre_tela_saco" class="form-control" min="0" value="<?php echo '0.40' ?>">
+                                                          <label class="control-label"><?php echo "ENTRE TELA (Metros)" ?></label>
+                                                          <input name="etsv" type="number" id="etsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $forro->nombre ?></label>
-                                                          <input name="forro_saco" type="number" id="forro_saco" class="form-control" min="0" value="<?php echo '1.30' ?>">
+                                                          <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
+                                                          <input name="fsv" type="number" id="fsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*1.30; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $plaston->nombre ?></label>
-                                                          <input name="plaston_saco" type="number" id="plaston_saco" class="form-control" min="0" value="<?php echo '0.40' ?>">
+                                                          <label class="control-label"><?php echo 'PLASTON (Metros)' ?></label>
+                                                          <input name="psv" type="number" id="psv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $hombrera_v->nombre ?></label>
-                                                          <input name="hombrera_v_saco" type="number" id="hombrera_v_saco" class="form-control" min="0" value="<?php echo '2' ?>">
+                                                          <label class="control-label"><?php echo 'HOMBRERA DE VARON (Unidades)' ?></label>
+                                                          <input name="hsv" type="number" id="hsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*2; ?>">
                                                         </div>
                                                       </div>
 
@@ -79,29 +84,29 @@
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $pellon->nombre ?></label>
-                                                          <input name="pellon_saco" type="number" id="pellon_saco" class="form-control" min="0" step="any" value="<?php echo '0.5' ?>">
+                                                          <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                          <input name="pesv" type="number" id="pesv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.5; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $fusionable->nombre ?></label>
-                                                          <input name="fusionable_saco" type="number" id="fusionable_saco" class="form-control" min="0" step="any" value="<?php echo '0.40' ?>">
+                                                          <label class="control-label"><?php echo 'TELA FUSIONABLE (Metros)' ?></label>
+                                                          <input name="tfsv" type="number" id="tfsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $boton_g->nombre ?></label>
-                                                          <input name="boton_g_saco" type="number" id="boton_g_saco" class="form-control" min="0" step="any" value="<?php echo $saco['botones']; ?>">
+                                                          <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
+                                                          <input name="bgsv" type="number" id="bgsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*4; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $boton_p->nombre ?></label>
-                                                          <input name="boton_p_saco" type="number" id="boton_p_saco" class="form-control" min="0" step="any" value="<?php echo '10' ?>">
+                                                          <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                          <input name="bpsv" type="number" id="bpsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*10; ?>">
                                                         </div>
                                                       </div>
 
@@ -112,72 +117,72 @@
                                         
                                         <?php endif ?>
 
-                                        <?php if (!empty($pantalon['modelo_nombre'])): ?>
+                                        <?php if (!empty($pantalon_varon->cantidad)): ?>
                                            
                                             <!-- modelos pantalon -->
                                             <div class="col-md-6">
                                               <div class="card card-outline-success">
                                                 <div class="card-header">
-                                                  <h4 class="mb-0 text-white">MATERIALES PARA EL PANTALON</h4>
+                                                  <h4 class="mb-0 text-white">MATERIALES PARA EL PANTALON (cantidad <?php echo $pantalon_varon->cantidad; ?>)</h4>
                                                 </div>
                                                 <div class="card-body" style="background-color: #e6ffe6;">
 
                                                     <div class="row">
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $bonye->nombre ?></label>
-                                                              <input name="bonye_pantalon" type="number" id="bonye_pantalon" class="form-control" min="0" step="any" value="<?php echo '0.50' ?>">
+                                                              <label class="control-label"><?php echo 'BONYE (Metros)' ?></label>
+                                                              <input name="bpv" type="number" id="bpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*0.50; ?>">
                                                             </div>
                                                           </div>
 
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $cierre->nombre ?></label>
-                                                              <input name="cierre_pantalon" type="number" id="cierre_pantalon" class="form-control" min="0" step="any" value="<?php echo '1' ?>">
+                                                              <label class="control-label"><?php echo 'CIERRE (Unidades)' ?></label>
+                                                              <input name="cpv" type="number" id="cpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1; ?>">
                                                             </div>
                                                           </div>
 
-                                                          <div class="col-md-3">
+                                                          <div class="col-md-5">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $pellon->nombre ?></label>
-                                                              <input name="pellon_pantalon" type="number" id="pellon_pantalon" class="form-control" min="0" step="any" value="<?php echo '0.30' ?>">
+                                                              <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                              <input name="pbpv" type="number" id="pbpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*0.30; ?>">
                                                             </div>
                                                           </div>
 
-                                                          <div class="col-md-3">
+                                                          <!-- <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $boton_g->nombre ?></label>
-                                                              <input name="boton_g_pantalon" type="number" id="boton_g_pantalon" class="form-control" min="0" step="any" value="<?php echo '2' ?>">
+                                                              <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
+                                                              <input name="bgpv" type="number" id="bgpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*2; ?>">
                                                             </div>
-                                                          </div>
+                                                          </div> -->
                                                     </div>
 
                                                     <div class="row">
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $boton_p->nombre ?></label>
-                                                              <input name="boton_p_pantalon" type="number" id="boton_p_pantalon" class="form-control" min="0" step="any" value="<?php echo '5' ?>">
+                                                              <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                              <input name="bppv" type="number" id="bppv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*5; ?>">
                                                             </div>
                                                           </div>
 
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $bocha->nombre ?></label>
-                                                              <input name="bocha_pantalon" type="number" id="bocha_pantalon" class="form-control" min="0" step="any" value="<?php echo '1' ?>">
+                                                              <label class="control-label"><?php echo 'BROCHE (Unidades)' ?></label>
+                                                              <input name="bropv" type="number" id="bropv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1; ?>">
                                                             </div>
                                                           </div>
 
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $plaston->nombre ?></label>
-                                                              <input name="plaston_pantalon" type="number" id="plaston_pantalon" class="form-control" min="0" step="any" value="<?php echo '6' ?>">
+                                                              <label class="control-label"><?php echo 'PLASTON (Metros)' ?></label>
+                                                              <input name="ppv" type="number" id="ppv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*6; ?>">
                                                             </div>
                                                           </div>
 
                                                           <div class="col-md-3">
                                                             <div class="form-group">
-                                                              <label class="control-label"><?php echo $liga->nombre ?></label>
-                                                              <input name="liga_pantalon" type="number" id="liga_pantalon" class="form-control" min="0" step="any" value="<?php echo '1.2' ?>">
+                                                              <label class="control-label"><?php echo 'LIGA (Metros)' ?></label>
+                                                              <input name="lpv" type="number" id="lpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1.2; ?>">
                                                             </div>
                                                           </div>
 
@@ -195,11 +200,11 @@
                                 <div class="col-md-12">
 
                                         <div class="row">
-                                        <?php if (!empty($chaleco['modelo_nombre'])): ?>
+                                        <?php if (!empty($chaleco_varon->cantidad)): ?>
                                             <div class="col-md-6">
                                                 <div class="card card-outline-primary">
                                                   <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL CHALECO</h4>
+                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL CHALECO (cantidad <?php echo $chaleco_varon->cantidad; ?>)</h4>
                                                   </div>
                                                   <div class="card-body" style="background-color: #f0e7fe;">
 
@@ -207,29 +212,29 @@
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $forro->nombre ?></label>
-                                                          <input name="forro_chaleco" type="number" id="forro_chaleco" class="form-control" min="0" step="any" value="<?php echo '1.10' ?>">
+                                                          <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
+                                                          <input name="fcv" type="number" id="fcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*1.10; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $pellon->nombre ?></label>
-                                                          <input name="pellon_chaleco" type="number" id="pellon_chaleco" class="form-control" min="0" step="any" value="<?php echo '0.30' ?>">
+                                                          <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                          <input name="pcv" type="number" id="pcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*0.30; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $hebilla->nombre ?></label>
-                                                          <input name="hebilla_chaleco" type="number" id="hebilla_chaleco" class="form-control" min="0" step="any" value="<?php echo '1' ?>">
+                                                          <label class="control-label"><?php echo 'HEVILLA (Unidades)' ?></label>
+                                                          <input name="hcv" type="number" id="hcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*1; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $boton_g->nombre ?></label>
-                                                          <input name="boton_g_chaleco" type="number" id="boton_g_chaleco" class="form-control" min="0" step="any" value="<?php echo '3' ?>">
+                                                          <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
+                                                          <input name="bgcv" type="number" id="bgcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*3; ?>">
                                                         </div>
                                                       </div>
 
@@ -239,8 +244,8 @@
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label"><?php echo $boton_p->nombre ?></label>
-                                                          <input name="boton_p_chaleco" type="number" id="boton_p_chaleco" class="form-control" min="0" step="any" value="<?php echo '2' ?>">
+                                                          <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                          <input name="bpcv" type="number" id="bpcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*2; ?>">
                                                         </div>
                                                       </div>
 
@@ -251,9 +256,7 @@
                                         
                                         <?php endif ?>
 
-                                        <?php if (!empty($camisa['modelo_nombre'])): ?>
-                                           
-                                            <!-- modelos pantalon -->
+                                        <!-- <?php if (!empty($camisa['modelo_nombre'])): ?>
                                             <div class="col-md-6">
                                               <div class="card card-outline-success">
                                                 <div class="card-header">
@@ -318,85 +321,74 @@
                                                 </div>
                                               </div>
                                             </div>
-                                            <!-- fin medidas pantalon -->
                                         </div>
-                                              <!-- fin pantalon -->
-                                            <?php endif ?>
+                                            <?php endif ?> -->
                                 </div>
+                            <!-- FIN DE DATOS DEL VARON -->
+							<?php } else { ?>
+							
+							<!-- INICIO DATOS PARA LA MUJER -->
 
                                 <div class="col-md-12">
 
                                         <div class="row">
-                                        <?php if (!empty($extras['modelo_nombre'])): ?>
+                                        <?php if (!empty($saco_mujer->cantidad)): ?>
                                             <div class="col-md-6">
                                                 <div class="card card-outline-info">
                                                   <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MATERIALES EXTRAS</h4>
+                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL SACO (cantidad <?php echo $saco_mujer->cantidad; ?>)</h4>
                                                   </div>
-                                                  <div class="card-body" style="background-color: #f0e7fe;">
+                                                  <div class="card-body" style="background-color: #e6f2ff;">
 
                                                     <div class="row">
-
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">ENTRE TELA</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
+                                                          <input name="fsm" type="number" id="fsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*1.10; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">FORRO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'TELA FUSIONABLE (Metros)' ?></label>
+                                                          <input name="fusm" type="number" id="fusm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.30; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">PLASTON</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                          <input name="psm" type="number" id="psm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.10; ?>">
                                                         </div>
                                                       </div>
-
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">HOMBRERA</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'TAFETA (Metros)' ?></label>
+                                                          <input name="tsm" type="number" id="tsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.20; ?>">
                                                         </div>
                                                       </div>
-
                                                     </div>
 
                                                     <div class="row">
-
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">PELLON BLANCO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'HOMBRERA DE MUJER (Unidades)' ?></label>
+                                                          <input name="hmsm" type="number" id="hmsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*2; ?>">
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-md-3">
+                                                        <div class="form-group">
+                                                          <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
+                                                          <input name="bgsm" type="number" id="bgsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*4; ?>">
                                                         </div>
                                                       </div>
 
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">FUSIONABLE</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                          <input name="bpsm" type="number" id="bpsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*10; ?>">
                                                         </div>
                                                       </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">BOTON GRANDE</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">BOTON PEQUEÑO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
                                                     </div>
                                                   </div>
                                                 </div>
@@ -404,70 +396,31 @@
                                         
                                         <?php endif ?>
 
-                                        <?php if (!empty($falda['modelo_nombre'])): ?>
+                                        <?php if (!empty($pantalon_mujer->cantidad)): ?>
                                            
                                             <!-- modelos pantalon -->
                                             <div class="col-md-6">
                                               <div class="card card-outline-success">
                                                 <div class="card-header">
-                                                  <h4 class="mb-0 text-white">MATERIALES PARA LA FALDA</h4>
+                                                  <h4 class="mb-0 text-white">MATERIALES PARA EL PANTALON (cantidad <?php echo $pantalon_mujer->cantidad; ?>)</h4>
                                                 </div>
-                                                <div class="card-body" style="background-color: #ffffcc;">
-
-                                                    <div class="row">
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label">BONYE</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                            </div>
-                                                          </div>
-
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label">CIERRE</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                            </div>
-                                                          </div>
-
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label">PELLON BLANCO</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                            </div>
-                                                          </div>
-
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label">BOTON</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                            </div>
-                                                          </div>
-                                                    </div>
+                                                <div class="card-body" style="background-color: #e6ffe6;">
 
                                                     <div class="row">
                                                           <div class="col-md-4">
                                                             <div class="form-group">
-                                                              <label class="control-label">BOCHA</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                              <label class="control-label"><?php echo 'CIERRE (Unidades)' ?></label>
+                                                              <input name="cpm" type="number" id="cpm" class="form-control" min="0" step="any" value="<?php echo $pantalon_mujer->cantidad*1; ?>">
                                                             </div>
                                                           </div>
 
-                                                          <div class="col-md-4">
+                                                          <div class="col-md-5">
                                                             <div class="form-group">
-                                                              <label class="control-label">PLASTON</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                              <label class="control-label"><?php echo 'PELLON PARA PRETINA (Metros)' ?></label>
+                                                              <input name="pppm" type="number" id="pppm" class="form-control" min="0" step="any" value="<?php echo $pantalon_mujer->cantidad*3.50; ?>">
                                                             </div>
                                                           </div>
-
-                                                          <div class="col-md-4">
-                                                            <div class="form-group">
-                                                              <label class="control-label">LIGA</label>
-                                                              <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                            </div>
-                                                          </div>
-
                                                     </div>
-
                                                 </div>
                                               </div>
                                             </div>
@@ -480,76 +433,34 @@
                                 <div class="col-md-12">
 
                                         <div class="row">
-                                        <?php if (!empty($jamper['modelo_nombre'])): ?>
+                                        <?php if (!empty($falda_mujer->cantidad)): ?>
                                             <div class="col-md-6">
-                                                <div class="card card-outline-info">
+                                            	<div class="card card-outline-primary">
                                                   <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL JAMPER</h4>
+                                                    <h4 class="mb-0 text-white">MATERIALES PARA LA FALDA (cantidad <?php echo $falda_mujer->cantidad; ?>)</h4>
                                                   </div>
-                                                  <div class="card-body" style="background-color: #ffffcc;">
+                                                  <div class="card-body" style="background-color: #f0e7fe;">
 
                                                     <div class="row">
-
                                                       <div class="col-md-3">
                                                         <div class="form-group">
-                                                          <label class="control-label">ENTRE TELA</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'CIERRE (Unidades)' ?></label>
+                                                          <input name="cfm" type="number" id="cfm" class="form-control" min="0" step="any" value="<?php echo $falda_mujer->cantidad*1; ?>">
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-md-3">
+                                                        <div class="form-group">
+                                                          <label class="control-label"><?php echo 'TAFETA (Metros)' ?></label>
+                                                          <input name="tfm" type="number" id="tfm" class="form-control" min="0" step="any" value="<?php echo $falda_mujer->cantidad*0.50; ?>">
                                                         </div>
                                                       </div>
 
-                                                      <div class="col-md-3">
+                                                      <div class="col-md-5">
                                                         <div class="form-group">
-                                                          <label class="control-label">FORRO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+                                                          <label class="control-label"><?php echo 'PELLON PARA PRETINA (Metros)' ?></label>
+                                                          <input name="ppfm" type="number" id="ppfm" class="form-control" min="0" step="any" value="<?php echo $falda_mujer->cantidad*3.50; ?>">
                                                         </div>
                                                       </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">PLASTON</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">HOMBRERA</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">PELLON BLANCO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">FUSIONABLE</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">BOTON GRANDE</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label">BOTON PEQUEÑO</label>
-                                                          <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                        </div>
-                                                      </div>
-
                                                     </div>
                                                   </div>
                                                 </div>
@@ -557,208 +468,54 @@
                                         
                                         <?php endif ?>
 
-                                        <div>
-                                              <input type="number" id="entre_tela_saco_id" hidden value="<?php echo $entre_tela->categoria_id ?>">
-                                              <input type="number" id="entre_tela_saco_pv" hidden value="<?php echo $entre_tela->precio_venta ?>">
+                                        <?php if (!empty($chaleco_mujer->cantidad)): ?>
+                                           
+                                            <!-- modelos pantalon -->
+                                            <div class="col-md-6">
+                                              <div class="card card-outline-inverse">
+                                                <div class="card-header">
+                                                  <h4 class="mb-0 text-white">MATERIALES PARA EL CHALECO (cantidad <?php echo $chaleco_mujer->cantidad; ?>)</h4>
+                                                </div>
+                                                <div class="card-body" style="background-color: #e6f2ff;">
 
-                                              <input type="number" id="forro_saco_id" hidden value="<?php echo $forro->categoria_id ?>">
-                                              <input type="number" id="forro_saco_pv" hidden value="<?php echo $forro->precio_venta ?>">
+                                                    <div class="row">
+                                                          <div class="col-md-3">
+                                                            <div class="form-group">
+                                                              <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
+                                                              <input name="fcm" type="number" id="fcm" class="form-control" min="0" step="any" value="<?php echo $chaleco_mujer->cantidad*0.50; ?>">
+                                                            </div>
+                                                          </div>
 
-                                              <input type="number" id="plaston_saco_id" hidden value="<?php echo $plaston->categoria_id ?>">
-                                              <input type="number" id="plaston_saco_pv" hidden value="<?php echo $plaston->precio_venta ?>">
+                                                          <div class="col-md-4">
+                                                            <div class="form-group">
+                                                              <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                              <input name="pbcm" type="number" id="pbcm" class="form-control" min="0" step="any" value="<?php echo $chaleco_mujer->cantidad*0.20; ?>">
+                                                            </div>
+                                                          </div>
 
-                                              <input type="number" id="hombrera_v_saco_id" hidden value="<?php echo $hombrera_v->categoria_id ?>">
-                                              <input type="number" id="hombrera_v_saco_pv" hidden value="<?php echo $hombrera_v->precio_venta ?>">
-
-                                              <input type="number" id="pellon_saco_id" hidden value="<?php echo $pellon->categoria_id ?>">
-                                              <input type="number" id="pellon_saco_pv" hidden value="<?php echo $pellon->precio_venta ?>">
-
-                                              <input type="number" id="fusionable_saco_id" hidden value="<?php echo $fusionable->categoria_id ?>">
-                                              <input type="number" id="fusionable_saco_pv" hidden value="<?php echo $fusionable->precio_venta ?>">
-
-                                              <input type="number" id="boton_g_saco_id" hidden value="<?php echo $boton_g->categoria_id ?>">
-                                              <input type="number" id="boton_g_saco_pv" hidden value="<?php echo $boton_g->precio_venta ?>">
-
-                                              <input type="number" id="boton_p_saco_id" hidden value="<?php echo $boton_p->categoria_id ?>">
-                                              <input type="number" id="boton_p_saco_pv" hidden value="<?php echo $boton_p->precio_venta ?>">
-
-                                              <input type="number" id="bonye_pantalon_id" hidden value="<?php echo $bonye->categoria_id ?>">
-                                              <input type="number" id="bonye_pantalon_pv" hidden value="<?php echo $bonye->precio_venta ?>">
-
-                                              <input type="number" id="cierre_pantalon_id" hidden value="<?php echo $cierre->categoria_id ?>">
-                                              <input type="number" id="cierre_pantalon_pv" hidden value="<?php echo $cierre->precio_venta ?>">
-
-                                              <input type="number" id="pellon_pantalon_id" hidden value="<?php echo $pellon->categoria_id ?>">
-                                              <input type="number" id="pellon_pantalon_pv" hidden value="<?php echo $pellon->precio_venta ?>">
-
-                                              <input type="number" id="boton_g_pantalon_id" hidden value="<?php echo $boton_g->categoria_id ?>">
-                                              <input type="number" id="boton_g_pantalon_pv" hidden value="<?php echo $boton_g->precio_venta ?>">
-
-                                              <input type="number" id="boton_p_pantalon_id" hidden value="<?php echo $boton_p->categoria_id ?>">
-                                              <input type="number" id="boton_p_pantalon_pv" hidden value="<?php echo $boton_p->precio_venta ?>">
-
-                                              <input type="number" id="bocha_pantalon_id" hidden value="<?php echo $bocha->categoria_id ?>">
-                                              <input type="number" id="bocha_pantalon_pv" hidden value="<?php echo $bocha->precio_venta ?>">
-
-                                              <input type="number" id="plaston_pantalon_id" hidden value="<?php echo $plaston->categoria_id ?>">
-                                              <input type="number" id="plaston_pantalon_pv" hidden value="<?php echo $plaston->precio_venta ?>">
-
-                                              <input type="number" id="liga_pantalon_id" hidden value="<?php echo $liga->categoria_id ?>">
-                                              <input type="number" id="liga_pantalon_pv" hidden value="<?php echo $liga->precio_venta ?>">
-
-                                              <input type="number" id="forro_chaleco_id" hidden value="<?php echo $forro->categoria_id ?>">
-                                              <input type="number" id="forro_chaleco_pv" hidden value="<?php echo $forro->precio_venta ?>">
-
-                                              <input type="number" id="pellon_chaleco_id" hidden value="<?php echo $pellon->categoria_id ?>">
-                                              <input type="number" id="pellon_chaleco_pv" hidden value="<?php echo $pellon->precio_venta ?>">
-
-                                              <input type="number" id="hebilla_chaleco_id" hidden value="<?php echo $hebilla->categoria_id ?>">
-                                              <input type="number" id="hebilla_chaleco_pv" hidden value="<?php echo $hebilla->precio_venta ?>">
-
-                                              <input type="number" id="boton_g_chaleco_id" hidden value="<?php echo $boton_g->categoria_id ?>">
-                                              <input type="number" id="boton_g_chaleco_pv" hidden value="<?php echo $boton_g->precio_venta ?>">
-
-                                              <input type="number" id="boton_p_chaleco_id" hidden value="<?php echo $boton_p->categoria_id ?>">
-                                              <input type="number" id="boton_p_chaleco_pv" hidden value="<?php echo $boton_p->precio_venta ?>">
-
+                                                          <div class="col-md-5">
+                                                            <div class="form-group">
+                                                              <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                              <input name="bpcm" type="number" id="bpcm" class="form-control" min="0" step="any" value="<?php echo $chaleco_mujer->cantidad*5; ?>">
+                                                            </div>
+                                                          </div>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <!-- fin medidas pantalon -->
                                         </div>
-
-                                        
-                                        </div>
-                                              
+                                              <!-- fin pantalon -->
+                                            <?php endif ?>
                                 </div>
-
-
-                               <!--  <div class="table-responsive mt-5" style="clear: both;">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">#</th>
-                                                <th>Descripcion</th>
-                                                <th class="text-right">Cantidad</th>
-                                                <th class="text-right">Precio Unitario</th>
-                                                <th class="text-right">Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php if (!empty($saco)): ?>
-                                                <tr>
-                                                    <td class="text-center">1</td>
-                                                    <td>Saco</td>
-                                                    <td class="text-right"><?php echo $saco['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $saco['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_saco = number_format($saco['cantidad'] * $saco['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_saco = 0 ?>
-                                            <?php endif ?>
-
-                                            <?php if (!empty($pantalon['modelo_nombre'])): ?>
-                                                <tr>
-                                                    <td class="text-center">2</td>
-                                                    <td>Pantalon</td>
-                                                    <td class="text-right"><?php echo $pantalon['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $pantalon['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_pantalon = number_format($pantalon['cantidad'] * $pantalon['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_pantalon = 0 ?>
-                                            <?php endif ?>
-
-                                            <?php if (!empty($chaleco['modelo_nombre'])): ?>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>Chaleco</td>
-                                                    <td class="text-right"><?php echo $chaleco['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $chaleco['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_chaleco = number_format($chaleco['cantidad'] * $chaleco['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_chaleco = 0 ?>
-                                            <?php endif ?>
-
-                                             <?php if (!empty($camisa['cuello'])): ?>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>camisa</td>
-                                                    <td class="text-right"><?php echo $camisa['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $camisa['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_camisa = number_format($camisa['cantidad'] * $camisa['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_falda = 0 ?>
-                                            <?php endif ?>
-
-                                            <?php if (!empty($extras['trabajo_id'])): ?>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>extras</td>
-                                                    <td class="text-right"><?php echo $extras['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $extras['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_extras = number_format($extras['cantidad'] * $extras['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_falda = 0 ?>
-                                            <?php endif ?>
-
-                                            <?php if (!empty($falda['modelo_nombre'])): ?>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>Falda</td>
-                                                    <td class="text-right"><?php echo $falda['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $falda['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_falda = number_format($falda['cantidad'] * $falda['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_falda = 0 ?>
-                                            <?php endif ?>
-
-                                            <?php if (!empty($jumper['modelo_nombre'])): ?>
-                                                <tr>
-                                                    <td class="text-center">3</td>
-                                                    <td>Jumper</td>
-                                                    <td class="text-right"><?php echo $jumper['cantidad'] ?></td>
-                                                    <td class="text-right"><?php echo $jumper['precio_unitario'] ?></td>
-                                                    <td class="text-right">
-                                                        <?php echo $sub_jumper = number_format($jumper['cantidad'] * $jumper['precio_unitario'], 2) ?>
-                                                    </td>
-                                                </tr>
-                                            <?php else: ?>
-                                                <?php $sub_jumper = 0 ?>
-                                            <?php endif ?>
-                                        </tbody>
-                                    </table>
-                                </div> -->
-                            </div>
-
-
+							<?php } ?>
+							<!-- FIN DATOS PARA LA MUJER -->
                         </div>
-
-                    </div>
-
-
-                    <div class="row">
                         <div class="col-md-6">
-                                <button class="btn waves-effect waves-light btn-block btn-info" type="button" onclick="sacar_inv();"> <span><i class="fa fa-print"></i> Guardar Orden</span> </button>
+                                <button class="btn waves-effect waves-light btn-block btn-info" type="submit"> <span><i class="fa fa-print"></i> Guardar</span> </button>
                         </div>
-                        <!-- <div class="col-md-6">
-                            <button id="print" class="btn waves-effect waves-light btn-block btn-dark" type="button"> <span><i class="fa fa-print"></i> Impresion Empresa</span> </button>
-                        </div> -->
                     </div>
-                    
-                </div>
+               		</form>
 
             </div>
             <!-- ============================================================== -->
