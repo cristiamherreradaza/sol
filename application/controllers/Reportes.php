@@ -197,7 +197,7 @@ class Reportes extends CI_Controller {
 						AND borrado IS NULL
 						";
 		$data['total_gastos'] = $this->db->query($sql_total_gastos, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
-		//vdebug($data['total_gastos'], true, false, true);
+		// vdebug($data['total_gastos'], true, false, true);
 
 		$this->db->select('p.id, c.nombre as cliente, u.nombre, t.id as trabajo, p.fecha, p.monto');
 		$this->db->from('pagos as p');
@@ -210,13 +210,13 @@ class Reportes extends CI_Controller {
 		$data['listado_pagos'] = $this->db->get()->result();
 		//vdebug($data['pagos'], false, false, true);
 		
-		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
-		$this->db->from('trabajos as t');
-		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
-		$this->db->where('t.fecha >=', $fecha_hora_inicio);
-		$this->db->where('t.fecha <=', $fecha_hora_fin);
-		$this->db->where('t.borrado =', NULL);
-		$data['listado_trabajos'] = $this->db->get()->result();
+		$this->db->select('c.id, u.nombre, c.descripcion, c.fecha, c.salida');
+		$this->db->from('cajachica as c');
+		$this->db->join('usuarios as u', 'u.id = c.usuario_id', 'left');
+		$this->db->where('c.fecha >=', $fecha_hora_inicio);
+		$this->db->where('c.fecha <=', $fecha_hora_fin);
+		$this->db->where('c.borrado =', NULL);
+		$data['listado_cajachica'] = $this->db->get()->result();
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');

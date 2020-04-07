@@ -29,7 +29,7 @@
 
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
 
                                         <div class="card card-outline-success">
                                             <div class="card-header">
@@ -46,7 +46,7 @@
                                                     <tr>
                                                         <td><?php echo $total_ingresos_trabajos['total']; ?></td>
                                                         <td><?php echo $total_ingresos_trabajos['saldo']; ?></td>
-                                                        <td><?php echo $total_ingresos_trabajos['total']-$total_ingresos_trabajos['saldo']; ?></td>
+                                                        <td><?php echo $ingreso_neto = $total_ingresos_trabajos['total']-$total_ingresos_trabajos['saldo']; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -54,24 +54,24 @@
                                         
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
 
                                         <div class="card card-outline-info">
                                             <div class="card-header">
                                                 <h4 class="mb-0 text-white">POR TIPO</h4>
                                             </div>
                                             <div class="card-body">
-                                                <div id="donutchart" style="width: 100%; height: 300px;"></div>
+                                                <div id="columnchart_material2" style="width: 100%; height: 300px;"></div>
                                                 <table class="table table-hover">
                                                     <tr>
-                                                        <th>TELA</th>
-                                                        <th>CONFECCION</th>
-                                                        <th>TOTAL</th>
+                                                        <th>INGRESOS NETO</th>
+                                                        <th>GASTOS</th>
+                                                        <th>SALDO</th>
                                                     </tr>
                                                     <tr>
-                                                        <td><?php echo $tela_confeccion['tela']; ?></td>
-                                                        <td><?php echo $tela_confeccion['confeccion']; ?></td>
-                                                        <td><?php echo $tela_confeccion['confeccion']+$tela_confeccion['tela']; ?></td>
+                                                        <td><?php echo $ingreso_neto; ?></td>
+                                                        <td><?php echo $total_gastos['total']; ?></td>
+                                                        <td><?php echo $ingreso_neto-$total_gastos['total']; ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -81,46 +81,69 @@
 
                                 </div>
 
-                                <div class="table-responsive mt-5" style="clear: both;">
-                                <?php //vdebug($entregados, false, false, true); ?>
-                                <h3>LISTADO DE LOS TRABAJOS</h3>
-                                    <table class="table display table-bordered table-striped no-wrap" id="config-table">
-                                        <thead>
-                                            <tr>
-                                                <th class="text-center">#</th>
-                                                <th class="text-center">CLIENTE</th>
-                                                <th class="text-center">REGISTRO</th>
-                                                <th class="text-center">PRUEBA</th>
-                                                <th class="text-center">ENTREGA</th>
-                                                <th class="text-center">$. TELA</th>
-                                                <th class="text-center">$. CONFECCION</th>
-                                                <th class="text-center">TOTAL</th>
-                                                <th class="text-center">$. SALDO</th>
-                                                <th class="text-center">ENTREGADO</th>
-                                                <th class="text-center">ACCIONES</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php foreach ($trabajos as $key => $t): ?>
-                                                <tr>
-                                                    <td class="text-center">#</td>
-                                                    <td><?php echo $t['nombre'] ?></td>
-                                                    <td class="text-right"><?php echo $t['fecha']; ?></td>
-                                                    <td class="text-right"><?php echo $t['fecha_prueba']; ?></td>
-                                                    <td class="text-right"><?php echo $t['fecha_entrega']; ?></td>
-                                                    <td class="text-right"><?php echo $t['costo_tela']; ?></td>
-                                                    <td class="text-right"><?php echo $t['costo_confeccion']; ?></td>
-                                                    <td class="text-right"><?php echo $t['total']; ?></td>
-                                                    <td class="text-right"><?php echo $t['saldo']; ?></td>
-                                                    <td class="text-right"><?php echo $t['entregado']; ?></td>
-                                                    <td class="text-right">
-                                                        
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        </tbody>
-                                    </table>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="table-responsive" style="clear: both;">
+                                        <h3>LISTADO DE LOS PAGOS</h3>
+                                            <table id="config-table" class="table display table-bordered table-striped no-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Cliente</th>
+                                                        <th class="text-center">Trabajo</th>
+                                                        <th>Fecha</th>
+                                                        <th class="text-center">Monto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($listado_pagos as $p): ?>
+                                                    <tr>
+                                                        <td><?php echo $p->id; ?></td>
+                                                        <td><?php echo $p->cliente; ?></td>
+                                                        <td class="text-center">
+                                                            <a href="<?php echo base_url() ?>trabajos/registro_pagos/<?php echo $p->trabajo ?>">
+                                                                <button type="button" class="btn btn-info"><i class="fas fa-eye"></i> &nbsp;<?php echo $p->trabajo ?></button>
+                                                            </a>
+                                                        </td>
+                                                        <td><?php echo fechaEs($p->fecha); ?></td>
+                                                        <td class="text-right"><?php echo $p->monto; ?></td>
+                                                    </tr>
+                                                    <?php endforeach ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="table-responsive" style="clear: both;">
+                                        <h3>LISTADO GASTOS</h3>
+                                            <table id="tabla-cc" class="table display table-bordered table-striped no-wrap">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No.</th>
+                                                        <th>Usuario</th>
+                                                        <th>Descripcion</th>
+                                                        <th>Fecha</th>
+                                                        <th class="text-center">Monto</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php foreach ($listado_cajachica as $c): ?>
+                                                    <tr>
+                                                        <td><?php echo $c->id; ?></td>
+                                                        <td><?php echo $c->nombre; ?></td>
+                                                        <td><?php echo $c->descripcion; ?></td>
+                                                        <td><?php echo fechaEs($c->fecha); ?></td>
+                                                        <td class="text-right"><?php echo $c->salida; ?></td>
+                                                    </tr>
+                                                    <?php endforeach ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
+
                             </div>
                             
                         </div>
@@ -170,6 +193,17 @@ $(function () {
             "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
         }
     });
+
+    $('#tabla-cc').DataTable({
+        responsive: true,
+        "order": [
+            [0, 'desc']
+        ],
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
+
 });
 </script>
 
@@ -187,11 +221,34 @@ $(function () {
         chart: {
             chartArea:{width:'90%',height:'100%'}
         },
-        hAxis: {format: 'currency'},
+        vAxis: {format: 'currency'},
     };
 
     var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
     chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['bar']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+    var data2 = google.visualization.arrayToDataTable([
+        ['-', 'INGRESOS', 'GASTOS'],
+        ['TRABAJOS', <?php echo $ingreso_neto ?>, <?php echo $total_gastos['total'] ?>],
+    ]);
+
+    var options2 = {
+        chart: {
+            chartArea:{width:'90%',height:'100%'}
+        },
+        vAxis: {format: 'currency'},
+    };
+
+    var chart2 = new google.charts.Bar(document.getElementById('columnchart_material2'));
+
+    chart2.draw(data2, google.charts.Bar.convertOptions(options2));
     }
 </script>

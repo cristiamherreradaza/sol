@@ -101,11 +101,7 @@
 										</form>
 										<hr>
 										<div class="row">
-											<div class="col-md-12">
-												<a href="<?php echo base_url() ?>reportes/reporte_deudas">
-													<button type="submit" class="btn waves-effect waves-light btn-block btn-dark">GENERA DEUDAS</button>
-												</a>
-											</div>
+											
 										</div>
 									</div>
 								</div>

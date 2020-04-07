@@ -530,10 +530,11 @@ class Trabajos extends CI_Controller {
 		// $nombre_cliente='juan';
 		// $consulta_cliente = $this->db->get_where;
 		$cliente_limpio = str_replace("%20"," ",$nombre_cliente);
-		$consulta_cliente = $this->db->like('nombre', $cliente_limpio);
+		$this->db->where('borrado', NULL);
+		$this->db->like('nombre', $cliente_limpio);
 		$this->db->limit(10);
 		$data['clientes_encontrados'] = $this->db->get('clientes')->result_array();
-		// vdebug($res, true, false, true);
+		// vdebug($data['clientes_encontrados'], true, false, true);
 		$this->load->view('trabajos/ajax_busca_cliente', $data);
 		// return $nombre_cliente;
 	}

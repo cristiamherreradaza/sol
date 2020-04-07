@@ -45,4 +45,33 @@ class Clientes extends CI_Controller {
 		$this->load->view('template/footer');
 
 	}
+
+	public function guarda()
+	{
+		$id = $this->input->post('ida');
+		// vdebug($this->input->post('ida'), true, false, true);
+		$datos = array(
+			'nombre'    => $this->input->post('nombre'),
+			'ci'    => $this->input->post('carnet'),
+			'celulares' => $this->input->post('celulares'),
+			'genero'    => $this->input->post('genero'),
+			'email'     => $this->input->post('email'),
+			'direccion' => $this->input->post('direccion'),
+		);
+		if (empty($id)) {
+			$this->db->insert('clientes', $datos);
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('clientes', $datos);
+		}
+		redirect("clientes/listado");
+	}
+
+	public function eliminar($id_cliente = null)
+	{
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('clientes', array('borrado'=>$hoy), "id=$id_cliente");
+		redirect("clientes/listado");
+	}
+
 }
