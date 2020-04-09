@@ -40,7 +40,7 @@
                                     <div class="col-md-12">
                                         
                                         <div class="table-responsive" style="clear: both;">
-                                            <?php if (!empty($saco)): ?>
+                                            <?php if (!empty($saco['modelo_nombre'])): ?>
                                                 <div class="card card-outline-info">
                                                     <div class="card-header">
                                                         <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
@@ -80,7 +80,7 @@
                                                 </table>
                                             <?php endif ?>
 
-                                            <?php if (!empty($pantalon)): ?>
+                                            <?php if (!empty($pantalon['modelo_nombre'])): ?>
                                                 <div class="card card-outline-success">
                                                     <div class="card-header">
                                                         <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
@@ -121,7 +121,7 @@
                                                 </table>
                                             <?php endif ?>
 
-                                            <?php if (!empty($chaleco)): ?>                                            
+                                            <?php if (!empty($chaleco['modelo_nombre'])): ?>                                            
                                             <div class="card card-outline-primary">
                                                 <div class="card-header">
                                                     <h4 class="mb-0 text-white">MEDIDAS CHALECO</h4>
@@ -146,7 +146,7 @@
                                             </table>
                                             <?php endif ?>
                                             
-                                            <?php if (!empty($falda)): ?>                                            
+                                            <?php if (!empty($falda['modelo_nombre'])): ?>                                            
                                             <?php //vdebug($falda, false, false, true); ?>
                                             <div class="card card-outline-warning">
                                                 <div class="card-header">
@@ -174,7 +174,7 @@
                                             </table>
                                             <?php endif ?>
 
-                                            <?php if (!empty($jumper)): ?>                                            
+                                            <?php if (!empty($jumper['modelo_nombre'])): ?>                                            
                                             <?php //vdebug($jumper, false, false, true); ?>
                                             <div class="card card-outline-warning">
                                                 <div class="card-header">

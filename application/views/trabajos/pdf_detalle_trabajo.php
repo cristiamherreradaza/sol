@@ -150,7 +150,7 @@
 
     <br>
 
-    <?php if (!empty($saco)): ?>
+    <?php if (!empty($saco['modelo_nombre'])): ?>
         <div class="titulo">MEDIDAS SACO</div>
         
         <table class="datos">
@@ -210,7 +210,7 @@
         <?php endif ?>
     <?php endif ?>
 
-    <?php if (!empty($pantalon)): ?>
+    <?php if (!empty($pantalon['modelo_nombre'])): ?>
         <br>
         <div class="titulo">MEDIDAS PANTALON</div>
         
@@ -274,7 +274,7 @@
         <?php endif ?>
     <?php endif ?>
 
-    <?php if (!empty($chaleco)): ?>                                            
+    <?php if (!empty($chaleco['modelo_nombre'])): ?>                                            
         <br>
         <div class="titulo">MEDIDAS CHALECO</div>
 
@@ -316,7 +316,7 @@
 
     <?php endif ?>
 
-    <?php if (!empty($falda)): ?>                                            
+    <?php if (!empty($falda['modelo_nombre'])): ?>                                            
     <br>
     <div class="titulo">MEDIDAS FALDA</div>
 

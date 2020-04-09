@@ -58,7 +58,7 @@
 
                                         <div class="card card-outline-info">
                                             <div class="card-header">
-                                                <h4 class="mb-0 text-white">POR TIPO</h4>
+                                                <h4 class="mb-0 text-white">INGRESOS VS GASTOS</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div id="columnchart_material2" style="width: 100%; height: 300px;"></div>

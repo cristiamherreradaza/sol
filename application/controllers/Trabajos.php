@@ -93,6 +93,11 @@ class Trabajos extends CI_Controller {
 
 		$fecha_hora_prueba = $this->input->post('fecha_prueba').' '.$this->input->post('hora_prueba');
 		$fecha_hora_entrega = $this->input->post('fecha_entrega').' '.$this->input->post('hora_entrega');
+		if ($this->input->post('a_cuenta') > 0) {
+			$fecha_pago = $fecha_hora_trabajo;
+		} else {
+			$fecha_pago = NULL;
+		}
 
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
@@ -100,6 +105,7 @@ class Trabajos extends CI_Controller {
 			'contrato_id'      => $this->input->post('contrato_id'),
 			'grupo_id'         => $this->input->post('grupo_id'),
 			'fecha'            => $fecha_hora_trabajo,
+			'ultimo_pago'      => $fecha_pago,
 			'fecha_prueba'     => $fecha_hora_prueba,
 			'fecha_entrega'    => $fecha_hora_entrega,
 			'costo_tela'       => $this->input->post('costo_tela'),
@@ -644,7 +650,7 @@ class Trabajos extends CI_Controller {
 		$total_trabajo = $detalle_trabajo['total'];
 		$saldo = $total_trabajo-$suma_pagos['monto'];
 
-		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
+		$this->db->update('trabajos', array('saldo'=>$saldo, 'ultimo_pago'=>$fecha_hora), "id=$id_trabajo");
 
 		if(!empty($this->input->post('entregado')))
 		{

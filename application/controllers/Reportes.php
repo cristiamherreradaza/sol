@@ -227,6 +227,85 @@ class Reportes extends CI_Controller {
 
 	public function centralizado()
 	{
+		// Esto hace que las consultas GROUP BY se generen de manera normal
+		$sql_mode = "set session sql_mode=''";
+		$this->db->query($sql_mode);
 
+		// suma total de trabajos
+		$trabajos_totales = "SELECT SUM(total) as total
+						FROM trabajos 
+						WHERE MONTH(fecha) = MONTH(CURRENT_DATE())
+						AND YEAR(fecha) = YEAR(CURRENT_DATE())
+						AND borrado IS NULL;";	
+		$data['trabajos_totales'] = $this->db->query($trabajos_totales)->row_array();
+
+		// total gastos ingresos caja chica
+		$ingresos_gastos_cc = "SELECT SUM(salida) as gastos, SUM(ingreso) as ingreso
+							FROM cajachica 
+							WHERE MONTH(fecha) = MONTH(CURRENT_DATE())
+							AND YEAR(fecha) = YEAR(CURRENT_DATE())
+							AND borrado IS NULL;";	
+		$data['ingresos_gastos_cc'] = $this->db->query($ingresos_gastos_cc)->row_array();
+
+		// total y cantidad ingresos por contratos
+		$ingresos_contratos = "SELECT SUM(cantidad*total) as total, COUNT(id) as cantidad
+							FROM contratos 
+							WHERE MONTH(fecha) = MONTH(CURRENT_DATE())
+							AND YEAR(fecha) = YEAR(CURRENT_DATE())
+							AND borrado IS NULL;";	
+		$data['ingresos_contratos'] = $this->db->query($ingresos_contratos)->row_array();
+
+		// cantidad total de trabajos
+		$trabajos_cantidad = "SELECT COUNT(id) as total 
+						FROM trabajos 
+						WHERE MONTH(fecha) = MONTH(CURRENT_DATE())
+						AND YEAR(fecha) = YEAR(CURRENT_DATE())
+						AND borrado IS NULL;";	
+		$data['trabajos_cantidad'] = $this->db->query($trabajos_cantidad)->row_array();
+
+		// cantidad total de deudores
+		$cantidad_deudores = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE MONTH(ultimo_pago) = MONTH(CURRENT_DATE())
+						AND saldo <> 0
+						AND YEAR(ultimo_pago) = YEAR(CURRENT_DATE())
+						AND borrado IS NULL;";	
+		$data['cantidad_deudores'] = $this->db->query($cantidad_deudores)->row_array();
+
+		// monto por deudores
+		$monto_deudores = "SELECT SUM(saldo) as total
+						FROM trabajos 
+						WHERE MONTH(ultimo_pago) = MONTH(CURRENT_DATE())
+						AND saldo <> 0
+						AND YEAR(ultimo_pago) = YEAR(CURRENT_DATE())
+						AND borrado IS NULL;";	
+		$data['monto_deudores'] = $this->db->query($monto_deudores)->row_array();
+
+		// cantidad de no entregados
+		$trabajos_no_entregados = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE MONTH(fecha) = MONTH(CURRENT_DATE())
+						AND entregado = 'No'
+						AND YEAR(fecha) = YEAR(CURRENT_DATE())
+						AND borrado IS NULL;
+						";	
+		$data['trabajos_no_entregados'] = $this->db->query($trabajos_no_entregados)->row_array();
+
+		// costos de operacion
+		$costos_operacion = "SELECT costos.descripcion, costos.varon, COUNT(costos.id) as total
+							FROM costos 
+							LEFT JOIN costos_produccion ON costos_produccion.costo_id = costos.id 
+							WHERE MONTH(costos_produccion.created_at) = MONTH(CURRENT_DATE())
+							AND YEAR(costos_produccion.created_at) = YEAR(CURRENT_DATE())
+							AND costos_produccion.borrado IS NULL
+							GROUP BY costos.descripcion;
+						";	
+		$data['costos_operacion'] = $this->db->query($costos_operacion)->result_array();
+		vdebug($data['costos_operacion'], true, false, true);
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('reportes/centralizado', $data);
+		$this->load->view('template/footer');
 	}
 }

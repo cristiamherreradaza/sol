@@ -125,7 +125,7 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">REPORTES</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php //echo base_url(); ?>reportes/inicio">Centralizado</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/centralizado">Centralizado</a></li>
                         <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
                     </ul>
                 </li>
