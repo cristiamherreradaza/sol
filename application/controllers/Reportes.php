@@ -301,7 +301,7 @@ class Reportes extends CI_Controller {
 							GROUP BY costos.descripcion;
 						";	
 		$data['costos_operacion'] = $this->db->query($costos_operacion)->result_array();
-		vdebug($data['costos_operacion'], true, false, true);
+		// vdebug($data['costos_operacion'], true, false, true);
 
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
