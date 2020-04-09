@@ -135,6 +135,7 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
                         <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
+                        <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
                         <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                     </ul>
                 </li>
