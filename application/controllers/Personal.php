@@ -113,5 +113,18 @@ class Personal extends CI_Controller {
 		$this->db->update('personal', array('fecha_retiro'=> $hoy,'estado'=> 1), "id=$id");
 		redirect("Personal/lista");
 	}
+
+	public function horarios()
+	{
+		// echo 'hola';
+		$data['horarios'] = $this->db->get_where('horarios', array('estado' =>1))->row();		
+		// // echo 'Holas desde listado';
+		// // vdebug($clientes, true, false, true);
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		// $this->load->view('trabajos/nuevo', $data);
+		$this->load->view('horarios/horarios', $data);
+		$this->load->view('template/footer');
+	}
 	
 }
