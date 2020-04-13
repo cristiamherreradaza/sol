@@ -272,8 +272,13 @@
                                                             <td class="text-right"><?php echo $pantalon['pinzas_nombre']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td class="text-success">Bragueta</td>
-                                                            <td class="text-right"><?php echo $pantalon['bragueta']; ?></td>
+                                                            <?php if ($pantalon['bragueta']==NULL): ?>
+                                                                <td class="text-success">Bragueta</td>
+                                                                <td class="text-right"><?php echo $pantalon['bragueta']; ?></td>
+                                                            <?php else: ?>
+                                                                <td class="text-success">Pretina</td>
+                                                                <td class="text-right"><?php echo $pantalon['pretina']; ?></td>
+                                                            <?php endif ?>
                                                             <td class="text-success">Bolsillo atras</td>
                                                             <td class="text-right"><?php echo $pantalon['bolsillo_nombre']; ?></td>
                                                         </tr>
