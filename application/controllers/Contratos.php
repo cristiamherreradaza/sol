@@ -229,14 +229,11 @@ class Contratos extends CI_Controller {
 		redirect("contratos/detalle/$grupo_id");
 	}
 
-	public function elimina($id = null)
+	public function elimina($contrato_id = null, $grupo_id = null)
 	{
-		$datos_trabajo = array(
-			'contrato_id'=>NULL,
-			'grupo_id'=>NULL,
-		);
-		$this->db->where('id', $id);
-		$this->db->update('trabajos', $datos_trabajo);
+		$hoy = date("Y-m-d H:i:s");
+		$this->db->update('contratos', array('borrado'=>$hoy), "id=$contrato_id");
+		$this->db->update('trabajos', array('contrato_id'=>NULL, 'grupo_id'=>NULL), "contrato_id=$contrato_id");
 		redirect("contratos/detalle/$grupo_id");
 	}
 

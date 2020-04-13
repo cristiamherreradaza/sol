@@ -132,6 +132,11 @@
 												<button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $c['id'] ?>, '<?php echo $c['nombre'] ?>')"><i class="fas fa-trash"></i>
 												</button>
 											<?php endif ?>
+											<?php if ($consulta_trabajos != NULL): ?>
+												<a href="<?php echo base_url(); ?>trabajos/detalle_trabajos_cliente/<?php echo $c['id']; ?>">
+													<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
+												</a>
+											<?php endif ?>
 										</td>
 									</tr>
 									<?php endforeach ?>

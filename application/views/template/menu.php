@@ -151,6 +151,7 @@
                                 <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
                                 <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
                                 <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
+                                <li><a href="<?php echo base_url(); ?>costos/modifica">Costos Operacion</a></li>
                             </ul>
                         </li>
                         <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
