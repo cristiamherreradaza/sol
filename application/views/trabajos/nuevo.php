@@ -440,10 +440,10 @@
                       </div>
                     </div>
 
-                    <div class="col" id="pd_pretina" style="display: none;">
+                    <div class="col" id="pd_cpretina" style="display: none;">
                       <div class="form-group">
                         <label class="control-label">Pretina</label>
-                        <select name="pd_pretina" name="pd_pretina" class="form-control custom-select">
+                        <select name="pd_pretina" id="pd_pretina" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <option value="Normal">Normal</option>
                           <option value="Ancho">Ancho</option>
@@ -454,7 +454,7 @@
                     <div class="col">
                       <div class="form-group">
                         <label class="control-label">Bolsillo</label>
-                        <select name="pd_batras" name="pd_batras" class="form-control custom-select">
+                        <select name="pd_batras" id="pd_batras" class="form-control custom-select">
                           <option value="">Seleccione</option>
                           <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
                             <?php if ($bvp['id']==1): ?>
@@ -1390,7 +1390,7 @@
     {
       $("#saco_albusto").toggle('slow');
       $("#pantalon_cadera").toggle('slow');
-      $("#pd_pretina").toggle('slow');
+      $("#pd_cpretina").toggle('slow');
       $("#ch_abusto").toggle('slow');
       $("#bloque_extras").toggle('slow');
       $("#bloque_mujer").toggle('slow');
@@ -1398,7 +1398,7 @@
     }else{
       $("#saco_albusto").toggle('slow');
       $("#pantalon_cadera").toggle('slow');
-      $("#pd_pretina").toggle('slow');
+      $("#pd_cpretina").toggle('slow');
       $("#ch_abusto").toggle('slow');
       $("#bloque_extras").toggle('slow');
       $("#bloque_mujer").toggle('slow');
@@ -1605,12 +1605,14 @@ function extraer_datos_contrato()
         $("#pd_bragueta").val(datos_modelos.pantalones.bragueta);
         $("#pd_batras").val(datos_modelos.pantalones.bolsillo_id);
         $("#pd_bpie").val(datos_modelos.pantalones.bota_pie_des);
+        $("#pd_pretina").val(datos_modelos.pantalones.pretina);
       }else{
         $("#pd_modelo").val("");
         $("#pd_botones").val("");
         $("#pd_bragueta").val("");
         $("#pd_batras").val("");
         $("#pd_bpie").val("");
+        $("#pd_pretina").val("");
       }
 
       if(datos_modelos.chalecos != null)
@@ -1640,60 +1642,6 @@ function extraer_datos_contrato()
     }
   });
 
-  
-
-  /*$("#bloque_busqueda").toggle('slow');  
-  $.ajax({
-    url: '<?php //echo base_url() ?>Trabajos/ajax_medidas_cliente/' + id_cliente,
-    type: 'GET',
-    success: function (data) {
-      datos_cliente = JSON.parse(data);
-      if(datos_cliente.cliente.genero == 'Mujer'){
-        $("#genero").val('Mujer');
-        $("#genero").attr("disabled", true);
-        cambia_genero();
-        // console.log('entro');
-      }
-
-      $("#cod_cliente").val(datos_cliente.cliente.id);
-      $("#nombre").val(datos_cliente.cliente.nombre);
-      $("#ci").val(datos_cliente.cliente.ci);
-      $("#celulares").val(datos_cliente.cliente.celulares);
-
-      if(datos_cliente.sacos != null)
-      {
-        $("#s_talla").val(datos_cliente.sacos.talla);
-        $("#s_largo").val(datos_cliente.sacos.largo);
-        $("#s_hombro").val(datos_cliente.sacos.hombro);
-        $("#s_espalda").val(datos_cliente.sacos.espalda);
-        $("#s_pecho").val(datos_cliente.sacos.pecho);
-        $("#s_estomago").val(datos_cliente.sacos.estomago);
-        $("#s_mbrazo").val(datos_cliente.sacos.medio_brazo);
-        $("#s_lmanga").val(datos_cliente.sacos.largo_manga);
-        $("#s_abusto").val(datos_cliente.sacos.altura_busto);
-      }
-      
-      if(datos_cliente.pantalones != null)
-      {
-        $("#p_largo").val(datos_cliente.pantalones.largo);
-        $("#p_entrepierna").val(datos_cliente.pantalones.entre_pierna);
-        $("#p_cintura").val(datos_cliente.pantalones.cintura);
-        $("#p_muslo").val(datos_cliente.pantalones.muslo);
-        $("#p_rodilla").val(datos_cliente.pantalones.rodilla);
-        $("#p_bpie").val(datos_cliente.pantalones.bota_pie);
-        $("#p_tdelantero").val(datos_cliente.pantalones.tiro_delantero);
-        $("#p_tatras").val(datos_cliente.pantalones.tiro_atras);
-        $("#p_cadera").val(datos_cliente.pantalones.cadera);
-      }
-      if(datos_cliente.chalecos != null)
-      {
-        $("#ch_largo").val(datos_cliente.chalecos.largo);
-        $("#ch_pecho").val(datos_cliente.chalecos.pecho);
-        $("#ch_estomago").val(datos_cliente.chalecos.estomago);
-      }
-
-    }
-  });*/
 }
 
 // fin extrae datos del contrato
@@ -1701,12 +1649,3 @@ function extraer_datos_contrato()
 </script>
 <script src="<?php echo base_url() ?>public/assets/plugins/switchery/dist/switchery.min.js"></script>
 <script src="<?php echo base_url() ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
-<script>
-jQuery(document).ready(function() {
-        // Switchery
-        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-        $('.js-switch').each(function() {
-            new Switchery($(this)[0], $(this).data());
-        });
-});
-</script>

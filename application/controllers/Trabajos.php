@@ -1245,7 +1245,7 @@ class Trabajos extends CI_Controller {
 		$this->db->update('jumpers', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
 		$this->db->update('camisas', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
 		$this->db->update('extras', array('borrado'=>$hoy), "trabajo_id=$id_trabajo");
-		redirect("trabajos/listado");
+		redirect("trabajos/listado_trabajos");
 	}
 
 	public function listado()
