@@ -40,13 +40,14 @@
                                                 <table class="table table-hover">
                                                     <tr>
                                                         <th>INGRESOS</th>
-                                                        <th>SALDOS</th>
                                                         <th>COBRADO</th>
+                                                        <th>SALDOS</th>
                                                     </tr>
                                                     <tr>
-                                                        <td><?php echo $totales['total']; ?></td>
-                                                        <td><?php echo $totales['saldo']; ?></td>
-                                                        <td><?php echo $totales['total']-$totales['saldo']; ?></td>
+                                                        <td><?php echo number_format($totales['total'], 2); ?></td>
+                                                        <?php $cobrado = $totales['total']-$totales['saldo']; ?>
+                                                        <td><?php echo number_format($cobrado, 2) ?></td>
+                                                        <td><?php echo number_format($totales['saldo'], 2); ?></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -203,7 +204,7 @@ $(function () {
     var data = google.visualization.arrayToDataTable([
       ['MONTOS',   'TOTALES'],
       ['INGRESOS', <?php echo $totales['total'] ?>],
-      ['SALDOS',   <?php echo $totales['saldo'] ?>]
+      ['SALDOS',   <?php echo $cobrado ?>]
     ]);
 
     var options = {
