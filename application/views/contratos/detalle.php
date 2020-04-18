@@ -417,7 +417,7 @@
     {
         var contrato = '<?php echo $contratos_json; ?>';
         var obj_contrato = JSON.parse(contrato);
-        console.log(obj_contrato);
+        // console.log(obj_contrato);
 
         $.each(obj_contrato, function(key, element){
             if(element['id']==contrato_id)

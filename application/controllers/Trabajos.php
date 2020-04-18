@@ -675,18 +675,18 @@ class Trabajos extends CI_Controller {
 
 	public function borra_pago($id_pago = null, $id_trabajo = null)
 	{
-		// $id_trabajo = $this->input->post('trabajo_id');
 		$detalle_trabajo = $this->db->get_where('trabajos', array('id'=>$id_trabajo))->row_array();
+		$detalle_pago = $this->db->get_where('pagos', array('id'=>$id_pago))->row_array();
+
+		// calculamos el nuevo saldo para actulizarlo en la tabla trabajos
+		$saldo_trabajo = $detalle_trabajo['saldo'];
+		$pago_eliminar = $detalle_pago['monto'];
+		$nuevo_saldo = $saldo_trabajo+$pago_eliminar;
+
 		$hoy = date("Y-m-d H:i:s");
 		$this->db->update('pagos', array('borrado'=>$hoy), "id=$id_pago");
 
-		$this->db->select_sum('monto');
-		$this->db->where('trabajo_id', $id_trabajo);
-		$suma_pagos = $this->db->get('pagos')->row_array();
-		$total_trabajo = $detalle_trabajo['total'];
-		$saldo = $total_trabajo-$suma_pagos['monto'];
-
-		$this->db->update('trabajos', array('saldo'=>$saldo), "id=$id_trabajo");
+		$this->db->update('trabajos', array('saldo'=>$nuevo_saldo), "id=$id_trabajo");
 
 		redirect("Trabajos/registro_pagos/$id_trabajo");
 	}
