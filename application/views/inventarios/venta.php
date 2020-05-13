@@ -383,6 +383,25 @@
             
         });
 </script>
+<script>
+     $('#cantidadEdit').on('change', function(e){
+        var cantidad = e.target.value;
+        var precio_venta = $("#precio_ventaEdit").val();
+        var total = cantidad * precio_venta;
+
+        $('#precio_totalEdit').val(total);
+            
+        });
+</script>
+<script>
+     $('#precio_ventaEdit').on('change', function(e){
+        var precio_venta = e.target.value;
+        var cantidad = $("#cantidadEdit").val();
+        var total = cantidad * precio_venta;
+
+        $('#precio_totalEdit').val(total);
+        });
+</script>
 
 <script>
    function guarda(){
@@ -472,6 +491,7 @@
 
     function ver(id, nombre, cantidad, tipo, precio_venta, precio_total, detalle, fecha)
     {
+        $('#nombreVer').html('<td>Material</td><td class="font-medium">' + nombre + '</td>');
         $('#cantidadVer').html('<td>Cantidad</td><td class="font-medium">' + cantidad + ' ' + tipo  + '</td>');
         $('#precio_ventaVer').html('<td>Precio de Venta</td><td class="font-medium">' + precio_venta + ' Bs.</td>');
         $('#precio_totalVer').html('<td>Precio Total</td><td class="font-medium">' + precio_total + ' Bs.</td>');
@@ -496,7 +516,7 @@
         Swal.fire({
           title: 'Estas seguro que quieres editarlo',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
@@ -536,7 +556,7 @@
         Swal.fire({
           title: 'Quieres borrar '+nombre+'?',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
@@ -562,7 +582,7 @@ function alerta(){
     var nombre = $('#nombre').val();
 
     Swal.fire({
-      icon: 'error',
+      type: 'error',
       title: 'Oops...',
       text: 'El material '+ nombre + ', ya se encuentra registrado.',
       footer: '<a href>Solo se puede registrar una sola vez!</a>'
@@ -577,7 +597,7 @@ function alerta_bien(){
     Swal.fire({
           title: 'Exito',
           text: "Se ingreso el Material correctamente!",
-          icon: 'success',
+          type: 'success',
           showCancelButton: false,
           confirmButtonColor: '#3085d6',
           confirmButtonText: 'OK!',

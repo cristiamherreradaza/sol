@@ -197,7 +197,7 @@
 		Swal.fire({
 			title: 'Quieres borrar ' + nombre + '?',
 			text: "Luego no podras recuperarlo!",
-			type: 'warning',
+			type: 'question',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
 			cancelButtonColor: '#d33',

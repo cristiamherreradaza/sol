@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <!-- Column -->
-                    <div class="col-lg-6 col-md-6">
+                    <!-- <div class="col-lg-6 col-md-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex no-block">
@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- Row -->
     </div>

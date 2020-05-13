@@ -20,9 +20,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    DESDE: <b class="text-info"> <?php //echo fechaEs($inicio); ?></b>
+                                    DESDE: <b class="text-info"> <?php echo fechaEs($inicio); ?></b>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    HASTA: <b class="text-info"> <?php //echo fechaEs($fin); ?></b>
+                                    HASTA: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
                                 </div>
                             </div>
                             <p>&nbsp;</p>
@@ -215,6 +215,124 @@
                                     </div>
 
                                 </div>
+
+                                <!-- REPORTES SOBRE LOS INVENTARIOS -->
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+
+                                        <div class="card card-outline-primary">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">COMPRA Y VENTA DE INVENTARIOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Descripcion</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-right">Monto</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Compra</td>
+                                                                <td class="text-center"><?php echo $cantidad_compra['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($valor_compra['total'], 2) ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Venta</td>
+                                                                <td class="text-center"><?php echo $venta_compra['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($valor_venta['total'], 2) ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Saldo</th>
+                                                                <td class="text-center"></td>
+                                                                <?php $inventarios_totales = $valor_compra['total']-$valor_venta['total'] ?>
+                                                                <th class="text-right"><?php echo number_format($inventarios_totales, 2) ?></th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                        <div class="card card-outline-warning">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">PAGO DE SALARIOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Descripcion</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-right">Monto</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Salario de Empleados</td>
+                                                                <td class="text-center"><?php echo $cantidad_empleados['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($sueldo_empleados['total'], 2) ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Descuento a Empleados</td>
+                                                                <td class="text-center"><?php echo $cantidad_descuentos['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($descuento_empleados['total'], 2) ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Saldo</th>
+                                                                <td class="text-center"></td>
+                                                                <?php $sueldos_totales = $sueldo_empleados['total']-$descuento_empleados['total'] ?>
+                                                                <th class="text-right"><?php echo number_format($sueldos_totales, 2) ?></th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+
+                                   <!--  <div class="col-md-4">
+
+                                        <div class="card card-outline-danger">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">INGRESOS POR CONTRATOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Descripcion</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-right">Monto</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Contratos</td>
+                                                                <td class="text-center"><?php echo $ingresos_contratos['cantidad']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($ingresos_contratos['total'], 2) ?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div> -->
+
+                                </div>
+
+                                <!-- HASTA AQUI -->
+
                                 
 
                             </div>

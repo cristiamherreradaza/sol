@@ -386,20 +386,26 @@ class Inventarios_Venta extends CI_Controller {
 
 		$cantidad = $this->input->get("param1");
 		$categoria_id = $this->input->get("param2");
+		// var_dump($cantidad);
+		// exit;
 		$nom1 = $this->db->get_where('categorias', array('id' => $categoria_id, 'estado' => 1))->row();
 		$tipo = $nom1->tipo;
-		$compra = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(stock) as suma
-																							FROM compras
-																							WHERE categoria_id = $categoria_id
-																							AND estado = 1
-																							GROUP BY (categoria_id))com
-											WHERE cate.id = com.categoria_id")->row();
+		$compra = $this->db->query("SELECT cate.*, com.*, compr.precio_venta
+									FROM categorias cate, compras compr, (SELECT categoria_id, SUM(stock) as suma
+																			FROM compras
+																			WHERE categoria_id = $categoria_id
+																			AND estado = 1
+																			GROUP BY (categoria_id))com, (SELECT MAX(id) as id
+																										FROM compras
+																										WHERE categoria_id = $categoria_id)commax
+										WHERE cate.id = com.categoria_id
+										AND compr.id = commax.id")->row();
 		$pre_vent = $compra->precio_venta;
+
 		$pr_total = $cantidad * $pre_vent;
 
 		$venta = $this->db->query("SELECT cate.*, com.*
-											FROM categorias cate, (SELECT *, SUM(cantidad) as suma
+											FROM categorias cate, (SELECT categoria_id, SUM(cantidad) as suma
 																							FROM ventas
 																							WHERE categoria_id = $categoria_id
 																							AND estado = 1
@@ -418,14 +424,13 @@ class Inventarios_Venta extends CI_Controller {
 			}
 			
 
-		}
-		else{
-			if($compra->stock >= $cantidad){
+		} else {
+			if($compra->suma >= $cantidad){
 				$respuesta = array('estado'=>'si', 'precio_venta' => $pre_vent, 'precio_total' => $pr_total);
 				echo json_encode($respuesta);
 			}
 			else{
-				$respuesta = array('estado'=>'no', 'valor' => $compra->stock, 'tipo' => $tipo);
+				$respuesta = array('estado'=>'no', 'valor' => $compra->suma, 'tipo' => $tipo);
 				echo json_encode($respuesta);
 			}
 			

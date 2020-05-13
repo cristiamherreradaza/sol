@@ -125,8 +125,10 @@
                 <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">REPORTES</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>reportes/centralizado">Centralizado</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/fecha_centralizado">Centralizado</a></li>
                         <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
+                        <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
                     </ul>
                 </li>
 
@@ -136,6 +138,7 @@
                         <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
                         <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
                         <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
+                        <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
                         <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                     </ul>
                 </li>
@@ -165,7 +168,7 @@
                             <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-account-multiple"></i> Telas</a>
+                            <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-format-title"></i> Telas</a>
                         </li>
 
                     </ul>
@@ -179,6 +182,16 @@
                         <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
                         <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
                         <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-border-color"></i><span class="hide-menu">COTIZACIONES</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                        <li><a href="<?php echo base_url(); ?>Cotizacion/lista_unida">Confeccion y Tela</a></li>
+                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                        <li><a href="<?php echo base_url(); ?>Cotizacion/lista_separada">Confeccion y Tela Separados</a></li>
                     </ul>
                 </li>
 

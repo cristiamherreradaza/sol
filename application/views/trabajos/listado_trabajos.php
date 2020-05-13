@@ -63,9 +63,20 @@
 
 											<button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $t['id'] ?>, '<?php echo $t['nombre'] ?>')"><i class="fas fa-trash"></i></button>
 
+											<?php
+												$id = $t['id'];
+												$venta = $this->db->query("SELECT trabajo_id
+                                                                             FROM ventas
+                                                                             WHERE trabajo_id = $id
+                                                                             AND estado = 1")->row();	
+										 		if (!empty($venta)) { 
+											 ?>
+											<button type="button" class="btn btn-dark" onclick="alerta(<?php echo $t['id']; ?>);"><i class="fas fa-cart-arrow-down"></i></button>
+											<?php } else { ?>
 											<a href="<?php echo base_url() ?>Inventarios_Venta/retira_material/<?php echo $t['id'] ?>">
 												<button type="button" class="btn btn-dark"><i class="fas fa-cart-arrow-down"></i></button>
 											</a>
+											<?php } ?>
 
 
 										</td>
@@ -139,4 +150,14 @@
 		})
 	}
 
+</script>
+<script>
+	function alerta(id){
+		Swal.fire({
+     	 type: 'error',
+     	 title: 'Oops...',
+     	 text: 'Ya se saco el material para el trabajo N° '+ id ,
+     	 footer: '<a href>Solo se puede sacar una sola vez!</a>'
+  	  })
+	}
 </script>

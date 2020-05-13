@@ -95,6 +95,7 @@ function cargarmodal(urll)
    <!-- <script src="<?php //echo base_url(); ?>public/assets/plugins/sweetalert2/sweet-alert.init.js"></script> -->
    <!-- <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script> -->
    <script src="<?php echo base_url(); ?>public/assets/plugins/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+   <script src="<?php echo base_url(); ?>public/assets/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
 </body>
 
 </html>

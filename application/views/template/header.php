@@ -31,7 +31,30 @@
     <!-- libreria jquery -->
     <script src="<?php echo base_url(); ?>public/assets/plugins/jquery/jquery.min.js"></script>
     <link href="<?php echo base_url(); ?>public/assets/plugins/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>public/assets/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <script type="text/javascript">
+        function abre()
+        {
+            $('#mostrar_fecha').show('slow');
+            $('#mostrar_boton').show('slow');
+
+            $('#abre_cierra').attr('onclick', 'cierra();');
+        }
+
+        function cierra()
+        {
+            $('#mostrar_fecha').hide('slow');
+            $('#mostrar_boton').hide('slow');
+
+            $('#abre_cierra').attr('onclick', 'abre();');
+        }
+
+        function envia()
+        {
+            var fecha = $('#mostrar_fecha').val();
+            window.location.href = "<?php echo base_url() ?>Control_Asistencia/consulta/" + fecha;
+        }
+
         function busca_cliente()
         {
             var nombre_cabecera_cliente = $('#cabecera_cliente').val();
@@ -107,11 +130,20 @@
                         <!-- ============================================================== -->
                         <!-- Messages -->
                         <!-- ============================================================== -->
+                        <!-- <?php echo form_open_multipart('Control_Asistencia/lista_pagos', array('method'=>'POST')); ?> -->
                         <li class="nav-item dropdown mega-dropdown"> 
+                            
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Trabajos/nuevo" title="Nuevo trabajo"><i class="mdi mdi-plus-box"></i></a>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/separados"><i class="mdi mdi-library-books"></i></a>
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/reporte/1"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/unidos"><i class="mdi mdi-library-books"></i></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="<?php echo base_url(); ?>Cotizacion/separados"><i class="mdi mdi-lead-pencil"></i></a>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" id="abre_cierra" onclick="abre();"><i class="mdi mdi-account-card-details"></i></a>
+                            <?php $mes = date('Y-m'); ?>
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark"><i><input type="month" class="form-control" id="mostrar_fecha" name="mostrar_fecha" value="<?php echo $mes; ?>" style="display:none;" data-control="1"></i></a>
+                            <button class="btn btn-primary" type="submit" id="mostrar_boton" onclick="envia();" style="display: none;">Buscar</button>
+
                         </li>
+                        <!-- </form> -->
+                        
                         <!-- ============================================================== -->
                         <!-- End Messages -->
                         <!-- ============================================================== -->

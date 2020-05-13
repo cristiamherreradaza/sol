@@ -123,15 +123,15 @@ class Inventarios_Compra extends CI_Controller {
 
 	public function editar1(){
 
-		$id = $this->input->post("param1");
+		$id = $this->input->get("param1");
 		$data = array(
-			'categoria_id' => $this->input->post("param2"),
-			'stock'   => $this->input->post("param3"),
-			'precio_unidad' => $this->input->post("param4"),
-			'precio_venta'   => $this->input->post("param5"),
-			'precio_total' => $this->input->post("param6"),
-			'fecha'   => $this->input->post("param7"),
-			'detalle' => $this->input->post("param8"),
+			'categoria_id' => $this->input->get("param2"),
+			'stock'   => $this->input->get("param3"),
+			'precio_unidad' => $this->input->get("param4"),
+			'precio_venta'   => $this->input->get("param5"),
+			'precio_total' => $this->input->get("param6"),
+			'fecha'   => $this->input->get("param7"),
+			'detalle' => $this->input->get("param8"),
 			'estado'   => 1
 		);
         $this->db->where('id', $id);
@@ -192,6 +192,25 @@ class Inventarios_Compra extends CI_Controller {
 																							GROUP BY (categoria_id))com
 											WHERE cate.id = com.categoria_id
 											AND cate.estado = 1")->result();
+		$sql_compras = "SELECT cat.nombre, tmp.total
+						FROM categorias cat, (SELECT SUM(stock) as total, categoria_id
+											FROM compras
+											GROUP BY categoria_id)tmp
+						WHERE cat.id = tmp.categoria_id
+						ORDER BY cat.id";
+		$data['compras'] = $this->db->query($sql_compras)->result_array();
+
+		// $sql_detalle_compras = "SELECT cat.nombre, com.stock, com.precio_unidad, com.precio_total
+		// 						FROM categorias cat, compras com
+		// 						WHERE com.borrado IS NULL 
+		// 						AND com.categoria_id = cat.id
+		// 						ORDER BY com.fecha";
+
+		
+
+
+		// $data['detalle_compras'] = $this->db->query($sql_detalle_compras)->result_array();
+
         $this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('inventarios/lista_inventarios', $data);

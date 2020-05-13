@@ -1,4 +1,4 @@
-<link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
+{<link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
 
 
@@ -176,7 +176,6 @@
                                     <div class="card-body">
                                         <form>
                                             <div class="form-body">
-
                                                 <div class="col-md-12 mb-3">
                                                     <label class="control-label">Material</label>
                                                         <select name="categorias" id="categorias" required class="select2" style="width: 100%">
@@ -188,7 +187,6 @@
                                                             <?php } ?>
                                                         </select>
                                                 </div>
-                                                
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group" id="cantidad">
@@ -355,6 +353,25 @@
 </script>
 
 <script>
+     $('#stockEdit').on('change', function(e){
+        var cantidad = e.target.value;
+        var precio_unidad = $("#precio_unidadEdit").val();
+        var total = cantidad * precio_unidad;
+
+        $('#precio_totalEdit').val(total);
+        });
+</script>
+<script>
+     $('#precio_unidadEdit').on('change', function(e){
+        var precio_unidad = e.target.value;
+        var cantidad = $("#stockEdit").val();
+        var total = cantidad * precio_unidad;
+
+        $('#precio_totalEdit').val(total);
+        });
+</script>
+
+<script>
    function guarda(){
         var categorias = $("#categorias").val();
         var stock = $("#stock").val();
@@ -368,10 +385,9 @@
             Swal.fire(
                   'Debe llenar los datos requeridos',
                   'Antes de Guardar',
-                  'info'
+                  'error'
                 )
-        }else
-        {
+        } else {
             $.ajax({
                 url: '<?php echo base_url(); ?>Inventarios_Compra/guarda/',
                 type: 'get',
@@ -380,16 +396,7 @@
                 // data: {param1: cod_catastral},
                 success:function(data, textStatus, jqXHR) {
                     if (data.estado == 'registrado') {
-                        // window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
-                        // $('#config-table').dataTable()._fnAjaxUpdate();
-                        // $("#config-table").dataTable().fnReloadAjax();
-                        alerta_bien();
-                        // setInterval(
-                        //     function(){
-                        //         window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
-                        //         },7000
-                        // );
-                        
+                    alerta_bien();
                     }
                 },
                 error:function(jqXHR, textStatus, errorThrown) {
@@ -398,6 +405,25 @@
             });
         }
     }
+</script>
+<script>
+function alerta_bien(){
+    Swal.fire({
+          title: 'Exito',
+          text: 'Se ingreso el Material correctamente!',
+          type: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          confirmButtonText: 'OK!'
+        }).then((result) => {
+          if (result.value) {
+            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
+          }
+          else{
+            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
+          }
+        })
+}
 </script>
 
 <script>
@@ -446,7 +472,7 @@
     function ver(id, nombre, stock, tipo, precio_unidad, precio_venta, precio_total, detalle, fecha)
     {
 
-        $('#stockVer').html('<td>Material</td><td class="font-medium">' + nombre + '</td>');
+        $('#nombreVer').html('<td>Material</td><td class="font-medium">' + nombre + '</td>');
         $('#stockVer').html('<td>Cantidad</td><td class="font-medium">' + stock + ' ' + tipo  + '</td>');
         $('#precio_unidadVer').html('<td>Precio por Unidad</td><td class="font-medium">' + precio_unidad + ' Bs.</td>');
         $('#precio_ventaVer').html('<td>Precio de Venta</td><td class="font-medium">' + precio_venta + ' Bs.</td>');
@@ -473,7 +499,7 @@
         Swal.fire({
           title: 'Estas seguro que quieres editarlo',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
@@ -488,8 +514,8 @@
             );
 
             $.ajax({
-                url: '<?php echo base_url(); ?>Inventarios_Compra/editar1/',
-                type: 'POST',
+                url: '<?php echo base_url(); ?>Inventarios_Compra/editar1',
+                type: 'GET',
                 dataType: 'json',
                 data: {csrfName: csrfHash, param1: id, param2: categorias, param3: stock, param4: precio_unidad, param5: precio_venta, param6: precio_total, param7: fecha, param8: detalle },
                 // data: {param1: cod_catastral},
@@ -513,7 +539,7 @@
         Swal.fire({
           title: 'Quieres borrar '+nombre+'?',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
@@ -539,7 +565,7 @@ function alerta(){
     var nombre = $('#nombre').val();
 
     Swal.fire({
-      icon: 'error',
+      type: 'error',
       title: 'Oops...',
       text: 'El material '+ nombre + ', ya se encuentra registrado.',
       footer: '<a href>Solo se puede registrar una sola vez!</a>'
@@ -548,28 +574,7 @@ function alerta(){
 }
 </script>
 
-<script>
-function alerta_bien(){
 
-    Swal.fire({
-          title: 'Exito',
-          text: "Se ingreso el Material correctamente!",
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          confirmButtonText: 'OK!',
-        }).then((result) => {
-          if (result.value) {
-            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
-          }
-          else{
-            window.location.href = "<?php echo base_url() ?>Inventarios_Compra/";
-          }
-        })
-
-
-}
-</script>
 
 
 <script>
@@ -676,7 +681,6 @@ function alerta_bien(){
             //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
         });
     });
-    </script>
+</script>
 
-<script>
 

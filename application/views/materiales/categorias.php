@@ -112,7 +112,7 @@
                     <div class="card-body">
                         <?php //vdebug($trabajos, true, false, true) ?>
                         <h3 class="card-title">LISTADO DE MATERIALES &nbsp;&nbsp;&nbsp;&nbsp; 
-                            <button type="button" class="btn btn-info" onclick="abre_modal();"><i class="fas fa-plus"></i> NUEVA MATERIAL</button>
+                            <button type="button" class="btn btn-info" onclick="abre_modal();"><i class="fas fa-plus"></i> NUEVO MATERIAL</button>
                         </h3>
                         <div class="table-responsive m-t-40">
                             <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -214,7 +214,7 @@
         Swal.fire({
           title: 'Estas seguro que quieres editarlo',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
@@ -222,12 +222,11 @@
           cancelButtonText: "Cancelar",
         }).then((result) => {
           if (result.value) {
-            Swal.fire(
-              'Excelente!',
-              'Fue editado exitosamente.',
-              'success'
-            );
-
+            // Swal.fire(
+            //   'Excelente!',
+            //   'Fue editado exitosamente.',
+            //   'success'
+            // );
             $.ajax({
                 url: '<?php echo base_url(); ?>Materiales/editar1/',
                 type: 'GET',
@@ -254,7 +253,7 @@
         Swal.fire({
           title: 'Quieres borrar '+nombre+'?',
           text: "Luego no podras recuperarlo!",
-          icon: 'question',
+          type: 'question',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
