@@ -659,6 +659,7 @@ class Trabajos extends CI_Controller {
 		$this->db->insert('pagos', $datos_pago);
 		$this->db->select_sum('monto');
 		$this->db->where('trabajo_id', $id_trabajo);
+		$this->db->where('borrado', NULL);
 		$suma_pagos = $this->db->get('pagos')->row_array();
 		$total_trabajo = $detalle_trabajo['total'];
 		$saldo = $total_trabajo-$suma_pagos['monto'];
@@ -866,7 +867,7 @@ class Trabajos extends CI_Controller {
 		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
-		$data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo))->result_array();
+		$data['pagos'] = $this->db->get_where('pagos', array('trabajo_id'=>$id_trabajo, 'borrado'=>NULL))->result_array();
 		// vdebug($data['pagos'], true, false, true);
 
 		$fecha = fechaEs($data['trabajo']['fecha']);
@@ -1392,7 +1393,7 @@ class Trabajos extends CI_Controller {
         $this->dompdf->loadHtml($html);
         $this->dompdf->set_option('isRemoteEnabled', TRUE);  
         $this->dompdf->setPaper('letter', 'portrait');
-        $this->dompdf->render();
+		$this->dompdf->render();
         $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
 
 	}
