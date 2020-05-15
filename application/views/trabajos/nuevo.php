@@ -23,35 +23,6 @@
                     ?>
                     <div class="card-body">
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="button" class="btn waves-effect waves-light btn-block btn-warning" onclick="muestra_bloque_busqueda();">BUSCAR CLIENTE</button>
-                            </div>
-
-                            <!-- <div class="col-md-6">
-              <button type="button" class="btn waves-effect waves-light btn-block btn-danger">Mujer</button>
-            </div> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="bloque_busqueda" style="display: none;">
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <br />
-                                                <input type="text" name="busca_cliente" id="busca_cliente" class="form-control" placeholder="Ej: Cristiam Herrera">
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-9">
-                                            <div id="datos_cliente_ajax"></div>
-                                            <div id="medidas_cliente_ajax"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-body">
 
                             <div class="row pt-3">
@@ -60,11 +31,7 @@
                                     <input type="hidden" name="cod_cliente" id="cod_cliente">
                                     <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autofocus required>
-                                        <!-- <div class="input-group-append">
-                  <button class="btn btn-info" type="button" onclick="cargarmodal('<?php //echo base_url();
-                                                                                    ?>trabajos/ajax_listado_clientes');" class="model_img img-fluid">Buscar</button>
-                </div> -->
+                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autocomplete="off" autofocus required>
                                     </div>
                                 </div>
 
@@ -105,6 +72,10 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            <div class="col-md-9" id="bloque_ajax_datos_cliente">
+                                <div id="datos_cliente_ajax"></div>
                             </div>
 
                             <div class="row">
@@ -1426,14 +1397,9 @@
         }
     }
 
-    $(document).on('keyup', '#busca_cliente', function(e) {
-        nombre_cliente = $('#busca_cliente').val();
+    $(document).on('keyup', '#nombre', function(e) {
+        nombre_cliente = $('#nombre').val();
         if (nombre_cliente.length > 3) {
-            // console.log(nombre_cliente.length);
-            // var pagina   = $(this).attr('data-pagina');
-            // var dv       = $(this).parents('.gale-archi-ajax');
-            // var idposmod = dv.attr('data-idposimod');
-
             $.ajax({
                 url: '<?php echo base_url() ?>Trabajos/ajax_busca_cliente/' + nombre_cliente,
                 type: 'GET',
@@ -1446,8 +1412,7 @@
     });
 
     function extraer_datos(id_cliente) {
-        // console.log(id_cliente);  
-        $("#bloque_busqueda").toggle('slow');
+        $("#bloque_ajax_datos_cliente").toggle('slow');
         $.ajax({
             url: '<?php echo base_url() ?>Trabajos/ajax_medidas_cliente/' + id_cliente,
             type: 'GET',
@@ -1504,31 +1469,6 @@
                 }
             }
         });
-    }
-
-    // validamos que el nombre del cliente no sea repetido
-    $(document).on('change', '#nombre', function(e) {
-        var nombre_cliente = $('#nombre').val();
-        $.ajax({
-            url: '<?php echo base_url() ?>/Trabajos/ajax_valida_cliente/' + nombre_cliente,
-            type: 'GET',
-            success: function(data) {
-                datos_cliente = JSON.parse(data);
-                if (datos_cliente == 1) {
-                    // $("#error_cliente_duplicado").show('slow');  
-                    swal.fire({
-                        type: 'error',
-                        title: 'Oops...',
-                        text: 'El cliente ya existe!',
-                        // footer: '<a href>Why do I have this issue?</a>'
-                    })
-                }
-            }
-        });
-    });
-
-    function muestra_bloque_busqueda() {
-        $("#bloque_busqueda").toggle('slow');
     }
 
     // validamos que el cliente no se repita en el contrato

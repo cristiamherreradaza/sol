@@ -1,4 +1,4 @@
-<?php if (!empty($clientes_encontrados)): ?>
+<?php if (!empty($clientes_encontrados)) : ?>
     <div class="table-responsive">
         <table class="table no-wrap">
             <thead>
@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($clientes_encontrados as $key => $c): ?>
+                <?php foreach ($clientes_encontrados as $key => $c) : ?>
                     <tr>
                         <td><?php echo ++$key; ?></td>
                         <td><?php echo $c['nombre'] ?></td>
@@ -21,12 +21,11 @@
                             <span class="label label-success" onclick="extraer_datos(<?php echo $c['id'] ?>)">ELEGIR</span>
                             <!-- <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button> -->
                         </td>
-                    </tr>                
+                    </tr>
                 <?php endforeach ?>
             </tbody>
         </table>
     </div>
-<?php else: ?>
-    <h3>&nbsp;</h3>
-    <h3>El cliente no esta registrado</h3>
+<?php else : ?>
+    <div class="text-primary"><b>El cliente no esta registrado, puede registralo</b></div>
 <?php endif ?>
