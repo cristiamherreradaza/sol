@@ -80,20 +80,27 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="card">
-                                        <div class="card-body pb-0">
-                                            <!-- Nav tabs -->
-                                            <ul class="nav nav-tabs customtab2" role="tablist">
-                                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#sacos" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">DATOS SACOS</span></a> </li>
-                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#pantalon" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">DATOS PANTALON</span></a> </li>
-                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#chaleco" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">DATOS CHALECO</span></a> </li>
-                                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#extras" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">EXTRAS</span></a> </li>
-                                            </ul>
-                                            <!-- Tab panes -->
-                                            <div class="tab-content">
-                                                <div class="tab-pane active" id="sacos" role="tabpanel">
-                                                    <div class="p-3">
-                                                        <!-- saco -->
+
+                                    <div class="row" id="tabsProductos">
+                                        <div class="col-md-3">
+                                            <button type="button" id="tab1" class="btn btn-block btn-info activo">DATOS SACO</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" id="tab2" class="btn btn-block btn-success inactivo">DATOS PANTALON</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" id="tab3" class="btn btn-block btn-primary inactivo">DATOS CHALECO</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="button" id="tab4" class="btn btn-block btn-inverse inactivo">EXTRAS</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12 tabContenido" id="tab1C">
+                                            <div class="card border-danger">
+                                                <div class="card-body">
+                                                     <!-- saco -->
                                                         <div class="row">
                                                             <!-- medidas saco -->
 
@@ -294,9 +301,12 @@
                                                             </div>
                                                         </div>
                                                         <!-- fin sacos -->
-                                                    </div>
                                                 </div>
-                                                <div class="tab-pane  p-3" id="pantalon" role="tabpanel">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 tabContenido" id="tab2C" style="display: none;">
+                                            <div class="card border-danger">
+                                                <div class="card-body">
                                                     <!-- pantalon -->
                                                     <div class="row">
 
@@ -502,7 +512,11 @@
                                                     </div>
                                                     <!-- fin pantalon -->
                                                 </div>
-                                                <div class="tab-pane p-3" id="chaleco" role="tabpanel">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 tabContenido" id="tab3C" style="display: none;">
+                                            <div class="card border-danger">
+                                                <div class="card-body">
                                                     <!-- chalecos -->
                                                     <div class="row">
                                                         <!-- chaleco medidas -->
@@ -635,7 +649,11 @@
                                                     </div>
                                                     <!-- fin chalecos -->
                                                 </div>
-                                                <div class="tab-pane p-3" id="extras" role="tabpanel">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 tabContenido" id="tab4C" style="display: none;">
+                                            <div class="card border-danger">
+                                                <div class="card-body">
                                                     <!-- camisa y extras -->
                                                     <div id="bloque_extras" style="display: block;">
 
@@ -647,7 +665,7 @@
                                                                     <div class="card-header">
                                                                         <h4 class="mb-0 text-white">CAMISA</h4>
                                                                     </div>
-                                                                    <div class="card-body" style="background-color: #f0e7fe;">
+                                                                    <div class="card-body" style="background-color: #f5f5f5;">
 
                                                                         <div class="row">
 
@@ -746,7 +764,7 @@
                                                                     <div class="card-header">
                                                                         <h4 class="mb-0 text-white">EXTRAS</h4>
                                                                     </div>
-                                                                    <div class="card-body" style="background-color: #f0e7fe;">
+                                                                    <div class="card-body" style="background-color: #f5f5f5;">
 
                                                                         <div class="row">
 
@@ -1061,6 +1079,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -1245,6 +1264,19 @@
     var subtotal_cam = 0;
     var subtotal_ext = 0;
     var costo_confeccion_calculado = 0;
+
+    // generamos los tabs
+    $('#tabsProductos div .btn').click(function () {
+        var t = $(this).attr('id');
+
+        if ($(this).hasClass('inactivo')) { //preguntamos si tiene la clase inactivo 
+            $('#tabsProductos div .btn').addClass('inactivo');
+            $(this).removeClass('inactivo');
+
+            $('.tabContenido').hide();
+            $('#' + t + 'C').fadeIn('slow');
+        }
+    });
 
     $("#saco_pu, #saco_cantidad").keyup(function() {
         calcula_precio_saco();
