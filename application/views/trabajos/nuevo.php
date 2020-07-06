@@ -92,7 +92,7 @@
                                             <button type="button" id="tab3" class="btn btn-block btn-primary inactivo">DATOS CHALECO</button>
                                         </div>
                                         <div class="col-md-3">
-                                            <button type="button" id="tab4" class="btn btn-block btn-inverse inactivo">EXTRAS</button>
+                                            <button type="button" id="tab4" class="btn btn-block btn-inverse inactivo">EXTRAS / FALDAS Y JUMPER</button>
                                         </div>
                                     </div>
 
