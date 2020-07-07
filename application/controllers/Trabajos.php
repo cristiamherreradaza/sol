@@ -1394,6 +1394,12 @@ class Trabajos extends CI_Controller {
         $this->dompdf->set_option('isRemoteEnabled', TRUE);  
         $this->dompdf->setPaper('letter', 'portrait');
 		$this->dompdf->render();
+		$f;
+		$l;
+		if (headers_sent($f, $l)) {
+			echo $f, '<br/>', $l, '<br/>';
+			die('now detect line');
+		}
         $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
 
 	}
