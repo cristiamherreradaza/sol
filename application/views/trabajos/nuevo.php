@@ -1380,9 +1380,7 @@
 
     $("#costo_confeccion").keyup(function() {
         ccc = parseFloat($("#costo_confeccion_calculado").val());
-        console.log(ccc);
         cc = parseFloat($("#costo_confeccion").val());
-        console.log(cc);
 
         if (cc < ccc) {
             calculo_rebaja = ccc - cc;
