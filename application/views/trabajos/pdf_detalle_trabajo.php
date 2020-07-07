@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Impresion Trabajo</title>
-
-    
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="<?php echo base_url(); ?>public/js/barcode/jquery-barcode.js"></script>
-
     <style type="text/css">
         @page {
             margin: 15px;
