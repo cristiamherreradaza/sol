@@ -43,10 +43,10 @@
             <div class="card-body">
                 <div class="form-horizontal form-material">
                     <center>
-                        <img src="<?php echo base_url() ?>public/assets/images/sol.png" height="150px">
+                        <img src="<?php echo base_url() ?>public/assets/images/sol.png" height="180px">
                         <p></p>
                         <img src="<?php echo base_url() ?>public/assets/images/reportes/impresion_cliente.jpg" width="300px">
-                        <hr>
+                        <p></p>
                         <!-- <h3 class="box-title mb-3">SOLIZ&MENDOZA</h3> -->
                     </center>
                     <div class="form-group ">
