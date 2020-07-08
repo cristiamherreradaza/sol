@@ -1416,4 +1416,12 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function presentacion()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('trabajos/presentacion');
+		$this->load->view('template/footer');
+	}
+
 }

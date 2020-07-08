@@ -195,6 +195,10 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="<?php echo base_url(); ?>trabajos/presentacion" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">PRESENTACION</span></a>
+                </li>
+
                 <!-- <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">COTIZACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
