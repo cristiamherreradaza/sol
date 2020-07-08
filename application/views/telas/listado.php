@@ -175,7 +175,6 @@
 		$('#nombre').val("");
 		$('#precio').val("");
 		$("#myModal").modal('show');
-
 	}
 
 	function cierra_modal()

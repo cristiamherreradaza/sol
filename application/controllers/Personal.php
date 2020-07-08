@@ -117,7 +117,8 @@ class Personal extends CI_Controller {
 	public function horarios()
 	{
 		// echo 'hola';
-		$data['horarios'] = $this->db->get_where('horarios', array('estado' =>1))->row();		
+		$data['horarios'] = $this->db->get_where('horarios', array('estado' =>1))->row();
+		$data['horarioss'] = $this->db->get_where('horarios', array('estado' =>1))->result();		
 		// // echo 'Holas desde listado';
 		// // vdebug($clientes, true, false, true);
 		$this->load->view('template/header');

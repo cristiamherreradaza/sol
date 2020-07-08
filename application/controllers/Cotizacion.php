@@ -70,6 +70,8 @@ class Cotizacion extends CI_Controller {
 	public function guarda_separado()
 	{
 		$fecha= date("Y-m-d");
+		// var_dump($fecha);
+		// exit;
 		$datos = array(
 		'nombre' => $this->input->post('nombre'),
 		'costo_real_v_1'	=> $this->input->post('costo_real_v_1'),
@@ -94,14 +96,13 @@ class Cotizacion extends CI_Controller {
 		'costo_mayor_tela_2' => $this->input->post('costo_mayor_tela_2'),
 		'id_tela_3' => $this->input->post('id_tela_3'),
 		'costo_real_tela_3' => $this->input->post('costo_real_tela_3'),
-		'costo_mayor_tela_1' => $this->input->post('costo_mayor_tela_1'),
 		'costo_mayor_tela_3' => $this->input->post('costo_mayor_tela_3'),
 		'fecha' => $fecha,
 		'estado'   => 1
 		);
 		$this->db->insert('cotizaciones2', $datos);
 		$ultimo = $this->db->query("SELECT MAX(id) as nro
-											FROM cotizaciones1")->row();
+											FROM cotizaciones2")->row();
 		$id = $ultimo->nro;
 		redirect('Cotizacion/reporte/'.$id);
 	}

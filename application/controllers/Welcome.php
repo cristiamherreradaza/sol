@@ -22,4 +22,33 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+	public function prueba(){
+
+		$ingreso_man = 08:00;
+		$salida_man = 12:30;
+		$ingreso_tar = 14:00;
+		$salida_tar = 20:00;
+			
+		$hora_ini = 08:00;
+		$hora_fin = 10:00;
+
+			if($hora_ini <= $ingreso_man)
+			{
+				if($hora_fin >= $salida_man)
+				{
+					$ingreso_man = 08:00
+					$salida_man = 12:30			
+				} 
+				else
+				{
+					$ingreso_man = 08:00		
+				}	
+			} 
+			else 
+			{ 
+			
+
+			}
+	}
 }
