@@ -570,7 +570,7 @@
                             <div class="col-md-12">
                                 <div class="float-right mt-4 text-right">
                                     <?php if ($trabajo['rebaja'] != 0): ?>
-                                        <h4 style="color: red;">Rebaja (<?php echo $trabajo['motivo_rebaja'] ?>) : <?php echo number_format($trabajo['rebaja'], 2); ?></h4>
+                                        <h4 style="color: red;">Rebaja (<?php echo $trabajo['motivo_rebaja'] ?>) : -<?php echo number_format($trabajo['rebaja'], 2); ?></h4>
                                     <?php endif ?>
                                     <p>Sub - Total : <?php echo number_format($trabajo['costo_confeccion'], 2) ?></p>
                                     <p>Precio - Tela : <?php echo number_format($trabajo['costo_tela'], 2) ;?> </p>

@@ -1395,7 +1395,7 @@ class Trabajos extends CI_Controller {
         $this->dompdf->setPaper('letter', 'portrait');
 		$this->dompdf->render();
         $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
-
+		exit;
 	}
 
 	public function listado_pagos()

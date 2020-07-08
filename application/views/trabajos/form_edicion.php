@@ -254,11 +254,11 @@
 
         <!-- pantalon -->
         <div class="row">
+          <?php if ($pantalon['modelo_id']): ?>
 
           <!-- medidas pantalon -->
             
           <div class="col-md-5">
-
             <div class="card card-outline-success">
               <div class="card-header">
                 <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
@@ -341,7 +341,6 @@
             </div>
             <!-- fin medidas pantalon -->
 
-            <?php if ($pantalon['modelo_id']): ?>
             <!-- modelos pantalon -->
             <div class="col-md-7">
               <div class="card card-outline-success">
@@ -427,12 +426,13 @@
               </div>
             </div>
             <!-- fin medidas pantalon -->
-            <?php endif ?>
+          <?php endif ?>          
           </div>
-
           <!-- fin pantalon -->
 
           <!-- chalecos -->
+          <?php if ($chaleco['modelo_id']): ?>
+
           <div class="row">
             <!-- chaleco medidas -->
             <div class="col-md-5">
@@ -481,7 +481,6 @@
               <!-- fin chaleco medidas -->
 
               <!-- chalecos -->
-              <?php if ($chaleco['modelo_id']): ?>
                 
               <div class="col-md-7">
                 <div class="card card-outline-primary">
@@ -537,11 +536,12 @@
                   </div>
                 </div>
               </div>
-              <?php endif ?>
 
               <!-- fin chalecos -->
 
           </div>
+          <?php endif ?>
+
           <!-- fin chalecos -->
 
           <!-- camisa y extras -->

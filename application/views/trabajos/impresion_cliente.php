@@ -283,6 +283,14 @@
                                                 <?php else: ?>
                                                     <?php $sub_chaleco = 0 ?>
                                                 <?php endif ?>
+                                                <?php if ($trabajo['rebaja'] != 0): ?>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td class="text-right">REBAJA (<?php echo $trabajo['motivo_rebaja'] ?>)</td>
+                                                        <td class="text-right">-<?php echo $trabajo['rebaja'] ?></td>
+                                                    </tr>
+                                                <?php endif ?>
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
