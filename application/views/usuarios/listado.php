@@ -217,7 +217,7 @@
 					'success'
 				);
 				// console.log("el id es "+id_pago);
-				window.location.href = "<?php echo base_url() ?>aberturas/eliminar/" + id;
+				window.location.href = "<?php echo base_url() ?>usuarios/eliminar/" + id;
 			}
 		})
 	}

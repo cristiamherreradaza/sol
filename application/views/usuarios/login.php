@@ -39,16 +39,11 @@
     <section id="wrapper">
         <div class="login-register" style="background-image:url(<?php echo base_url(); ?>public/assets/images/background/img_login.jpg);">        
             <div class="login-box card">
+                        <img src="<?php echo base_url() ?>public/assets/images/logoLogin.jpg">
             <?php echo form_open('usuarios/valida'); ?>
             <div class="card-body">
                 <div class="form-horizontal form-material">
-                    <center>
-                        <img src="<?php echo base_url() ?>public/assets/images/sol.png" height="180px">
-                        <p></p>
-                        <img src="<?php echo base_url() ?>public/assets/images/reportes/impresion_cliente.jpg" width="300px">
-                        <p></p>
-                        <!-- <h3 class="box-title mb-3">SOLIZ&MENDOZA</h3> -->
-                    </center>
+                    
                     <div class="form-group ">
                       <div class="col-xs-12">
                         <input class="form-control" name="usuario" type="text" required="" placeholder="Usuario" autofocus>
