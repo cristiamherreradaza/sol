@@ -78,11 +78,29 @@
             line-height:18px;
         }
 
-
-       
-
-
-      
+        /*estilos para tablas de datos*/
+        table.datos {
+            font-size: 13px;
+            /*line-height:14px;*/
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        .datos th {
+          height: 15px;
+          background-color: #616362;
+          color: #fff;
+        }
+        .datos td {
+          height: 20px;
+        }
+        .datos th, .datos td {
+          border: 1px solid #ddd;
+          padding: 2px;
+          text-align: center;
+        }
+        .datos tr:nth-child(even) {background-color: #f2f2f2;}
+        /*fin de estilos para tablas de datos*/
     </style>
 
 
@@ -91,7 +109,7 @@
 
 <br/>
     <div class="invoice">
-        <h3 align="center" style="margin-top: 180px; font-size: 30px; font-family: Ink Free; ">COTIZACION</h3>
+        <h3 align="center" style="margin-top: 180px; font-size: 30px;">COTIZACION</h3>
          <table width="100%"  style=" margin-top: 10px; margin-bottom: 15px;">
             <tr>
                 <td align="left" width="40"  style=" margin-top: 20px; font-size: 12px; width: 60%; float: right;">                
@@ -122,7 +140,7 @@
                     </td>
                 </tr>
         </table>
-        <table id="data" width="100%" class="code" style="text-align: center;">
+        <table id="data" width="100%" class="datos" style="text-align: center;">
             <thead>
                 <tr>
                    
@@ -157,7 +175,7 @@
                 </td>
             </tr>
         </table>
-        <table id="data1" width="100%" class="code" style="text-align: center;">
+        <table id="data1" width="100%" class="datos" style="text-align: center;">
             <thead>
                 <tr>
                    

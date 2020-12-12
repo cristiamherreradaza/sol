@@ -11,7 +11,7 @@
 
         body {
            
-        background-image: url('<?php echo base_url(); ?>public/assets/images/reportes/formato.png');
+        background-image: url('<?php echo base_url(); ?>public/assets/images/reportes/membrete_oficial_sm.jpg');
         
         background-repeat: no-repeat; 
 
@@ -19,9 +19,7 @@
 
         * {
             font-family: Verdana, Arial, sans-serif;
-            margin-top: 10px; 
-            margin-left: 10px;
-            margin-right: 10px;
+            
 
         }
 
@@ -37,7 +35,12 @@
             
         }
 
-       
+       .invoice {
+            /*margin-top: 10px; */
+            margin-left: 40px;
+            margin-right: 40px;
+
+        }
 
         tfoot tr td {
             font-weight: bold;
@@ -81,7 +84,29 @@
             
         }
 
-       
+        /*estilos para tablas de datos*/
+        table.datos {
+            font-size: 13px;
+            /*line-height:14px;*/
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+        .datos th {
+          height: 15px;
+          background-color: #616362;
+          color: #fff;
+        }
+        .datos td {
+          height: 20px;
+        }
+        .datos th, .datos td {
+          border: 1px solid #ddd;
+          padding: 2px;
+          text-align: center;
+        }
+        .datos tr:nth-child(even) {background-color: #f2f2f2;}
+        /*fin de estilos para tablas de datos*/
 
 
       
@@ -99,7 +124,7 @@
 
 
 <div class="invoice">
-    <h3 align="center" style="margin-top: 170px; font-size: 30px; font-family: Ink Free; ">COTIZACION</h3>
+    <h3 align="center" style="margin-top: 120px; font-size: 30px;">COTIZACION</h3>
      <table width="100%"  style=" margin-top: 10px; margin-bottom: 15px;">
         <tr>
             <td align="left" width="40"  style=" margin-top: 20px; font-size: 12px; width: 60%; float: right;">                
@@ -134,7 +159,7 @@
         </tr>
 </table>
 
-    <table id="data" width="100%" class="code" style="text-align: center; margin-top: 5px;">
+    <table id="data" width="100%" class="datos" style="text-align: center; margin-top: 5px;">
         <thead>
             <tr>
                
@@ -175,7 +200,7 @@
         </tr>
     </table>
 
-    <table id="data1" width="100%" class="code" style="text-align: center; margin-top: 5px;">
+    <table id="data1" width="100%" class="datos" style="text-align: center; margin-top: 5px;">
         <thead>
             <tr>
                
@@ -221,7 +246,7 @@
         </tr>
     </table>
 
-    <table id="data1" width="100%" class="code" style="text-align: center; margin-top: 5px;">
+    <table id="data1" width="100%" class="datos" style="text-align: center; margin-top: 5px;">
         <thead>
             <tr>
                
