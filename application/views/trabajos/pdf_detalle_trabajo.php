@@ -10,7 +10,7 @@
             margin: 15px;
         }
         body {
-            background-image: url('<?php echo base_url(); ?>public/assets/images/reportes/formato.png');
+            /* background-image: url('<?php //echo base_url(); ?>public/assets/images/reportes/formato.png'); */
             background-repeat: no-repeat; 
             font-size: 13px;
         }
@@ -104,6 +104,7 @@
 <body>
 <div class="invoice">
     <h3 style="margin-top: 30px; font-size: 30px;">TRABAJO # <?php echo $trabajo['id']; ?></h3>
+    <img src="">
 
     <table class="contenidos">
         <tr>

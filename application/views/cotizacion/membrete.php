@@ -11,7 +11,7 @@
 
         body {
            
-           background-image: url('<?php echo base_url(); ?>public/assets/images/reportes/membrete3.png');
+           background-image: url('<?php echo base_url(); ?>public/assets/images/reportes/membrete_oficial_sm.jpg');
 
            background-repeat: no-repeat; 
 
