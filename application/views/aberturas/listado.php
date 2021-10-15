@@ -5,8 +5,8 @@
 <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
-			<?php echo form_open('aberturas/guarda'); ?>
+			<!-- <form action="<?=//base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
+			<?php //echo form_open('aberturas/guarda'); ?>
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -46,7 +46,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA ABERTURA</button>
+					<button type="button" onclick="guardarabertura()" class="btn waves-effect waves-light btn-block btn-success">GUARDA ABERTURA</button>
 				</div>
 			</form>
 
@@ -151,7 +151,6 @@
 		$('#genero').val("varon");
 		$('#ida').val("");
 		$("#myModal").modal('show');
-
 	}
 
 	function cierra_modal()
@@ -166,6 +165,20 @@
 		$('#genero').val(genero);
 		$('#ida').val(id);
 		$("#myModal").modal('show');
+		Swal.fire(
+			'Excelente!',
+			'La abertura fue registrado Exitosamente.',
+			'success'
+		);
+	}
+	
+	function guardarabertura(){
+		if($('#formulario-abertura')[0].checkValidity()){
+			$('#formulario-abertura').submit();
+            Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-abertura')[0].reportValidity()
+        }
 	}
 
 
