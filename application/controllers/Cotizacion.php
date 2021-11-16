@@ -60,11 +60,18 @@ class Cotizacion extends CI_Controller {
 		'fecha' => $fecha,
 		'estado'   => 1
 		);
-		$this->db->insert('cotizaciones1', $datos);
-		$ultimo = $this->db->query("SELECT MAX(id) as nro
-											FROM cotizaciones1")->row();
-		$id = $ultimo->nro;
-		redirect('Cotizacion/membrete/'.$id);
+		
+		if($this->input->post('nuevo-edita') != 0){
+			$this->db->update('cotizaciones1', $datos, array('id' => $this->input->post('nuevo-edita')));
+
+			redirect('Cotizacion/lista_unida');
+		}else{
+			$this->db->insert('cotizaciones1', $datos);
+			$ultimo = $this->db->query("SELECT MAX(id) as nro
+												FROM cotizaciones1")->row();
+			$id = $ultimo->nro;
+			redirect('Cotizacion/membrete/'.$id);
+		}
 	}
 
 	public function guarda_separado()
@@ -100,11 +107,21 @@ class Cotizacion extends CI_Controller {
 		'fecha' => $fecha,
 		'estado'   => 1
 		);
-		$this->db->insert('cotizaciones2', $datos);
-		$ultimo = $this->db->query("SELECT MAX(id) as nro
+
+		if($this->input->post('nuevo-edita') != 0){
+			$this->db->update('cotizaciones2', $datos, array('id' => $this->input->post('nuevo-edita')));
+
+			redirect('Cotizacion/lista_separada');
+
+		}else{
+			$this->db->insert('cotizaciones2', $datos);
+
+			$ultimo = $this->db->query("SELECT MAX(id) as nro
 											FROM cotizaciones2")->row();
-		$id = $ultimo->nro;
-		redirect('Cotizacion/reporte/'.$id);
+			$id = $ultimo->nro;
+
+			redirect('Cotizacion/reporte/'.$id);
+		}
 	}
 
 	public function membrete($id = null)
@@ -178,10 +195,20 @@ class Cotizacion extends CI_Controller {
 
     public function lista_unida()
     {
-		$data['cotizacion'] = $this->db->query("SELECT cot1.id, cot1.nombre, tel.nombre as nom_tela1, cot1.prec_1, cot1.fecha 
+		// $data['cotizacion'] = $this->db->query("SELECT cot1.id, cot1.nombre, tel.nombre as nom_tela1, cot1.prec_1, cot1.fecha 
+		// 										FROM cotizaciones1 cot1, telas tel
+		// 										WHERE cot1.tela_id_1 = tel.id
+		// 										AND cot1.estado = 1")->result();
+
+
+		$data['cotizacion'] = $this->db->query("SELECT *, cot1.id, cot1.nombre, tel.nombre as nom_tela1, cot1.prec_1, cot1.fecha 
 												FROM cotizaciones1 cot1, telas tel
 												WHERE cot1.tela_id_1 = tel.id
 												AND cot1.estado = 1")->result();
+
+		$data['telas'] = $this->db->get_where('telas', array('estado'=>1))->result();
+
+
         $this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('cotizacion/lista_unida', $data);
@@ -190,10 +217,18 @@ class Cotizacion extends CI_Controller {
 
 	public function lista_separada()
     {
-		$data['cotizacion'] = $this->db->query("SELECT cot2.id, cot2.nombre, tel.nombre as nom_tela1, cot2.costo_real_tela_1, cot2.fecha 
+		// $data['cotizacion'] = $this->db->query("SELECT cot2.id, cot2.nombre, tel.nombre as nom_tela1, cot2.costo_real_tela_1, cot2.fecha 
+		// 										FROM cotizaciones2 cot2, telas tel
+		// 										WHERE cot2.id_tela_1 = tel.id
+		// 										AND cot2.estado = 1")->result();
+		
+		$data['cotizacion'] = $this->db->query("SELECT * ,tel.nombre as nom_tela1, cot2.nombre as nombre_cotizador, cot2.id as id_cot
 												FROM cotizaciones2 cot2, telas tel
 												WHERE cot2.id_tela_1 = tel.id
 												AND cot2.estado = 1")->result();
+
+		$data['telas'] = $this->db->get_where('telas', array('estado'=>1))->result();
+
         $this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('cotizacion/lista_separada', $data);

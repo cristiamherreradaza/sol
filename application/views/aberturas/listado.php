@@ -5,8 +5,10 @@
 <div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<!-- <form action="<?=//base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
-			<?php //echo form_open('aberturas/guarda'); ?>
+			<!-- <form action="<?//=base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
+			<?php 
+				echo form_open('aberturas/guarda'); 
+			?>
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>

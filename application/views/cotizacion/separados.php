@@ -25,6 +25,7 @@
                                         <label for="example-text-input" class="col-form-label" >A Nombre de:</label>
                                         <div class="col-6">
                                             <input class="form-control" type="text" id="nombre" required name="nombre">
+											<input type="text" name="nuevo-edita" value="0">
                                         </div>
                                     </div>
                         <h3 class="modal-title" id="myModalLabel">Confecci&oacute;n para Var&oacute;n</h3>
