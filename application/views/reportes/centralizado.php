@@ -299,6 +299,43 @@
                                         
                                     </div>
 
+                                    <div class="col-md-4">
+                                    <div class="card card-outline-danger">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white">COSTOS Y PRODUCCION</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Descripcion</th>
+                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-right">Monto</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Trabajos</td>
+                                                                <td class="text-center"><?php echo $costo_produccion['cant_tra']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($costo_produccion['precio'], 2) ?></td>
+                                                            </tr>
+                                                            <!-- <tr>
+                                                                <td>Descuento a Empleados</td>
+                                                                <td class="text-center"><?php echo $cantidad_descuentos['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($descuento_empleados['total'], 2) ?></td>
+                                                            </tr> -->
+                                                            <tr>
+                                                                <th>Total</th>
+                                                                <td class="text-center"></td>
+                                                                <?//php $sueldos_totales = $sueldo_empleados['total']-$descuento_empleados['total'] ?>
+                                                                <th class="text-right"><?php echo number_format($costo_produccion['precio'], 2) ?></th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                    <!--  <div class="col-md-4">
 
                                         <div class="card card-outline-danger">

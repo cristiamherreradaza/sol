@@ -371,6 +371,20 @@ class Reportes extends CI_Controller {
 		$data['descuento_empleados'] = $this->db->query($descuento_empleados)->row_array();
 
 		// var_dump($data['venta_compra']);
+		// COSTO Y PRODUCCION
+		$fecha_hora_fin1 = $fecha_hora_fin.' 23:59:59' ;
+		$costo_produccion = "SELECT SUM(cp.precio) as precio, COUNT(t.id) as cant_tra
+							FROM trabajos t INNER JOIN costos_produccion cp
+								ON t.id = cp.trabajo_id
+							WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin1' ";
+							// -- WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin' ";
+
+
+		$data['costo_produccion'] = $this->db->query($costo_produccion)->row_array();
+
+		// $data['costo_produccion'] = $this->db->query($costo_produccion)->result();
+		
+		// var_dump($data['costo_produccion']);
 		// exit;
 
 
