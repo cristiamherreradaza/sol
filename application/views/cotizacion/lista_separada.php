@@ -229,7 +229,7 @@
                                             <td><?php echo $valor->fecha ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" id="editar" onclick="editar('<?=$valor->id_cot?>','<?=$valor->nombre_cotizador?>','<?=$valor->costo_real_v_1?>','<?=$valor->costo_mayor_v_1?>','<?=$valor->costo_real_v_2?>','<?=$valor->costo_mayor_v_2?>','<?=$valor->costo_real_v_3?>','<?=$valor->costo_mayor_v_3?>','<?=$valor->costo_real_m_1?>','<?=$valor->costo_mayor_m_1?>','<?=$valor->costo_real_m_2?>','<?=$valor->costo_mayor_m_2?>','<?=$valor->costo_real_m_3?>','<?=$valor->costo_mayor_m_3?>','<?=$valor->costo_real_m_4?>','<?=$valor->costo_mayor_m_4?>','<?=$valor->id_tela_1?>','<?=$valor->costo_real_tela_1?>','<?=$valor->costo_mayor_tela_1?>','<?=$valor->id_tela_2?>','<?=$valor->costo_real_tela_2?>','<?=$valor->costo_mayor_tela_2?>','<?=$valor->id_tela_3?>','<?=$valor->costo_real_tela_3?>','<?=$valor->costo_mayor_tela_3?>')" ><i class="fas fa-edit"></i></button>
-                                                <a type="button" href="<?php echo site_url('Cotizacion/reporte/').$valor->id ?>" target="_blank" class="btn btn-warning"><i class="fas fa-file-pdf"></i></a>
+                                                <a type="button" href="<?php echo site_url('Cotizacion/reporte/').$valor->id ?>" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i></a>
                                                 <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $valor->id ?>)"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>

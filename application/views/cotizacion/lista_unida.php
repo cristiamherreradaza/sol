@@ -217,7 +217,7 @@
                                             <td><?php echo $valor->fecha ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" onclick="edita('<?=$valor->id?>','<?=$valor->nombre?>','<?=$valor->tela_id_1?>','<?=$valor->tela_id_2?>','<?=$valor->tela_id_3?>','<?=$valor->prec_1?>','<?=$valor->prec_2?>','<?=$valor->prec_3?>','<?=$valor->prec_4?>','<?=$valor->prec_5?>','<?=$valor->prec_6?>','<?=$valor->tela_id_4?>','<?=$valor->tela_id_5?>','<?=$valor->tela_id_6?>','<?=$valor->prec_7?>','<?=$valor->prec_8?>','<?=$valor->prec_9?>','<?=$valor->precio_1?>','<?=$valor->precio_2?>','<?=$valor->precio_3?>')"><i class="fas fa-edit"></i></button>
-                                                <a type="button" href="<?php echo site_url('Cotizacion/membrete/').$valor->id ?>" target="_blank" class="btn btn-warning"><i class="fas fa-file-pdf"></i></a>
+                                                <a type="button" href="<?php echo site_url('Cotizacion/membrete/').$valor->id ?>" target="_blank" class="btn btn-success"><i class="fas fa-file-pdf"></i></a>
                                                 <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $valor->id ?>)"><i class="fas fa-trash"></i></button>
                                             </td>
                                         </tr>
