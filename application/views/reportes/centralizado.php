@@ -314,21 +314,25 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr>
-                                                                <td>Trabajos</td>
-                                                                <td class="text-center"><?php echo $costo_produccion['cant_tra']; ?></td>
-                                                                <td class="text-right"><?php echo number_format($costo_produccion['precio'], 2) ?></td>
-                                                            </tr>
-                                                            <!-- <tr>
-                                                                <td>Descuento a Empleados</td>
-                                                                <td class="text-center"><?php echo $cantidad_descuentos['total']; ?></td>
-                                                                <td class="text-right"><?php echo number_format($descuento_empleados['total'], 2) ?></td>
-                                                            </tr> -->
+                                                            <?php
+                                                                $cantidadCP = 0;
+                                                                $MontoCP = 0;
+                                                                foreach ($costo_produccion as $cp){
+                                                                ?>
+                                                                    <tr>
+                                                                        <td><?=$cp->tipo?></td>
+                                                                        <td class="text-center"><?=$cp->cant_tra?></td>
+                                                                        <td class="text-right"><?=$cp->precio?></td>
+                                                                    </tr>    
+                                                                <?php
+                                                                    $cantidadCP = $cantidadCP + $cp->cant_tra;
+                                                                    $MontoCP = $MontoCP + $cp->precio;
+                                                                }
+                                                            ?>
                                                             <tr>
                                                                 <th>Total</th>
-                                                                <td class="text-center"></td>
-                                                                <?//php $sueldos_totales = $sueldo_empleados['total']-$descuento_empleados['total'] ?>
-                                                                <th class="text-right"><?php echo number_format($costo_produccion['precio'], 2) ?></th>
+                                                                <th class="text-center"><?=$cantidadCP?></td>
+                                                                <th class="text-right"><?=number_format($MontoCP,2)?></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
