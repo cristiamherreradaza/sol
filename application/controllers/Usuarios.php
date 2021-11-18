@@ -30,7 +30,8 @@ class Usuarios extends CI_Controller {
 		$pass_encriptado = sha1($password);
 		if($this->Usuario_model->valida($usuario, $pass_encriptado))
 		{
-			redirect("trabajos/nuevo");
+			// redirect("trabajos/nuevo");
+			redirect("Panel/home");
 		}else{
 			// echo 'no';
 			$this->form_validation->set_message('verificar_usuario', 'Los datos son incorrectos.');

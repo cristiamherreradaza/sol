@@ -52,6 +52,7 @@
 									<option value="Almacenero">ALMACENERO</option>
 									<option value="Operario">OPERARIO</option>
 									<option value="Administrador">ADMINISTRADOR</option>
+									<option value="recursos humanos">RECURSOS HUMANOS</option>
 								</select>
 							</div>
 						</div>

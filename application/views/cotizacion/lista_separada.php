@@ -277,7 +277,7 @@
 
     });
 </script>
-<<script>
+<script>
 	function eliminar(id){
 
         Swal.fire({

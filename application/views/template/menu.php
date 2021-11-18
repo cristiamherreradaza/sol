@@ -91,114 +91,199 @@
             </div>
         </div>
         <!-- End User profile text-->
+        
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="nav-small-cap">MENU PRINCIPAL</li>
-                <li>
-                    <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
-                </li>
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
-                        <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
-                    </ul>
-                </li>
+                <li class="nav-small-cap">MENU PRINCIPAL<?php echo $this->session->rol; ?></li>
+                <?php
+                if($this->session->rol == 'Administrador'){
+                    ?>
+                    <li>
+                        <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
+                        </ul>
+                    </li>
 
-                <li>
-                    <a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false"><i class="mdi mdi-cash"></i>PAGOS</a>
-                </li>
+                    <li>
+                        <a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false"><i class="mdi mdi-cash"></i>PAGOS</a>
+                    </li>
+                    
+                    <li>
+                        <a href="<?php echo base_url(); ?>contratos/listado" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i>CONTRATOS</a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">REPORTES</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="<?php echo base_url(); ?>reportes/fecha_centralizado">Centralizado</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
+                            <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
+                            <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <!-- <li><a href="#">Confecciones</a> -->
+                            <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Trabajos</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
+                                    <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
+                                    <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
+                                    <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
+                                    <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
+                                    <li><a href="<?php echo base_url(); ?>costos/modifica">Costos Operacion</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
+                                <ul aria-expanded="false" class="collapse">
+                                    <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
+                                    <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
+                                    <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
+                            </li>
+                            <li>
+                                <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-format-title"></i> Telas</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-border-color"></i><span class="hide-menu">COTIZACIONES</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                            <li><a href="<?php echo base_url(); ?>Cotizacion/lista_unida">Confeccion y Tela</a></li>
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                            <li><a href="<?php echo base_url(); ?>Cotizacion/lista_separada">Confeccion y Tela Separados</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>trabajos/presentacion" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">PRESENTACION</span></a>
+                    </li>
+                    <?php
+                }
+                ?>
+
+                <?php
+                if($this->session->rol == 'Operario'){
+                    ?>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
+                            <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false"><i class="mdi mdi-cash"></i>PAGOS</a>
+                    </li>
+                    
+                    <li>
+                        <a href="<?php echo base_url(); ?>contratos/listado" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i>CONTRATOS</a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
+                    </li>
+
+                    <li>
+                        <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
+                    </li>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-border-color"></i><span class="hide-menu">COTIZACIONES</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                            <li><a href="<?php echo base_url(); ?>Cotizacion/lista_unida">Confeccion y Tela</a></li>
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                            <li><a href="<?php echo base_url(); ?>Cotizacion/lista_separada">Confeccion y Tela Separados</a></li>
+                        </ul>
+                    </li>
+                    <?php
+                    }
+                ?>
+
+                <?php
+                if($this->session->rol == 'recursos humanos'){
+                    ?>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
+                            <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
+                            <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
+
+                <?php
+                if($this->session->rol == 'Almacenero'){
+                    ?>
+                    <li>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
+                        <ul aria-expanded="false" class="collapse">
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
+
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
+                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
+                        </ul>
+                    </li>
+                    <?php
+                }
+                ?>
+
+
+
                 
-                <li>
-                    <a href="<?php echo base_url(); ?>contratos/listado" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i>CONTRATOS</a>
-                </li>
-
-                <li>
-                    <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
-                </li>
-
-                <li>
-                    <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
-                </li>
-
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">REPORTES</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>reportes/fecha_centralizado">Centralizado</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
-                        <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-account-card-details"></i><span class="hide-menu">RECURSOS HUMANOS</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
-                        <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
-                        <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
-                        <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
-                        <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">CONFIGURACIONES</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <!-- <li><a href="#">Confecciones</a> -->
-                        <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Trabajos</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo base_url(); ?>aberturas/listado">Aberturas</a></li>
-                                <li><a href="<?php echo base_url(); ?>bolsillos/listado">Bolsillos</a></li>
-                                <li><a href="<?php echo base_url(); ?>detalles/listado">Detalles</a></li>
-                                <li><a href="<?php echo base_url(); ?>modelos/listado">Modelos</a></li>
-                                <li><a href="<?php echo base_url(); ?>pinzas/listado">Pinzas</a></li>
-                                <li><a href="<?php echo base_url(); ?>costos/modifica">Costos Operacion</a></li>
-                            </ul>
-                        </li>
-                        <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
-                            <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
-                                <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
-                                <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-format-title"></i> Telas</a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
-                        <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-border-color"></i><span class="hide-menu">COTIZACIONES</span></a>
-                    <ul aria-expanded="false" class="collapse">
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
-                        <li><a href="<?php echo base_url(); ?>Cotizacion/lista_unida">Confeccion y Tela</a></li>
-                        <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
-                        <li><a href="<?php echo base_url(); ?>Cotizacion/lista_separada">Confeccion y Tela Separados</a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="<?php echo base_url(); ?>trabajos/presentacion" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">PRESENTACION</span></a>
-                </li>
-
                 <!-- <li>
                     <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">COTIZACIONES</span></a>
                     <ul aria-expanded="false" class="collapse">
