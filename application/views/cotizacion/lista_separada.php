@@ -52,20 +52,20 @@
                                                 <tr>
                                                     <td>2 Piezas</td>
                                                     <td>Saco y Pantalon</td>
-                                                    <td><input type="text" required id="costo_real_v_1" name="costo_real_v_1"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_v_1" name="costo_mayor_v_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_v_1" name="costo_real_v_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_v_1" name="costo_mayor_v_1"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>3 Piezas</td>
                                                     <td>Saco, Pantalon y Chaleco</td>
-                                                    <td><input type="text" required id="costo_real_v_2" name="costo_real_v_2"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_v_2" name="costo_mayor_v_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_v_2" name="costo_real_v_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_v_2" name="costo_mayor_v_2"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1 Pieza</td>
                                                     <td>Camisa y Corbata</td>
-                                                    <td><input type="text" required id="costo_real_v_3" name="costo_real_v_3"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_v_3" name="costo_mayor_v_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_v_3" name="costo_real_v_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_v_3" name="costo_mayor_v_3"> Bs.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -87,26 +87,26 @@
                                                 <tr>
                                                     <td>2 Piezas</td>
                                                     <td>Saco y Pantalon</td>
-                                                    <td><input type="text" required id="costo_real_m_1" name="costo_real_m_1"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_m_1" name="costo_mayor_m_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_m_1" name="costo_real_m_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_m_1" name="costo_mayor_m_1"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>3 Piezas</td>
                                                     <td>Saco, Pantalon y Falda</td>
-                                                    <td><input type="text" required id="costo_real_m_2" name="costo_real_m_2"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_m_2" name="costo_mayor_m_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_m_2" name="costo_real_m_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_m_2" name="costo_mayor_m_2"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1 Pieza</td>
                                                     <td>Chaleco</td>
-                                                    <td><input type="text" required id="costo_real_m_3" name="costo_real_m_3"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_m_3" name="costo_mayor_m_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_m_3" name="costo_real_m_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_m_3" name="costo_mayor_m_3"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1 Pieza</td>
                                                     <td>Blusa</td>
-                                                    <td><input type="text" required id="costo_real_m_4" name="costo_real_m_4"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_m_4" name="costo_mayor_m_4"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_m_4" name="costo_real_m_4"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_m_4" name="costo_mayor_m_4"> Bs.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -139,8 +139,8 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" required id="costo_real_tela_1" name="costo_real_tela_1"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_tela_1" name="costo_mayor_tela_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_tela_1" name="costo_real_tela_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_tela_1" name="costo_mayor_tela_1"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1 Metro</td>
@@ -157,8 +157,8 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" required id="costo_real_tela_2" name="costo_real_tela_2"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_tela_2" name="costo_mayor_tela_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_tela_2" name="costo_real_tela_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_tela_2" name="costo_mayor_tela_2"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>1 Metro</td>
@@ -175,8 +175,8 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td><input type="text" required id="costo_real_tela_3" name="costo_real_tela_3"> Bs.</td>
-                                                    <td><input type="text" required id="costo_mayor_tela_3" name="costo_mayor_tela_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_real_tela_3" name="costo_real_tela_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="costo_mayor_tela_3" name="costo_mayor_tela_3"> Bs.</td>
                                                 </tr>
                                             </tbody>
                                         </table>

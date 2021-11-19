@@ -88,16 +88,16 @@
                                                 <tr>
                                                     <td>2</td>
                                                     <td>Saco y Pantalon</td>
-                                                    <td><input type="text" required id="pre_1" name="pre_1"> Bs.</td>
-                                                    <td><input type="text" required id="pre_2" name="pre_2"> Bs.</td>
-                                                    <td><input type="text" required id="pre_3" name="pre_3"> Bs.</td>
+                                                    <td><input class="form-control" type="text" required id="pre_1" name="pre_1"> Bs.</td>
+                                                    <td><input class="form-control" type="text" required id="pre_2" name="pre_2"> Bs.</td>
+                                                    <td><input class="form-control" type="text" required id="pre_3" name="pre_3"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
                                                     <td>Saco, Pantalon y Chaleco</td>
-                                                    <td><input type="text" required id="pre_4" name="pre_4"> Bs.</td>
-                                                    <td><input type="text" required id="pre_5" name="pre_5"> Bs.</td>
-                                                    <td><input type="text" required id="pre_6" name="pre_6"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_4" name="pre_4"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_5" name="pre_5"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_6" name="pre_6"> Bs.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -155,16 +155,16 @@
                                                 <tr>
                                                     <td>2</td>
                                                     <td>Saco y Pantalon</td>
-                                                    <td><input type="text" required id="pre_7" name="pre_7"> Bs.</td>
-                                                    <td><input type="text" required id="pre_8" name="pre_8"> Bs.</td>
-                                                    <td><input type="text" required id="pre_9" name="pre_9"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_7" name="pre_7"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_8" name="pre_8"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="pre_9" name="pre_9"> Bs.</td>
                                                 </tr>
                                                 <tr>
                                                     <td>3</td>
                                                     <td>Saco, Pantalon y Falda</td>
-                                                    <td><input type="text" required id="prec_1" name="prec_1"> Bs.</td>
-                                                    <td><input type="text" required id="prec_2" name="prec_2"> Bs.</td>
-                                                    <td><input type="text" required id="prec_3" name="prec_3"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="prec_1" name="prec_1"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="prec_2" name="prec_2"> Bs.</td>
+                                                    <td><input  class="form-control"  type="text" required id="prec_3" name="prec_3"> Bs.</td>
                                                 </tr>
                                             </tbody>
                                         </table>
