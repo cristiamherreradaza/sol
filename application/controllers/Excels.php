@@ -25,7 +25,7 @@ class Excels extends CI_Controller {
 		parent::__construct();
 		// $this->load->helper('url_helper');
 		// $this->load->database();
-		$this->load->helper('vayes_helper');
+		// $this->load->helper('vayes_helper');
 		$this->load->helper('tools_helper');
 	}
 

@@ -6,7 +6,7 @@ class Inventarios_model extends CI_Model {
     {
 		parent::__construct();
         $this->load->database();
-        $this->load->helper('vayes_helper');
+        // $this->load->helper('vayes_helper');
     }
 
     // MODELOS PARA VARON

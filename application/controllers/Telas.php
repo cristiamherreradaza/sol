@@ -8,7 +8,7 @@ class Telas extends CI_Controller {
 		parent::__construct();
 		 // load Session Library
 		$this->load->library('form_validation');
-		$this->load->helper('vayes_helper');
+		// $this->load->helper('vayes_helper');
 		$this->load->helper('form');
         $this->load->helper('url');
 	}

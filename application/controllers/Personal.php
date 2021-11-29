@@ -8,7 +8,7 @@ class Personal extends CI_Controller {
 		parent::__construct();
 		 // load Session Library
 		$this->load->library('form_validation');
-		$this->load->helper('vayes_helper');
+		// $this->load->helper('vayes_helper');
 		$this->load->helper('form');
 
         // load url helper

@@ -24,7 +24,7 @@ class Inventarios_Venta extends CI_Controller {
 		parent::__construct();
 		// $this->load->helper('url_helper');
 		// $this->load->database();
-		$this->load->helper('vayes_helper');
+		// $this->load->helper('vayes_helper');
 		$this->load->model("Inventarios_model");
 
 	}

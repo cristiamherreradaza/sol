@@ -8,7 +8,7 @@ class Contratos extends CI_Controller {
 		// $this->load->helper('url_helper');
 		// $this->load->database();
 		// $this->load->library('encrypt');
-		$this->load->helper('vayes_helper');
+		// $this->load->helper('vayes_helper');
 		$this->load->helper('tools_helper');
 	}
 
