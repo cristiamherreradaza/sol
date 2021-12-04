@@ -66,28 +66,28 @@
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Saco</label>
-						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any" required>
+						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any" value="0">
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Pantalon</label>
-						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any" required>
+						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any" value="0">
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Chaleco</label>
-						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any" required>
+						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any" value="0">
 						  </div>
 						</div>
 
 						<div class="col">
 						  <div class="form-group">
 						    <label class="control-label">Precio Falda</label>
-						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any" required>
+						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any" value="0">
 						  </div>
 						</div>
 
