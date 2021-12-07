@@ -28,6 +28,8 @@
     <h3>&nbsp;</h3>
     <h3>No encontrado</h3>
 <?php endif ?>
+
+<?php if (!empty($grupos)): ?>
 <script type="text/javascript">
     var grupos = <?php echo $obj_grupo ?>;
     // var obj_grupos = JSON.parse(grupos);
@@ -48,3 +50,4 @@
         }
     }
 </script>
+<?php endif; ?>
