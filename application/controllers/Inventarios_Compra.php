@@ -217,4 +217,29 @@ class Inventarios_Compra extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function verMaterial($id = null){
+		
+		$data['categorias'] = $this->db->get_where('categorias', array('estado' => 1))->result();
+		$data['compras'] = $this->db->get_where('compras', array('estado' => 1, 'categoria_id' => $id))->result();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('inventarios/verMaterial', $data);
+		$this->load->view('template/footer');
+
+	}
+
+	public function guardarProducto(){
+		
+		$id = $this->input->post("producto-edita");
+
+		$data = array(
+            'nombre' => $this->input->post("nombre-producto"),
+            'tipo' => $this->input->post("tipo-producto")
+        );
+        $this->db->where('id', $id);
+        $this->db->update('categorias', $data);
+
+        redirect("Inventarios_Compra/lista");
+	}
+
 }

@@ -2,7 +2,7 @@
 <link rel="stylesheet" type="text/css"  href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
 
 <!-- inicio modal content -->
-<div id="myModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal-horario" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Row -->
@@ -255,6 +255,11 @@
                 window.location.href = "<?php echo base_url() ?>Telas/eliminar/" + id;
             }
         })
+    }
+
+    function abre_modal(){
+        $('#myModal-horario').modal('show')
+        // alert("en desarrollo :v");
     }
 
 </script>

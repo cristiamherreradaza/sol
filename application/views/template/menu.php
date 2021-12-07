@@ -174,7 +174,9 @@
                             <li>
                                 <a href="<?php echo base_url() ?>Telas/listado"><i class="mdi mdi-format-title"></i> Telas</a>
                             </li>
-
+                            <li>
+                                <a href="<?php echo base_url() ?>Almacen/listado"><i class="mdi mdi-store"></i> Almacenes</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

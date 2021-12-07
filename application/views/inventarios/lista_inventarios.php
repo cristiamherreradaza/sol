@@ -12,12 +12,62 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
        <!-- Row -->
+
+       <div id="myModalEditar" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="text-center">Formulario de Producto</h2>
+                                        <hr/>
+                                        <!-- <form action="<?//=base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
+                                        <?php 
+                                            $attributes = array('method'=>'POST', 'id' => 'formulario-producto');
+                                            echo form_open('inventarios_Compra/guardarProducto', $attributes); 
+                                        ?>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Nombre del Producto</label>
+                                                                <input name="nombre-producto" type="text" id="nombre-producto" class="form-control" required>
+                                                                <input type="hidden" name="producto-edita" id="producto-edita">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Tipo</label>
+                                                                <input name="tipo-producto" type="text" id="tipo-producto" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="guardarProducto()" class="btn waves-effect waves-light btn-block btn-success">GUARDA PRODUCTO</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
         <div class="row">
             <!-- Column -->
             <div class="col-lg-12 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">LISTA DE INVENTARIOS &nbsp;&nbsp;&nbsp;&nbsp; 
+                        <h3 class="card-title">LISTA DE INVENTARIOS &nbsp;&nbsp;&nbsp;&nbsp;
                         </h3>
                         <div class="table-responsive m-t-40" id="tabla">
                                 <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -26,8 +76,8 @@
                                             <th>No.</th>
                                             <th>Material</th>
                                             <th>Cantidad en Inventario</th>
-                                            <th>Precio de Compra</th>
-                                            <th>Precio de Venta</th>
+                                            <th>Acciones</th>
+                                            <!-- <th>Precio de Venta</th> -->
                                             <!-- <th>Precio Total</th> -->
                                             <!-- <th>Acciones</th> -->
                                         </tr>
@@ -61,8 +111,14 @@
                                             <td><?php $total = $a->suma;
                                                 echo $total;?> <?php echo $a->tipo ?></td>
                                             <?php }  ?>
-                                            <td><?php echo $valores->precio_unidad ?></td>
-                                            <td><?php echo $valores->precio_venta ?></td>
+                                            <td>
+                                                <button class="btn btn-warning" onclick="editar_material('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-edit"></i></button>
+                                                <button class="btn btn-info" onclick="ver_material('<?=$a->id?>')" title="Ver <?=$a->nombre?>"><i class="fas fa-eye"></i></button>
+                                                <button class="btn btn-danger" onclick="quita('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-minus-circle"></i></button>
+                                                <button class="btn btn-success" onclick="quita('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-plus-circle"></i></button>
+                                            </td>
+                                            <!-- <td><?php echo $valores->precio_unidad ?></td>
+                                            <td><?php echo $valores->precio_venta ?></td> -->
                                             <!-- <td><?= date("Y-m-d",strtotime($a->fecha));?></td> -->
                                             <!-- <td>
                                                 <button type="button" class="btn btn-info" onclick="ver(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-eye"></i></button>
@@ -152,52 +208,29 @@
         });
 
     });
-</script>
 
-<script type="text/javascript">
-
-  google.charts.load("current", {packages:["corechart"]});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['MONTOS',   'TOTALES'],
-        <?php foreach ($compras as $c): ?>
-            ['<?php echo $c['nombre'] ?>', <?php echo $c['total'] ?>],
-        <?php endforeach; ?>
-    ]);
-
-    var options = {
-      is3D: true,
-      chartArea:{width:'90%',height:'100%'}
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
-  }
-</script>
-
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
-
-    function drawChart() {
-
-    var data = google.visualization.arrayToDataTable([
-        ['MONTOS', 'TOTALES'],
-        <?php foreach ($ventas as $v): ?>
-            ['<?php echo $v['nombre'] ?>', <?php echo $v['total'] ?>],
-        <?php endforeach; ?>
-    ]);
-
-    var options = {
-      // title: 'My Daily Activities'
-        chartArea:{width:'90%',height:'100%'}
-    };
-
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-    chart.draw(data, options);
+    function ver_material(id){
+        window.location.href = "<?php echo base_url().'Inventarios_Compra/verMaterial/' ?>"+id;
     }
-</script>
 
+    function editar_material(id, nombre, tipo){
+        // alert(id);
+        $('#nombre-producto').val(nombre);
+        $('#tipo-producto').val(tipo);
+        $('#producto-edita').val(id);
+        $('#myModalEditar').modal('show')
+    }
+
+    function guardarProducto(){
+        // alert("En desarrollo :v");
+        if($('#formulario-producto')[0].checkValidity()){
+			$('#formulario-producto').submit();
+            Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-producto')[0].reportValidity()
+        }
+    }
+
+</script>
+    
 
