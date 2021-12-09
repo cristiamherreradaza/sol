@@ -35,6 +35,9 @@
                             <div class="row">
 
                                 <div class="col-md-3">
+                                    <?php
+                                    if($trabajo['saldo'] != 0.00){
+                                    ?>
                                     <!-- <form action="<?php //echo base_url() ?>Trabajos/guarda_pago" method="POST"> -->
                                     <?php echo form_open('trabajos/guarda_pago'); ?>
                                         <div class="row">
@@ -58,23 +61,37 @@
                                         </div>
 
                                         <div class="custom-control custom-checkbox mr-sm-2 mb-3">
-                                            <input type="checkbox" class="custom-control-input" id="checkbox0" name="entregado" value="si">
+                                            <?php
+                                                $valor = '';
+                                                if($trabajo['entregado'] == 'Si'){
+                                                    $valor = 'checked';
+                                                }
+                                            ?>
+                                            <input type="checkbox" class="custom-control-input" id="checkbox0" name="entregado" value="si" <?=$valor?>>
                                             <label class="custom-control-label" for="checkbox0">Entregar trabajo</label>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA PAGO</button>
-                                                <p></p>
-                                                <a 
-                                                    href="<?php echo base_url() ?>trabajos/impresion_recibo/<?php echo $trabajo['id']; ?>"
-                                                    class="btn waves-effect waves-light btn-block btn-info"
-                                                >
-                                                    IMPRIME RECIBO
-                                                </a>
                                             </div>
                                         </div>
                                     </form>
+                                    <br>
+                                    <?php
+                                    }
+                                    ?>
+                                    <div class="row">
+                                        <div class="col-md-12">                                            
+                                            <a 
+                                                href="<?php echo base_url() ?>trabajos/impresion_recibo/<?php echo $trabajo['id']; ?>"
+                                                class="btn waves-effect waves-light btn-block btn-info"
+                                            >
+                                                IMPRIME RECIBO
+                                            </a>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="col-md-9">

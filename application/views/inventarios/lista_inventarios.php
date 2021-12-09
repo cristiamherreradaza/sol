@@ -13,6 +13,116 @@
         <!-- ============================================================== -->
        <!-- Row -->
 
+
+        <!-- MODAL AGREGAR ITEM -->
+
+        <div id="myModalAgregarItem" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="text-center">Agregar Producto "<span class="text-info" id="nombre-categoria"></span>"</h2>
+                                        <hr/>
+                                        <!-- <form action="<?//=base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
+                                        <?php 
+                                            $attributes = array('method'=>'POST', 'id' => 'formulario-agregar-producto');
+                                            echo form_open('Movimiento/agregarProducto', $attributes); 
+                                        ?>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Cantidad</label>
+                                                                <input type="number" name="cantidad-agregar" id="cantidad-agregar" class="form-control" required>
+                                                                <input type="text" name="categoria_id-agregar" id="categoria_id-agregar">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Detalle</label>
+                                                                <input type="text" name="detalle-agregar"id="detalle-agregar" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="AgregarProducto()" class="btn waves-effect waves-light btn-block btn-success">AGREGAR PRODUCTO</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- END MODAL AGREGAR ITEM -->
+
+
+        <!-- MODAL SACAR ITEM -->
+
+        <div id="myModalSacarItem" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Row -->
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h2 class="text-center">Sacar Produto "<span class="text-info" id="nombre-categoria"></span>"</h2>
+                                        <hr/>
+                                        <!-- <form action="<?//=base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
+                                        <?php 
+                                            $attributes = array('method'=>'POST', 'id' => 'formulario-saca-producto');
+                                            echo form_open('Movimiento/sacaProducto', $attributes); 
+                                        ?>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Cantidad</label>
+                                                                <input type="number" name="cantidad-sacado" id="cantidad-sacado" class="form-control" required>
+                                                                <input type="hidden" name="categoria_id" id="categoria_id">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Detalle</label>
+                                                                <input name="detalle-quitar" type="text" id="detalle-quitar" class="form-control" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" onclick="SacarProducto()" class="btn waves-effect waves-light btn-block btn-danger">SACAR PRODUCTO</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Row -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <!-- END MODAL SACAR ITEM -->
+
+
+
        <div id="myModalEditar" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -114,8 +224,8 @@
                                             <td>
                                                 <button class="btn btn-warning" onclick="editar_material('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-edit"></i></button>
                                                 <button class="btn btn-info" onclick="ver_material('<?=$a->id?>')" title="Ver <?=$a->nombre?>"><i class="fas fa-eye"></i></button>
-                                                <button class="btn btn-danger" onclick="quita('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-minus-circle"></i></button>
-                                                <button class="btn btn-success" onclick="quita('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-plus-circle"></i></button>
+                                                <button class="btn btn-danger" onclick="quitar('<?=$a->id?>', '<?=$a->nombre?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-minus-circle"></i></button>
+                                                <button class="btn btn-success" onclick="add('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-plus-circle"></i></button>
                                             </td>
                                             <!-- <td><?php echo $valores->precio_unidad ?></td>
                                             <td><?php echo $valores->precio_venta ?></td> -->
@@ -231,6 +341,37 @@
         }
     }
 
+    function quitar(categoria_id, nombre){
+        $("#nombre-categoria").text(nombre);
+        $("#categoria_id").val(categoria_id);
+        $("#myModalSacarItem").modal('show');
+    }
+
+    function SacarProducto(){
+        // alert("En desarrollo :v");
+        if($('#formulario-saca-producto')[0].checkValidity()){
+			$('#formulario-saca-producto').submit();
+            Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-saca-producto')[0].reportValidity()
+        }
+    }
+
+    function add(categoria_id, nombre){
+        $("#nombre-categoria").text(nombre);
+        $("#categoria_id-agregar").val(categoria_id);
+        $("#myModalAgregarItem").modal('show');
+    }
+
+    function AgregarProducto(){
+        // alert("En desarrollo :v");
+        if($('#formulario-agregar-producto')[0].checkValidity()){
+			$('#formulario-agregar-producto').submit();
+            Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-agregar-producto')[0].reportValidity()
+        }
+    }
 </script>
     
 

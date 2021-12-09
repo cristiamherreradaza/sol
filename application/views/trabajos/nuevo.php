@@ -1167,7 +1167,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label class="control-label">Motivo Rebaja</label>
-                                                        <select name="motivo_rebaja" class="form-control custom-select">
+                                                        <select id="motivo_rebaja" name="motivo_rebaja" class="form-control custom-select" onchange='habilita()'>
                                                             <option value="">Seleccione</option>
                                                             <option value="Comision">Comision</option>
                                                             <option value="Familiar">Familiar</option>
@@ -1181,7 +1181,7 @@
                                                 <div class="col-md">
                                                     <div class="form-group has-danger">
                                                         <label class="control-label"><b>Rebaja</b></label>
-                                                        <input type="number" name="rebaja" id="rebaja" class="form-control" min="0" step="any" readonly>
+                                                        <input type="number" name="rebaja" id="rebaja" class="form-control calculo" min="0" step="any" readonly>
                                                         <input type="hidden" name="monto_rebaja" id="monto_rebaja">
                                                         <input type="hidden" name="costo_confeccion_calculado" id="costo_confeccion_calculado">
                                                     </div>
@@ -1391,15 +1391,27 @@
     });
 
 
-    $(".calculo").change(function() {
+    // $(".calculo").change(function() {
+    $(".calculo").on("change paste keyup", function() {
+
 
         costo_tela = parseFloat($("#costo_tela").val());
         costo_confeccion = parseFloat($("#costo_confeccion").val());
         suma = costo_tela + costo_confeccion;
 
+        var obj = document.getElementById('rebaja');
+        if(obj.getAttribute("readonly") == null){
+            var rebaja = $('#rebaja').val()
+            suma = suma - rebaja;
+        }
+
         $("#monto_total").val(suma);
+
         a_cuenta = parseFloat($("#a_cuenta").val());
         saldo = suma - a_cuenta
+
+        
+
         $("#saldo").val(saldo);
         // console.log("Costo: "+suma);
         // console.log("Costo de tela: "+costo_tela);
@@ -1619,6 +1631,28 @@
         });
 
     }
+
+    function habilita(){
+        // alert('en desarrollo :v');
+        if($('#motivo_rebaja').val() == ''){
+            suma = parseInt($("#rebaja").val()) + parseInt($("#monto_total").val());
+            $("#monto_total").val(suma);
+
+            $("#saldo").val(parseInt($("#monto_total").val()) - parseInt($("#a_cuenta").val()));
+            
+            $("#rebaja").val(0);
+            $("#rebaja").attr("readonly", true); 
+        }else{
+            $("#rebaja").attr("readonly", false); 
+        }
+    }
+
+    // $("#rebaja").on("change paste keyup", function() {
+    //     // $("#raza-modal").val($("#raza_id").val());
+    //     console.log($('#rebaja').val());
+    //     console.log($('#monto_total').val());
+    //     console.log('------------');
+    // });
 
     // fin extrae datos del contrato
 </script>

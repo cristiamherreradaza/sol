@@ -11,7 +11,7 @@ class Usuario_model extends CI_Model {
 
     public function valida($usuario, $pass)
     {
-        $this->db->select('id, nombre, usuario, rol');
+        $this->db->select('id, nombre, usuario, rol, almacenes_id');
         $this->db->from('usuarios');
         $this->db->where('usuario', $usuario);
         $this->db->where('pass', $pass);
@@ -22,6 +22,7 @@ class Usuario_model extends CI_Model {
             'id_usuario'=>$resultado['id'],
             'nombre'    =>$resultado['nombre'],
             'usuario'   =>$resultado['usuario'],
+            'almacen_id'=>$resultado['almacenes_id'],
             // 'celulares' =>$resultado['celulares'],
             // 'email'     =>$resultado['email'],
             // 'direccion' =>$resultado['direccion'],
