@@ -87,6 +87,8 @@
     </div>
 </div>
                 <!-- ============================================================== -->
+<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+
 <script>
     function pagado($id){
         var id = $id;
@@ -112,5 +114,6 @@
             }
         });
     }
+
 </script>
 

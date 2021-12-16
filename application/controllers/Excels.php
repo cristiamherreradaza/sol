@@ -43,17 +43,99 @@ class Excels extends CI_Controller {
 	{
 		$usuario_id = $this->session->id_usuario;
 
-		$config['upload_path']   = './archivos/';
-		$config['allowed_types'] = 'xlsx';
-		$config['max_size']      = 5000;
+		$file = $_FILES['archivo']['tmp_name'];
 
-		$this->load->library('upload', $config);
+		$fileTmpPath = $_FILES['archivo']['tmp_name'];
+		$fileName = $_FILES['archivo']['name'];
+		$fileSize = $_FILES['archivo']['size'];
+		$fileType = $_FILES['archivo']['type'];
 
+		$fileNameCmps = explode(".", $fileName);
+
+		$fileExtension = strtolower(end($fileNameCmps));
+
+		$newFileName = $this->input->post('mes').date('Y-m-d').'.'.$fileExtension;
+
+		$uploadFileDir = './archivos/';
+		
+		$dest_path = $uploadFileDir . $newFileName;
+
+		if ( $xlsx = SimpleXLSX::parse($file) ) {
+
+			move_uploaded_file($fileTmpPath, $dest_path);
+
+			$verifica = $this->db->get_where('excels', array('mes' => $this->input->post('mes'),'gestion' => date('Y')))->row();
+
+			if(empty($verifica)){
+
+				$datos = array(
+					'usuario_id'        => $usuario_id,
+					'nombre_archivo'    => $newFileName,
+					'nombre_sistema'    => $fileExtension,
+					'mes'  			    => $this->input->post('mes'),
+					'gestion'	        => date('Y'),
+					'fecha'				=> date('Y-m-d H:i:s'),
+				);
+	
+				$this->db->insert('excels', $datos);	
+			}
+
+			echo '<table border="1" cellpadding="3" style="border-collapse: collapse">';
+			$datos = $xlsx->rows();
+
+				foreach ($xlsx->rows() as $key => $r) {
+					if($key != 0){
+
+						$verdad_fecha = explode('/',$r[2]);
+
+						$datos = array(
+							'carnet'        		=> $r[0],
+							'nombre'	    		=> $r[1],
+							'fecha'    				=> $verdad_fecha[2].'-'.$verdad_fecha[1].'-'.$verdad_fecha[0],
+							'horario'  			    => $r[3],
+							'horaEntrada'	        => $r[4],
+							'horaSalida'	        => $r[5],
+							'marcadoEntrada'	    => $r[6],
+							'marcadoSalida'	        => $r[7],
+							'normal'	        	=> $r[8],
+							'tiempoReal'	        => $r[9],
+							'tardanza'	        	=> $r[10],
+							'salidaTemprano'	    => $r[11],
+							'falta'	        		=> $r[12],
+							'horaExtra'	        	=> $r[13],
+							'tiempoTrabajado'	    => $r[14],
+							'excepcion'	        	=> $r[15],
+							'debeCin'	        	=> $r[16],
+							'debeCsal'	        	=> $r[17],
+							'departamento'	        => $r[18],
+							'nDias'	        		=> $r[19],
+							'finSemana'	        	=> $r[20],
+							'feriado'	        	=> $r[21],
+							'tiempoAsistencia'	    => $r[22],
+							'nDias_ot'	        	=> $r[23],
+							'finSemana_ot'	        => $r[24],
+							'feriado_ot'	        => $r[25]
+						);
+
+						$this->db->insert('asistencias', $datos);
+						
+					}
+				}
+			// foreach( $xlsx->rows() as $r ) {
+			// 	echo '<tr><td>'.implode('</td><td>', $r ).'</td></tr>';
+			// }
+			echo '</table>';
+		} else {
+			echo SimpleXLSX::parseError();
+		}
+
+		exit;
 		if (!$this->upload->do_upload('archivo')) {
+			echo "mmmm";
 
 			$error = array('error' => $this->upload->display_errors());
 
-			// $this->load->view('upload_form', $error);
+			$this->load->view('upload_form', $error);
 		} else {
 			$gestion = date('Y');
 			$hoy = date("Y-m-d H:i:s");
@@ -68,6 +150,7 @@ class Excels extends CI_Controller {
 				'gestion'        => $gestion,
 				'fecha'          => $hoy
 			);
+
 			$this->db->insert('excels', $datos_excel);
 
 			if ($xlsx = SimpleXLSX::parse("./archivos/$nombre_archivo")) {

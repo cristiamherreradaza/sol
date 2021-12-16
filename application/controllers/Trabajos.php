@@ -1424,4 +1424,21 @@ class Trabajos extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function ajaxbuscatrabajoFecha($fechaIni = null, $fechafi = null){
+		
+		$this->db->select('p.id, c.nombre as cliente, u.nombre, t.id as trabajo, p.fecha, p.monto');
+		$this->db->from('pagos as p');
+		$this->db->join('clientes as c', 'c.id = p.cliente_id', 'left');
+		$this->db->join('trabajos as t', 't.id = p.trabajo_id', 'left');
+		$this->db->join('usuarios as u', 'u.id = p.usuario_id', 'left');
+		$this->db->where('p.borrado', NULL);
+		$this->db->where("p.fecha BETWEEN '$fechaIni' AND '$fechafi'");
+		$this->db->limit(100);
+		$data['pagos'] = $this->db->get()->result();
+
+		$this->load->view('trabajos/ajax_busca_fecha', $data);
+
+		
+	}
+
 }

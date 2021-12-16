@@ -22,46 +22,44 @@
                            <div class="row">
 
                                <div class="col-md-3">
-                                   <?php echo form_open_multipart('excels/guarda_excel'); ?>
-                                   <div class="row">
+                                    <?php echo form_open_multipart('excels/guarda_excel'); ?>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Archivo (Nombre:<span style="color: red;"> enero_2020.xlsx</span>)</label>
+                                                    <input type="file" name="archivo" class="form-control" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Mes</label>
+                                                    <select name="mes" id="mes" class="form-control custom-select">
+                                                        <option value="Enero">Enero</option>
+                                                        <option value="Febrero">Febrero</option>
+                                                        <option value="Marzo">Marzo</option>
+                                                        <option value="Abril">Abril</option>
+                                                        <option value="Mayo">Mayo</option>
+                                                        <option value="Junio">Junio</option>
+                                                        <option value="Julio">Julio</option>
+                                                        <option value="Agosto">Agosto</option>
+                                                        <option value="Septiembre">Septiembre</option>
+                                                        <option value="Octubre">Octubre</option>
+                                                        <option value="Noviembre">Noviembre</option>
+                                                        <option value="Diciembre">Diciembre</option>
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label class="control-label">Archivo (Nombre:<span style="color: red;"> enero_2020.xlsx</span>)</label>
-                                               <input type="file" name="archivo" class="form-control" required>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="row">
+                                        </div>
 
-                                       <div class="col-md-12">
-                                           <div class="form-group">
-                                               <label class="control-label">Mes</label>
-                                               <select name="mes" id="mes" class="form-control custom-select">
-                                                   <option value="Enero">Enero</option>
-                                                   <option value="Febrero">Febrero</option>
-                                                   <option value="Marzo">Marzo</option>
-                                                   <option value="Abril">Abril</option>
-                                                   <option value="Mayo">Mayo</option>
-                                                   <option value="Junio">Junio</option>
-                                                   <option value="Julio">Julio</option>
-                                                   <option value="Agosto">Agosto</option>
-                                                   <option value="Septiembre">Septiembre</option>
-                                                   <option value="Octubre">Octubre</option>
-                                                   <option value="Noviembre">Noviembre</option>
-                                                   <option value="Diciembre">Diciembre</option>
-                                               </select>
-                                           </div>
-                                       </div>
-
-                                   </div>
-
-                                   <div class="row">
-                                       <div class="col-md-12">
-                                           <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA PAGO</button>
-                                       </div>
-                                   </div>
-                                   </form>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA PAGO</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                </div>
 
                                <div class="col-md-9">

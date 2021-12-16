@@ -19,34 +19,62 @@
 
 						<h4 class="card-title">LISTADO DE PAGOS</h4>
 						<div class="table-responsive m-t-40">
-							<table id="config-table" class="table display table-bordered table-striped no-wrap">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>Cliente</th>
-										<th class="text-center">Trabajo</th>
-										<th>Usuario</th>
-										<th>Fecha</th>
-										<th class="text-center">Monto</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($pagos as $p): ?>
-									<tr>
-										<td><?php echo $p->id; ?></td>
-										<td><?php echo $p->cliente; ?></td>
-										<td class="text-center">
-											<a href="<?php echo base_url() ?>trabajos/registro_pagos/<?php echo $p->trabajo ?>">
-	                                        	<button type="button" class="btn btn-info"><i class="fas fa-eye"></i> &nbsp;<?php echo $p->trabajo ?></button>
-	                                        </a>
-										</td>
-										<td><?php echo $p->nombre; ?></td>
-										<td><?php echo fechaEs($p->fecha); ?></td>
-										<td class="text-right"><?php echo $p->monto; ?></td>
-									</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table>
+							<!-- <form action=""> -->
+							<?php 
+								// $attributes = array('method'=>'POST', 'id' => 'formulario-busca-fecha');
+								$attributes = array('id' => 'formulario-busca-fecha');
+								echo form_open('Cotizacion/guarda_separado', $attributes); 
+							?>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">Fecha Inicio</label>
+											<input type="date" id="fecha-inicio" name="fecha-inicio" class="form-control" value="" required>
+											
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">Fecha Fin</label>
+											<input type="date" id="fecha-fin" name="fecha-fin" class="form-control" value="" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<p style="padding-top: 16px;"></p>
+										<button type="button" class="btn btn-success btn-block" onclick="buscarFecha()" >BUSCAR</button>
+									</div>
+								</div>							
+							</form>
+							<div id="date-table">
+								<table id="config-table" class="table display table-bordered table-striped no-wrap">
+									<thead>
+										<tr>
+											<th>No.</th>
+											<th>Cliente</th>
+											<th class="text-center">Trabajo</th>
+											<th>Usuario</th>
+											<th>Fecha</th>
+											<th class="text-center">Monto</th>
+										</tr>
+									</thead>
+									<tbody>
+										<?php foreach ($pagos as $p): ?>
+										<tr>
+											<td><?php echo $p->id; ?></td>
+											<td><?php echo $p->cliente; ?></td>
+											<td class="text-center">
+												<a href="<?php echo base_url() ?>trabajos/registro_pagos/<?php echo $p->trabajo ?>">
+													<button type="button" class="btn btn-info"><i class="fas fa-eye"></i> &nbsp;<?php echo $p->trabajo ?></button>
+												</a>
+											</td>
+											<td><?php echo $p->nombre; ?></td>
+											<td><?php echo fechaEs($p->fecha); ?></td>
+											<td class="text-right"><?php echo $p->monto; ?></td>
+										</tr>
+										<?php endforeach ?>
+									</tbody>
+								</table>
+							</div>
 						</div>
 						
 					</div>
@@ -63,7 +91,7 @@
 	<!-- ============================================================== -->
 	<!-- footer -->
 	<!-- ============================================================== -->
-	<footer class="footer"> 2020 desarrollado por GoGhu </footer>
+	<footer class="footer"> <?=date('Y')?> desarrollado por GoGhu </footer>
 	<!-- ============================================================== -->
 	<!-- End footer -->
 	<!-- ============================================================== -->
@@ -80,6 +108,8 @@
 		$('#myTable').DataTable();
 		// responsive table
 		$('#config-table').DataTable({
+			searching: false,
+			lengthChange: false,
 			responsive: true,
 			"order": [
 				[0, 'desc']
@@ -90,4 +120,28 @@
 		});
 	});
 
+	function buscarFecha(){
+		if($('#formulario-busca-fecha')[0].checkValidity()){
+			fechaIni = $('#fecha-inicio').val();
+			fechafin = $('#fecha-fin').val();
+
+			$.ajax({
+				url: "<?php echo base_url() ?>/Trabajos/ajaxbuscatrabajoFecha/"+fechaIni+"/"+fechafin,
+				// data: {
+				// 	fechaIni: fechaIni,
+				// 	fechafin: fechafin
+				// },
+				type: "GET",
+				success: function(data) {
+					$('#date-table').html(data);
+				}
+			});
+
+			// alert(fechaIni+"  "+fechafin);
+			// $('#formulario-busca-fecha').submit();
+            // Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-busca-fecha')[0].reportValidity()
+        } 
+	}
 </script>
