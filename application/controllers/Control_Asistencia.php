@@ -91,8 +91,10 @@ class Control_Asistencia extends CI_Controller {
 
 	public function lista_pagos($mostrar_fecha = null)
 	{	
-		$mes = date('m', strtotime($mostrar_fecha));//MES ACTUAL
-		$year = date('Y', strtotime($mostrar_fecha));//AÑO ACTUAL
+		echo  $mostrar_fecha;
+		exit;
+		// $mes = date('m', strtotime($mostrar_fecha));//MES ACTUAL
+		// $year = date('Y', strtotime($mostrar_fecha));//AÑO ACTUAL
 		$Cantidad_Dias_Mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
 
 		//AQUI OBTENEMOS LOS DIAS HABILES QUE TIENE EL MES SELECCIONADO
