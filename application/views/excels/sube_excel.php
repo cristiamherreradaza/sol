@@ -93,9 +93,26 @@
                                     <!-- <?php echo form_open('reportes/ingresos_gastos') ?> -->
                                     <form>
                                         <div class="row">
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">&nbsp;</label>
+                                                    <select name="mes-sueldo" id="mes-sueldo" class="form-control">
+                                                        <option value="1">Enero</option>
+                                                        <option value="2">Febrero</option>
+                                                        <option value="3">Marzo</option>
+                                                        <option value="4">Abril</option>
+                                                        <option value="5">Mayo</option>
+                                                        <option value="6">Junio</option>
+                                                        <option value="7">Julio</option>
+                                                        <option value="8">Agosto</option>
+                                                        <option value="9">Septiembre</option>
+                                                        <option value="10">Octubre</option>
+                                                        <option value="11">Noviembre</option>
+                                                        <option value="12">Diciembre</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
                                                     <button type="button" onclick="verifica_genera()" class="btn waves-effect waves-light btn-block btn-success">GENERAR SUELDOS</button>
                                                 </div>
                                             </div>
@@ -156,8 +173,8 @@
 
        function verifica_genera(){
 		// var fecha = $('#fecha_genera').val();
-        var mes = $('#mes').val();
-        alert(mes);
+        var mes = $('#mes-sueldo').val();
+        // alert(mes);
         // hay que convertir el mes en numero
 		if (fecha == '') {
 			Swal.fire({
