@@ -59,10 +59,24 @@
                                                         </div>
                                                     </div>  
                                                     <div class="row">
-                                                        <div class="col-md-12">
+                                                        <div class="col-md-8">
                                                             <div class="form-group">
                                                                 <label class="control-label">Direccion</label>
                                                                 <input type="text" class="form-control" name="direccion" id="direccion" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="control-label">Horario</label>
+                                                                <select name="horario" id="horario" class="form-control">
+                                                                    <?php
+                                                                        foreach($horarios as $h){
+                                                                        ?>
+                                                                            <option value="<?=$h->id?>"><?=$h->descripcion?> (<?=$h->man_ingreso?>-<?=$h->man_salida?>) A (<?=$h->tarde_ingreso?>-<?=$h->tarde_salida?>)</option>
+                                                                        <?php
+                                                                        }
+                                                                    ?>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>

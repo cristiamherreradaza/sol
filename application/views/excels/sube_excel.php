@@ -66,7 +66,7 @@
                                                    <th>Excel</th>
                                                    <th>Mes</th>
                                                    <th>Fecha</th>
-                                                   <th class="text-center">Acciones</th>
+                                                   <th>Acciones</th>
                                                </tr>
                                            </thead>
                                            <tbody>

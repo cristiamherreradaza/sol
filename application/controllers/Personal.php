@@ -20,6 +20,9 @@ class Personal extends CI_Controller {
 	{
 
 		$data['personal'] = $this->db->get_where('personal', array('borrado='=>NULL))->result();
+
+		$data['horarios'] = $this->db->get_where('horarios', array('borrado='=>NULL))->result();
+
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
@@ -29,10 +32,11 @@ class Personal extends CI_Controller {
 
 	public function registra()
 	{
+		$data['horarios'] = $this->db->get_where('horarios', array('borrado='=>NULL))->result();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
-		$this->load->view('personal/crea_personal');
+		$this->load->view('personal/crea_personal', $data);
 		$this->load->view('template/footer');	
 	}
 
@@ -40,6 +44,7 @@ class Personal extends CI_Controller {
 	{
 		// vdebug($this->input->post('ida'), true, false, true);
 		$datos = array(
+			'horario_id' => $this->input->post('horario'),
 			'nombre' => $this->input->post('nombre'),
 			'carnet' => $this->input->post('carnet'),
 			'direccion' => $this->input->post('direccion'),
@@ -56,14 +61,15 @@ class Personal extends CI_Controller {
 		$hoy = date("Y-m-d H:i:s");
 		$id = $this->input->post("id");
 		$data = array(
-			'nombre' => $this->input->post("nombre"),
-			'carnet'   => $this->input->post("carnet"),
-			'direccion' => $this->input->post("direccion"),
-			'celulares'   => $this->input->post("celulares"),
+			'horario_id' 	=> $this->input->post('horario'),
+			'nombre' 		=> $this->input->post("nombre"),
+			'carnet'   		=> $this->input->post("carnet"),
+			'direccion' 	=> $this->input->post("direccion"),
+			'celulares'   	=> $this->input->post("celulares"),
 			'fecha_ingreso' => $this->input->post("fecha_ingreso"),
-			'sueldo'   => $this->input->post("sueldo"),
-			'modified_at' => $hoy,
-			'estado'   => 1
+			'sueldo'   		=> $this->input->post("sueldo"),
+			'modified_at' 	=> $hoy,
+			'estado'   		=> 1
 		);
         $this->db->where('id', $id);
         $this->db->update('personal', $data);
@@ -118,7 +124,8 @@ class Personal extends CI_Controller {
 	{
 		// echo 'hola';
 		$data['horarios'] = $this->db->get_where('horarios', array('estado' =>1))->row();
-		$data['horarioss'] = $this->db->get_where('horarios', array('estado' =>1))->result();		
+		// $data['horarioss'] = $this->db->get_where('horarios', array('estado' =>1))->result();		
+		$data['horarioss'] = $this->db->get_where('horarios', array('borrado' => null))->result();		
 		// // echo 'Holas desde listado';
 		// // vdebug($clientes, true, false, true);
 		$this->load->view('template/header');
@@ -179,6 +186,54 @@ class Personal extends CI_Controller {
 
 		redirect("Personal/descuentos");
 
+	}
+
+	public function guarda_horario(){
+
+		$datos = array(
+			'descripcion'	=> $this->input->post('descripcion'),
+			'man_ingreso' 	=> $this->input->post('entrada_maniana'),
+			'man_salida'	=> $this->input->post('salida_maniana'),
+			'tarde_ingreso' => $this->input->post('entrada_tarde'),
+			'tarde_salida' 	=> $this->input->post('salida_tarde'),
+			'estado'		=> 1
+		);
+
+		if($this->input->post('horario_id') == 0){
+
+			$this->db->insert('horarios', $datos);
+
+		}else{
+
+			$id = $this->input->post('horario_id');
+
+			$this->db->where('id', $id);
+			$this->db->update('horarios', $datos);
+
+			$datos =  array(
+				'modified_at' => date('Y-m-d H:i:s')
+			);
+			
+			$this->db->where('id', $id);
+			$this->db->update('horarios', $datos);
+			
+		}
+
+		redirect("Personal/horarios");
+
+	}
+
+	public function eliminar_horario($id = null){
+		
+		$datos = array(
+			'borrado' => date('Y-m-d H:i:s')
+		);
+
+		
+		$this->db->where('id', $id);
+		$this->db->update('horarios', $datos);
+
+		redirect("Personal/horarios");
 	}
 	
 }

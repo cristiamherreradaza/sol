@@ -3,110 +3,56 @@
 
 <!-- inicio modal content -->
 <div id="myModal-horario" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <!-- Row -->
-                <div class="row">
-                    <!-- Column -->
-                    <div class="col-lg-12 col-md-12">
-                        <div class="card card-body">
-                            <h3 class="card-title">HORARIO DE MARCACIONES</h3>
-                            <div class="message-box">
-                                <div class="message-widget">
-                                    <!-- Message -->
-                                    <h5 class="card-title">Ma&ntilde;ana</h5>
-                                    <a href="#">
-                                        <div class="user-img"><span class="round bg-primary"><i class="mdi mdi-alarm-multiple"></i></span></div>
-                                        <div class="mail-contnet">
-                                            <h5>Entrada Ma&ntilde;ana: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $horarios->man_ingreso ?> AM</b></h5>
-                                            <h5>Marcaciones validas: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: green;"><?php echo $horarios->man_desde ?> AM</b></h5>
-                                            <h5>a <b style="color: green;"><?php echo $horarios->man_hasta ?> AM</b></h5>
-                                            <?php $nuevahora_man = strtotime ( '+1 minute' , strtotime ( $horarios->man_hasta ) ) ; ?>
-                                            <h5>Marcaciones retrasadas: &nbsp;&nbsp;&nbsp;<b style="color: red;"><?php echo date('H:i:s', $nuevahora_man); ?> AM</b> hasta las <b style="color: red;"><?php echo $horarios->man_max ?> AM</b></h5>  
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="user-img"><span class="round bg-danger"><i class="mdi mdi-food"></i></span></div>
-                                        <div class="mail-contnet">
-                                            <h5>Salida Ma&ntilde;ana: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $horarios->man_salida ?> PM</b></h5>
-                                            <h5>Marcaciones validas: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: green;"><?php echo $horarios->man_salida ?> PM</b> hasta las <b style="color: green;"><?php echo $horarios->man_salida_hasta ?> PM</b></h5>
-                                            <?php $nuevahora_man_sal = strtotime ( '-1 minute' , strtotime ( $horarios->man_salida ) ) ; ?>
-                                            <h5>Marcaciones retrasadas: &nbsp;&nbsp;&nbsp;&nbsp;<b style="color: red;"><?php echo $horarios->man_salida_min ?> PM</b> hasta las <b style="color: red;"><?php echo date('H:i:s', $nuevahora_man_sal); ?> PM</b></h5> 
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <br>
-                                    <h5 class="card-title">Tarde</h5>
-                                    <a href="#">
-                                        <div class="user-img"> <span class="round bg-success"><i class="mdi mdi-run-fast"></i></span></div>
-                                        <div class="mail-contnet">
-                                            <h5>Entrada Tarde: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $horarios->tarde_ingreso ?> PM</b></h5>
-                                            <h5>Marcaciones validas: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: green;"><?php echo $horarios->tarde_desde ?> PM</b> hasta las <b style="color: green;"><?php echo $horarios->tarde_hasta ?> PM</b></h5>
-                                            <?php $nuevahora_tar = strtotime ( '+1 minute' , strtotime ( $horarios->tarde_hasta ) ) ; ?>
-                                            <h5>Marcaciones retrasadas: &nbsp;&nbsp;&nbsp;<b style="color: red;"><?php echo date('H:i:s', $nuevahora_tar); ?> PM</b> hasta las <b style="color: red;"><?php echo $horarios->tarde_max ?> PM</b></h5> 
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="#">
-                                        <div class="user-img"><span class="round"><i class="mdi mdi-seat-individual-suite"></i></span></div>
-                                        <div class="mail-contnet">
-                                            <h5>Salida Tarde: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><?php echo $horarios->tarde_salida ?> PM</b></h5>
-                                            <h5>Marcaciones validas: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b style="color: green;"><?php echo $horarios->tarde_salida ?> PM</b> hasta las <b style="color: green;"><?php echo $horarios->tarde_salida_hasta ?> PM</b></h5>
-                                            <?php $nuevahora_tar_sal = strtotime ( '-1 minute' , strtotime ( $horarios->tarde_salida ) ) ; ?>
-                                            <h5>Marcaciones retrasadas: &nbsp;&nbsp;&nbsp;<b style="color: red;"><?php echo $horarios->tarde_salida_min ?> PM</b> hasta las <b style="color: red;"><?php echo date('H:i:s', $nuevahora_tar_sal); ?> PM</b></h5> 
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Row -->
-
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- fin modal -->
-
-<!-- editar modal content -->
-<div id="myModaledit" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- <form action="<?php //echo base_url() ?>aberturas/guarda" method="POST"> -->
-            <?php echo form_open('Telas/editar'); ?>
+            <?php echo form_open('Personal/guarda_horario'); ?>
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">FORMULARIO DE TELAS</h4>
+                    <h4 class="modal-title" id="myModalLabel">FORMULARIO DE HORARIOS</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <input type="hidden" name="idedit" id="idedit" value="">
+                    <input type="hidden" name="horario_id" id="horario_id" value="0">
                 </div>
                 <div class="modal-body">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label class="control-label">Nombre</label>
-                                <input name="nombreedit" type="text" id="nombreedit" class="form-control" required>
+                                <label class="control-label">Descripcion</label><br>
+                                <input name="descripcion" type="text" placeholder="Horario de la Mañana..." id="descripcion" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label">Precio por Metro</label>
-                                <input name="precioedit" type="text" id="precioedit" class="form-control" required>
+                                <label class="control-label">Entrada Mañana</label><br>
+                                 <input name="entrada_maniana" type="time" value="08:00" id="entrada_maniana" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Salida Mañana</label><br>
+                                 <input name="salida_maniana" type="time" value="12:30" id="salida_maniana" class="form-control" required>
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Entrada Tarde</label>
+                                <input name="entrada_tarde" type="time" value="14:00" id="entrada_tarde" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Salida Tarde</label>
+                                <input name="salida_tarde" type="time" value="20:00" id="salida_tarde" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA TELA</button>
+                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success">GUARDA HORARIO</button>
                 </div>
             </form>
-
         </div>
         <!-- /.modal-content -->
     </div>
@@ -137,12 +83,12 @@
                             <table id="config-table" class="table display table-bordered table-striped no-wrap">
                                 <thead>
                                     <tr>
-                                        <th>No.</th>
+                                        <!-- <th>No.</th> -->
+                                        <th>Descripcion</th>
                                         <th>Entrada Ma&ntilde;ana</th>
                                         <th>Salida Ma&ntilde;ana</th>
                                         <th>Entrada Tarde</th>
                                         <th>Salida Tarde</th>
-                                        <th>Descuento por Hora de Retraso</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -150,12 +96,12 @@
                                 <tbody>
                                     <?php foreach ($horarioss as $hor): ?>
                                     <tr>
-                                        <td><?php echo $n++ ?></td>
+                                        <!-- <td><?php echo $n++ ?></td> -->
+                                        <td><?=$hor->descripcion?></td>
                                         <td><?php echo $hor->man_ingreso ?></td>
-                                        <td><?php echo $hor->man_salida ?> LP.</td>
+                                        <td><?php echo $hor->man_salida ?></td>
                                         <td><?php echo $hor->tarde_ingreso ?></td>
                                         <td><?php echo $hor->tarde_salida ?></td>
-                                        <td><?php echo $hor->descuento_hora ?> Bs.</td>
                                         <?php if ($hor->estado == 1) { ?>
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="pagado(<?php echo $hor->id ?>)">ACTIVO</button>
@@ -166,9 +112,8 @@
                                         </td>
                                         <?php } ?> 
                                         <td>
-                                            <button type="button" class="btn btn-info" onclick="ver()"><i class="fas fa-eye"></i></button>
-                                            <button type="button" class="btn btn-warning" onclick="editar(<?php echo $hor->id ?>)"><i class="fas fa-edit"></i></button>
-                                                <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $hor->id ?>)"><i class="fas fa-trash"></i></button>
+                                            <button type="button" class="btn btn-warning" onclick="editar('<?=$hor->id ?>', '<?=$hor->descripcion ?>', '<?=$hor->man_ingreso ?>', '<?=$hor->man_salida ?>', '<?=$hor->tarde_ingreso ?>', '<?=$hor->tarde_salida ?>')"><i class="fas fa-edit"></i></button>
+                                            <button type="button" class="btn btn-danger" onclick="eliminar('<?=$hor->id ?>', '<?=$hor->descripcion ?>')"><i class="fas fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     <?php endforeach ?>
@@ -214,22 +159,25 @@
         });
     });
 
-    function ver()
-    {
-        $("#myModal").modal('show');
+    function abre_modal(){
+        $('#myModal-horario').modal('show')
     }
 
-    function cierra_modal()
-    {
-        $("#myModal").modal('hide');
-    }
+    // function cierra_modal()
+    // {
+    //     $("#myModal").modal('hide');
+    // }
 
-    function editar(id, nombre, precio)
+    function editar(id, descripcion,  entrada_maniana, salida_maniana, entrada_tarde, salida_tarde)
     {
-        $('#nombreedit').val(nombre);
-        $('#precioedit').val(precio);
-        $('#idedit').val(id);
-        $("#myModaledit").modal('show');
+        $('#horario_id').val(id);
+        $('#descripcion').val(descripcion);
+        $('#entrada_maniana').val(entrada_maniana);
+        $('#salida_maniana').val(salida_maniana);
+        $('#entrada_tarde').val(entrada_tarde);
+        $('#salida_tarde').val(salida_tarde);
+
+        $("#myModal-horario").modal('show');
     }
 
 
@@ -252,14 +200,11 @@
                     'success'
                 );
                 // console.log("el id es "+id_pago);
-                window.location.href = "<?php echo base_url() ?>Telas/eliminar/" + id;
+                window.location.href = "<?php echo base_url() ?>Personal/eliminar_horario/" + id;
             }
         })
     }
 
-    function abre_modal(){
-        $('#myModal-horario').modal('show')
-        // alert("en desarrollo :v");
-    }
+    
 
 </script>

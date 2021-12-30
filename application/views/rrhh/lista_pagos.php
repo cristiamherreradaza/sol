@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/assets/plugins/dropify/dist/css/dropify.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>public/assets/plugins/wizard/steps.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/pasos.css">
-<link rel="stylesheet" href="<?php echo base_url(); ?>public/assets/plugins/sweetalert/sweetalert.css" type="text/css">
+<link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
 
 
 <div class="page-wrapper">
@@ -21,7 +21,7 @@
                                     <div class="ml-auto">
                                         <div class="col-12">
                                             <h2 class="mb-0" align="center">Reporte a la fecha</h2>
-                                            <h3 style="align-content: center; color: blue;"><?php echo fechaEs($fecha); ?></h3>
+                                            <!-- <h3 style="align-content: center; color: blue;"><?php echo fechaEs($fecha); ?></h3> -->
                                         </div>
                                     </div>
                                 </div>
@@ -31,14 +31,14 @@
                                     <div class="col-6">
                                         <!-- <h2 class="mb-0">March 2019</h2> -->
                                         <h4 class="font-light mt-0">Suma Total de Sueldos a Pagar</h4>
-                                        <div class="display-6 text-info"><?php echo $totales->total; ?> Bs.</div>
+                                        <!-- <div class="display-6 text-info"><?php echo $totales->total; ?> Bs.</div> -->
                                     </div>
                                     
                                 </div>
                                 <?php $n = 1; ?>
                             </div>
                             <div class="table-responsive">
-                                <table class="table table-hover no-wrap" id="myTable">
+                                <table class="table display table-bordered table-striped no-wrap" id="myTable">
                                     <thead>
                                         <tr>
                                             <th class="text-center">#</th>
@@ -51,8 +51,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($consulta as $valor) {
-                                            # code...
+                                        <?php
+                                        foreach($personal as $pe){
+                                        ?>
+                                            <tr>
+                                                <td><?=$pe->id?></td>
+                                                <td><?=$pe->nombre?></td>
+                                                <td><?=$pe->carnet?></td>
+                                                <td><?=$pe->sueldo?> Bs.</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                        <?php
+                                        }
+                                        ?>
+                                        <!-- <?php 
+                                        foreach ($consulta as $valor) {
                                         ?>
                                         <tr>
                                             <td class="text-center"><?php echo $n++; ?></td>
@@ -75,7 +90,8 @@
                                             </td>
                                             <?php } ?> 
                                         </tr>
-                                        <?php  } ?>
+                                            <?php  
+                                        } ?> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -87,9 +103,27 @@
     </div>
 </div>
                 <!-- ============================================================== -->
-<script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+<!-- <script src="{{ asset('assets/plugins/custom/datatables/datatables.bundle.js') }}"></script> -->
+
+
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
 
 <script>
+    $(function () {
+		// $('#myTable').DataTable();
+		// responsive table
+		$('#myTable').DataTable({
+			responsive: true,
+			"order": [
+				[0, 'desc']
+			],
+			"language": {
+            	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        	}
+		});
+	});
+
     function pagado($id){
         var id = $id;
         // alert(id);

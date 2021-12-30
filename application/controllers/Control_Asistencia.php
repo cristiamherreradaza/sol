@@ -109,108 +109,179 @@ class Control_Asistencia extends CI_Controller {
 
 	public function lista_pagos($mostrar_fecha = null)
 	{	
+		$data['personal'] = $this->db->get_where('personal', array('borrado' => null))->result();
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('rrhh/lista_pagos', $data);
+		$this->load->view('template/footer');
 		// $mes = date('m', strtotime($mostrar_fecha));//MES ACTUAL
 		// $year = date('Y', strtotime($mostrar_fecha));//AÑO ACTUAL
-		$mes = $mostrar_fecha;
-		$year = date('Y');
 
-		$Cantidad_Dias_Mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
+		// switch ($mostrar_fecha) {
+		// 	case 'Enero':
+		// 		# code...
+		// 		$mes = 1;
+		// 		break;
+			
+		// 	case 'Febrero':
+		// 		# code...
+		// 		$mes = 2;
+		// 		break;
 
-		//AQUI OBTENEMOS LOS DIAS HABILES QUE TIENE EL MES SELECCIONADO
-		$nro_dias_habiles = $this->Asistencia_model->contar_dias($mes, $year, $Cantidad_Dias_Mes);
-		//AQUI OBTENEMOS LOS DIAS FERIADOS QUE TIENE EL MES SELECCIONADO
-		$nro_dias_feriados = $this->Asistencia_model->contar_dias_feriados($mes, $year);
+		// 	case 'Marzo':
+		// 		# code...
+		// 		$mes = 3;
+		// 		break;
+			
+		// 	case 'Abril':
+		// 		# code...
+		// 		$mes = 4;
+		// 		break;
+			
+		// 	case 'Mayo':
+		// 		# code...
+		// 		$mes = 5;
+		// 	break;
+			
+		// 	case 'Junio':
+		// 		# code...
+		// 		$mes = 6;
+		// 		break;
 
-		$personal = $this->db->get_where('personal', array('estado' => 1))->result();
-		$horario_vigente = $this->db->get_where('horarios', array('estado' => 1))->row();
+		// 	case 'Julio':
+		// 		# code...
+		// 		$mes = 7;
+		// 		break;
+			
+		// 	case 'Agosto':
+		// 		# code...
+		// 		$mes = 8;
+		// 		break;
+			
+		// 	case 'Septiembre':
+		// 		# code...
+		// 		$mes = 9;
+		// 	break;
+			
+		// 	case 'Octubre':
+		// 		# code...
+		// 		$mes = 10;
+		// 		break;
 
-		foreach ($personal as $per) {
-			$mes_sin_cero = ltrim($mes, '0');
-			$mes_año = $mes_sin_cero.'/'.$year;
-			// $nro_dias_feriados = $this->Asistencia_model->contar_dias_feriados($mes, $year);
-			$asistencia = $this->db->query("SELECT *
-											FROM asistencias
-											WHERE carnet = '$per->carnet' 
-											AND fecha like '%$mes_año'
-											AND borrado IS NULL")->result();
-			$tiempo_retraso_man = '00:00';
-			$tiempo_retraso_tar = '00:00';
-			$tiempo_retraso = '00:00';
-			$dias_trabajados = 0;
-			$abandono_manana = 0;
-			$abandono_tarde = 0;
-			$numero_atrasos = 0;
-			$falta_manana = 0;
-			$falta_tarde = 0;
+		// 	case 'Noviembre':
+		// 		# code...
+		// 		$mes = 11;
+		// 		break;
+			
+		// 	case 'Diciembre':
+		// 		# code...
+		// 		$mes = 12;
+		// 		break;
+		// }
 
-			foreach ($asistencia as $asis) {
-				$tiempo_retraso1 = '00:00';
-				$tiempo_retraso2 = '00:00';
-				$tiempo_retraso3 = '00:00';
-				$tiempo_retraso4 = '00:00';
-				$manana = 0;
-				$tarde = 0;
-				$tiempo_retraso_man = 0;
-				$tiempo_retraso_tar = 0;
-				// verifica si llego a tiempo, por otro caso se retraso y por otro caso no marco el ingreso de la mañana
-				if ($asis->man_hi >= $horario_vigente->man_desde && $asis->man_hi <= $horario_vigente->man_hasta) {
-					$manana += 0.25;
-				} elseif ($asis->man_hi > $horario_vigente->man_hasta && $asis->man_hi <= $horario_vigente->man_max) {
-					$manana += 0.25;
-					$tiempo_retraso1 = $this->Asistencia_model->horas_ret_man_hi($asis->man_hi);
-					$numero_atrasos += 1;
-				}
-				//verifica si salio a tiempo, por otro caso se salio antes y por otro caso no marco su salida de la mañana
-				if ($asis->man_hs >= $horario_vigente->man_salida && $asis->man_hs <= $horario_vigente->man_salida_hasta) {
-					$manana += 0.25;
-				} elseif (($asis->man_hs) >= ($horario_vigente->man_salida_min) && ($asis->man_hs) < ($horario_vigente->man_salida)) {
-					$manana += 0.25;
-					$tiempo_retraso2 = $this->Asistencia_model->horas_ret_man_hs($asis->man_hs);
-					$numero_atrasos += 1;
-				}
+		// $year = date('Y');
 
-				if ($manana == 0.50) {
-					$dias_trabajados += $manana;
-					$tiempo_retraso_man = $this->Asistencia_model->retraso($tiempo_retraso1, $tiempo_retraso2);
-				} elseif ($manana == 0.25) {
-					$abandono_manana += 1;
-				} else {
-					$falta_manana += 1;
-				}
+		// // echo strtotime($mes);
+		// // exit;
 
-				//verifica si llego a tiempo, por otro caso se retraso y por otro caso no marco el ingreso de la tarde
-				if ($asis->tar_hi >= $horario_vigente->tarde_desde && $asis->tar_hi <= $horario_vigente->tarde_hasta) {
-					$tarde += 0.25;
-				} elseif ($asis->tar_hi > $horario_vigente->tarde_hasta && $asis->tar_hi <= $horario_vigente->tarde_max) {
-					$tarde += 0.25;
-					$tiempo_retraso3 = $this->Asistencia_model->horas_ret_tar_hi($asis->tar_hi);
-					$numero_atrasos += 1;
-				}
-				//verifica si salio a tiempo, por otro caso se salio antes y por otro caso no marco su salida de la tarde
-				if ($asis->tar_hs >= $horario_vigente->tarde_salida && $asis->tar_hs <= $horario_vigente->tarde_salida_hasta) {
-					$tarde += 0.25;
-				} elseif ($asis->tar_hs >= $horario_vigente->tarde_salida_min && $asis->tar_hs < $horario_vigente->tarde_salida) {
-					$tarde += 0.25;
-					$tiempo_retraso4 = $this->Asistencia_model->horas_ret_tar_hs($asis->tar_hs);
-					$numero_atrasos += 1;
-				}
+		// $Cantidad_Dias_Mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
 
-				if ($tarde == 0.50) {
-					$dias_trabajados += $tarde;
-					$tiempo_retraso_tar = $this->Asistencia_model->retraso($tiempo_retraso3, $tiempo_retraso4);
-				} elseif ($tarde == 0.25) {
-					$abandono_tarde += 1;
-				} else {
-					$falta_tarde += 1;
-				}
+		// //AQUI OBTENEMOS LOS DIAS HABILES QUE TIENE EL MES SELECCIONADO
+		// $nro_dias_habiles = $this->Asistencia_model->contar_dias($mes, $year, $Cantidad_Dias_Mes);
+		// //AQUI OBTENEMOS LOS DIAS FERIADOS QUE TIENE EL MES SELECCIONADO
+		// $nro_dias_feriados = $this->Asistencia_model->contar_dias_feriados($mes, $year);
+
+		// $personal = $this->db->get_where('personal', array('estado' => 1))->result();
+		// $horario_vigente = $this->db->get_where('horarios', array('estado' => 1))->row();
+
+		// foreach ($personal as $per) {
+		// 	$mes_sin_cero = ltrim($mes, '0');
+		// 	$mes_año = $mes_sin_cero.'/'.$year;
+		// 	// $nro_dias_feriados = $this->Asistencia_model->contar_dias_feriados($mes, $year);
+		// 	$asistencia = $this->db->query("SELECT *
+		// 									FROM asistencias
+		// 									WHERE carnet = '$per->carnet' 
+		// 									AND fecha like '%$mes_año'
+		// 									AND borrado IS NULL")->result();
+		// 	$tiempo_retraso_man = '00:00';
+		// 	$tiempo_retraso_tar = '00:00';
+		// 	$tiempo_retraso = '00:00';
+		// 	$dias_trabajados = 0;
+		// 	$abandono_manana = 0;
+		// 	$abandono_tarde = 0;
+		// 	$numero_atrasos = 0;
+		// 	$falta_manana = 0;
+		// 	$falta_tarde = 0;
+
+		// 	foreach ($asistencia as $asis) {
+		// 		$tiempo_retraso1 = '00:00';
+		// 		$tiempo_retraso2 = '00:00';
+		// 		$tiempo_retraso3 = '00:00';
+		// 		$tiempo_retraso4 = '00:00';
+		// 		$manana = 0;
+		// 		$tarde = 0;
+		// 		$tiempo_retraso_man = 0;
+		// 		$tiempo_retraso_tar = 0;
+		// 		// verifica si llego a tiempo, por otro caso se retraso y por otro caso no marco el ingreso de la mañana
+		// 		if ($asis->man_hi >= $horario_vigente->man_desde && $asis->man_hi <= $horario_vigente->man_hasta) {
+		// 			$manana += 0.25;
+		// 		} elseif ($asis->man_hi > $horario_vigente->man_hasta && $asis->man_hi <= $horario_vigente->man_max) {
+		// 			$manana += 0.25;
+		// 			$tiempo_retraso1 = $this->Asistencia_model->horas_ret_man_hi($asis->man_hi);
+		// 			$numero_atrasos += 1;
+		// 		}
+		// 		//verifica si salio a tiempo, por otro caso se salio antes y por otro caso no marco su salida de la mañana
+		// 		if ($asis->man_hs >= $horario_vigente->man_salida && $asis->man_hs <= $horario_vigente->man_salida_hasta) {
+		// 			$manana += 0.25;
+		// 		} elseif (($asis->man_hs) >= ($horario_vigente->man_salida_min) && ($asis->man_hs) < ($horario_vigente->man_salida)) {
+		// 			$manana += 0.25;
+		// 			$tiempo_retraso2 = $this->Asistencia_model->horas_ret_man_hs($asis->man_hs);
+		// 			$numero_atrasos += 1;
+		// 		}
+
+		// 		if ($manana == 0.50) {
+		// 			$dias_trabajados += $manana;
+		// 			$tiempo_retraso_man = $this->Asistencia_model->retraso($tiempo_retraso1, $tiempo_retraso2);
+		// 		} elseif ($manana == 0.25) {
+		// 			$abandono_manana += 1;
+		// 		} else {
+		// 			$falta_manana += 1;
+		// 		}
+
+		// 		//verifica si llego a tiempo, por otro caso se retraso y por otro caso no marco el ingreso de la tarde
+		// 		if ($asis->tar_hi >= $horario_vigente->tarde_desde && $asis->tar_hi <= $horario_vigente->tarde_hasta) {
+		// 			$tarde += 0.25;
+		// 		} elseif ($asis->tar_hi > $horario_vigente->tarde_hasta && $asis->tar_hi <= $horario_vigente->tarde_max) {
+		// 			$tarde += 0.25;
+		// 			$tiempo_retraso3 = $this->Asistencia_model->horas_ret_tar_hi($asis->tar_hi);
+		// 			$numero_atrasos += 1;
+		// 		}
+		// 		//verifica si salio a tiempo, por otro caso se salio antes y por otro caso no marco su salida de la tarde
+		// 		if ($asis->tar_hs >= $horario_vigente->tarde_salida && $asis->tar_hs <= $horario_vigente->tarde_salida_hasta) {
+		// 			$tarde += 0.25;
+		// 		} elseif ($asis->tar_hs >= $horario_vigente->tarde_salida_min && $asis->tar_hs < $horario_vigente->tarde_salida) {
+		// 			$tarde += 0.25;
+		// 			$tiempo_retraso4 = $this->Asistencia_model->horas_ret_tar_hs($asis->tar_hs);
+		// 			$numero_atrasos += 1;
+		// 		}
+
+		// 		if ($tarde == 0.50) {
+		// 			$dias_trabajados += $tarde;
+		// 			$tiempo_retraso_tar = $this->Asistencia_model->retraso($tiempo_retraso3, $tiempo_retraso4);
+		// 		} elseif ($tarde == 0.25) {
+		// 			$abandono_tarde += 1;
+		// 		} else {
+		// 			$falta_tarde += 1;
+		// 		}
 				
-				$tiempo_retraso = $this->Asistencia_model->retraso_suma($tiempo_retraso, $tiempo_retraso_man, $tiempo_retraso_tar);
-			}
-			// exit;
-			$registra_sueldo = $this->Asistencia_model->calcula_sueldo($per->id, $mes, $year, $abandono_manana, $abandono_tarde, $numero_atrasos, $tiempo_retraso, $dias_trabajados, $nro_dias_habiles, 
-		$nro_dias_feriados, $horario_vigente->descuento_hora, $falta_manana, $falta_tarde);
-		}
-		redirect("Control_Asistencia/consulta/".$mostrar_fecha);
+		// 		$tiempo_retraso = $this->Asistencia_model->retraso_suma($tiempo_retraso, $tiempo_retraso_man, $tiempo_retraso_tar);
+		// 	}
+		// 	// exit;
+		// 	$registra_sueldo = $this->Asistencia_model->calcula_sueldo($per->id, $mes, $year, $abandono_manana, $abandono_tarde, $numero_atrasos, $tiempo_retraso, $dias_trabajados, $nro_dias_habiles, 
+		// $nro_dias_feriados, $horario_vigente->descuento_hora, $falta_manana, $falta_tarde);
+		// }
+		// redirect("Control_Asistencia/consulta/".$mostrar_fecha);
 	}
 
 	public function pagar()
