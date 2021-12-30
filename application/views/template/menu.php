@@ -142,6 +142,7 @@
                             <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
                             <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
                             <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/descuentos">Descuentos</a></li>
                             <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
                             <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                         </ul>
@@ -257,6 +258,7 @@
                             <li><a href="<?php echo base_url(); ?>Personal/lista">Lista del Personal</a></li>
                             <li><a href="<?php echo base_url(); ?>Personal/registra">Registrar Personal</a></li>
                             <li><a href="<?php echo base_url(); ?>Personal/horarios">Horarios</a></li>
+                            <li><a href="<?php echo base_url(); ?>Personal/descuentos">Descuentos</a></li>
                             <li><a href="<?php echo base_url(); ?>Control_Asistencia/inicio">Sueldos</a></li>
                             <li><a href="<?php echo base_url(); ?>Excels/sube_excel">Subir Excel</a></li>
                         </ul>

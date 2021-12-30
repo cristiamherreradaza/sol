@@ -127,5 +127,58 @@ class Personal extends CI_Controller {
 		$this->load->view('horarios/horarios', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function descuentos(){
+		$data['descuentos'] = $this->db->get_where('descuentos',  array('borrado' => null))->result();
+
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		
+		$this->load->view('rrhh/descuentos', $data);
+		$this->load->view('template/footer');
+	}
+
+	public function guarda_descuento(){
+
+		$datos = array(
+			'descripcion' => $this->input->post('descripcion'),
+			'minutos' => $this->input->post('minutos'),
+			'descuento' => $this->input->post('descuento')
+		);
+
+		if($this->input->post('descuento_id') == 0 ){
+
+			$this->db->insert('descuentos', $datos);
+
+		}else{
+			$id = $this->input->post('descuento_id');
+
+			$this->db->where('id', $id);
+			$this->db->update('descuentos', $datos);
+
+			$datos =  array(
+				'modified_at' => date('Y-m-d H:i:s')
+			);
+			
+			$this->db->where('id', $id);
+			$this->db->update('descuentos', $datos);
+		}
+
+		redirect("Personal/descuentos");
+	}
+
+	public function eliminar_descuento($id = null){
+
+		$datos = array(
+			'borrado' => date('Y-m-d H:i:s')
+		);
+
+		
+		$this->db->where('id', $id);
+		$this->db->update('descuentos', $datos);
+
+		redirect("Personal/descuentos");
+
+	}
 	
 }

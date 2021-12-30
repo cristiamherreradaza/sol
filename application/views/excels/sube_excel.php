@@ -96,18 +96,18 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <select name="mes-sueldo" id="mes-sueldo" class="form-control">
-                                                        <option value="1">Enero</option>
-                                                        <option value="2">Febrero</option>
-                                                        <option value="3">Marzo</option>
-                                                        <option value="4">Abril</option>
-                                                        <option value="5">Mayo</option>
-                                                        <option value="6">Junio</option>
-                                                        <option value="7">Julio</option>
-                                                        <option value="8">Agosto</option>
-                                                        <option value="9">Septiembre</option>
-                                                        <option value="10">Octubre</option>
-                                                        <option value="11">Noviembre</option>
-                                                        <option value="12">Diciembre</option>
+                                                        <option value="Enero">Enero</option>
+                                                        <option value="Febrero">Febrero</option>
+                                                        <option value="Marzo">Marzo</option>
+                                                        <option value="Abril">Abril</option>
+                                                        <option value="Mayo">Mayo</option>
+                                                        <option value="Junio">Junio</option>
+                                                        <option value="Julio">Julio</option>
+                                                        <option value="Agosto">Agosto</option>
+                                                        <option value="Septiembre">Septiembre</option>
+                                                        <option value="Octubre">Octubre</option>
+                                                        <option value="Noviembre">Noviembre</option>
+                                                        <option value="Diciembre">Diciembre</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -176,7 +176,7 @@
         var mes = $('#mes-sueldo').val();
         // alert(mes);
         // hay que convertir el mes en numero
-		if (fecha == '') {
+		if (mes == '') {
 			Swal.fire({
 				      type: 'error',
 				      title: 'Oops...',
@@ -187,15 +187,15 @@
 	                url: '<?php echo base_url(); ?>Control_Asistencia/verifica_genera/',
 	                type: 'get',
 	                dataType: 'json',
-	                data: {param1: fecha},
+	                data: {param1: mes},
 	                success:function(data, textStatus, jqXHR) {
-	                    if (data.estado == 'No') {
-	                        window.location.href = "<?php echo base_url() ?>Control_Asistencia/lista_pagos/"+fecha;
+	                    if (data.estado == 'Si') {
+	                        window.location.href = "<?php echo base_url() ?>Control_Asistencia/lista_pagos/"+mes;
 	                    } else {
 	                    	Swal.fire({
 						      type: 'error',
 						      title: 'Oops...',
-						      text: 'Ya existe el registrado de fecha '+ fecha
+						      text: 'No Existe el Excel del mes de '+ mes
 						    })
 	                    }
 	                },

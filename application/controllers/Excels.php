@@ -98,6 +98,8 @@ class Excels extends CI_Controller {
 
 					$datos = array(
 						'excel_id' 				=> $id_reg_antiguo->id,
+						'mes'					=> $this->input->post('mes'),
+						'anio'					=> date('Y'),
 						'carnet'        		=> $r[0],
 						'nombre'	    		=> $r[1],
 						'fecha'    				=> $verdad_fecha[2].'-'.$verdad_fecha[1].'-'.$verdad_fecha[0],

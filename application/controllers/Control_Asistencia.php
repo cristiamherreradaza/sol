@@ -48,10 +48,11 @@ class Control_Asistencia extends CI_Controller {
 
 	public function verifica_genera()
 	{
-		$fecha = $this->input->get("param1");
-		$mes = date('m', strtotime($fecha));//MES ACTUAL
-		$anio = date('Y', strtotime($fecha));//AÑO ACTUAL	
-		$consulta = $this->db->get_where('sueldos', array('mes' => $mes, 'anio' => $anio, 'borrado ='=>NULL))->result();
+		$mes = $this->input->get("param1");
+
+		$anio = date('Y');//AÑO ACTUAL	
+
+		$consulta = $this->db->get_where('excels', array('mes' => $mes, 'gestion' => $anio, 'borrado ='=>NULL))->result();
 		if (!empty($consulta)) {
 			$respuesta = array('estado'=>'Si');
 		echo json_encode($respuesta);
@@ -59,13 +60,30 @@ class Control_Asistencia extends CI_Controller {
 			$respuesta = array('estado'=>'No');
 		echo json_encode($respuesta);
 		}
+
+		// $fecha = $this->input->get("param1");
+		// $mes = date('m', strtotime($fecha));//MES ACTUAL
+		// $anio = date('Y', strtotime($fecha));//AÑO ACTUAL	
+		// $mes = $this->input->get("param1");
+		// $anio = date('Y');//AÑO ACTUAL	
+		// $consulta = $this->db->get_where('sueldos', array('mes' => $mes, 'anio' => $anio, 'borrado ='=>NULL))->result();
+		// if (!empty($consulta)) {
+		// 	$respuesta = array('estado'=>'Si');
+		// echo json_encode($respuesta);
+		// } else {
+		// 	$respuesta = array('estado'=>'No');
+		// echo json_encode($respuesta);
+		// }
 	}
 
 	public function consulta($fecha)
 	{
 		// $fecha = $this->input->post('fecha');
-		$mes = date('m', strtotime($fecha));//MES ACTUAL
-		$year = date('Y', strtotime($fecha));//AÑO ACTUAL
+		// $mes = date('m', strtotime($fecha));//MES ACTUAL
+		// $year = date('Y', strtotime($fecha));//AÑO ACTUAL
+		$mes = $fecha;
+		$year = date('Y');
+		
 		$data['fecha'] = date('Y-m-d', strtotime($fecha));//MES ACTUAL;
 		// $data['mes'] = $mes;
 		// $data['anio'] = $year;
@@ -91,10 +109,11 @@ class Control_Asistencia extends CI_Controller {
 
 	public function lista_pagos($mostrar_fecha = null)
 	{	
-		echo  $mostrar_fecha;
-		exit;
 		// $mes = date('m', strtotime($mostrar_fecha));//MES ACTUAL
 		// $year = date('Y', strtotime($mostrar_fecha));//AÑO ACTUAL
+		$mes = $mostrar_fecha;
+		$year = date('Y');
+
 		$Cantidad_Dias_Mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
 
 		//AQUI OBTENEMOS LOS DIAS HABILES QUE TIENE EL MES SELECCIONADO
