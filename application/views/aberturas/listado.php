@@ -7,7 +7,8 @@
 		<div class="modal-content">
 			<!-- <form action="<?//=base_url('aberturas/guarda'); ?>" method="POST" id="formulario-abertura"> -->
 			<?php 
-				echo form_open('aberturas/guarda'); 
+				$atributos = array('id'=>'formulario-abertura');
+				echo form_open('aberturas/guarda', $atributos); 
 			?>
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">FORMULARIO DE ABERTURA</h4>

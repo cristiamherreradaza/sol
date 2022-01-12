@@ -95,12 +95,14 @@
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-                <li class="nav-small-cap">MENU PRINCIPAL<?php echo $this->session->rol; ?></li>
+                <li class="nav-small-cap text-center">
+                    <?php echo $this->session->rol; ?>
+                </li>
                 <?php
                 if($this->session->rol == 'Administrador'){
                     ?>
                     <li>
-                        <a href="javascript:void(0)" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
+                        <a href="<?php echo base_url(); ?>Panel/home" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">CONTROL PANEL</span></a>
                     </li>
                     <li>
                         <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
