@@ -54,47 +54,113 @@
 
 						<div class="col-md-4">
 							<div class="form-group">
-								<label class="control-label">Cantidad</label>
+								<label class="control-label">Cantidad Personas</label>
 								<input name="cantidad" type="text" id="cantidad" class="form-control" required>
 							</div>
 						</div>
 						
 					</div>
 
-					<div class="row">
+					<div class="row" style="background-color: #C3E6FF;">
 
-						<div class="col">
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label">Varones</label>
+						    <input name="cantidad_varones" type="number" id="cantidad_varones" class="form-control" min="0" step="any" value="0">
+						  </div>
+						</div>
+
+						<div class="col-md-2">
 						  <div class="form-group">
 						    <label class="control-label">Precio Saco</label>
-						    <input name="costo_saco" type="number" id="costo_saco" class="form-control calculo" min="0" step="any" value="0">
+						    <input name="costo_saco_varon" onblur="sumaVarones();" type="number" id="costo_saco_varon" class="form-control varones" min="0" step="any" value="0">
 						  </div>
 						</div>
 
-						<div class="col">
+						<div class="col-md-2">
 						  <div class="form-group">
 						    <label class="control-label">Precio Pantalon</label>
-						    <input name="costo_pantalon" type="number" id="costo_pantalon" class="form-control calculo" min="0" step="any" value="0">
+						    <input name="costo_pantalon_varon" onblur="sumaVarones();" type="number" id="costo_pantalon_varon" class="form-control varones" min="0" step="any" value="0">
 						  </div>
 						</div>
 
-						<div class="col">
+						<div class="col-md-2">
 						  <div class="form-group">
 						    <label class="control-label">Precio Chaleco</label>
-						    <input name="costo_chaleco" type="number" id="costo_chaleco" class="form-control calculo" min="0" step="any" value="0">
+						    <input name="costo_chaleco_varon" onblur="sumaVarones();" type="number" id="costo_chaleco_varon" class="form-control varones" min="0" step="any" value="0">
 						  </div>
 						</div>
 
-						<div class="col">
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label"></label>
+						  </div>
+						</div>
+
+						<div class="col-md-1">
+						  <div class="form-group">
+						    <label class="control-label">$. Conf.</label>
+						    <input name="costo_confeccion_varon" type="text" id="costo_confeccion_varon" class="form-control" min="0" step="any" readonly>
+						  </div>
+						</div>
+
+						<div class="col-md-1">
+						  <div class="form-group">
+						    <label class="control-label">Subtotal</label>
+						    <input name="subtotal_varones" type="text" id="subtotal_varones" class="form-control" min="0" step="any" readonly>
+						  </div>
+						</div>
+						
+					</div>
+
+					<div class="row" style="background-color: #FFC3C3;">
+
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label">Mujeres</label>
+						    <input name="cantidad_mujeres" type="number" id="cantidad_mujeres" class="form-control calculo" min="0" step="any" value="0">
+						  </div>
+						</div>
+
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label">Precio Saco</label>
+						    <input name="costo_saco_mujer" onblur="sumaMujeres();" type="number" id="costo_saco_mujer" class="form-control mujer" min="0" step="any" value="0">
+						  </div>
+						</div>
+
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label">Precio Pantalon</label>
+						    <input name="costo_pantalon_mujer" onblur="sumaMujeres();" type="number" id="costo_pantalon_mujer" class="form-control mujer" min="0" step="any" value="0">
+						  </div>
+						</div>
+
+						<div class="col-md-2">
+						  <div class="form-group">
+						    <label class="control-label">Precio Chaleco</label>
+						    <input name="costo_chaleco_mujer" onblur="sumaMujeres();" type="number" id="costo_chaleco_mujer" class="form-control mujer" min="0" step="any" value="0">
+						  </div>
+						</div>
+
+						<div class="col-md-2">
 						  <div class="form-group">
 						    <label class="control-label">Precio Falda</label>
-						    <input name="costo_falda" type="number" id="costo_falda" class="form-control calculo" min="0" step="any" value="0">
+						    <input name="costo_falda_mujer" onblur="sumaMujeres();" type="number" id="costo_falda_mujer" class="form-control mujer" min="0" step="any" value="0">
 						  </div>
 						</div>
 
-						<div class="col">
+						<div class="col-md-1">
 						  <div class="form-group">
-						    <label class="control-label">Costo Confeccion</label>
-						    <input name="costo_confeccion" type="number" id="costo_confeccion" class="form-control calculo" min="0" step="any" readonly>
+						    <label class="control-label">$. Conf.</label>
+						    <input name="costo_confeccion_mujer" type="text" id="costo_confeccion_mujer" class="form-control" min="0" step="any" readonly>
+						  </div>
+						</div>
+
+						<div class="col-md-1">
+						  <div class="form-group">
+						    <label class="control-label">Subtotal</label>
+						    <input name="subtotal_mujeres" type="text" id="subtotal_mujeres" class="form-control" min="0" step="any" readonly>
 						  </div>
 						</div>
 						
@@ -326,4 +392,37 @@
 			}
 		})
 	}
+
+	function sumaVarones(){
+
+		var arrayVarones = document.getElementsByClassName('varones');
+
+		var tot=0;
+		for(var i=0;i<arrayVarones.length;i++){
+			if(parseInt(arrayVarones[i].value))
+				tot += parseInt(arrayVarones[i].value);
+		}
+		document.getElementById('costo_confeccion_varon').value = tot;
+		
+		let subtotalVarones = tot * parseInt(document.getElementById('cantidad_varones').value);
+
+		document.getElementById('subtotal_varones').value = subtotalVarones;
+	}
+
+	function sumaMujeres(){
+
+		var arrayMujeres = document.getElementsByClassName('mujer');
+
+		var tot=0;
+		for(var i=0;i<arrayMujeres.length;i++){
+			if(parseInt(arrayMujeres[i].value))
+				tot += parseInt(arrayMujeres[i].value);
+		}
+		document.getElementById('costo_confeccion_mujer').value = tot;
+		
+		let subtotalVarones = tot * parseInt(document.getElementById('cantidad_mujeres').value);
+
+		document.getElementById('subtotal_mujeres').value = subtotalVarones;
+	}
+
 </script>
