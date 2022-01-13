@@ -2,13 +2,13 @@
     <?php $obj_grupo = json_encode($grupos); ?>
     <div class="table-responsive">
         <table class="table no-wrap">
-            <thead>
+            <!-- <thead>
                 <tr>
                     <th>No.</th>
                     <th>Nombre</th>
                     <th></th>
                 </tr>
-            </thead>
+            </thead> -->
             <tbody>
                 <?php foreach ($grupos as $key => $c): ?>
                     <tr>

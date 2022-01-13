@@ -18,8 +18,11 @@ class Contratos extends CI_Controller {
 
 	public function guarda() 
 	{
+		echo '<pre>';
+		var_dump($this->input->post());
+		echo '</pre>';
+		die();
 		$usuario_id = $this->session->id_usuario;
-		// vdebug($usuario_id, true, false, true);
 		$id_grupo = $this->input->post('ida');
 		if(empty($id_grupo)){
 
@@ -31,16 +34,17 @@ class Contratos extends CI_Controller {
 			$this->db->insert('grupos', $datos_grupo);
 			$grupo_id = $this->db->insert_id();
 
+			// guarda para varon
 			$datos_contrato = array(
 				'grupo_id'         => $grupo_id,
 				'usuario_id'       => $usuario_id,
 				'fecha'            => $this->input->post('fecha'),
 				'cantidad'         => $this->input->post('cantidad'),
 				'descripcion'      => $this->input->post('descripcion'),
-				'costo_saco'       => $this->input->post('costo_saco'),
-				'costo_pantalon'   => $this->input->post('costo_pantalon'),
-				'costo_chaleco'    => $this->input->post('costo_chaleco'),
-				'costo_falda'      => $this->input->post('costo_falda'),
+				'costo_saco'       => $this->input->post('costo_saco_varon'),
+				'costo_pantalon'   => $this->input->post('costo_pantalon_varon'),
+				'costo_chaleco'    => $this->input->post('costo_chaleco_varon'),
+				// 'costo_falda'      => $this->input->post('costo_falda'),
 				'tela_propia'      => $this->input->post('tela_propia'),
 				'marca'            => $this->input->post('marca'),
 				'costo_tela'       => $this->input->post('costo_tela'),
@@ -235,6 +239,14 @@ class Contratos extends CI_Controller {
 		$this->db->update('contratos', array('borrado'=>$hoy), "id=$contrato_id");
 		$this->db->update('trabajos', array('contrato_id'=>NULL, 'grupo_id'=>NULL), "contrato_id=$contrato_id");
 		redirect("contratos/detalle/$grupo_id");
+	}
+
+	public function nuevo()
+	{
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('contratos/nuevo');
+		$this->load->view('template/footer');
 	}
 
 }
