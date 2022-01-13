@@ -13,9 +13,91 @@
         <!-- ============================================================== -->
        <!-- Row -->
 
+       <!-- modal de ingrso de material -->
+        <div id="modal-ingrega-material" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-outline-info">
+                                <div class="card-header">
+                                    <h4 class="mb-0 text-white">FORMULARIO DE REGISTRO DE PRODUCTO</h4>
+                                </div>
+                                <div class="card-body">
+                                <?php 
+                                    $attributes = array('method'=>'POST', 'id' => 'formulario-agregar-producto-legal');
+                                    echo form_open('Movimiento/agregarProductoLegal', $attributes); 
+                                ?>
+                                        <div class="form-body">
+                                            <input type="hidden" name="producto_id" id="producto_id">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Cantidad</label>
+                                                        <input type="number" class="form-control" required step="0.1" id="stock" name="stock">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Precio por Unidad</label>
+                                                        <input type="number" class="form-control" step="0.1" id="precio_unidad" name="precio_unidad">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <!--/row-->
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Precio de Venta</label>
+                                                        <input type="number" class="form-control" step="0.1" id="precio_venta" name="precio_venta">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Precio Total</label>
+                                                        <input type="number" class="form-control" required step="0.01" id="precio_total" name="precio_total">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Fecha</label>
+                                                        <input type="date" class="form-control" id="fecha" name="fecha" value="<?php echo date('Y-m-d');?>">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Detalle</label>
+                                                        <input type="text" class="form-control" id="detalle" name="detalle">
+                                                    </div>
+                                                </div>
+                                                <!--/span-->
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn waves-effect waves-light btn-block btn-success" onclick="guardaProductoLegal();">GUARDA</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+       <!-- end modal de ingrso de material -->
 
         <!-- MODAL AGREGAR ITEM -->
-
         <div id="myModalAgregarItem" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -38,7 +120,7 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Cantidad</label>
                                                                 <input type="number" name="cantidad-agregar" id="cantidad-agregar" class="form-control" required>
-                                                                <input type="text" name="categoria_id-agregar" id="categoria_id-agregar">
+                                                                <input type="hidden" name="producto_id-agregar" id="producto_id-agregar">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8">
@@ -64,12 +146,9 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
         <!-- END MODAL AGREGAR ITEM -->
 
-
         <!-- MODAL SACAR ITEM -->
-
         <div id="myModalSacarItem" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -92,7 +171,7 @@
                                                             <div class="form-group">
                                                                 <label class="control-label">Cantidad</label>
                                                                 <input type="number" name="cantidad-sacado" id="cantidad-sacado" class="form-control" required>
-                                                                <input type="hidden" name="categoria_id" id="categoria_id">
+                                                                <input type="hidden" name="producto_id" id="producto_id">
                                                             </div>
                                                         </div>
                                                         <div class="col-md-8">
@@ -118,12 +197,9 @@
             </div>
             <!-- /.modal-dialog -->
         </div>
-
         <!-- END MODAL SACAR ITEM -->
 
-
-
-       <div id="myModalEditar" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div id="myModalEditar" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Row -->
@@ -151,7 +227,11 @@
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                                 <label class="control-label">Tipo</label>
-                                                                <input name="tipo-producto" type="text" id="tipo-producto" class="form-control" required>
+                                                                <!-- <input name="tipo-producto" type="text" id="tipo-producto" class="form-control" required> -->
+                                                                <select name="tipo-producto" id="tipo-producto" class="form-control" required>
+                                                                    <option value="METROS">METROS</option>
+                                                                    <option value="UNIDADES">UNIDADES</option>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -177,7 +257,7 @@
             <div class="col-lg-12 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">LISTA DE INVENTARIOS &nbsp;&nbsp;&nbsp;&nbsp;
+                        <h3 class="card-title">LISTA DE ITEMS &nbsp;&nbsp;&nbsp;&nbsp;
                         </h3>
                         <div class="table-responsive m-t-40" id="tabla">
                                 <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -187,56 +267,40 @@
                                             <th>Material</th>
                                             <th>Cantidad en Inventario</th>
                                             <th>Acciones</th>
-                                            <!-- <th>Precio de Venta</th> -->
-                                            <!-- <th>Precio Total</th> -->
-                                            <!-- <th>Acciones</th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $nro = 1;
-                                         foreach ($compra as $a): 
-                                            $venta = $this->db->query("SELECT categoria_id, SUM(cantidad) as suma
-                                                                                 FROM ventas
-                                                                                 WHERE categoria_id = $a->categoria_id
-                                                                                 AND estado = 1
-                                                                                 GROUP BY (categoria_id)")->row();
-                                            $mayor = $this->db->query("SELECT MAX(id) as nro_mayor
-                                                                                 FROM compras
-                                                                                 WHERE categoria_id = $a->categoria_id
-                                                                                 AND estado = 1")->row();
-                                            $valores = $this->db->query("SELECT *
-                                                                                 FROM compras
-                                                                                 WHERE id = $mayor->nro_mayor
-                                                                                 AND estado = 1")->row();
+                                            foreach($productos as  $pro){
 
+                                    		    $cantidadEntrada = $this->db->query("SELECT sum(ingreso) as cantidadEntrada FROM movimientos WHERE producto_id = $pro->id AND  borrado is null")->result();
+                                    		    $cantidadSalida = $this->db->query("SELECT sum(salida) as cantidadSalida FROM movimientos WHERE producto_id = $pro->id AND  borrado is null")->result();
+
+                                                $cantidadTotal = $cantidadEntrada[0]->cantidadEntrada - $cantidadSalida[0]->cantidadSalida;
                                             ?>
-                                        <tr>
-                                            <td><?php echo $nro ++ ?></td>
-                                            <td><?php echo $a->nombre ?></td>
-                                            <?php if (!empty($venta)) { ?>
-                                            <td><?php $total = $a->suma - $venta->suma;
-                                                echo $total;?> <?php echo $a->tipo ?></td>
-                                            <?php }else {?>
-                                            <td><?php $total = $a->suma;
-                                                echo $total;?> <?php echo $a->tipo ?></td>
-                                            <?php }  ?>
-                                            <td>
-                                                <button class="btn btn-warning" onclick="editar_material('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-edit"></i></button>
-                                                <button class="btn btn-info" onclick="ver_material('<?=$a->id?>')" title="Ver <?=$a->nombre?>"><i class="fas fa-eye"></i></button>
-                                                <button class="btn btn-danger" onclick="quitar('<?=$a->id?>', '<?=$a->nombre?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-minus-circle"></i></button>
-                                                <button class="btn btn-success" onclick="add('<?=$a->id?>', '<?=$a->nombre?>','<?=$a->tipo?>')" title="Editar <?=$a->nombre?>"><i class="fas fa-plus-circle"></i></button>
-                                            </td>
-                                            <!-- <td><?php echo $valores->precio_unidad ?></td>
-                                            <td><?php echo $valores->precio_venta ?></td> -->
-                                            <!-- <td><?= date("Y-m-d",strtotime($a->fecha));?></td> -->
-                                            <!-- <td>
-                                                <button type="button" class="btn btn-info" onclick="ver(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-eye"></i></button>
-                                                <button type="button" class="btn btn-warning" onclick="editar(<?php echo $a->id ?>, '<?php echo $a->categoria_id ?>', '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-edit"></i></button>
-                                                <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $a->id ?>, '<?php echo $a->categoria_id ?>')"><i class="fas fa-trash"></i></button>
-                                            </td> -->
-                                        </tr>
-                                        <?php endforeach ?>
+                                            <tr>
+                                                <td><?=$pro->id?></td>
+                                                <td><?=$pro->nombre?></td>
+                                                <td>
+                                                    <?php
+                                                        if($cantidadTotal > 0){
+                                                            echo $cantidadTotal." ". $pro->tipo;
+                                                        }else{
+                                                           echo 0 ." ". $pro->tipo; 
+                                                        }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-warning" onclick="editar_material('<?=$pro->id?>', '<?=$pro->nombre?>','<?=$pro->tipo?>')" title="Editar <?=$pro->nombre?>"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn btn-info" onclick="ver_material('<?=$pro->id?>')" title="Ver <?=$pro->nombre?>"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn btn-dark" onclick="agregarProductoLegal('<?=$pro->id?>')"><i class=" fas fa-chevron-circle-down"></i></button>
+                                                    <button class="btn btn-danger" onclick="quitar('<?=$pro->id?>', '<?=$pro->nombre?>')" title="Editar <?=$pro->nombre?>"><i class="fas fa-minus-circle"></i></button>
+                                                    <button class="btn btn-success" onclick="add('<?=$pro->id?>', '<?=$pro->nombre?>','<?=$pro->tipo?>')" title="Editar <?=$pro->nombre?>"><i class="fas fa-plus-circle"></i></button>
+                                                </td>
+                                            </tr>
+                                            <?php
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                         </div>
@@ -266,6 +330,7 @@
                       </div>
                     </div>
                 </div>
+
             </div> -->
         </div>
         <!-- End PAge Content -->
@@ -341,9 +406,9 @@
         }
     }
 
-    function quitar(categoria_id, nombre){
+    function quitar(producto_id, nombre){
         $("#nombre-categoria").text(nombre);
-        $("#categoria_id").val(categoria_id);
+        $("#producto_id").val(producto_id);
         $("#myModalSacarItem").modal('show');
     }
 
@@ -357,9 +422,9 @@
         }
     }
 
-    function add(categoria_id, nombre){
+    function add(producto_id, nombre){
         $("#nombre-categoria").text(nombre);
-        $("#categoria_id-agregar").val(categoria_id);
+        $("#producto_id-agregar").val(producto_id);
         $("#myModalAgregarItem").modal('show');
     }
 
@@ -370,6 +435,28 @@
             Swal.fire("Excelente!", "Registro Guardado!", "success");
         }else{
             $('#formulario-agregar-producto')[0].reportValidity()
+        }
+    }
+
+    function agregarProductoLegal(id){
+        $("#producto_id").val(id);
+        $('#modal-ingrega-material').modal('show');
+    }
+
+    $('#precio_unidad').on('change', function(e){
+        var precio_unidad = e.target.value;
+        var stock = $("#stock").val();
+        var total = precio_unidad * stock;
+        $('#precio_total').val(total);
+        console.log(stock);
+    });
+
+    function guardaProductoLegal(){
+        if($('#formulario-agregar-producto-legal')[0].checkValidity()){
+			$('#formulario-agregar-producto-legal').submit();
+            Swal.fire("Excelente!", "Registro Guardado!", "success");
+        }else{
+            $('#formulario-agregar-producto-legal')[0].reportValidity()
         }
     }
 </script>

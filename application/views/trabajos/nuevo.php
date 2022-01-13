@@ -1441,6 +1441,7 @@
 
     $(document).on('keyup', '#nombre', function(e) {
         nombre_cliente = $('#nombre').val();
+        // console.log(nombre_cliente);
         if (nombre_cliente.length > 3) {
             $.ajax({
                 url: '<?php echo base_url() ?>Trabajos/ajax_busca_cliente/' + nombre_cliente,

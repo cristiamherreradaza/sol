@@ -56,98 +56,98 @@
     <div class="modal-dialog">
         <div class="modal-content">
           <!-- Row -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card card-outline-info">
-                                    <div class="card-header">
-                                        <h4 class="mb-0 text-white">EDITAR REGISTRO</h4>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card card-outline-info">
+                        <div class="card-header">
+                            <h4 class="mb-0 text-white">EDITAR REGISTRO</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="form-body">
+
+                                    <div>
+                                        <input type="text" name="idEdit" id="idEdit" hidden>
                                     </div>
-                                    <div class="card-body">
-                                        <form>
-                                            <div class="form-body">
 
-                                                <div>
-                                                    <input type="text" name="idEdit" id="idEdit" hidden>
-                                                </div>
-
-                                                <div class="col-md-12 mb-3">
-                                                    <label class="control-label">Material</label>
-                                                        <select name="categorias" id="categoriasEdit" required class="select2" style="width: 100%">
-                                                            <option class="prueba" value=""></option>
-                                                            <?php 
-                                                            foreach ($categorias as $val) {
-                                                            ?>
-                                                            <option value="<?php echo $val->id ?>"><?php echo $val->nombre ?></option>
-                                                            <?php } ?>
-                                                        </select>
-                                                </div>
-                                                
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Cantidad</label>
-                                                            <input type="number" class="form-control" required step="0.1" id="stockEdit" name="stock">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Precio por Unidad</label>
-                                                            <input type="number" class="form-control" step="0.1" id="precio_unidadEdit" name="precio_unidad">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                </div>
-                                                <!--/row-->
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Precio de Venta</label>
-                                                            <input type="number" class="form-control" step="0.1" id="precio_ventaEdit" name="precio_venta">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Precio Total</label>
-                                                            <input type="number" class="form-control" required step="0.01" id="precio_totalEdit" name="precio_total">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Fecha</label>
-                                                            <input type="date" class="form-control" id="fechaEdit" name="fechaEdit" value="<?php echo date('Y-m-d');?>">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label>Detalle</label>
-                                                            <input type="text" class="form-control" id="detalleEdit" name="detalle">
-                                                        </div>
-                                                    </div>
-                                                    <!--/span-->
-                                                </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label class="control-label">Material</label>
+                                            <select name="categorias" id="categoriasEdit" required class="select2" style="width: 100%">
+                                                <option class="prueba" value=""></option>
+                                                <?php 
+                                                foreach ($categorias as $val) {
+                                                ?>
+                                                <option value="<?php echo $val->id ?>"><?php echo $val->nombre ?></option>
+                                                <?php } ?>
+                                            </select>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Cantidad</label>
+                                                <input type="number" class="form-control" required step="0.1" id="stockEdit" name="stock">
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn waves-effect waves-light btn-block btn-success" onclick="editar1();">GUARDA</button>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Precio por Unidad</label>
+                                                <input type="number" class="form-control" step="0.1" id="precio_unidadEdit" name="precio_unidad">
                                             </div>
-                                        </form>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <!--/row-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Precio de Venta</label>
+                                                <input type="number" class="form-control" step="0.1" id="precio_ventaEdit" name="precio_venta">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Precio Total</label>
+                                                <input type="number" class="form-control" required step="0.01" id="precio_totalEdit" name="precio_total">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Fecha</label>
+                                                <input type="date" class="form-control" id="fechaEdit" name="fechaEdit" value="<?php echo date('Y-m-d');?>">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Detalle</label>
+                                                <input type="text" class="form-control" id="detalleEdit" name="detalle">
+                                            </div>
+                                        </div>
+                                        <!--/span-->
                                     </div>
                                 </div>
-                            </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn waves-effect waves-light btn-block btn-success" onclick="editar1();">GUARDA</button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- Row -->
-
+                    </div>
+                </div>
+            </div>
+        <!-- Row -->
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
 <!-- fin modal -->
+
 
 
 
@@ -167,11 +167,7 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <?php //vdebug($trabajos, true, false, true) ?>
-                                <?php
-                                    $datosT = $this->db->get_where('categorias', array('id' => $compras[0]->categoria_id,'estado' => 1))->row();
-                                ?>
-                                <h3 class="card-title">LISTA DE MATERIALES INGRESADOS DEL PRODUCTO <span class="text-blue"><b> "<?=$datosT->nombre?>"</b> </span>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                <h3 class="card-title">LISTA DE MOVIMIENTOS DEL PRODUCTO <span class="text-blue"><b> "<?=$producto[0]->nombre?>"</b> </span>&nbsp;&nbsp;&nbsp;&nbsp; 
                                 </h3>
                                 <div class="table-responsive m-t-40" id="tabla">
                                         <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -180,28 +176,42 @@
                                                     <th>No.</th>
                                                     <th>Material</th>
                                                     <th>Cantidad</th>
+                                                    <th>Tipo</th>
                                                     <th>Precio Total</th>
+                                                    <th>Detalle</th>
                                                     <th>Fecha</th>
-                                                    <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 $nro = 1;
-                                                 foreach ($compras as $a): 
-                                                    $datos = $this->db->get_where('categorias', array('id' => $a->categoria_id,'estado' => 1))->row();
-                                                    ?>
+                                                 foreach ($productos as $pro):
+                                                    $producto = $this->db->get_where('productos', array('id' => $pro->producto_id))->result();
+                                                ?>
                                                 <tr>
                                                     <td><?php echo $nro ++ ?></td>
-                                                    <td><?php echo $datos->nombre ?></td>
-                                                    <td><?php echo $a->stock ?> <?php echo $datos->tipo ?></td>
-                                                    <td><?php echo $a->precio_total ?></td>
-                                                    <td><?= date("Y-m-d",strtotime($a->fecha));?></td>
+                                                    <td><?php echo $producto[0]->nombre ?></td>
                                                     <td>
-                                                        <button type="button" class="btn btn-info" onclick="ver(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-warning" onclick="editar(<?php echo $a->id ?>, '<?php echo $a->categoria_id ?>', '<?php echo $datos->nombre ?>', '<?php echo $a->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $a->precio_unidad ?>', '<?php echo $a->precio_venta ?>', '<?php echo $a->precio_total ?>', '<?php echo $a->detalle ?>', '<?= date("Y-m-d",strtotime($a->fecha));?>')"><i class="fas fa-edit"></i></button>
-                                                        <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $a->id ?>, '<?php echo $datos->nombre ?>','<?php echo $a->categoria_id ?>')"><i class="fas fa-trash"></i></button>
+                                                        <?php
+                                                        if($pro->ingreso != null){
+                                                            echo $pro->ingreso;
+                                                        }else{
+                                                            echo $pro->salida;
+                                                        }
+                                                        ?>    
                                                     </td>
+                                                    <td>
+                                                        <?php
+                                                        if($pro->ingreso != null){
+                                                            echo 'Ingreso';
+                                                        }else{
+                                                            echo 'Salida';
+                                                        }
+                                                        ?>    
+                                                    </td>
+                                                    <td><?=$pro->precio_total?></td>
+                                                    <td><?=$pro->descripcion?></td>
+                                                    <td><?=$pro->fecha?></td>
                                                 </tr>
                                                 <?php endforeach ?>
                                             </tbody>

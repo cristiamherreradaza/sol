@@ -183,14 +183,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">ITEMS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
-                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de itemns</a></li>
                         </ul>
                     </li>
                     <li>
@@ -273,14 +268,9 @@
                 if($this->session->rol == 'Almacenero'){
                     ?>
                     <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIOS</span></a>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">ITEMS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Principal</a></li> -->
-
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Inventarios</a></li>
-                            <!-- <li><a href="<?php echo base_url(); ?>Inventarios_Compra/categorias">Lista de Materiales</a></li> -->
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra">Ingresar Material</a></li>
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Venta">Sacar Material</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de Items</a></li>
                         </ul>
                     </li>
                     <?php

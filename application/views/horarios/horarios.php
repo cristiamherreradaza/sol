@@ -97,12 +97,12 @@
                                     <?php foreach ($horarioss as $hor): ?>
                                     <tr>
                                         <!-- <td><?php echo $n++ ?></td> -->
-                                        <td><?=$hor->descripcion?></td>
+                                        <!-- <td><?=$hor->descripcion?></td> -->
                                         <td><?php echo $hor->man_ingreso ?></td>
                                         <td><?php echo $hor->man_salida ?></td>
                                         <td><?php echo $hor->tarde_ingreso ?></td>
                                         <td><?php echo $hor->tarde_salida ?></td>
-                                        <?php if ($hor->estado == 1) { ?>
+                                        <!-- <?php if ($hor->estado == 1) { ?>
                                         <td>
                                             <button type="button" class="btn btn-primary" onclick="pagado(<?php echo $hor->id ?>)">ACTIVO</button>
                                         </td>
@@ -114,7 +114,7 @@
                                         <td>
                                             <button type="button" class="btn btn-warning" onclick="editar('<?=$hor->id ?>', '<?=$hor->descripcion ?>', '<?=$hor->man_ingreso ?>', '<?=$hor->man_salida ?>', '<?=$hor->tarde_ingreso ?>', '<?=$hor->tarde_salida ?>')"><i class="fas fa-edit"></i></button>
                                             <button type="button" class="btn btn-danger" onclick="eliminar('<?=$hor->id ?>', '<?=$hor->descripcion ?>')"><i class="fas fa-trash"></i></button>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php endforeach ?>
                                 </tbody>
