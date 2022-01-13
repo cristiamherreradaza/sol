@@ -185,38 +185,10 @@ class Inventarios_Compra extends CI_Controller {
 
     public function lista()
     {
-		// $sql_productos = $this->db->query("SELECT * FROM productos")->result_array(); // este devuleve array recuperacion es ['0']
 		$sql_productos = $this->db->query("SELECT * FROM productos")->result(); // este no devuleve array recuperacion es ->
 
 		$data['productos'] = $sql_productos;
 		
-		// var_dump($sql_productos);
-		// $data['compra'] = $this->db->query("SELECT cate.*, com.*
-		// 									FROM categorias cate, (SELECT categoria_id, SUM(stock) as suma
-		// 																					FROM compras
-		// 																					WHERE estado = 1
-		// 																					GROUP BY (categoria_id))com
-		// 									WHERE cate.id = com.categoria_id
-		// 									AND cate.estado = 1")->result();
-		// $sql_compras = "SELECT cat.nombre, tmp.total
-		// 				FROM categorias cat, (SELECT SUM(stock) as total, categoria_id
-		// 									FROM compras
-		// 									GROUP BY categoria_id)tmp
-		// 				WHERE cat.id = tmp.categoria_id
-		// 				ORDER BY cat.id";
-		// $data['compras'] = $this->db->query($sql_compras)->result_array();
-
-		// $sql_detalle_compras = "SELECT cat.nombre, com.stock, com.precio_unidad, com.precio_total
-		// 						FROM categorias cat, compras com
-		// 						WHERE com.borrado IS NULL 
-		// 						AND com.categoria_id = cat.id
-		// 						ORDER BY com.fecha";
-
-		
-
-
-		// $data['detalle_compras'] = $this->db->query($sql_detalle_compras)->result_array();
-
         $this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('inventarios/lista_inventarios', $data);
@@ -225,17 +197,10 @@ class Inventarios_Compra extends CI_Controller {
 
 	public function verMaterial($id = null){
 
-		// var_dump($id);
-		// exit;
-		
 		$data['productos'] = $this->db->get_where('movimientos', array('producto_id' => $id, 'borrado' => NULL))->result();
 
 		$data['producto'] = $this->db->get_where('productos', array('id' => $id, 'borrado' => NULL))->result(); 
 
-		// var_dump($data['producto'][0]->nombre);
-		// exit;
-
-		// $data['compras'] = $this->db->get_where('compras', array('estado' => 1, 'categoria_id' => $id))->result();
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('inventarios/verMaterial', $data);

@@ -167,10 +167,6 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <?php //vdebug($trabajos, true, false, true) ?>
-                                <?php
-                                    // $datosT = $this->db->get_where('categorias', array('id' => $compras[0]->categoria_id,'estado' => 1))->row();
-                                ?>
                                 <h3 class="card-title">LISTA DE MOVIMIENTOS DEL PRODUCTO <span class="text-blue"><b> "<?=$producto[0]->nombre?>"</b> </span>&nbsp;&nbsp;&nbsp;&nbsp; 
                                 </h3>
                                 <div class="table-responsive m-t-40" id="tabla">
