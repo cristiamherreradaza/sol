@@ -13,7 +13,7 @@
                 <?php foreach ($grupos as $key => $c): ?>
                     <tr>
                         <td><?php echo ++$key; ?></td>
-                        <td><?php echo $c['nombre'] ?></td>
+                        <td>sp<?php echo $c['nombre'] ?></td>
                         <td>
                             <span class="label label-success" onclick="escoje_grupo(<?php echo $c['id'] ?>)">ELEGIR</span>
                             <!-- <span class="label label-success" onclick="extraer_datos(<?php //echo $c['id'] ?>)">ELEGIR</span> -->
@@ -25,14 +25,15 @@
         </table>
     </div>
 <?php else: ?>
-    <h3>&nbsp;</h3>
-    <h3>No encontrado</h3>
+    <br />
+    <h4 class="text-info">No encontrado, registrelo</h4>
 <?php endif ?>
 
 <?php if (!empty($grupos)): ?>
 <script type="text/javascript">
+    
     var grupos = <?php echo $obj_grupo ?>;
-    // var obj_grupos = JSON.parse(grupos);
+
     function escoje_grupo(id)
     {
         // console.log(grupos);
@@ -40,7 +41,6 @@
         {
             if(grupos[i].id == id)
             {
-                console.log(grupos[i].nombre);
                 $("#muestra_grupos_ajax").hide('slow');
                 $("#ida").val(grupos[i].id);
                 $("#busca_grupo").val(grupos[i].nombre);

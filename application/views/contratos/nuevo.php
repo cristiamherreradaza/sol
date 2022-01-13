@@ -33,6 +33,8 @@
         									<label class="control-label">Nombre</label>
         									<input name="nombre" type="text" id="busca_grupo" class="form-control"
         										required autocomplete="off">
+                                        
+                                            <div id="muestra_grupos_ajax"></div>
         								</div>
         							</div>
 
@@ -76,12 +78,6 @@
         								</div>
         							</div>
 
-        						</div>
-
-        						<div class="row">
-        							<div class="col-md-12">
-        								<div id="muestra_grupos_ajax"></div>
-        							</div>
         						</div>
 
         						<div class="row" style="background-color: #C3E6FF;">
@@ -129,7 +125,7 @@
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">$. Conf.</label>
+        									<label class="control-label"><i class="mdi mdi-coin"></i> Conf.</label>
         									<input name="costo_confeccion_varon" type="text" id="costo_confeccion_varon"
         										class="form-control" min="0" step="any" readonly>
         								</div>
@@ -138,7 +134,7 @@
         							<div class="col-md-1">
         								<div class="form-group">
         									<label class="control-label">Tela</label>
-        									<select name="tela_propia" class="form-control custom-select">
+        									<select name="tela_propia_varon" class="form-control custom-select">
         										<option value="NO">Sin Tela</option>
         										<option value="SI">Con Tela</option>
         									</select>
@@ -148,30 +144,30 @@
         							<div class="col-md-2">
         								<div class="form-group">
         									<label class="control-label">Marca</label>
-        									<input type="text" name="marca" id="marca" class="form-control">
+        									<input type="text" name="marca_tela_varon" id="marca" class="form-control">
         								</div>
         							</div>
 
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Precio Tela</label>
-        									<input name="costo_tela" type="number" id="costo_tela" class="form-control"
-        										min="0" step="any">
+        									<label class="control-label"><i class="mdi mdi-coin"></i> Tela</label>
+        									<input name="costo_tela_varon" type="number" id="costo_tela_varon" class="form-control"
+        										min="0" value="0" step="any" onblur="calculaTelaVaron();">
         								</div>
         							</div>
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Costo Total</label>
-        									<input name="total" type="number" id="total" class="form-control calculo"
-        										min="0" step="any" readonly>
+        									<label class="control-label"><i class="mdi mdi-coin"></i> P. Tela</label>
+        									<input name="precio_tela_varon" type="number" id="precio_tela_varon" class="form-control calculo"
+        										min="0" step="any" value="0" readonly>
         								</div>
         							</div>
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Subtotal</label>
+        									<label class="control-label"><i class="mdi mdi-coin"></i> Total</label>
         									<input name="subtotal_varones" type="text" id="subtotal_varones"
         										class="form-control" min="0" step="any" readonly>
         								</div>
@@ -278,6 +274,12 @@
 
         						</div>
 
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        total
+                                    </div>
+                                </div>
+
         					</div>
 
         				</div>
@@ -307,6 +309,147 @@
         <!-- Row -->
     </div>
 </div>
-<script type="text/javascript"></script>
-<script src="<?php echo base_url() ?>public/assets/plugins/switchery/dist/switchery.min.js"></script>
-<script src="<?php echo base_url() ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+<script type="text/javascript">
+    $(document).on('keyup', '#busca_grupo', function(e){
+	  nombre_grupo = $('#busca_grupo').val();
+	  if (nombre_grupo.length > 3) {
+
+        $("#muestra_grupos_ajax").show('slow');
+
+	    // console.log(nombre_grupo.length);
+	    // var pagina   = $(this).attr('data-pagina');
+	    // var dv       = $(this).parents('.gale-archi-ajax');
+	    // var idposmod = dv.attr('data-idposimod');
+
+	    $.ajax({
+	      url: '<?php echo base_url() ?>contratos/ajax_busca_grupo/' + nombre_grupo,
+	      type: 'GET',
+	      success: function (data) {
+	        $("#muestra_grupos_ajax").html(data);
+	      }
+	    });
+	  }
+
+	});
+
+	$(".calculo").keyup(function(){
+
+		var saco = parseFloat($("#costo_saco").val());
+		var pantalon = parseFloat($("#costo_pantalon").val());
+		var chaleco = parseFloat($("#costo_chaleco").val());
+		var falda = parseFloat($("#costo_falda").val());
+		costo_confeccion = saco + pantalon + chaleco + falda;
+		$("#costo_confeccion").val(costo_confeccion);
+	});
+
+	$("#costo_tela").keyup(function(){
+		var costo_confeccion = parseFloat($("#costo_confeccion").val());
+		var costo_tela = parseFloat($("#costo_tela").val());
+		total = costo_confeccion+costo_tela;
+		$("#total").val(total);
+	});
+
+	
+
+	function abre_modal()
+	{
+		$('#nombre').val("");
+		$('#tipo').val("saco");
+		$('#genero').val("varon");
+		$('#ida').val("");
+		$("#myModal").modal('show');
+
+	}
+
+	function cierra_modal()
+	{
+		$("#myModal").modal('hide');
+	}
+
+	function editar(id, nombre, tipo, genero)
+	{
+		$('#nombre').val(nombre);
+		$('#tipo').val(tipo);
+		$('#genero').val(genero);
+		$('#ida').val(id);
+		$("#myModal").modal('show');
+	}
+
+	function eliminar(id, nombre) {
+		//console.log(id_pago);
+		Swal.fire({
+			title: 'Quieres borrar ' + nombre + '?',
+			text: "Luego no podras recuperarlo!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, estoy seguro!',
+			cancelButtonText: "Cancelar",
+		}).then((result) => {
+			if (result.value) {
+				Swal.fire(
+					'Excelente!',
+					'Tu monto fue borrado.',
+					'success'
+				);
+				// console.log("el id es "+id_pago);
+				window.location.href = "<?php echo base_url() ?>aberturas/eliminar/" + id;
+			}
+		})
+	}
+
+	function sumaVarones(){
+
+		var arrayVarones = document.getElementsByClassName('varones');
+
+		var tot=0;
+		for(var i=0;i<arrayVarones.length;i++){
+			if(parseInt(arrayVarones[i].value))
+				tot += parseInt(arrayVarones[i].value);
+		}
+		document.getElementById('costo_confeccion_varon').value = tot;
+		
+		let subtotalVarones = tot * parseInt(document.getElementById('cantidad_varones').value);
+
+		document.getElementById('subtotal_varones').value = subtotalVarones;
+
+        // calculaTelaVaron();
+
+        // document.getElementById('costo_confeccion_varon').value = tot;  
+
+	}
+
+	function sumaMujeres(){
+
+		var arrayMujeres = document.getElementsByClassName('mujer');
+
+		var tot=0;
+		for(var i=0;i<arrayMujeres.length;i++){
+			if(parseInt(arrayMujeres[i].value))
+				tot += parseInt(arrayMujeres[i].value);
+		}
+		document.getElementById('costo_confeccion_mujer').value = tot;
+		
+		let subtotalVarones = tot * parseInt(document.getElementById('cantidad_mujeres').value);
+
+		document.getElementById('subtotal_mujeres').value = subtotalVarones;
+	}
+
+    function calculaTelaVaron(){
+
+        let precioConfeccionVaron = parseInt(document.getElementById('subtotal_varones').value);
+
+        let precioTelaVaron = parseInt(document.getElementById('costo_tela_varon').value);
+        let cantidadVarones = parseInt(document.getElementById('cantidad_varones').value);
+
+        let costoTelaVaron = precioTelaVaron*cantidadVarones;
+
+        let costoSubtotalVarones = precioConfeccionVaron+costoTelaVaron;
+
+        document.getElementById('precio_tela_varon').value = costoTelaVaron;
+        document.getElementById('subtotal_varones').value = costoSubtotalVarones;
+
+        // console.log(precioTelaVaron, cantidadVarones);
+    }
+</script>
