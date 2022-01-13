@@ -171,7 +171,7 @@
                                 <?php
                                     // $datosT = $this->db->get_where('categorias', array('id' => $compras[0]->categoria_id,'estado' => 1))->row();
                                 ?>
-                                <h3 class="card-title">LISTA DE MOVIMIENTOS DEL PRODUCTO <span class="text-blue"><b> "<?//=$datosT->nombre?>"</b> </span>&nbsp;&nbsp;&nbsp;&nbsp; 
+                                <h3 class="card-title">LISTA DE MOVIMIENTOS DEL PRODUCTO <span class="text-blue"><b> "<?=$producto[0]->nombre?>"</b> </span>&nbsp;&nbsp;&nbsp;&nbsp; 
                                 </h3>
                                 <div class="table-responsive m-t-40" id="tabla">
                                         <table id="config-table" class="table display table-bordered table-striped no-wrap">
@@ -182,39 +182,40 @@
                                                     <th>Cantidad</th>
                                                     <th>Tipo</th>
                                                     <th>Precio Total</th>
+                                                    <th>Detalle</th>
                                                     <th>Fecha</th>
-                                                    <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 $nro = 1;
-                                                 foreach ($productos as $pro): 
-                                                    $producto = $this->db->get_where('productos', array('id' => $pro->id))->result();
-                                                    // var_dump($producto[0]->nombre);
-                                                    // exit;
+                                                 foreach ($productos as $pro):
+                                                    $producto = $this->db->get_where('productos', array('id' => $pro->producto_id))->result();
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $nro ++ ?></td>
                                                     <td><?php echo $producto[0]->nombre ?></td>
-
                                                     <td>
                                                         <?php
                                                         if($pro->ingreso != null){
-                                                            echo 'si';
+                                                            echo $pro->ingreso;
                                                         }else{
-                                                            echo 'no';
+                                                            echo $pro->salida;
                                                         }
                                                         ?>    
                                                     </td>
-                                                    <!-- <td><?php echo $pro->stock ?> <?php echo $datos->tipo ?></td>
-                                                    <td><?php echo $pro->precio_total ?></td>
-                                                    <td><?= date("Y-m-d",strtotime($pro->fecha));?></td> -->
                                                     <td>
-                                                        <!-- <button type="button" class="btn btn-info" onclick="ver(<?php echo $pro->id ?>, '<?php echo $datos->nombre ?>', '<?php echo $pro->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $pro->precio_unidad ?>', '<?php echo $pro->precio_venta ?>', '<?php echo $pro->precio_total ?>', '<?php echo $pro->detalle ?>', '<?= date("Y-m-d",strtotime($pro->fecha));?>')"><i class="fas fa-eye"></i></button>
-                                                        <button type="button" class="btn btn-warning" onclick="editar(<?php echo $pro->id ?>, '<?php echo $pro->categoria_id ?>', '<?php echo $datos->nombre ?>', '<?php echo $pro->stock ?>', '<?php echo $datos->tipo ?>', '<?php echo $pro->precio_unidad ?>', '<?php echo $pro->precio_venta ?>', '<?php echo $pro->precio_total ?>', '<?php echo $pro->detalle ?>', '<?= date("Y-m-d",strtotime($pro->fecha));?>')"><i class="fas fa-edit"></i></button>
-                                                        <button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $pro->id ?>, '<?php echo $datos->nombre ?>','<?php echo $pro->categoria_id ?>')"><i class="fas fa-trash"></i></button> -->
+                                                        <?php
+                                                        if($pro->ingreso != null){
+                                                            echo 'Ingreso';
+                                                        }else{
+                                                            echo 'Salida';
+                                                        }
+                                                        ?>    
                                                     </td>
+                                                    <td><?=$pro->precio_total?></td>
+                                                    <td><?=$pro->descripcion?></td>
+                                                    <td><?=$pro->fecha?></td>
                                                 </tr>
                                                 <?php endforeach ?>
                                             </tbody>

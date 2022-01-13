@@ -226,8 +226,14 @@ class Inventarios_Compra extends CI_Controller {
 	public function verMaterial($id = null){
 
 		// var_dump($id);
+		// exit;
 		
 		$data['productos'] = $this->db->get_where('movimientos', array('producto_id' => $id, 'borrado' => NULL))->result();
+
+		$data['producto'] = $this->db->get_where('productos', array('id' => $id, 'borrado' => NULL))->result(); 
+
+		// var_dump($data['producto'][0]->nombre);
+		// exit;
 
 		// $data['compras'] = $this->db->get_where('compras', array('estado' => 1, 'categoria_id' => $id))->result();
 		$this->load->view('template/header');
