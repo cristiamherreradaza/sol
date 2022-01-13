@@ -758,6 +758,7 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ch.trabajo_id', $id_trabajo);
 		$data['chaleco'] = $this->db->get()->row_array();
 
+
 		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
 		$this->db->from('faldas as f');
 		$this->db->join('modelos as mo', 'mo.id = f.modelo_id', 'left');
