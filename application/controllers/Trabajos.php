@@ -1141,8 +1141,8 @@ class Trabajos extends CI_Controller {
 				'bragueta'        => $this->input->post('pd_bragueta'),
 				'bota_pie_des'    => $this->input->post('pd_bpie'),
 				'pretina'         => $this->input->post('pd_pretina'),
-				'precio_unitario' => $this->input->post('pantalon_pu'),
-				'cantidad'        => $this->input->post('pantalon_cantidad'),
+				// 'precio_unitario' => $this->input->post('pantalon_pu'),
+				// 'cantidad'        => $this->input->post('pantalon_cantidad'),
 			);
 			$this->db->where('id', $this->input->post('pantalon_id'));
 			$this->db->update('pantalones', $datos_pantalon);
@@ -1160,8 +1160,8 @@ class Trabajos extends CI_Controller {
 				'botones'         => $this->input->post('ch_botones'),
 				'color_ojales'    => $this->input->post('ch_color'),
 				'altura_busto'    => $this->input->post('ch_abusto'),
-				'precio_unitario' => $this->input->post('ch_pu'),
-				'cantidad'        => $this->input->post('ch_cantidad'),
+				// 'precio_unitario' => $this->input->post('ch_pu'),
+				// 'cantidad'        => $this->input->post('ch_cantidad'),
 			);
 			$this->db->where('id', $this->input->post('chaleco_id'));
 			$this->db->update('chalecos', $datos_chaleco);

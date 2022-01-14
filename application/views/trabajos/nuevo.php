@@ -122,7 +122,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Largo</label>
-                                                                                    <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any">
+                                                                                    <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -147,7 +147,7 @@
                                                                             <div class="col">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Pecho</label>
-                                                                                    <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any">
+                                                                                    <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -161,7 +161,7 @@
                                                                             <div class="col">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Estomago</label>
-                                                                                    <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any">
+                                                                                    <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -1646,6 +1646,18 @@
         }else{
             $("#rebaja").attr("readonly", false); 
         }
+    }
+
+    function copyDateChaleco(dato){
+
+        if(dato.id == 's_largo'){
+            $('#ch_largo').val(dato.value);
+        }else if(dato.id == 's_pecho'){
+            $('#ch_pecho').val(dato.value);
+        }else{
+            $('#ch_estomago').val(dato.value);
+        }
+
     }
 
     // $("#rebaja").on("change paste keyup", function() {
