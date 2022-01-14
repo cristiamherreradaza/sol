@@ -1113,8 +1113,8 @@ class Trabajos extends CI_Controller {
 				'medio_brazo'     => $this->input->post('s_mbrazo'),
 				'largo_manga'     => $this->input->post('s_lmanga'),
 				'altura_busto'    => $this->input->post('s_abusto'),
-				'precio_unitario' => $this->input->post('saco_pu'),
-				'cantidad'        => $this->input->post('saco_cantidad'),
+				// 'precio_unitario' => $this->input->post('saco_pu'),
+				// 'cantidad'        => $this->input->post('saco_cantidad'),
 			);
 			// $this->db->insert('sacos', $datos_saco);
 			$this->db->where('id', $this->input->post('saco_id'));
