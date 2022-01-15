@@ -180,6 +180,9 @@
                             <li>
                                 <a href="<?php echo base_url() ?>Almacen/listado"><i class="mdi mdi-store"></i> Almacenes</a>
                             </li>
+                            <li>
+                            <a href="<?php echo base_url() ?>Material_trabajo/listado"><i class="mdi mdi-book"></i> Material Trabajos</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

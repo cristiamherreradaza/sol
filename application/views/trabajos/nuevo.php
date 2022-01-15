@@ -25,13 +25,14 @@
 
                         <div class="form-body">
 
-                            <div class="row pt-3">
+                            <!-- <div class="row pt-3"> -->
+                            <div class="row">
 
                                 <div class="col-md-3">
                                     <input type="hidden" name="cod_cliente" id="cod_cliente">
                                     <label class="control-label">Nombre del cliente <span id="error_cliente_duplicado" style="color: #f00; display: none;"><i class="far fa-times-circle"></i> El cliente ya existe!!!</span></label>
                                     <div class="input-group mb-3">
-                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" autocomplete="off" autofocus required>
+                                        <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ej: Cristiam J. Herrera Daza" required autocomplete="off">
                                     </div>
                                 </div>
 
@@ -73,9 +74,12 @@
                                 </div>
 
                             </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div id="datos_cliente_ajax">
 
-                            <div class="col-md-9" id="bloque_ajax_datos_cliente">
-                                <div id="datos_cliente_ajax"></div>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">
@@ -122,7 +126,7 @@
                                                                             <div class="col-md-3">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Largo</label>
-                                                                                    <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any">
+                                                                                    <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -147,7 +151,7 @@
                                                                             <div class="col">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Pecho</label>
-                                                                                    <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any">
+                                                                                    <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -161,7 +165,7 @@
                                                                             <div class="col">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Estomago</label>
-                                                                                    <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any">
+                                                                                    <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -1439,10 +1443,13 @@
         }
     }
 
-    $(document).on('keyup', '#nombre', function(e) {
+    $("#nombre").on("change paste keyup", function() {
+        $("#datos_cliente_ajax").show('toggle');
+
         nombre_cliente = $('#nombre').val();
-        // console.log(nombre_cliente);
-        if (nombre_cliente.length > 3) {
+
+        console.log(nombre_cliente);
+        if (nombre_cliente.length > 2) {
             $.ajax({
                 url: '<?php echo base_url() ?>Trabajos/ajax_busca_cliente/' + nombre_cliente,
                 type: 'GET',
@@ -1455,7 +1462,8 @@
     });
 
     function extraer_datos(id_cliente) {
-        $("#bloque_ajax_datos_cliente").toggle('slow');
+        $("#datos_cliente_ajax").hide('toggle');
+
         $.ajax({
             url: '<?php echo base_url() ?>Trabajos/ajax_medidas_cliente/' + id_cliente,
             type: 'GET',
@@ -1646,6 +1654,18 @@
         }else{
             $("#rebaja").attr("readonly", false); 
         }
+    }
+
+    function copyDateChaleco(dato){
+
+        if(dato.id == 's_largo'){
+            $('#ch_largo').val(dato.value);
+        }else if(dato.id == 's_pecho'){
+            $('#ch_pecho').val(dato.value);
+        }else{
+            $('#ch_estomago').val(dato.value);
+        }
+
     }
 
     // $("#rebaja").on("change paste keyup", function() {
