@@ -33,6 +33,7 @@
         									<label class="control-label">Nombre</label>
         									<input name="nombre" type="text" id="busca_grupo" class="form-control"
         										required autocomplete="off">
+											<input type="hidden" name="grupo_id" value="0">
                                         
                                             <div id="muestra_grupos_ajax"></div>
         								</div>
@@ -169,7 +170,7 @@
         								<div class="form-group">
         									<label class="control-label"><i class="mdi mdi-coin"></i> Total</label>
         									<input name="subtotal_varones" type="text" id="subtotal_varones"
-        										class="form-control" min="0" step="any" readonly>
+        										class="form-control" min="0" step="any" value="0" readonly>
         								</div>
         							</div>
 
@@ -232,7 +233,7 @@
                                     <div class="col-md-1">
         								<div class="form-group">
         									<label class="control-label">Tela</label>
-        									<select name="tela_propia" class="form-control custom-select">
+        									<select name="tela_propia_mujer" class="form-control custom-select">
         										<option value="NO">Sin Tela</option>
         										<option value="SI">Con Tela</option>
         									</select>
@@ -242,41 +243,40 @@
         							<div class="col-md-2">
         								<div class="form-group">
         									<label class="control-label">Marca</label>
-        									<input type="text" name="marca" id="marca" class="form-control">
+        									<input type="text" name="marca_tela_mujer" id="marca_tela_mujer" class="form-control">
         								</div>
         							</div>
 
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Precio Tela</label>
-        									<input name="costo_tela" type="number" id="costo_tela" class="form-control"
-        										min="0" step="any">
+        									<label class="control-label"><i class="mdi mdi-coin"></i> Tela</label>
+        									<input name="costo_tela_mujer" type="number" id="costo_tela_mujer" class="form-control"
+        										min="0" value="0" step="any" onblur="calculaTelaMujer();">
         								</div>
         							</div>
 
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Costo Total</label>
-        									<input name="total" type="number" id="total" class="form-control calculo"
-        										min="0" step="any" readonly>
+        									<label class="control-label"><i class="mdi mdi-coin"></i> P. Tela</label>
+        									<input name="precio_tela_mujer" type="number" id="precio_tela_mujer" class="form-control calculo"
+        										min="0" value="0" step="any" readonly>
         								</div>
         							</div>
 
-
         							<div class="col-md-1">
         								<div class="form-group">
-        									<label class="control-label">Subtotal</label>
+        									<label class="control-label"><i class="mdi mdi-coin"></i> Total</label>
         									<input name="subtotal_mujeres" type="text" id="subtotal_mujeres"
-        										class="form-control" min="0" step="any" readonly>
+        										class="form-control" min="0" value="0" step="any" readonly>
         								</div>
         							</div>
 
         						</div>
 
                                 <div class="row">
-                                    <div class="col-md-1">
-                                        total
+                                    <div class="col-md-12 d-flex justify-content-end">
+                                        <h3>TOTAL: <span id="total_trabajo"></span></h3>
                                     </div>
                                 </div>
 
@@ -414,10 +414,7 @@
 
 		document.getElementById('subtotal_varones').value = subtotalVarones;
 
-        // calculaTelaVaron();
-
-        // document.getElementById('costo_confeccion_varon').value = tot;  
-
+		calculaTotalTrabajo();
 	}
 
 	function sumaMujeres(){
@@ -434,6 +431,9 @@
 		let subtotalVarones = tot * parseInt(document.getElementById('cantidad_mujeres').value);
 
 		document.getElementById('subtotal_mujeres').value = subtotalVarones;
+
+		calculaTotalTrabajo();
+
 	}
 
     function calculaTelaVaron(){
@@ -450,6 +450,40 @@
         document.getElementById('precio_tela_varon').value = costoTelaVaron;
         document.getElementById('subtotal_varones').value = costoSubtotalVarones;
 
+		calculaTotalTrabajo();
+
+
         // console.log(precioTelaVaron, cantidadVarones);
     }
+
+    function calculaTelaMujer(){
+
+        let precioConfeccionMujer = parseInt(document.getElementById('subtotal_mujeres').value);
+
+        let precioTelaMujer = parseInt(document.getElementById('costo_tela_mujer').value);
+        let cantidadMujeres = parseInt(document.getElementById('cantidad_mujeres').value);
+
+        let costoTelaMujer = precioTelaMujer*cantidadMujeres;
+
+        let costoSubtotalMujeres = precioConfeccionMujer+costoTelaMujer;
+
+        document.getElementById('precio_tela_mujer').value = costoTelaMujer;
+        document.getElementById('subtotal_mujeres').value = costoSubtotalMujeres;
+
+		calculaTotalTrabajo();
+
+        // console.log(precioTelaVaron, cantidadVarones);
+    }
+
+	function calculaTotalTrabajo(){
+
+		let subtotalMujeres = parseInt(document.getElementById('subtotal_mujeres').value);
+		let subtotalVarones = parseInt(document.getElementById('subtotal_varones').value);
+
+		let totalTrabajo = subtotalMujeres + subtotalVarones;
+
+		document.getElementById('total_trabajo').innerHTML = totalTrabajo;
+
+			
+	}
 </script>

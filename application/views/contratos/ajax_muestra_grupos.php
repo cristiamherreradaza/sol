@@ -42,7 +42,7 @@
             if(grupos[i].id == id)
             {
                 $("#muestra_grupos_ajax").hide('slow');
-                $("#ida").val(grupos[i].id);
+                $("#grupo_id").val(grupos[i].id);
                 $("#busca_grupo").val(grupos[i].nombre);
                 $("#direccion").val(grupos[i].direccion);
                 $("#celulares").val(grupos[i].celulares);

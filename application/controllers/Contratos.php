@@ -18,13 +18,14 @@ class Contratos extends CI_Controller {
 
 	public function guarda() 
 	{
-		echo '<pre>';
+		/*echo '<pre>';
 		var_dump($this->input->post());
 		echo '</pre>';
-		die();
+		die();*/
 		$usuario_id = $this->session->id_usuario;
-		$id_grupo = $this->input->post('ida');
-		if(empty($id_grupo)){
+		$grupo_id = $this->input->post('grupo_id');
+
+		if($grupo_id == 0){
 
 			$datos_grupo = array(
 				'nombre'    => $this->input->post('nombre'),
@@ -32,46 +33,60 @@ class Contratos extends CI_Controller {
 				'direccion' => $this->input->post('direccion'),
 			);
 			$this->db->insert('grupos', $datos_grupo);
-			$grupo_id = $this->db->insert_id();
+			$grupoId = $this->db->insert_id();
+		}else{
+			$grupoId = $this->input->post('grupo_id');
+		}
 
-			// guarda para varon
+		// preguntamos si hay varones en el contrato
+		if($this->input->post('cantidad_varones') != 0){
+
 			$datos_contrato = array(
-				'grupo_id'         => $grupo_id,
+				'grupo_id'         => $grupoId,
 				'usuario_id'       => $usuario_id,
 				'fecha'            => $this->input->post('fecha'),
 				'cantidad'         => $this->input->post('cantidad'),
+				'cantidad_varones' => $this->input->post('cantidad_varones'),
 				'descripcion'      => $this->input->post('descripcion'),
 				'costo_saco'       => $this->input->post('costo_saco_varon'),
 				'costo_pantalon'   => $this->input->post('costo_pantalon_varon'),
 				'costo_chaleco'    => $this->input->post('costo_chaleco_varon'),
 				// 'costo_falda'      => $this->input->post('costo_falda'),
-				'tela_propia'      => $this->input->post('tela_propia'),
-				'marca'            => $this->input->post('marca'),
-				'costo_tela'       => $this->input->post('costo_tela'),
-				'costo_confeccion' => $this->input->post('costo_confeccion'),
-				'total'            => $this->input->post('total'),
+				'tela_propia'      => $this->input->post('tela_propia_varon'),
+				'marca'            => $this->input->post('marca_tela_varon'),
+				'costo_tela'       => $this->input->post('costo_tela_varon'),
+				'costo_confeccion' => $this->input->post('costo_confeccion_varon'),
+				'total'            => $this->input->post('subtotal_varones'),
 			);
-			$this->db->insert('contratos', $datos_contrato);
 
-		}else{
+			$this->db->insert('contratos', $datos_contrato);
+		}
+
+		// preguntamos si hay mujeres en el contrato
+		if($this->input->post('cantidad_mujeres') != 0){
+
 			$datos_contrato = array(
-				'grupo_id'         => $this->input->post('ida'),
+				'grupo_id'         => $grupoId,
 				'usuario_id'       => $usuario_id,
 				'fecha'            => $this->input->post('fecha'),
 				'cantidad'         => $this->input->post('cantidad'),
+				'cantidad_mujeres' => $this->input->post('cantidad_mujeres'),
 				'descripcion'      => $this->input->post('descripcion'),
-				'costo_saco'       => $this->input->post('costo_saco'),
-				'costo_pantalon'   => $this->input->post('costo_pantalon'),
-				'costo_chaleco'    => $this->input->post('costo_chaleco'),
-				'costo_falda'      => $this->input->post('costo_falda'),
-				'tela_propia'      => $this->input->post('tela_propia'),
-				'marca'            => $this->input->post('marca'),
-				'costo_tela'       => $this->input->post('costo_tela'),
-				'costo_confeccion' => $this->input->post('costo_confeccion'),
-				'total'            => $this->input->post('total'),
+				'costo_saco'       => $this->input->post('costo_saco_mujer'),
+				'costo_pantalon'   => $this->input->post('costo_pantalon_mujer'),
+				'costo_chaleco'    => $this->input->post('costo_chaleco_mujer'),
+				'costo_falda'      => $this->input->post('costo_falda_mujer'),
+				'tela_propia'      => $this->input->post('tela_propia_mujer'),
+				'marca'            => $this->input->post('marca_tela_mujer'),
+				'costo_tela'       => $this->input->post('costo_tela_mujer'),
+				'costo_confeccion' => $this->input->post('costo_confeccion_mujer'),
+				'total'            => $this->input->post('subtotal_mujeres'),
 			);
+
 			$this->db->insert('contratos', $datos_contrato);
 		}
+
+
 		redirect("contratos/listado");
 	}
 
