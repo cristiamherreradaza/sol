@@ -240,24 +240,26 @@
                                                     <th>Marca</th>
                                                     <th>P. Confec.</th>
                                                     <th>P. Tela</th>
+                                                    <th>Subtotal</th>
                                                     <th>Total</th>
                                                     <th style="width: 5%;"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php 
-                                                    $cantidad_personas = 0; 
-                                                    $precio_saco       = 0; 
-                                                    $precio_pantalon   = 0; 
-                                                    $precio_chaleco    = 0; 
-                                                    $precio_falda      = 0; 
-                                                    $costo_confeccion  = 0; 
-                                                    $costo_tela        = 0; 
-                                                    $costo_total       = 0; 
+                                                    $cantidad_personas = 0;
+                                                    $precio_saco       = 0;
+                                                    $precio_pantalon   = 0;
+                                                    $precio_chaleco    = 0;
+                                                    $precio_falda      = 0;
+                                                    $costo_confeccion  = 0;
+                                                    $costo_tela        = 0;
+                                                    $costo_total       = 0;
+                                                    $subTotal          = 0;
                                                 ?>
                                                 <?php foreach ($contratos as $key => $c): ?>
                                                 <?php 
-                                                    $cantidad_personas = $c['cantidad'];
+                                                    $cantidad_personas  = $c['cantidad'];
                                                     $precio_saco       += $c['costo_saco'];
                                                     $precio_pantalon   += $c['costo_pantalon'];
                                                     $precio_chaleco    += $c['costo_chaleco'];
@@ -265,6 +267,7 @@
                                                     $costo_confeccion  += $c['costo_confeccion'];
                                                     $costo_tela        += $c['costo_tela'];
                                                     $costo_total       += $c['total'];
+                                                    $subTotal           = $costo_tela+$costo_confeccion;
                                                 ?>
                                                     <tr>
                                                         <td><?php echo $c['genero'] ?></td>
@@ -282,6 +285,7 @@
                                                         <td><?php echo $c['marca'] ?></td>
                                                         <td><?php echo $c['costo_confeccion'] ?></td>
                                                         <td><?php echo $c['costo_tela'] ?></td>
+                                                        <td><?php echo $c['costo_confeccion']+$c['costo_tela'] ?></td>
                                                         <td><?php echo $c['total'] ?></td>
                                                         <td align="left">
                                                             <button type="button" class="btn btn-warning" onclick="edita_detalle_contrato(<?php echo $c['id'] ?>)"><i class="fas fa-edit"></i></button>
@@ -303,6 +307,7 @@
                                                     <th></th>
                                                     <th><?php echo $costo_confeccion; ?></th>
                                                     <th><?php echo $costo_tela; ?></th>
+                                                    <th><?php echo $subTotal; ?></th>
                                                     <th class="text-info" style="font-size: 16pt;"><?php echo $costo_total; ?></th>
                                                     <td style="width: 5%;"></td>
                                                 </tr>
