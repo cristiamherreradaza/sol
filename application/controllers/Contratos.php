@@ -219,7 +219,6 @@ class Contratos extends CI_Controller {
 	{
 		$grupo_id = $this->input->post('contrato_grupo_id');
 		$contrato_id = $this->input->post('contrato_id');
-		$contrato = $this->db->get_where('contratos', array('id'=>$contrato_id))->row_array();
 		// echo '<pre>';
 		// print_r($contrato);
 		// echo '</pre>';
@@ -269,6 +268,27 @@ class Contratos extends CI_Controller {
 		$this->load->view('template/menu');
 		$this->load->view('contratos/nuevo');
 		$this->load->view('template/footer');
+	}
+
+	public function ajaxContratos($genero = null){
+		// $contratos = $this->db->get_where('contratos', array('genero'=>$genero, 'borrado'=>NULL))->result_array();
+
+		$this->db->select('g.nombre, g.celulares, g.direccion, c.*');
+		$this->db->from('contratos as c');
+		$this->db->order_by('c.id', 'desc');
+		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		$this->db->where('c.borrado =', NULL);
+		$this->db->where('c.genero =', $genero);
+		$this->db->where('c.terminado', 'No');
+		$this->db->limit(100);
+		$data['contratos'] = $this->db->get()->result_array();
+
+		$this->load->view('contratos/ajaxContratos', $data);
+
+		/*echo '<pre>';
+		print_r($data['contratos']);
+		echo '</pre>';*/
+
 	}
 
 }

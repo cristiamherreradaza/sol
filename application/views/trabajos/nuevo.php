@@ -63,12 +63,14 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
-                                        <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
-                                            <option value="">Seleccione</option>
-                                            <?php foreach ($contratos as $key => $c) : ?>
-                                                <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> - <?php echo $c['descripcion'] ?> (<?php echo $c['cantidad'] ?>)</option>
-                                            <?php endforeach ?>
-                                        </select>
+                                        <div id="carga_contratos">
+                                            <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
+                                                <option value="">Seleccione</option>
+                                                <?php foreach ($contratos as $key => $c) : ?>
+                                                    <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> (<?php echo $c['genero'] ?>)</option>
+                                                <?php endforeach ?>
+                                            </select>
+                                        </div>
                                         <input type="hidden" name="grupo_id" id="grupo_id">
                                     </div>
                                 </div>
@@ -1422,6 +1424,8 @@
     });
 
     function cambia_genero() {
+    
+        
         var genero = $("#genero").val();
         // console.log(genero);
         if (genero == 'Mujer') {
@@ -1432,6 +1436,17 @@
             $("#bloque_extras").toggle('slow');
             $("#bloque_mujer").toggle('slow');
             $("#select_bragueta").toggle('slow');
+
+            // invocamos los contratos para mujer
+            $.ajax({
+                url: '<?php echo base_url() ?>Contratos/ajaxContratos/Mujer',
+                type: 'GET',
+                success: function(data) {
+                    $("#carga_contratos").html(data);
+                }
+            });
+
+
         } else {
             $("#saco_albusto").toggle('slow');
             $("#pantalon_cadera").toggle('slow');
@@ -1440,6 +1455,16 @@
             $("#bloque_extras").toggle('slow');
             $("#bloque_mujer").toggle('slow');
             $("#select_bragueta").toggle('slow');
+
+            // invocamos los contratos para val
+            $.ajax({
+                url: '<?php echo base_url() ?>Contratos/ajaxContratos/Varon',
+                type: 'GET',
+                success: function(data) {
+                    $("#carga_contratos").html(data);
+                }
+            });
+
         }
     }
 
@@ -1448,7 +1473,7 @@
 
         nombre_cliente = $('#nombre').val();
 
-        console.log(nombre_cliente);
+        // console.log(nombre_cliente);
         if (nombre_cliente.length > 2) {
             $.ajax({
                 url: '<?php echo base_url() ?>Trabajos/ajax_busca_cliente/' + nombre_cliente,
@@ -1462,6 +1487,7 @@
     });
 
     function extraer_datos(id_cliente) {
+
         $("#datos_cliente_ajax").hide('toggle');
 
         $.ajax({
@@ -1474,9 +1500,12 @@
                 // console.log(datos_cliente.cliente.nombre);
                 if (datos_cliente.cliente.genero == 'Mujer') {
                     $("#genero").val('Mujer');
-                    $("#genero").attr("disabled", true);
+                    // $("#genero").attr("disabled", true);
                     cambia_genero();
                     // console.log('entro');
+                }else{
+                    $("#genero").val('Varon');
+                    cambia_genero();
                 }
 
                 $("#cod_cliente").val(datos_cliente.cliente.id);

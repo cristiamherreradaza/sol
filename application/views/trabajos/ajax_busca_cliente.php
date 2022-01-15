@@ -18,7 +18,7 @@
                         <td><?php echo $c['ci'] ?></td>
                         <td><?php echo $c['celulares'] ?></td>
                         <td>
-                            <span class="label label-success" onclick="extraer_datos(<?php echo $c['id'] ?>)">ELEGIR</span>
+                            <a href="#" class="btn btn-sm btn-success" onclick="extraer_datos(<?php echo $c['id'] ?>);">ELEGIR</a>
                             <!-- <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button> -->
                         </td>
                     </tr>

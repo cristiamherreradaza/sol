@@ -25,10 +25,12 @@ class Trabajos extends CI_Controller {
 		$this->db->order_by('c.id', 'desc');
 		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
 		$this->db->where('c.borrado =', NULL);
+		$this->db->where('c.genero =', 'Varon');
 		$this->db->where('c.terminado', 'No');
-		// $this->db->limit(100);
+		$this->db->limit(100);
 		$data['contratos'] = $this->db->get()->result_array();
-		// vdebug($data['contratos'], true, false, true);
+
+		// $contratos = $this->db->select('')->get_where('contratos', array('genero'=>'Varon', 'borrado'=>NULL))->result_array();
 
 		$modelos_varon_saco   = $this->db->order_by('nombre', 'ASC')->get_where('modelos', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
 		$aberturas_varon_saco = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'saco', 'borrado ='=>NULL))->result_array();
