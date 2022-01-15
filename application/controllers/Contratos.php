@@ -44,6 +44,7 @@ class Contratos extends CI_Controller {
 			$datos_contrato = array(
 				'grupo_id'         => $grupoId,
 				'usuario_id'       => $usuario_id,
+				'genero'           => 'Varon',
 				'fecha'            => $this->input->post('fecha'),
 				'cantidad'         => $this->input->post('cantidad'),
 				'cantidad_varones' => $this->input->post('cantidad_varones'),
@@ -68,6 +69,7 @@ class Contratos extends CI_Controller {
 			$datos_contrato = array(
 				'grupo_id'         => $grupoId,
 				'usuario_id'       => $usuario_id,
+				'genero'           => 'Mujer',
 				'fecha'            => $this->input->post('fecha'),
 				'cantidad'         => $this->input->post('cantidad'),
 				'cantidad_mujeres' => $this->input->post('cantidad_mujeres'),
@@ -215,12 +217,17 @@ class Contratos extends CI_Controller {
 
 	public function edita_contrato()
 	{
-		// vdebug($this->input->post(), true, false, true);
 		$grupo_id = $this->input->post('contrato_grupo_id');
 		$contrato_id = $this->input->post('contrato_id');
+		$contrato = $this->db->get_where('contratos', array('id'=>$contrato_id))->row_array();
+		// echo '<pre>';
+		// print_r($contrato);
+		// echo '</pre>';
+		// die;
+		// if($contrato['genero'])
 		$datos_contrato = array(
 			'fecha'            => $this->input->post('fecha'),
-			'cantidad'         => $this->input->post('cantidad'),
+			// 'cantidad'         => $this->input->post('cantidad'),
 			'descripcion'      => $this->input->post('descripcion'),
 			'costo_saco'       => $this->input->post('costo_saco'),
 			'costo_pantalon'   => $this->input->post('costo_pantalon'),

@@ -13,7 +13,7 @@
                 <?php foreach ($grupos as $key => $c): ?>
                     <tr>
                         <td><?php echo ++$key; ?></td>
-                        <td>sp<?php echo $c['nombre'] ?></td>
+                        <td><?php echo $c['nombre'] ?></td>
                         <td>
                             <span class="label label-success" onclick="escoje_grupo(<?php echo $c['id'] ?>)">ELEGIR</span>
                             <!-- <span class="label label-success" onclick="extraer_datos(<?php //echo $c['id'] ?>)">ELEGIR</span> -->

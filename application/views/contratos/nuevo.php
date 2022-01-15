@@ -310,7 +310,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).on('keyup', '#busca_grupo', function(e){
+    /*$(document).on('keyup', '#busca_grupo', function(e){
 	  nombre_grupo = $('#busca_grupo').val();
 	  if (nombre_grupo.length > 3) {
 
@@ -330,7 +330,7 @@
 	    });
 	  }
 
-	});
+	});*/
 
 	$(".calculo").keyup(function(){
 

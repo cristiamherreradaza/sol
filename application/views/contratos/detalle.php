@@ -75,7 +75,7 @@
 
                                 <div class="row">
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-8">
                                         <div class="form-group">
                                             <input type="hidden" name="contrato_id" id="contrato_id" value="">
                                             <input type="hidden" name="contrato_grupo_id" id="contrato_grupo_id" value="">
@@ -85,14 +85,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="control-label">Fecha</label>
                                             <input name="fecha" type="date" id="fecha" class="form-control" value="<?php echo date('Y-m-d') ?>">
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="form-group">
                                             <label class="control-label">Cantidad</label>
                                             <input name="cantidad" type="text" id="cantidad" class="form-control" required>
@@ -145,7 +145,7 @@
                                     <div class="col">
                                       <div class="form-group">
                                         <label class="control-label">Tela</label>
-                                        <select name="tela_propia" class="form-control custom-select">
+                                        <select name="tela_propia" id="tela_propia" class="form-control custom-select">
                                           <option value="NO">Sin Tela</option>
                                           <option value="SI">Con Tela</option>
                                         </select>
@@ -229,7 +229,7 @@
                                         <table class="table table-striped no-wrap">
                                             <thead>
                                                 <tr>
-                                                    <th>Descripcion</th>
+                                                    <th>Genero</th>
                                                     <th>Fecha</th>
                                                     <th>Cantidad</th>
                                                     <th>P. Saco</th>
@@ -257,7 +257,7 @@
                                                 ?>
                                                 <?php foreach ($contratos as $key => $c): ?>
                                                 <?php 
-                                                    $cantidad_personas += $c['cantidad'];
+                                                    $cantidad_personas = $c['cantidad'];
                                                     $precio_saco       += $c['costo_saco'];
                                                     $precio_pantalon   += $c['costo_pantalon'];
                                                     $precio_chaleco    += $c['costo_chaleco'];
@@ -267,9 +267,13 @@
                                                     $costo_total       += $c['total'];
                                                 ?>
                                                     <tr>
-                                                        <td><?php echo $c['descripcion'] ?></td>
+                                                        <td><?php echo $c['genero'] ?></td>
                                                         <td><?php echo $c['fecha'] ?></td>
-                                                        <td><?php echo $c['cantidad'] ?></td>
+                                                        <?php if($c['genero']=='Varon'): ?>
+                                                            <td><?php echo $c['cantidad_varones'] ?></td>
+                                                        <?php else: ?>
+                                                            <td><?php echo $c['cantidad_mujeres'] ?></td>
+                                                        <?php endif; ?>
                                                         <td><?php echo $c['costo_saco'] ?></td>
                                                         <td><?php echo $c['costo_pantalon'] ?></td>
                                                         <td><?php echo $c['costo_chaleco'] ?></td>
@@ -426,7 +430,11 @@
                 $("#contrato_grupo_id").val(element['grupo_id']);
                 $("#descripcion").val(element['descripcion']);
                 $("#fecha").val(element['fecha']);
-                $("#cantidad").val(element['cantidad']);
+                if(element['genero']=='Varon'){
+                    $("#cantidad").val(element['cantidad_varones']);
+                }else{
+                    $("#cantidad").val(element['cantidad_mujeres']);
+                }
                 $("#costo_saco").val(element['costo_saco']);
                 $("#costo_pantalon").val(element['costo_pantalon']);
                 $("#costo_chaleco").val(element['costo_chaleco']);
@@ -447,6 +455,7 @@
 
     $(".calculo").keyup(function(){
 
+        var cantidad = parseFloat($("#cantidad").val());
         var saco = parseFloat($("#costo_saco").val());
         var pantalon = parseFloat($("#costo_pantalon").val());
         var chaleco = parseFloat($("#costo_chaleco").val());
@@ -456,15 +465,16 @@
 
         var costo_confeccion = parseFloat($("#costo_confeccion").val());
         var costo_tela = parseFloat($("#costo_tela").val());
-        total = costo_confeccion+costo_tela;
+        total = (costo_confeccion+costo_tela)*cantidad;
         $("#total").val(total);
 
     });
 
     $("#costo_tela").keyup(function(){
+        var cantidad = parseFloat($("#cantidad").val());
         var costo_confeccion = parseFloat($("#costo_confeccion").val());
         var costo_tela = parseFloat($("#costo_tela").val());
-        total = costo_confeccion+costo_tela;
+        total = (costo_confeccion+costo_tela)*cantidad;
         $("#total").val(total);
     });
 
