@@ -19,7 +19,6 @@
                         <td><?php echo $c['celulares'] ?></td>
                         <td>
                             <a href="#" class="btn btn-sm btn-success" onclick="extraer_datos(<?php echo $c['id'] ?>);">ELEGIR</a>
-                            <!-- <button type="button" class="btn btn-success"><i class="fas fa-check"></i></button> -->
                         </td>
                     </tr>
                 <?php endforeach ?>
