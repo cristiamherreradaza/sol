@@ -1446,7 +1446,6 @@
                 }
             });
 
-
         } else {
             $("#saco_albusto").toggle('slow');
             $("#pantalon_cadera").toggle('slow');
