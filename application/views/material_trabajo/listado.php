@@ -53,6 +53,8 @@
                                             <option value="SACO">SACO</option>
                                             <option value="PANTALON">PANTALON</option>
                                             <option value="CHALECO">CHALECO</option>
+                                            <option value="CORBATON">CORBATON</option>
+                                            <option value="FALDA">FALDA</option>
                                         </select>
                                     </div>
                                 </div>

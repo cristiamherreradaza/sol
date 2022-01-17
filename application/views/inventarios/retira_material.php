@@ -50,67 +50,162 @@
                                                   <div class="card-body" style="background-color: #e6f2ff;">
 
                                                     <div class="row">
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo "ENTRE TELA (Metros)" ?></label>
-                                                          <input name="etsv" type="number" id="etsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo "ENTRE TELA (Metros)" ?></label>
+                                                        <div class="row">
+                                                            <?php
+                                                              $datos = $this->db->get_where('material_trabajos', array('detalle'=>'ENTRE TELA','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                            ?>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="etsv" type="number" id="etsv" class="form-control" min="0" step="any" value="<?php echo  $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                              </div>      
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="etsv" type="number" id="etsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                              </div>
+                                                            </div>       
                                                         </div>
                                                       </div>
 
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
+                                                        <?php
+                                                          $datos = $this->db->get_where('material_trabajos', array('detalle'=>'FORRO','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                        ?>
+                                                        <div class="row">
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="fsv" type="number" id="fsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="fsv" type="number" id="fsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                        <!-- <div class="form-group">
                                                           <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
                                                           <input name="fsv" type="number" id="fsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*1.30; ?>">
-                                                        </div>
+                                                        </div> -->
                                                       </div>
 
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'PLASTON (Metros)' ?></label>
-                                                          <input name="psv" type="number" id="psv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo 'PLASTON (Metros)' ?></label>
+                                                        <?php
+                                                          $datos = $this->db->get_where('material_trabajos', array('detalle'=>'PLASTON','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                        ?>
+                                                        <div class="row">
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="psv" type="number" id="psv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="psv" type="number" id="psv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                            </div>
+                                                          </div>
                                                         </div>
                                                       </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'HOMBRERA DE VARON (Unidades)' ?></label>
-                                                          <input name="hsv" type="number" id="hsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*2; ?>">
-                                                        </div>
-                                                      </div>
-
                                                     </div>
 
                                                     <div class="row">
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
-                                                          <input name="pesv" type="number" id="pesv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.5; ?>">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo 'HOMBRERA DE VARON (Unidades)' ?></label>
+                                                        <div class="row">
+                                                          <?php
+                                                            $datos = $this->db->get_where('material_trabajos', array('detalle'=>'HOMBRERA','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                          ?>
+                                                          <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="hsv" type="number" id="hsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="hsv" type="number" id="hsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                              </div>
+                                                            </div>
+                                                          </div>
                                                         </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'TELA FUSIONABLE (Metros)' ?></label>
-                                                          <input name="tfsv" type="number" id="tfsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*0.40; ?>">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
+                                                        <div class="row">
+                                                          <?php
+                                                            $datos = $this->db->get_where('material_trabajos', array('detalle'=>'PELLON BLANCO','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                          ?>
+                                                          <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="pesv" type="number" id="pesv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="pesv" type="number" id="pesv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                              </div>
+                                                            </div>
+                                                          </div>
                                                         </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
-                                                          <input name="bgsv" type="number" id="bgsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*4; ?>">
+                                                      <div class="col-md-4">
+                                                        <label class="control-label"><?php echo 'TELA FUSIONABLE (Metros)' ?></label>
+                                                        <div class="row">
+                                                          <?php
+                                                            $datos = $this->db->get_where('material_trabajos', array('detalle'=>'FUCIONABLE','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                          ?>
+                                                          <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="tfsv" type="number" id="tfsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                              <div class="form-group">
+                                                                <input name="tfsv" type="number" id="tfsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                              </div>
+                                                            </div>
+                                                          </div>
                                                         </div>
-                                                      </div>
-
-                                                      <div class="col-md-3">
-                                                        <div class="form-group">
-                                                          <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
-                                                          <input name="bpsv" type="number" id="bpsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*10; ?>">
-                                                        </div>
-                                                      </div>
-
                                                     </div>
+
+                                                    <div class="row">
+                                                      <div class="col-md-12">
+                                                        <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
+                                                        <div class="row">
+                                                          <?php
+                                                            $datos = $this->db->get_where('material_trabajos', array('detalle'=>'BOTON','genero' =>'VARON', 'pieza' =>'SACO', 'borrado' => null ))->row();
+                                                          ?>
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="bgsv" type="number" id="bgsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->cantidad; ?>">
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="bgsv" type="number" id="bgsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*$datos->precio; ?>">
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+
+                                                      <!-- <div class="col-md-6">
+                                                        <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
+                                                        <div class="row">
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="bpsv" type="number" id="bpsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*10; ?>">
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-md-6">
+                                                            <div class="form-group">
+                                                              <input name="bpsv" type="number" id="bpsv" class="form-control" min="0" step="any" value="<?php echo $saco_varon->cantidad*10; ?>">
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div> -->
+                                                    </div>
+
                                                   </div>
                                                 </div>
                                             </div>

@@ -86,6 +86,15 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->where('trabajo_id', $id_trabajo);
 		$data['chaleco_mujer'] = $this->db->get()->row();
 
+		// $data['materiales_saco_varon'] = $this->db->get_where('material_trabajos', array('genero' => 'VARON','pieza' => 'SACO','borrado' => null))->result();
+		// $data['materiales_pantalon_varon'] = $this->db->get_where('material_trabajos', array('genero' => 'VARON','pieza' => 'PANTALON','borrado' => null))->result();
+		// $data['materiales_chaleco_varon'] = $this->db->get_where('material_trabajos', array('genero' => 'VARON','pieza' => 'SACO','borrado' => null))->result();
+		// $data['materiales_corbaton_varon'] = $this->db->get_where('material_trabajos', array('genero' => 'VARON','pieza' => 'SACO','borrado' => null))->result();
+
+
+		// var_dump($data['materiales']);
+		// exit;
+
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		// $this->load->view('trabajos/nuevo', $data);
