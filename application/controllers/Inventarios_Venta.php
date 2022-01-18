@@ -105,78 +105,245 @@ class Inventarios_Venta extends CI_Controller {
 
 	public function guarda_retiro()
 	{
-		$trabajo_id = $this->input->post('trabajo_id');
-		$fecha = $this->input->post('fecha');
 
-		// MATERIALES PARA EL SACO DEL VARON
-		if(!empty($this->input->post('etsv'))){
-			$etsv = $this->input->post('etsv');
-			$fsv = $this->input->post('fsv');
-			$psv = $this->input->post('psv');
-			$hsv = $this->input->post('hsv');
-			$pesv = $this->input->post('pesv');
-			$tfsv = $this->input->post('tfsv');
-			$bgsv = $this->input->post('bgsv');
-			$bpsv = $this->input->post('bpsv');
-			$this->Inventarios_model->insertar_material_saco_varon($trabajo_id, $fecha, $etsv, $fsv, $psv, $hsv, $pesv, $tfsv, $bgsv, $bpsv);
+		// // MATERIALES PARA EL SACO DEL VARON
+		$varon_saco_ids = $this->input->post('saco_varon_ids');
+
+		if(!empty($varon_saco_ids)){
+			foreach ($varon_saco_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('saco_varon_precio')[$key],
+					'salida'        => $this->input->post('saco_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'SACO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+	
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
 		}
 
-		// MATERIALES PARA EL PANTALON DEL VARON
-		if(!empty($this->input->post('bpv'))){
-			$bpv = $this->input->post('bpv');
-			$cpv = $this->input->post('cpv');
-			$pbpv = $this->input->post('pbpv');
-			$bppv = $this->input->post('bppv');
-			$bropv = $this->input->post('bropv');
-			$ppv = $this->input->post('ppv');
-			$lpv = $this->input->post('lpv');
-			$this->Inventarios_model->insertar_material_pantalon_varon($trabajo_id, $fecha, $bpv, $cpv, $pbpv, $bppv, $bropv, $ppv, $lpv);
+		// // MATERIALES PARA EL PANTALON DEL VARON
+		$varon_pantalon_ids = $this->input->post('pantalon_varon_ids');
+
+		if(!empty($varon_pantalon_ids)){
+			foreach ($varon_pantalon_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('pantalon_varon_precio')[$key],
+					'salida'        => $this->input->post('pantalon_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'PANTALON',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+	
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
 		}
+
+		// // MATERIALES PARA EL CHALECO DEL VARON
+		$varon_chaleco_ids = $this->input->post('chaleco_varon_ids');
+
+		if(!empty($varon_chaleco_ids)){
+			foreach ($varon_chaleco_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('chaleco_varon_precio')[$key],
+					'salida'        => $this->input->post('chaleco_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'CHALECO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+	
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// // MATERIALES PARA EL SACO DE LA MUJER
+		$mujer_saco_ids = $this->input->post('saco_mujer_ids');
+
+		if(!empty($mujer_saco_ids)){
+			foreach ($mujer_saco_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('saco_mujer_precio')[$key],
+					'salida'        => $this->input->post('saco_mujer_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'SACO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+	
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// // MATERIALES PARA EL PANTALON DE LA MUJER
+		$mujer_pantalon_ids = $this->input->post('pantalon_mujer_ids');
+
+		if(!empty($mujer_pantalon_ids)){
+			foreach ($mujer_pantalon_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('pantalon_mujer_precio')[$key],
+					'salida'        => $this->input->post('pantalon_mujer_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'PANTALON',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// // MATERIALES PARA EL FALDA DE LA MUJER
+		$mujer_falda_ids = $this->input->post('falda_mujer_ids');
+
+		if(!empty($mujer_falda_ids)){
+			foreach ($mujer_falda_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('falda_mujer_precio')[$key],
+					'salida'        => $this->input->post('falda_mujer_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'FALDA',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// // MATERIALES PARA EL CHALECO DE LA MUJER
+		$mujer_chaleco_ids = $this->input->post('chaleco_mujer_ids');
+
+		if(!empty($mujer_chaleco_ids)){
+			foreach ($mujer_chaleco_ids as $key => $id){
+
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $this->input->post('trabajo_id'),
+					'precio_total' 	=> $this->input->post('chaleco_mujer_precio')[$key],
+					'salida'        => $this->input->post('chaleco_mujer_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'CHALECO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+
+		// $trabajo_id = $this->input->post('trabajo_id');
+		// $fecha = $this->input->post('fecha');
+
+		// // MATERIALES PARA EL SACO DEL VARON
+		// if(!empty($this->input->post('etsv'))){
+		// 	$etsv = $this->input->post('etsv');
+		// 	$fsv = $this->input->post('fsv');
+		// 	$psv = $this->input->post('psv');
+		// 	$hsv = $this->input->post('hsv');
+		// 	$pesv = $this->input->post('pesv');
+		// 	$tfsv = $this->input->post('tfsv');
+		// 	$bgsv = $this->input->post('bgsv');
+		// 	$bpsv = $this->input->post('bpsv');
+		// 	$this->Inventarios_model->insertar_material_saco_varon($trabajo_id, $fecha, $etsv, $fsv, $psv, $hsv, $pesv, $tfsv, $bgsv, $bpsv);
+		// }
+
+		// // MATERIALES PARA EL PANTALON DEL VARON
+		// if(!empty($this->input->post('bpv'))){
+		// 	$bpv = $this->input->post('bpv');
+		// 	$cpv = $this->input->post('cpv');
+		// 	$pbpv = $this->input->post('pbpv');
+		// 	$bppv = $this->input->post('bppv');
+		// 	$bropv = $this->input->post('bropv');
+		// 	$ppv = $this->input->post('ppv');
+		// 	$lpv = $this->input->post('lpv');
+		// 	$this->Inventarios_model->insertar_material_pantalon_varon($trabajo_id, $fecha, $bpv, $cpv, $pbpv, $bppv, $bropv, $ppv, $lpv);
+		// }
 		
-		// MATERIALES PARA EL PANTALON DEL VARON
-		if(!empty($this->input->post('fcv'))){
-			$fcv = $this->input->post('fcv');
-			$pcv = $this->input->post('pcv');
-			$hcv = $this->input->post('hcv');
-			$bgcv = $this->input->post('bgcv');
-			$bpcv = $this->input->post('bpcv');
-			$this->Inventarios_model->insertar_material_chaleco_varon($trabajo_id, $fecha, $fcv, $pcv, $hcv, $bgcv, $bpcv);
-		}
+		// // MATERIALES PARA EL PANTALON DEL VARON
+		// if(!empty($this->input->post('fcv'))){
+		// 	$fcv = $this->input->post('fcv');
+		// 	$pcv = $this->input->post('pcv');
+		// 	$hcv = $this->input->post('hcv');
+		// 	$bgcv = $this->input->post('bgcv');
+		// 	$bpcv = $this->input->post('bpcv');
+		// 	$this->Inventarios_model->insertar_material_chaleco_varon($trabajo_id, $fecha, $fcv, $pcv, $hcv, $bgcv, $bpcv);
+		// }
 
-		// MATERIALES PARA EL SACO DE LA MUJER
-		if(!empty($this->input->post('fsm'))){
-			$fsm = $this->input->post('fsm');
-			$fusm = $this->input->post('fusm');
-			$psm = $this->input->post('psm');
-			$tsm = $this->input->post('tsm');
-			$hmsm = $this->input->post('hmsm');
-			$bgsm = $this->input->post('bgsm');
-			$bpsm = $this->input->post('bpsm');
-			$this->Inventarios_model->insertar_material_saco_mujer($trabajo_id, $fecha, $fsm, $fusm, $psm, $tsm, $hmsm, $bgsm, $bpsm);
-		}
+		// // MATERIALES PARA EL SACO DE LA MUJER
+		// if(!empty($this->input->post('fsm'))){
+		// 	$fsm = $this->input->post('fsm');
+		// 	$fusm = $this->input->post('fusm');
+		// 	$psm = $this->input->post('psm');
+		// 	$tsm = $this->input->post('tsm');
+		// 	$hmsm = $this->input->post('hmsm');
+		// 	$bgsm = $this->input->post('bgsm');
+		// 	$bpsm = $this->input->post('bpsm');
+		// 	$this->Inventarios_model->insertar_material_saco_mujer($trabajo_id, $fecha, $fsm, $fusm, $psm, $tsm, $hmsm, $bgsm, $bpsm);
+		// }
 
-		// MATERIALES PARA EL PANTALON DE LA MUJER
-		if(!empty($this->input->post('cpm'))){
-			$cpm = $this->input->post('cpm');
-			$pppm = $this->input->post('pppm');
-			$this->Inventarios_model->insertar_material_pantalon_mujer($trabajo_id, $fecha, $cpm, $pppm);
-		}
+		// // MATERIALES PARA EL PANTALON DE LA MUJER
+		// if(!empty($this->input->post('cpm'))){
+		// 	$cpm = $this->input->post('cpm');
+		// 	$pppm = $this->input->post('pppm');
+		// 	$this->Inventarios_model->insertar_material_pantalon_mujer($trabajo_id, $fecha, $cpm, $pppm);
+		// }
 
-		// MATERIALES PARA EL FALDA DE LA MUJER
-		if(!empty($this->input->post('cfm'))){
-			$cfm = $this->input->post('cfm');
-			$tfm = $this->input->post('tfm');
-			$ppfm = $this->input->post('ppfm');
-			$this->Inventarios_model->insertar_material_falda_mujer($trabajo_id, $fecha, $cfm, $tfm, $ppfm);
-		}
+		// // MATERIALES PARA EL FALDA DE LA MUJER
+		// if(!empty($this->input->post('cfm'))){
+		// 	$cfm = $this->input->post('cfm');
+		// 	$tfm = $this->input->post('tfm');
+		// 	$ppfm = $this->input->post('ppfm');
+		// 	$this->Inventarios_model->insertar_material_falda_mujer($trabajo_id, $fecha, $cfm, $tfm, $ppfm);
+		// }
 
-		// MATERIALES PARA EL CHALECO DE LA MUJER
-		if(!empty($this->input->post('fcm'))){
-			$fcm = $this->input->post('fcm');
-			$pbcm = $this->input->post('pbcm');
-			$bpcm = $this->input->post('bpcm');
-			$this->Inventarios_model->insertar_material_cheleco_mujer($trabajo_id, $fecha, $fcm, $pbcm, $bpcm);
-		}
+		// // MATERIALES PARA EL CHALECO DE LA MUJER
+		// if(!empty($this->input->post('fcm'))){
+		// 	$fcm = $this->input->post('fcm');
+		// 	$pbcm = $this->input->post('pbcm');
+		// 	$bpcm = $this->input->post('bpcm');
+		// 	$this->Inventarios_model->insertar_material_cheleco_mujer($trabajo_id, $fecha, $fcm, $pbcm, $bpcm);
+		// }
 		redirect("trabajos/listado_trabajos");
 		
     }
