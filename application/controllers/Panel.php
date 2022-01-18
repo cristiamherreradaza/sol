@@ -19,12 +19,17 @@ class Panel extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
+    // function __construct()
+    // {
+    //    parent::__construct();
+    // }
+
 	public function __construct() 
 	{
 		parent::__construct();
-		// $this->load->helper('url_helper');
-		// $this->load->database();
-		// $this->load->helper('vayes_helper');
+		// // $this->load->helper('url_helper');
+		// // $this->load->database();
+		// // $this->load->helper('vayes_helper');
 		$this->load->helper('tools_helper');
 	}
 

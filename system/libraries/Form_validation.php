@@ -288,6 +288,8 @@ class CI_Form_validation {
 	 */
 	public function set_message($lang, $val = '')
 	{
+		// var_dump($lang);
+
 		if ( ! is_array($lang))
 		{
 			$lang = array($lang => $val);

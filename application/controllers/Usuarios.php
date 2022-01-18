@@ -28,14 +28,17 @@ class Usuarios extends CI_Controller {
 		$usuario = $this->input->post('usuario');
 		$password = $this->input->post('pass');
 		$pass_encriptado = sha1($password);
+		// var_dump($usuario);
+		// var_dump($pass_encriptado);
+		// exit;
 		if($this->Usuario_model->valida($usuario, $pass_encriptado))
 		{
-			// redirect("trabajos/nuevo");
 			redirect("Panel/home");
 		}else{
-			// echo 'no';
-			$this->form_validation->set_message('verificar_usuario', 'Los datos son incorrectos.');
-			redirect(base_url());
+			$data = $this->form_validation->set_message('verificar_usuario', 'Los datos son incorrectos.');
+			// var_dump($data);
+			// redirect(base_url());
+			$this->load->view('usuarios/login',$data);  
 		}
 	}
 	

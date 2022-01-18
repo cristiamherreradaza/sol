@@ -18,18 +18,23 @@ class Usuario_model extends CI_Model {
         $this->db->where('borrado =', NULL);
         $consulta = $this->db->get();
         $resultado = $consulta->row_array();
-        $datos_sesion = array(
-            'id_usuario'=>$resultado['id'],
-            'nombre'    =>$resultado['nombre'],
-            'usuario'   =>$resultado['usuario'],
-            'almacen_id'=>$resultado['almacenes_id'],
-            // 'celulares' =>$resultado['celulares'],
-            // 'email'     =>$resultado['email'],
-            // 'direccion' =>$resultado['direccion'],
-            'rol'       =>$resultado['rol'],
-        );
-        $this->session->set_userdata($datos_sesion);
-        return $resultado;
+        if($resultado){
+            $datos_sesion = array(
+                'id_usuario'=>$resultado['id'],
+                'nombre'    =>$resultado['nombre'],
+                'usuario'   =>$resultado['usuario'],
+                'almacen_id'=>$resultado['almacenes_id'],
+                // 'celulares' =>$resultado['celulares'],
+                // 'email'     =>$resultado['email'],
+                // 'direccion' =>$resultado['direccion'],
+                'rol'       =>$resultado['rol'],
+            );
+            $this->session->set_userdata($datos_sesion);
+            return $resultado;
+        }else{
+            return $resultado =  false;
+        }
+        
     }
 
 }
