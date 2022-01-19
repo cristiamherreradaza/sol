@@ -125,16 +125,16 @@ function cargarmodal(urll)
 
   function refresh() {
     console.log(time);
-      // if(new Date().getTime() - time >= 60000) 
-      if(new Date().getTime() - time >= 20000) 
+      if(new Date().getTime() - time >= 600000) 
+      // if(new Date().getTime() - time >= 20000) 
           // window.location.reload(true);
           window.location.href = "<?=base_url()?>";
       else 
           setTimeout(refresh, 5000);
   }
 
-  // setTimeout(refresh, 10000);
-  setTimeout(refresh, 5000);
+  setTimeout(refresh, 10000);
+  // setTimeout(refresh, 5000);
 </script>
 
     <!-- ============================================================== -->

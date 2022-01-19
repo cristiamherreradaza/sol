@@ -11,6 +11,15 @@ class Movimiento extends CI_Controller {
 		// $this->load->helper('vayes_helper');
 	}
 
+	public function nuevo(){
+		$data['almacenes'] = $this->db->get_where('almacenes', array('borrado' => null))->result();
+		// echo 'holas';
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('movimientos/nuevo', $data);
+		$this->load->view('template/footer');
+	}
+
     public function sacaProducto(){
 
         $user_id = $this->session->id_usuario;
@@ -64,6 +73,11 @@ class Movimiento extends CI_Controller {
 		$this->db->insert('movimientos', $datos1);
 
         redirect ("Inventarios_Compra/lista");
+	}
+
+	public function ajaxBuscaProducto($fecha = null, $alamcen_origen = null, $almacen_destino = null, $busca_producto = null){
+		
+		// echo $this->input->get('busca_producto');
 	}
 
 }
