@@ -18,7 +18,11 @@
                         <h4>ENVIO DE PRODUCTOS</h4>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <!-- <form action=""> -->
+                    <?php 
+                        $attributes = array('method'=>'POST', 'id' => 'formulario-movimiento');
+                        echo form_open('Movimiento/guardarMovimiento', $attributes); 
+                    ?>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="form-group">
@@ -29,7 +33,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="control-label">Almacen Origen</label>
-                                        <select name="alamcen_origen" id="alamcen_origen" class="form-control">
+                                        <select name="almacen_origen" id="almacen_origen" class="form-control">
                                             <?php
                                             foreach ($almacenes as $key => $al) {
                                             ?>
@@ -64,8 +68,42 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div id="table-productos">
+                                <div class="col-md-12">
+                                    <div id="table-productos">
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card border-dark">
+                                        <div class="card-header bg-dark">
+                                            <h4 class="mb-0 text-white">PRODUCTOS PARA ENVIO</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="table-responsive m-t-40">
+                                                <table id="tablaPedido" class="table table-bordered table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 5%">ID</th>
+                                                            <th>Nombre</th>
+                                                            <th>Stock</th>
+                                                            <th style="width: 5%">Cantidad</th>
+                                                            <th>Tipo</th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                                <div class="form-group">
+                                                    <label class="control-label">&nbsp;</label>
+                                                    <button type="submit" class="btn waves-effect waves-light btn-block btn-success" onclick="validaItems()">ENVIAR</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -76,7 +114,21 @@
         <!-- Row -->
     </div>
 </div>
+
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
+
 <script type="text/javascript">
+
+    var t = $('#tablaPedido').DataTable({
+        paging: false,
+        searching: false,
+        ordering: false,
+        info:false,
+        language: {
+            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        }
+    });
 
     // $("#edita-busqueda-kcb, #edita-busqueda-nombre").on("change paste keyup", function() {
     $("#busca_producto").on("change paste keyup", function() {
@@ -96,10 +148,40 @@
             },
             type: 'GET',
             success: function(data) {
+                $("#table-productos").show('slow');
                 $("#table-productos").html(data);
             }
         });
 
+    });
+
+    // Variable necesaria para funcionamiento de datatable
+    var itemsPedidoArray = [];
+    
+    // Funcion que valida que exista al menos un item en la lista para continuar
+    function validaItems()
+    {
+        if(!(itemsPedidoArray.length > 0)){
+            event.preventDefault();
+            Swal.fire({
+                type: 'error',
+                title: 'Oops...',
+                text: 'Tienes que adicionar al menos un producto.'
+            })
+        }   
+    }
+
+    // Funcion que elimina un producto en la lista de productos ingresados
+    $(document).ready(function () {
+        console.log('se apreto elimina');
+        $('#tablaPedido tbody').on('click', '.btnElimina', function () {
+            t.row($(this).parents('tr'))
+                .remove()
+                .draw();
+            let itemBorrar = $(this).closest("tr").find("td:eq(0)").text();
+            let pos = itemsPedidoArray.lastIndexOf(itemBorrar);
+            itemsPedidoArray.splice(pos, 1);
+        });
     });
 </script>
 
