@@ -125,6 +125,14 @@ class Movimiento extends CI_Controller {
 
 			$ids = array_keys($this->input->post('item'));
 
+			$numeroQuery = $this->db->query("SELECT max(numero_ingreso) as numero FROM movimientos WHERE borrado is null")->result();
+
+			if(!empty($numeroQuery[0]->numero)){
+				$numero = $numeroQuery[0]->numero + 1;
+			}else{
+				$numero = 1;
+			}
+
 			foreach($ids as $id){
 
 				$user_id = $this->session->id_usuario;
@@ -136,6 +144,7 @@ class Movimiento extends CI_Controller {
 					'almacen_id'    => $alamcen_origen,
 					'salida'        => $productos[$id],
 					'fecha'         => date("Y-m-d"),
+					'numero_ingreso'=> $numero,
 					'estado'        => 'Envio',
 					// 'descripcion'   => $this->input->post('detalle-quitar'),
 					'created_at'	 	=> 	date("Y-m-d H:i:s"),
@@ -154,84 +163,19 @@ class Movimiento extends CI_Controller {
 					// 'precio_total'   	=> 	$this->input->post('precio_total'),
 					'ingreso'		 	=> 	$productos[$id],
 					'fecha'          	=> 	date("Y-m-d H:i:s"),
+					'numero_ingreso'=> $numero,
 					'estado'        	=> 'Envio',
 					// 'descripcion'    	=> 	$this->input->post('detalle'),
 					'created_at'	 	=> 	date("Y-m-d H:i:s"),
 				);
 				$this->db->insert('movimientos', $datos1);
 			}
-			// var_dump($ids);
 
-			echo 'si';
-		}else{
-			echo 'no';
+			$data['detalle'] = $this->db->get('movimientos', array())->row_array();
+
+			$this->load->view('movimientos/recibo_movimiento', $data);
+			
 		}
-
-		// if($request->item){
-        //     //Preguntaremos si almacen_origen es null
-        //     if($request->almacen_origen){
-        //         $almacen_origen = $request->almacen_origen;
-        //     }else{
-        //         $almacen_origen = Auth::user()->almacen_id;
-        //     }
-            
-        //     //arraykeys guarda ids de prod
-        //     $hoy = date("Y-m-d H:i:s");
-        //     $num = DB::select("SELECT MAX(numero) as nro
-        //                             FROM movimientos");
-        //     if (!empty($num)) {
-        //         $numero = $num[0]->nro + 1;
-        //     } else {
-        //         $numero = 1;
-        //     }
-
-        //     $llaves = array_keys($request->item);
-        //     foreach ($llaves as $key => $ll) 
-        //     {
-        //         // Sacamos el stock existente en almacen X del producto X
-        //         $ingreso = Movimiento::where('producto_id', $ll)
-        //                             ->where('almacene_id', $almacen_origen)
-        //                             ->where('ingreso', '>', 0)
-        //                             ->sum('ingreso');
-        //         $salida = Movimiento::where('producto_id', $ll)
-        //                             ->where('almacene_id', $almacen_origen)
-        //                             ->where('salida', '>', 0)
-        //                             ->sum('salida');
-        //         $cantidad_disponible = $ingreso - $salida;
-        //         // Si la cantidad solicitada, no supera a la existente en almacen X del producto X 
-        //         if($cantidad_disponible >= $request->item[$ll]){
-        //             // Buscamos al producto
-        //             $item = Producto::find($ll);
-        //             //AQUI SACAMOS EL MATERIAL SOLICITADO DEL ALMACEN ORIGEN
-        //             $salida = new Movimiento();
-        //             $salida->user_id = Auth::user()->id;
-        //             $salida->producto_id = $ll;
-        //             $salida->tipo_id = $item->tipo_id;
-        //             $salida->almacene_id = $almacen_origen;
-        //             $salida->salida = $request->item[$ll];
-        //             $salida->fecha = $hoy;
-        //             $salida->numero = $numero;
-        //             $salida->estado = 'Envio';
-        //             $salida->dispositivo  = session('dispositivo');
-        //             $salida->save();
-
-        //             //AQUI INGRESAMOS EL MATERIAL AL ALMACEN QUE LO SOLICITO
-        //             $ingreso = new Movimiento();
-        //             $ingreso->user_id = Auth::user()->id;
-        //             $ingreso->producto_id = $ll;
-        //             $ingreso->tipo_id = $item->tipo_id;
-        //             $ingreso->almacen_origen_id = $almacen_origen;
-        //             $ingreso->almacene_id = $request->almacen_a_pedir;
-        //             $ingreso->ingreso = $request->item[$ll];
-        //             $ingreso->fecha = $hoy;
-        //             $ingreso->numero = $numero;
-        //             $ingreso->estado = 'Envio';
-        //             $ingreso->dispositivo  = session('dispositivo');
-        //             $ingreso->save();
-        //         }
-        //     }
-        // }
-        // return redirect('Envio/ver_pedido/'.$numero);
 	}
 
 }
