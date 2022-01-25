@@ -115,12 +115,24 @@
     <p style="margin-top: 5px; font-size: 15px; text-align: center;">RECIBO DE ENVIO DE PRODUCTOS</p>
     <table class="contenidos">
         <tr>
-            <!-- <td><b>Numero de Envio :</b> {{ $detalle->numero }} </td> -->
-            <td><b>Fecha :</b> {{ $detalle->fecha }}</td>
+            <?php
+            
+            ?>
+            <td><b>Numero de Envio :</b> <?=$detalle['numero_ingreso']?> </td>  
+            <td><b>Fecha :</b> <?=$detalle['fecha']?></td>
         </tr>
         <tr>
-            <td><b>Desde :</b> {{ $detalle->almacen_origen->nombre }} </td>
-            <td><b>Hasta :</b> {{ $detalle->almacen->nombre }} </td>
+            <?php
+                $numero_ingreso = $detalle['numero_ingreso'];
+
+    			$almacen = $this->db->query("SELECT * FROM movimientos WHERE numero_ingreso = $numero_ingreso AND  almacen_origen_id IS NOT NULL AND borrado is NULL")->result();
+
+                $almacen_origen_result = $this->db->get_where('almacenes', array('id' => $almacen[0]->almacen_origen_id, 'borrado' => null))->row_array();
+                
+                $almacen_destino = $this->db->get_where('almacenes', array('id' => $almacen[0]->almacen_id, 'borrado' => null))->row_array();
+            ?>
+            <td><b>Desde :</b> <?=$almacen_origen_result['nombre']?> </td>
+            <td><b>Hasta :</b> <?=$almacen_destino['nombre']?> </td>
         </tr>
     </table>
     <!-- Detalle de los Productos -->
@@ -130,9 +142,9 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th class="text-right">Codigo</th>
+                <!-- <th class="text-right">Codigo</th> -->
                 <th class="text-right">Nombre</th>
-                <th>Marca</th>
+                <!-- <th>Marca</th> -->
                 <th>Tipo</th>
                 <!-- <th class="text-right">Tipo</th> -->
                 <th class="text-right">Cantidad Ingresada</th>
@@ -141,6 +153,21 @@
             </tr>
         </thead>
         <tbody>
+            <?php
+            foreach ($productos as $key => $pro) {
+            ?>
+            <tr>
+                <td><?=$key+1?></td>
+                <?php
+                    $productoName = $this->db->get_where('productos', array('id' => $pro->producto_id, 'borrado' => null))->row_array();
+                ?>
+                <td><?=$productoName['nombre']?></td>
+                <td><?=$productoName['tipo']?></td>
+                <td><?=$pro->ingreso?></td>
+            </tr>            
+            <?php
+            }
+            ?>
             @foreach($productos_envio as $key => $producto)
                 <tr>
                     <td>{{ ($key+1) }}</td>
@@ -196,12 +223,12 @@
     <p style="margin-top: 5px; font-size: 15px; text-align: center;">RECIBO DE ENVIO DE PRODUCTOS</p>
     <table class="contenidos">
         <tr>
-            <!-- <td><b>Numero de Envio :</b> {{ $detalle->numero }} </td> -->
+            <td><b>Numero de Envio :</b> {{ $detalle->numero }} </td>
             <td><b>Fecha :</b> {{ $detalle->fecha }}</td>
         </tr>
         <tr>
-            <td><b>Desde :</b> {{ $detalle->almacen_origen->nombre }} </td>
-            <td><b>Hasta :</b> {{ $detalle->almacen->nombre }} </td>
+            <td><b>Desde :</b> <?=$almacen_origen_result['nombre']?> </td>
+            <td><b>Hasta :</b> <?=$almacen_destino['nombre']?> </td>
         </tr>
     </table>
     <!-- Detalle de los Productos -->

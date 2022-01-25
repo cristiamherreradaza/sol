@@ -171,7 +171,11 @@ class Movimiento extends CI_Controller {
 				$this->db->insert('movimientos', $datos1);
 			}
 
-			$data['detalle'] = $this->db->get('movimientos', array())->row_array();
+			$numero = intval($numero);
+
+			$data['detalle'] = $this->db->get_where('movimientos', array('numero_ingreso' => $numero, 'borrado' => null))->row_array();
+
+			$data['productos'] = $this->db->query("SELECT * FROM movimientos WHERE numero_ingreso = $numero AND  almacen_origen_id IS NOT NULL AND borrado is NULL")->result();
 
 			$this->load->view('movimientos/recibo_movimiento', $data);
 			
