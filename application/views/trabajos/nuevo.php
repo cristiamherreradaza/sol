@@ -1432,7 +1432,7 @@
             $("#pantalon_cadera").show('slow');
             $("#pd_cpretina").show('slow');
             $("#ch_abusto").show('slow');
-            $("#bloque_extras").show('slow');
+            $("#bloque_extras").hide('slow');
             $("#bloque_mujer").show('slow');
             $("#select_bragueta").show('slow');
 
@@ -1450,7 +1450,7 @@
             $("#pantalon_cadera").hide('slow');
             $("#pd_cpretina").hide('slow');
             $("#ch_abusto").hide('slow');
-            $("#bloque_extras").hide('slow');
+            $("#bloque_extras").show('slow');
             $("#bloque_mujer").hide('slow');
             $("#select_bragueta").hide('slow');
 
