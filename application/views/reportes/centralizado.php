@@ -11,6 +11,15 @@
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
@@ -414,7 +423,10 @@
 <script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
     
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
 <script type="text/javascript">
+
 $(function () {
     $('#config-table').DataTable({
         responsive: true,
@@ -440,47 +452,48 @@ $(function () {
 </script>
 
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['bar']});
+    google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
 
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart1);
+
     function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['-', 'INGRESOS', 'SALDOS'],
-        ['TRABAJOS', <?php echo $total_ingresos_trabajos['total'] ?>, <?php echo $total_ingresos_trabajos['saldo'] ?>],
-    ]);
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            // ['Trabajo Con Deuda',<?//=$tra_deuda?>],
+            // ['Trabajo Pagados',<?//=$tra_pagado?>]
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);
 
-    var options = {
-        chart: {
-            chartArea:{width:'90%',height:'100%'}
-        },
-        vAxis: {format: 'currency'},
-    };
+        var options = {
+            title: 'Trabajos pagados o con Deudas',
+            is3D: true,
+        };
 
-    var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-    chart.draw(data, google.charts.Bar.convertOptions(options));
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
     }
-</script>
 
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
-    var data2 = google.visualization.arrayToDataTable([
-        ['-', 'INGRESOS', 'GASTOS'],
-        ['TRABAJOS', <?php echo $ingreso_neto ?>, <?php echo $total_gastos['total'] ?>],
-    ]);
+    function drawChart1() {
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2]
+            // ['Commute',  2],
+            // ['Watch TV', 2],
+            // ['Sleep',    7]
+        ]);
 
-    var options2 = {
-        chart: {
-            chartArea:{width:'90%',height:'100%'}
-        },
-        vAxis: {format: 'currency'},
-    };
+        var options = {
+            title: 'My Daily Activities',
+            pieHole: 0.4,
+        };
 
-    var chart2 = new google.charts.Bar(document.getElementById('columnchart_material2'));
-
-    chart2.draw(data2, google.charts.Bar.convertOptions(options2));
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
     }
 </script>

@@ -83,7 +83,7 @@
     <!-- ============================================================== -->
     <!-- footer -->
     <!-- ============================================================== -->
-    <footer class="footer"> 2020 desarrollado por GoGhu </footer>
+    <footer class="footer"> <?=date('Y')?> desarrollado por GoGhu </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
     <!-- ============================================================== -->
@@ -160,42 +160,42 @@
 
 
     function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Trabajo Con Deuda',<?=$tra_deuda?>],
-        ['Trabajo Pagados',<?=$tra_pagado?>]
-    //   ['Commute',  2],
-    //   ['Watch TV', 2],
-    //   ['Sleep',    7]
-    ]);
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Trabajo Con Deuda',<?=$tra_deuda?>],
+            ['Trabajo Pagados',<?=$tra_pagado?>]
+        //   ['Commute',  2],
+        //   ['Watch TV', 2],
+        //   ['Sleep',    7]
+        ]);
 
-    var options = {
-        title: 'Trabajos pagados o con Deudas',
-        is3D: true,
-    };
+        var options = {
+            title: 'Trabajos pagados o con Deudas',
+            is3D: true,
+        };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-    chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
     }
 
 
     function drawChart1() {
-    var data = google.visualization.arrayToDataTable([
-        ['Task', 'Hours per Day'],
-        ['Work',     11],
-        ['Eat',      2]
-        // ['Commute',  2],
-        // ['Watch TV', 2],
-        // ['Sleep',    7]
-    ]);
+        var data = google.visualization.arrayToDataTable([
+            ['Task', 'Hours per Day'],
+            ['Work',     11],
+            ['Eat',      2]
+            // ['Commute',  2],
+            // ['Watch TV', 2],
+            // ['Sleep',    7]
+        ]);
 
-    var options = {
-        title: 'My Daily Activities',
-        pieHole: 0.4,
-    };
+        var options = {
+            title: 'My Daily Activities',
+            pieHole: 0.4,
+        };
 
-    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
     }
 
 

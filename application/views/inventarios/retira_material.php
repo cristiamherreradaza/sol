@@ -13,6 +13,18 @@
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
                         <center><h1><b>MATERIALES PERTENECIENTES AL TRABAJO N° <?php echo $trabajo['id']; ?></b></h1></center>
+                        <?php
+                        $retiro = $this->db->get_where('movimientos', array('trabajo_id'=>$trabajo['id'], 'borrado'=>null))->result();
+                        // var_dump(count($retiro));
+                        // var_dump($retiro);
+                        // var_dump($retiro->num_rows());
+                        // exit;
+                        if(count($retiro) > 0){
+                        ?>
+                          <h6 class="text-danger text-center"><b><i class="mdi mdi-triangle-alert"></i>Material ya Retirado</b></h6>
+                        <?php
+                        }
+                        ?>
                         <?php //vdebug($trabajo, false, false, true); ?>
                         <hr>
                       <?php echo form_open_multipart('Inventarios_Venta/guarda_retiro', array('method'=>'POST')); ?>
