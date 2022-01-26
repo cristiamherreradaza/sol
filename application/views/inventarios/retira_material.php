@@ -21,7 +21,7 @@
                         // exit;
                         if(count($retiro) > 0){
                         ?>
-                          <h6 class="text-danger text-center"><b><i class="mdi mdi-triangle-alert"></i>Material ya Retirado</b></h6>
+                          <h6 class="text-danger text-center"><b><i class="mdi mdi-alert"></i> Material ya Retirado <i class="mdi mdi-alert"></i></b></h6>
                         <?php
                         }
                         ?>
