@@ -1424,18 +1424,17 @@
     });
 
     function cambia_genero() {
-    
         
         var genero = $("#genero").val();
-        // console.log(genero);
+        console.log(genero);
         if (genero == 'Mujer') {
-            $("#saco_albusto").toggle('slow');
-            $("#pantalon_cadera").toggle('slow');
-            $("#pd_cpretina").toggle('slow');
-            $("#ch_abusto").toggle('slow');
-            $("#bloque_extras").toggle('slow');
-            $("#bloque_mujer").toggle('slow');
-            $("#select_bragueta").toggle('slow');
+            $("#saco_albusto").show('slow');
+            $("#pantalon_cadera").show('slow');
+            $("#pd_cpretina").show('slow');
+            $("#ch_abusto").show('slow');
+            $("#bloque_extras").show('slow');
+            $("#bloque_mujer").show('slow');
+            $("#select_bragueta").show('slow');
 
             // invocamos los contratos para mujer
             $.ajax({
@@ -1447,13 +1446,13 @@
             });
 
         } else {
-            $("#saco_albusto").toggle('slow');
-            $("#pantalon_cadera").toggle('slow');
-            $("#pd_cpretina").toggle('slow');
-            $("#ch_abusto").toggle('slow');
-            $("#bloque_extras").toggle('slow');
-            $("#bloque_mujer").toggle('slow');
-            $("#select_bragueta").toggle('slow');
+            $("#saco_albusto").hide('slow');
+            $("#pantalon_cadera").hide('slow');
+            $("#pd_cpretina").hide('slow');
+            $("#ch_abusto").hide('slow');
+            $("#bloque_extras").hide('slow');
+            $("#bloque_mujer").hide('slow');
+            $("#select_bragueta").hide('slow');
 
             // invocamos los contratos para val
             $.ajax({
@@ -1495,7 +1494,7 @@
             success: function(data) {
                 // dv.html(data);
                 datos_cliente = JSON.parse(data);
-                // console.log(datos_cliente);
+                console.log(datos_cliente);
                 // console.log(datos_cliente.cliente.nombre);
                 if (datos_cliente.cliente.genero == 'Mujer') {
                     $("#genero").val('Mujer');
