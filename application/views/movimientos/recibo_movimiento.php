@@ -142,13 +142,10 @@
         <thead>
             <tr>
                 <th>#</th>
-                <!-- <th class="text-right">Codigo</th> -->
                 <th class="text-right">Nombre</th>
-                <!-- <th>Marca</th> -->
                 <th>Tipo</th>
-                <!-- <th class="text-right">Tipo</th> -->
                 <th class="text-right">Cantidad Ingresada</th>
-                <th class="text-right">Stock actual en {{ $detalle->almacen->nombre }} </th>
+                <th class="text-right">Stock actual en <?=$almacen_destino['nombre']?> </th>
                 <th class="text-right">Total</th>
             </tr>
         </thead>
@@ -160,53 +157,23 @@
                 <td><?=$key+1?></td>
                 <?php
                     $productoName = $this->db->get_where('productos', array('id' => $pro->producto_id, 'borrado' => null))->row_array();
+
+                    
+                    $cantidadEntrada = $this->db->query("SELECT sum(ingreso) as cantidadEntrada FROM movimientos WHERE producto_id = $pro->producto_id AND almacen_id = $pro->almacen_id AND  borrado is null")->result();
+                    $cantidadSalida = $this->db->query("SELECT sum(salida) as cantidadSalida FROM movimientos WHERE producto_id = $pro->producto_id AND almacen_id = $pro->almacen_id AND  borrado is null")->result();
+
+                    $cantidadTotal = $cantidadEntrada[0]->cantidadEntrada - $cantidadSalida[0]->cantidadSalida;
+
                 ?>
                 <td><?=$productoName['nombre']?></td>
                 <td><?=$productoName['tipo']?></td>
                 <td><?=$pro->ingreso?></td>
+                <td><?=($cantidadTotal - $pro->ingreso)?></td>
+                <td><?=$cantidadTotal?></td>
             </tr>            
             <?php
             }
             ?>
-            @foreach($productos_envio as $key => $producto)
-                <tr>
-                    <td>{{ ($key+1) }}</td>
-                    <td>{{ $producto->producto->codigo }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->nombre }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->marca->nombre }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->tipo->nombre }}</td>
-                    <!-- <td class="text-right">{{ $producto->producto->tipo->nombre }}</td> -->
-                    <td class="text-right">{{ round($producto->ingreso) }}</td>
-                    @php
-                        $stock = App\Movimiento::select(Illuminate\Support\Facades\DB::raw('SUM(ingreso) - SUM(salida) as total'))
-                                ->where('producto_id', $producto->producto_id)
-                                ->where('almacene_id', $producto->almacen->id)
-                                ->first();
-                        $stock=intval($stock->total - $producto->ingreso);
-                    @endphp
-                    <td class="text-right">{{ $stock }}</td>
-                    <td class="text-right">
-                        @php
-                            $total = $stock + round($producto->ingreso);
-                            echo $total;
-                        @endphp
-                    </td>
-                </tr>
-            @endforeach
-            @if($complemento > 0)
-                @for($i=1; $i<=$complemento; $i++)
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                @endfor
-            @endif
         </tbody>
     </table>
     <table class="firmas">
@@ -216,15 +183,14 @@
         </tr>
     </table>
 </div>
-@if($cantidad_producto <= 20)
 <br>
 <br>
 <div class="invoice" id="printableArea">
     <p style="margin-top: 5px; font-size: 15px; text-align: center;">RECIBO DE ENVIO DE PRODUCTOS</p>
     <table class="contenidos">
         <tr>
-            <td><b>Numero de Envio :</b> {{ $detalle->numero }} </td>
-            <td><b>Fecha :</b> {{ $detalle->fecha }}</td>
+            <td><b>Numero de Envio :</b> <?=$detalle['numero_ingreso']?> </td>
+            <td><b>Fecha :</b> <?=$detalle['fecha']?></td>
         </tr>
         <tr>
             <td><b>Desde :</b> <?=$almacen_origen_result['nombre']?> </td>
@@ -238,57 +204,39 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th class="text-right">Codigo</th>
                 <th class="text-right">Nombre</th>
-                <th>Marca</th>
                 <th>Tipo</th>
-                <!-- <th class="text-right">Tipo</th> -->
                 <th class="text-right">Cantidad Ingresada</th>
-                <th class="text-right">Stock actual en {{ $detalle->almacen->nombre }} </th>
+                <th class="text-right">Stock actual en <?=$almacen_destino['nombre']?> </th>
                 <th class="text-right">Total</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($productos_envio as $key => $producto)
-                <tr>
-                    <td>{{ ($key+1) }}</td>
-                    <td class="text-right">{{ $producto->producto->codigo }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->nombre }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->marca->nombre }}</td>
-                    <td style="text-align: left;">{{ $producto->producto->tipo->nombre }}</td>
 
-                    <!-- <td class="text-right">{{ $producto->producto->tipo->nombre }}</td> -->
-                    <td class="text-right">{{ round($producto->ingreso) }}</td>
-                    @php
-                        $stock = App\Movimiento::select(Illuminate\Support\Facades\DB::raw('SUM(ingreso) - SUM(salida) as total'))
-                                ->where('producto_id', $producto->producto_id)
-                                ->where('almacene_id', $producto->almacen->id)
-                                ->first();
-                        $stock=intval($stock->total - $producto->ingreso);
-                    @endphp
-                    <td class="text-right">{{ $stock }}</td>
-                    <td class="text-right">
-                        @php
-                            $total = $stock + round($producto->ingreso);
-                            echo $total;
-                        @endphp
-                    </td>
-                </tr>
-            @endforeach
-            @if($complemento > 0)
-                @for($i=1; $i<=$complemento; $i++)
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                @endfor
-            @endif
+        <?php
+            foreach ($productos as $key => $pro) {
+            ?>
+            <tr>
+                <td><?=$key+1?></td>
+                <?php
+                    $productoName = $this->db->get_where('productos', array('id' => $pro->producto_id, 'borrado' => null))->row_array();
+
+                    
+                    $cantidadEntrada = $this->db->query("SELECT sum(ingreso) as cantidadEntrada FROM movimientos WHERE producto_id = $pro->producto_id AND almacen_id = $pro->almacen_id AND  borrado is null")->result();
+                    $cantidadSalida = $this->db->query("SELECT sum(salida) as cantidadSalida FROM movimientos WHERE producto_id = $pro->producto_id AND almacen_id = $pro->almacen_id AND  borrado is null")->result();
+
+                    $cantidadTotal = $cantidadEntrada[0]->cantidadEntrada - $cantidadSalida[0]->cantidadSalida;
+
+                ?>
+                <td><?=$productoName['nombre']?></td>
+                <td><?=$productoName['tipo']?></td>
+                <td><?=$pro->ingreso?></td>
+                <td><?=($cantidadTotal - $pro->ingreso)?></td>
+                <td><?=$cantidadTotal?></td>
+            </tr>            
+            <?php
+            }
+            ?>
         </tbody>
     </table>
     <table class="firmas">
@@ -298,7 +246,6 @@
         </tr>
     </table>
 </div>
-@endif
 <input type="button" name="imprimir" id="boton_imprimir" value="Imprimir" onclick="window.print();">
 <!-- <button id="botonImprimir" class="btn btn-inverse btn-block print-page" type="button"> <span><i class="fa fa-print"></i> IMPRIMIR </span></button> -->
 
