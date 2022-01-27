@@ -48,40 +48,43 @@ class Inventarios_Venta extends CI_Controller {
 		$this->db->where('t.id', $id_trabajo);
 		$data['trabajo'] = $this->db->get()->row_array();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('sacos');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$this->db->where('altura_busto', 0);
 		$data['saco_varon'] = $this->db->get()->row();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('pantalones');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$this->db->where('cadera', 0);
 		$data['pantalon_varon'] = $this->db->get()->row();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('chalecos');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$this->db->where('altura_busto', 0);
 		$data['chaleco_varon'] = $this->db->get()->row();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('sacos');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$data['saco_mujer'] = $this->db->get()->row();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('pantalones');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$data['pantalon_mujer'] = $this->db->get()->row();
+		
+		// var_dump($data['pantalon_mujer']);
+		// exit;
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('faldas');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$data['falda_mujer'] = $this->db->get()->row();
 
-		$this->db->select('cantidad');
+		$this->db->select('cantidad, modelo_id');
 		$this->db->from('chalecos');
 		$this->db->where('trabajo_id', $id_trabajo);
 		$data['chaleco_mujer'] = $this->db->get()->row();
