@@ -50,7 +50,46 @@
                               <div class="row">
                                 <div class="col-md-6">
                                   <?php
-                                    $chaleco = $this->db->get_where('movimientos', array('confeccion' => 'SACO', 'trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
+                                    $sacos = $this->db->get_where('movimientos', array('confeccion' => 'SACO', 'trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
+                                    if(!empty($sacos)){
+                                      $saco = $this->db->get_where('sacos', array('trabajo_id'=>$trabajo['id'],'borrado'=>null))->row_array();
+                                    ?>
+                                      <div class="card card-outline-info">
+                                        <div class="card-header">
+                                          <h4 class="mb-0 text-white">MATERIALES PARA EL SACO (cantidad <?php echo $saco['cantidad']; ?>)</h4>
+                                        </div>
+                                        <div class="card-body" style="background-color: #e6f2ff;">
+                                          <?php
+                                            $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
+                                          ?>
+                                          <table class="table table-responsive table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>PRODUCTO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>PRECIO</th>
+                                              </tr>                                               
+                                            </thead>
+                                            <tbody>
+                                              <?php
+                                              foreach ($sacos as $sa){
+                                                var_dump($sa);
+                                                exit;
+                                                ?>
+                                                <tr>
+                                                  <td><?=$sa->detalle?><input type="hidden" name="saco_varon_ids[]" value="<?=$sa->producto_id?>"></td>
+                                                  <td><input name="saco_varon_cantidad[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sa->cantidad?>"></td>
+                                                  <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sa->precio?>"></td>
+                                                </tr>                                            
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    <?php
+                                    }
                                   ?>
                                 </div>
                                 <div class="col-md-6">
@@ -88,38 +127,38 @@
                                         <!-- <?//php if (!empty($saco_varon->cantidad)): ?> -->
                                         <?php if ($saco_varon->modelo_id != 0): ?>
                                             <div class="col-md-6">
-                                                <div class="card card-outline-info">
-                                                  <div class="card-header">
-                                                    <h4 class="mb-0 text-white">MATERIALES PARA EL SACO (cantidad <?php echo $saco_varon->cantidad; ?>)</h4>
-                                                  </div>
-                                                  <div class="card-body" style="background-color: #e6f2ff;">
-                                                    <?php
-                                                      $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
-                                                    ?>
-                                                    <table class="table table-responsive table-striped">
-                                                      <thead>
-                                                        <tr>
-                                                          <th>PRODUCTO</th>
-                                                          <th>CANTIDAD</th>
-                                                          <th>PRECIO</th>
-                                                        </tr>                                               
-                                                      </thead>
-                                                      <tbody>
-                                                        <?php
-                                                        foreach ($datos as $sv){
-                                                          ?>
-                                                          <tr>
-                                                            <td><?=$sv->detalle?><input type="hidden" name="saco_varon_ids[]" value="<?=$sv->producto_id?>"></td>
-                                                            <td><input name="saco_varon_cantidad[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sv->cantidad?>"></td>
-                                                            <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sv->precio?>"></td>
-                                                          </tr>                                            
-                                                          <?php
-                                                        }
-                                                        ?>
-                                                      </tbody>
-                                                    </table>
-                                                  </div>
+                                              <div class="card card-outline-info">
+                                                <div class="card-header">
+                                                  <h4 class="mb-0 text-white">MATERIALES PARA EL SACO (cantidad <?php echo $saco_varon->cantidad; ?>)</h4>
                                                 </div>
+                                                <div class="card-body" style="background-color: #e6f2ff;">
+                                                  <?php
+                                                    $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
+                                                  ?>
+                                                  <table class="table table-responsive table-striped">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>PRODUCTO</th>
+                                                        <th>CANTIDAD</th>
+                                                        <th>PRECIO</th>
+                                                      </tr>                                               
+                                                    </thead>
+                                                    <tbody>
+                                                      <?php
+                                                      foreach ($datos as $sv){
+                                                        ?>
+                                                        <tr>
+                                                          <td><?=$sv->detalle?><input type="hidden" name="saco_varon_ids[]" value="<?=$sv->producto_id?>"></td>
+                                                          <td><input name="saco_varon_cantidad[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sv->cantidad?>"></td>
+                                                          <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sv->precio?>"></td>
+                                                        </tr>                                            
+                                                        <?php
+                                                      }
+                                                      ?>
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+                                              </div>
                                             </div>
                                         
                                         <?php endif ?>
@@ -473,7 +512,6 @@
 
                                         <!-- <?//php if (!empty($pantalon_mujer->cantidad)): ?> -->
                                         <?php if ($pantalon_mujer->modelo_id != 0): ?>
-                                            
                                             <!-- modelos pantalon -->
                                             <div class="col-md-6">
                                               <div class="card card-outline-success">
