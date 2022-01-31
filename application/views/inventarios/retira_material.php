@@ -27,7 +27,7 @@
                         $retiro = $this->db->get_where('movimientos', array('trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
                         if(count($retiro) != 0){
                           ?>
-                          <?php echo form_open_multipart('Inventarios_Venta/guarda_retiro', array('method'=>'POST')); ?>
+                          <?php echo form_open_multipart('Inventarios_Venta/edita_retiro', array('method'=>'POST')); ?>
                             <div class="row">
                               <div class="col-md-12">
                                 <div class="float-left">
@@ -41,12 +41,11 @@
                                   </address>
                                 </div>
                               </div>
+                            </div>
 
-                              trabajo id:
-                              <input type="text" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
-                              <!-- <input type="text" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
-                              fecha:
-                              <input type="text" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
+                              <input type="hidden" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
+                              <!-- <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
+                              <input type="hidden" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
                               <div class="row">
                                 <div class="col-md-6">
                                   <?php
@@ -73,13 +72,12 @@
                                             <tbody>
                                               <?php
                                               foreach ($sacos as $sa){
-                                                var_dump($sa);
-                                                exit;
+                                                $producto = $this->db->get_where('productos', array('id' => $sa->producto_id, 'borrado' => null ))->row_array();
                                                 ?>
                                                 <tr>
-                                                  <td><?=$sa->detalle?><input type="hidden" name="saco_varon_ids[]" value="<?=$sa->producto_id?>"></td>
-                                                  <td><input name="saco_varon_cantidad[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sa->cantidad?>"></td>
-                                                  <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sa->precio?>"></td>
+                                                  <td><?=$producto['nombre']?><input type="hidden" name="saco_varon_ids[]" value="<?=$sa->producto_id?>"></td>
+                                                  <td><input name="saco_varon_cantidad[]" type="text" class="form-control" value="<?=$sa->salida?>"></td>
+                                                  <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$sa->precio_total?>"></td>
                                                 </tr>                                            
                                                 <?php
                                               }
@@ -93,10 +91,142 @@
                                   ?>
                                 </div>
                                 <div class="col-md-6">
-
+                                  <?php
+                                    $pantalones = $this->db->get_where('movimientos', array('confeccion' => 'PANTALON', 'trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
+                                    if(!empty($pantalones)){
+                                      $pantalon = $this->db->get_where('pantalones', array('trabajo_id'=>$trabajo['id'],'borrado'=>null))->row_array();
+                                    ?>
+                                      <div class="card card-outline-success">
+                                        <div class="card-header">
+                                          <h4 class="mb-0 text-white">MATERIALES PARA EL PANTALON (cantidad <?php echo $pantalon['cantidad']; ?>)</h4>
+                                        </div>
+                                        <div class="card-body" style="background-color: #e6ffe6;">
+                                          <?php
+                                            $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
+                                          ?>
+                                          <table class="table table-responsive table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>PRODUCTO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>PRECIO</th>
+                                              </tr>                                               
+                                            </thead>
+                                            <tbody>
+                                              <?php
+                                              foreach ($pantalones as $sa){
+                                                $producto = $this->db->get_where('productos', array('id' => $sa->producto_id, 'borrado' => null ))->row_array();
+                                                ?>
+                                                <tr>
+                                                  <td><?=$producto['nombre']?><input type="hidden" name="pantalon_varon_ids[]" value="<?=$sa->producto_id?>"></td>
+                                                  <td><input name="pantalon_varon_cantidad[]" type="text" class="form-control" value="<?=$sa->salida?>"></td>
+                                                  <td><input name="pantalon_varon_precio[]" type="text" class="form-control" value="<?=$sa->precio_total?>"></td>
+                                                </tr>                                            
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    <?php
+                                    }
+                                  ?>
                                 </div>
                               </div>
-                            </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <?php
+                                    $chalecos = $this->db->get_where('movimientos', array('confeccion' => 'CHALECO', 'trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
+                                    if(!empty($chalecos)){
+                                      $pantalon = $this->db->get_where('chalecos', array('trabajo_id'=>$trabajo['id'],'borrado'=>null))->row_array();
+                                    ?>
+                                      <div class="card card-outline-primary">
+                                        <div class="card-header">
+                                          <h4 class="mb-0 text-white">MATERIALES PARA EL CHALECO (cantidad <?php echo $pantalon['cantidad']; ?>)</h4>
+                                        </div>
+                                        <div class="card-body" style="background-color: #f0e7fe;">
+                                          <?php
+                                            $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
+                                          ?>
+                                          <table class="table table-responsive table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>PRODUCTO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>PRECIO</th>
+                                              </tr>                                               
+                                            </thead>
+                                            <tbody>
+                                              <?php
+                                              foreach ($chalecos as $cha){
+                                                $producto = $this->db->get_where('productos', array('id' => $cha->producto_id, 'borrado' => null ))->row_array();
+                                                ?>
+                                                <tr>
+                                                  <td><?=$producto['nombre']?><input type="hidden" name="chaleco_varon_ids[]" value="<?=$cha->producto_id?>"></td>
+                                                  <td><input name="chaleco_varon_cantidad[]" type="text" class="form-control" value="<?=$cha->salida?>"></td>
+                                                  <td><input name="chaleco_varon_precio[]" type="text" class="form-control" value="<?=$cha->precio_total?>"></td>
+                                                </tr>                                            
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    <?php
+                                    }
+                                  ?>
+                                </div>
+                                <div class="col-md-6">
+                                  <?php
+                                    $faldas = $this->db->get_where('movimientos', array('confeccion' => 'FALDA', 'trabajo_id'=>$trabajo['id'], 'borrado' => null))->result();
+                                    if(!empty($faldas)){
+                                      $falda = $this->db->get_where('faldas', array('trabajo_id'=>$trabajo['id'],'borrado'=>null))->row_array();
+                                    ?>
+                                      <div class="card card-outline-warning">
+                                        <div class="card-header">
+                                          <h4 class="mb-0 text-white">MATERIALES PARA LA FALDA (cantidad <?php echo $falda['cantidad']; ?>)</h4>
+                                        </div>
+                                        <div class="card-body" style="background-color: #FBFCBF;">
+                                          <?php
+                                            $datos = $this->db->get_where('material_trabajos', array('pieza'=>'SACO','genero' =>'VARON', 'borrado' => null ))->result();
+                                          ?>
+                                          <table class="table table-responsive table-striped">
+                                            <thead>
+                                              <tr>
+                                                <th>PRODUCTO</th>
+                                                <th>CANTIDAD</th>
+                                                <th>PRECIO</th>
+                                              </tr>                                               
+                                            </thead>
+                                            <tbody>
+                                              <?php
+                                              foreach ($faldas as $fa){
+                                                $producto = $this->db->get_where('productos', array('id' => $fa->producto_id, 'borrado' => null ))->row_array();
+                                                ?>
+                                                <tr>
+                                                  <td><?=$producto['nombre']?><input type="hidden" name="falda_varon_ids[]" value="<?=$fa->producto_id?>"></td>
+                                                  <td><input name="falda_varon_cantidad[]" type="text" class="form-control" value="<?=$fa->salida?>"></td>
+                                                  <td><input name="falda_varon_precio[]" type="text" class="form-control" value="<?=$fa->precio_total?>"></td>
+                                                </tr>                                            
+                                                <?php
+                                              }
+                                              ?>
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    <?php
+                                    }
+                                  ?>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <button class="btn btn-block btn-info"> <span><i class="fa fa-print"></i> Guardar</span> </button>
+                                </div>
+                              </div>
                           </form>
                           <?php
                         }else{
@@ -115,11 +245,9 @@
                                     </address>
                                   </div>
                                 </div>
-                                trabajo id:
-                                <input type="text" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
-                                <!-- <input type="text" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
-                                fecha:
-                                <input type="text" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
+                                <input type="hidden" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
+                                <!-- <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
+                                <input type="hidden" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
                                 <?php if (!empty($saco_varon->cantidad)) { ?>
                                 <!-- INICIO DATOS PARA EL VARON -->
                                 <div class="col-md-12">
@@ -443,7 +571,7 @@
                                                         foreach ($datos as $sm){
                                                           ?>
                                                           <tr>
-                                                            <td><?=$sm->detalle?><input type="text" name="saco_mujer_ids[]" value="<?=$sm->producto_id?>"></td>
+                                                            <td><?=$sm->detalle?><input type="hidden" name="saco_mujer_ids[]" value="<?=$sm->producto_id?>"></td>
                                                             <td><input name="saco_mujer_cantidad[]" type="text" class="form-control" value="<?=$saco_mujer->cantidad*$sm->cantidad?>"></td>
                                                             <td><input name="saco_mujer_precio[]" type="text" class="form-control" value="<?=$saco_mujer->cantidad*$sm->precio?>"></td>
                                                           </tr>                                            
@@ -533,7 +661,7 @@
                                                     foreach($datos as $pm){
                                                     ?>
                                                       <tr>      
-                                                        <td><?=$pm->detalle?> <input type="text" name="pantalon_mujer_ids[]" value="<?=$pm->producto_id?>"></td>
+                                                        <td><?=$pm->detalle?> <input type="hidden" name="pantalon_mujer_ids[]" value="<?=$pm->producto_id?>"></td>
                                                         <td><input name="pantalon_mujer_cantidad[]" id="" type="text" class="form-control" value="<?=$pantalon_mujer->cantidad*$pm->cantidad?>"></td>
                                                         <td><input name="pantalon_mujer_precio[]" id="" type="text" class="form-control" value="<?=$pantalon_mujer->cantidad*$pm->precio?>"></td>
                                                       </tr>  
@@ -592,7 +720,7 @@
                                                       foreach($datos as $fm){
                                                       ?>
                                                         <tr>      
-                                                          <td><?=$fm->detalle?> <input type="text" name="falda_mujer_ids[]" value="<?=$fm->producto_id?>"></td>
+                                                          <td><?=$fm->detalle?> <input type="hidden" name="falda_mujer_ids[]" value="<?=$fm->producto_id?>"></td>
                                                           <td><input name="falda_mujer_cantidad[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$fm->cantidad?>"></td>
                                                           <td><input name="falda_mujer_precio[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$fm->precio?>"></td>
                                                         </tr>  

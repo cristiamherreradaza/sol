@@ -756,4 +756,106 @@ class Inventarios_Venta extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function edita_retiro(){
+
+		$trabajo_id = $this->input->post('trabajo_id');
+
+		$this->db->delete('movimientos', array('trabajo_id' => $trabajo_id));
+		
+		// PARA LOS SACOS
+		$sacos_ids = $this->input->post('saco_varon_ids');
+
+		if(!empty($sacos_ids)){
+			foreach ($sacos_ids as $key => $id) {
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $trabajo_id,
+					'precio_total' 	=> $this->input->post('saco_varon_precio')[$key],
+					'salida'        => $this->input->post('saco_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'SACO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+
+				);
+
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// PARA LOS PANTALONES
+		$pantalones_ids = $this->input->post('pantalon_varon_ids');
+
+		if(!empty($pantalones_ids)){
+			foreach ($pantalones_ids as $key => $id) {
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $trabajo_id,
+					'precio_total' 	=> $this->input->post('pantalon_varon_precio')[$key],
+					'salida'        => $this->input->post('pantalon_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'PANTALON',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+
+				);
+
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// PARA LOS CHALECOS
+		$pantalones_ids = $this->input->post('chaleco_varon_ids');
+
+		if(!empty($pantalones_ids)){
+			foreach ($pantalones_ids as $key => $id) {
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $trabajo_id,
+					'precio_total' 	=> $this->input->post('chaleco_varon_precio')[$key],
+					'salida'        => $this->input->post('chaleco_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'CHALECO',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+
+				);
+
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		// PARA LOS FALDAS
+		$pantalones_ids = $this->input->post('falda_varon_ids');
+
+		if(!empty($pantalones_ids)){
+			foreach ($pantalones_ids as $key => $id) {
+				$datos= array(
+					'usuarios_id'  	=> $this->session->id_usuario,
+					'producto_id' 	=> $id,
+					'almacen_id' 	=> $this->session->almacen_id,
+					'trabajo_id' 	=> $trabajo_id,
+					'precio_total' 	=> $this->input->post('falda_varon_precio')[$key],
+					'salida'        => $this->input->post('falda_varon_cantidad')[$key],
+					'fecha'			=> date('Y-m-d'),
+					'confeccion' 	=> 'FALDA',
+					'estado' 		=> 'Confeccion',
+					'created_at' => date('Y-m-d H:i:s')
+
+				);
+
+				$this->db->insert('movimientos', $datos);
+			}
+		}
+
+		redirect("trabajos/listado_trabajos");
+
+	}
+
 }
