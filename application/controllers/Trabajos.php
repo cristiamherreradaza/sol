@@ -1440,8 +1440,50 @@ class Trabajos extends CI_Controller {
 		$data['pagos'] = $this->db->get()->result();
 
 		$this->load->view('trabajos/ajax_busca_fecha', $data);
+	}
+	
+	public function ajaxListado(){
 
+		$this->db->select('*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c','c.id = t.cliente_id');
+		// $this->db->where('t.id',30);
+
+		// $resultado = $this->db->get()->result();
 		
+		// var_dump($resultado);
+		// exit;
+
+		if($this->input->get('numero') != ''){
+
+			$numero = $this->input->get('numero');
+
+			$this->db->where('t.id',$numero);
+		}
+
+		if($this->input->get('cliente') != ''){
+			echo 'cliente -> si<br>';
+		}else{
+			echo 'cliente -> no<br>';
+		}
+
+		if($this->input->get('celular') != ''){
+			echo 'celular -> si<br>';
+		}else{
+			echo 'celular -> no<br>';
+		}
+
+		if($this->input->get('fecha_prueba') != ''){
+			echo 'fecha prueba-> si<br>';
+		}else{
+			echo 'fecha prueba-> no<br>';
+		}
+
+		if($this->input->get('fecha_entrega') != ''){
+			echo 'fecha entrega-> si<br>';
+		}else{
+			echo 'fecha entrega-> no<br>';
+		}
 	}
 
 }
