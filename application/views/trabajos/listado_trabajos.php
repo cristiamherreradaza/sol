@@ -56,7 +56,10 @@
 							</div>
 						</div>
 						<div class="table-responsive m-t-40">
-							<table id="config-table" class="table display table-bordered table-striped no-wrap">
+							<div id="tabla-trabajos">
+
+							</div>
+							<!-- <table id="config-table" class="table display table-bordered table-striped no-wrap">
 								<thead>
 									<tr>
 										<th>No.</th>
@@ -120,7 +123,7 @@
 									</tr>
 									<?php endforeach ?>
 								</tbody>
-							</table>
+							</table> -->
 						</div>
 					</div>
 				</div>
@@ -221,7 +224,7 @@
 				fecha_entrega: fecha_entrega
 			},
 			success: function(data) {
-				// $("#carga_contratos").html(data);
+				$("#tabla-trabajos").html(data);
 			}
 		});
 		// console.log('en desarrollo :v');

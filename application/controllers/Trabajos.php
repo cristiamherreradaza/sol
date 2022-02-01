@@ -1444,15 +1444,10 @@ class Trabajos extends CI_Controller {
 	
 	public function ajaxListado(){
 
-		$this->db->select('*');
+		$this->db->select('t.id, c.nombre, c.celulares, t.fecha_entrega, t.fecha_prueba, t.costo_tela, t.costo_confeccion ,t.total , t.saldo, t.entregado');
 		$this->db->from('trabajos as t');
 		$this->db->join('clientes as c','c.id = t.cliente_id');
 		// $this->db->where('t.id',30);
-
-		// $resultado = $this->db->get()->result();
-		
-		// var_dump($resultado);
-		// exit;
 
 		if($this->input->get('numero') != ''){
 
@@ -1462,28 +1457,53 @@ class Trabajos extends CI_Controller {
 		}
 
 		if($this->input->get('cliente') != ''){
-			echo 'cliente -> si<br>';
-		}else{
-			echo 'cliente -> no<br>';
+
+			$cliente =  $this->input->get('cliente');
+
+			$this->db->like('c.nombre', $cliente);
 		}
 
 		if($this->input->get('celular') != ''){
-			echo 'celular -> si<br>';
-		}else{
-			echo 'celular -> no<br>';
+
+			$celular =  $this->input->get('celular');
+
+			$this->db->like('c.celular', $celular);
 		}
 
 		if($this->input->get('fecha_prueba') != ''){
-			echo 'fecha prueba-> si<br>';
-		}else{
-			echo 'fecha prueba-> no<br>';
+			
+			$fecha_prueba = $this->input->get('fecha_prueba');
+
+			$fecha_prueba_ini = $fecha_prueba." 00:00:00";
+			$fecha_prueba_fin = $fecha_prueba." 23:59:59";
+
+			$this->db->where("fecha_prueba BETWEEN '$fecha_prueba_ini' AND '$fecha_prueba_fin'");
 		}
 
 		if($this->input->get('fecha_entrega') != ''){
-			echo 'fecha entrega-> si<br>';
-		}else{
-			echo 'fecha entrega-> no<br>';
+			
+			$fecha_entrega = $this->input->get('fecha_entrega');
+
+			$fecha_entrega_ini = $fecha_entrega." 00:00:00";
+			$fecha_entrega_fin = $fecha_entrega." 23:59:59";
+
+			$this->db->where("fecha_entrega BETWEEN '$fecha_entrega_ini' AND '$fecha_entrega_fin'");
 		}
+
+		if($this->input->get('numero') != '' && $this->input->get('cliente') != '' && $this->input->get('celular') != '' && $this->input->get('fecha_prueba') != '' && $this->input->get('fecha_entrega') != ''){
+			$this->db->limit(200);
+		}else{
+			$this->db->limit(50);
+		}
+		
+		// $data['trabajos'] = $this->db->get()->result();
+		$data['trabajos'] = $this->db->get()->result_array();
+
+		$this->load->view('trabajos/ajax_listado', $data);
+		
+		// var_dump($resultado);
+		// exit;
 	}
 
 }
+
