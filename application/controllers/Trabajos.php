@@ -1492,6 +1492,8 @@ class Trabajos extends CI_Controller {
 			$this->db->where("fecha_entrega BETWEEN '$fecha_entrega_ini' AND '$fecha_entrega_fin'");
 		}
 
+		$this->db->where('t.borrado',null);
+
 		if($this->input->get('numero') != '' && $this->input->get('cliente') != '' && $this->input->get('celular') != '' && $this->input->get('fecha_prueba') != '' && $this->input->get('fecha_entrega') != ''){
 			$this->db->limit(200);
 		}else{
