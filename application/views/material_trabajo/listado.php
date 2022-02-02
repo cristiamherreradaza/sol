@@ -19,8 +19,18 @@
                                 <input type="hidden" name="material_id" id="material_id" value="0">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class="control-label">Detalle:</label>
-                                        <input name="detalle" type="text" id="detalle" class="form-control">
+                                        <label class="control-label">Detalle:</label><br>
+                                        <!-- <input name="detalle" type="text" id="detalle" class="form-control"> -->
+										<select name="detalle" id="detalle" class=" form-control" style="width: 100%" required>
+											<option value="">Elija el Producto</option>
+											<?php
+											foreach ($productos as $pro){
+												?>
+												<option value="<?=$pro->id?>"><?=$pro->nombre?></option>
+												<?php
+											}
+											?>
+										</select>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -132,7 +142,7 @@
 										<td><?php echo $traMat->pieza ?></td>
 										<td><?php echo $traMat->tipo ?></td>
 										<td>
-                                            <button type="button" class="btn btn-warning" onclick="editar('<?=$traMat->id?>','<?=$traMat->detalle?>','<?=$traMat->cantidad?>','<?=$traMat->precio?>','<?=$traMat->genero?>','<?=$traMat->pieza?>','<?=$traMat->tipo?>')"><i class="fas fa-edit"></i></button>
+                                            <button type="button" class="btn btn-warning" onclick="editar('<?=$traMat->id?>','<?=$traMat->producto_id?>','<?=$traMat->detalle?>','<?=$traMat->cantidad?>','<?=$traMat->precio?>','<?=$traMat->genero?>','<?=$traMat->pieza?>','<?=$traMat->tipo?>')"><i class="fas fa-edit"></i></button>
                                             <button type="button" class="btn btn-danger" onclick="eliminar('<?=$traMat->id?>','<?=$traMat->detalle?>')"><i class="fas fa-trash"></i></button>
 										</td>
 									</tr>
@@ -183,7 +193,7 @@
 
     function abre_modal()
     {
-        $('#detalle').val('');
+        // $('#detalle').val('');
         $('#cantidad').val('');
         $('#precio').val('');
         $('#genero').val('VARON');
@@ -193,10 +203,11 @@
         $("#myModaledit").modal('show');
     }
     
-	function editar(id, detalle, cantidad, precio, genero, pieza, tipo)
+	function editar(id, producto_id, detalle, cantidad, precio, genero, pieza, tipo)
     {
         $('#material_id').val(id);
-        $('#detalle').val(detalle);
+		$('#detalle').val(producto_id).trigger('change.select2');
+        // $('#detalle').val(detalle);
         $('#cantidad').val(cantidad);
         $('#precio').val(precio);
         $('#genero').val(genero);
@@ -229,5 +240,11 @@
 			}
 		})
 	}
+
+	$(function(){
+        $('#detalle').select2({
+            placeholder: "Seleccion un Producto"
+        });
+    });
 
 </script>

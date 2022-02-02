@@ -234,6 +234,12 @@ class Reportes extends CI_Controller {
 	{
 		$fecha_hora_inicio = $this->input->post('fecha_inicio');
 		$fecha_hora_fin    = $this->input->post('fecha_fin');
+		
+		$fecha_hora_inicio = $fecha_hora_inicio.' 00:00:00';
+		$fecha_hora_fin    = $fecha_hora_fin.' 23:59:59';
+
+		// var_dump($fecha_hora_fin);
+		// exit;
 
 		$data['inicio'] = $fecha_hora_inicio;
 		$data['fin'] = $fecha_hora_fin;

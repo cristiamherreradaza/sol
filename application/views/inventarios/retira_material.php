@@ -816,7 +816,7 @@
                                                     foreach($datos as $chm){
                                                     ?>
                                                       <tr>      
-                                                        <td><?=$chm->detalle?> <input type="text" name="chaleco_mujer_ids[]" value="<?=$chm->producto_id?>"></td>
+                                                        <td><?=$chm->detalle?> <input type="hidden" name="chaleco_mujer_ids[]" value="<?=$chm->producto_id?>"></td>
                                                         <td><input name="chaleco_mujer_cantidad[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$chm->cantidad?>"></td>
                                                         <td><input name="chaleco_mujer_precio[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$chm->precio?>"></td>
                                                       </tr>  

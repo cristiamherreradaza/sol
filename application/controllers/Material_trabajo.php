@@ -30,6 +30,8 @@ class Material_trabajo extends CI_Controller {
 
 	public function listado(){
         $data['trabajo_material'] = $this->db->get_where('material_trabajos', array('borrado' => null))->result();
+
+        $data['productos'] = $this->db->get_where('productos', array('borrado' => null))->result();
 		
         $this->load->view('template/header');
 		$this->load->view('template/menu');
