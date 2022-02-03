@@ -559,7 +559,7 @@
                                                                         <div class="col" id="ch_abusto" style="display: none;">
                                                                             <div class="form-group">
                                                                                 <label class="control-label">Altura busto</label>
-                                                                                <input name="ch_abusto" type="number" id="ch_abusto" class="form-control" min="0" step="any">
+                                                                                <input name="ch_abusto" type="number" id="ch_abusto_dato" class="form-control" min="0" step="any">
                                                                             </div>
                                                                         </div>
 
@@ -1535,9 +1535,12 @@
                     $("#p_cadera").val(datos_cliente.pantalones.cadera);
                 }
                 if (datos_cliente.chalecos != null) {
+                    // console.log('entre a chalecos');
                     $("#ch_largo").val(datos_cliente.chalecos.largo);
                     $("#ch_pecho").val(datos_cliente.chalecos.pecho);
                     $("#ch_estomago").val(datos_cliente.chalecos.estomago);
+                    $("#ch_abusto_dato").val(datos_cliente.chalecos.altura_busto);
+                    // console.log(datos_cliente.chalecos.altura_busto);
                 }
                 if (datos_cliente.faldas != null) {
                     $("#fa_largo").val(datos_cliente.faldas.largo);
