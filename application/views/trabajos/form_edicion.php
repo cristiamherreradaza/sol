@@ -557,119 +557,130 @@
 
               <!-- camisa medidas -->
               <div class="col-md-5">
-                <?php if ($camisa['cuello']): ?>
-                  
-                <div class="card card-outline-inverse">
-                  <div class="card-header">
-                    <h4 class="mb-0 text-white">CAMISA</h4></div>
-                    <div class="card-body" style="background-color: #f0e7fe;">
+                <?php 
+                if(!empty($camisa)){
+                  if ($camisa['cuello']): 
+                  ?>
+                  <div class="card card-outline-inverse">
+                    <div class="card-header">
+                      <h4 class="mb-0 text-white">CAMISA</h4></div>
+                      <div class="card-body" style="background-color: #f0e7fe;">
 
-                      <div class="row">
-                        <input type="hidden" name="camisa_id" value="<?php echo $camisa['id'] ?>">
+                        <div class="row">
+                          <input type="hidden" name="camisa_id" value="<?php echo $camisa['id'] ?>">
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Cuello</label>
-                            <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any" value="<?php echo $camisa['cuello']; ?>">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Cuello</label>
+                              <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any" value="<?php echo $camisa['cuello']; ?>">
+                            </div>
                           </div>
+
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Largo manga</label>
+                              <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any" value="<?php echo $camisa['largo_manga']; ?>">
+                            </div>
+                          </div>
+
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Color</label>
+                              <input name="cam_color" type="text" id="cam_color" class="form-control" value="<?php echo $camisa['color']; ?>">
+                            </div>
+                          </div>
+
                         </div>
+                        <div class="row">
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Largo manga</label>
-                            <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any" value="<?php echo $camisa['largo_manga']; ?>">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Modelo cuello</label>
+                              <select name="cam_mcuello" class="form-control custom-select">
+                                <option value="">Seleccione</option>
+                                <option value="Pajarito" <?php echo ($camisa['modelo_cuello']=='Pajarito')?'selected':'' ?>>Pajarito</option>
+                                <option value="Normal" <?php echo ($camisa['modelo_cuello']=='Normal')?'selected':'' ?>>Normal</option>
+                              </select>
+                            </div>
                           </div>
-                        </div>
 
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Color</label>
-                            <input name="cam_color" type="text" id="cam_color" class="form-control" value="<?php echo $camisa['color']; ?>">
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Ancho</label>
+                              <select name="cam_ancho" class="form-control custom-select">
+                                <option value="">Seleccione</option>
+                                <option value="Normal" <?php echo ($camisa['ancho']=='Normal')?'selected':'' ?>>Normal</option>
+                                <option value="Slim" <?php echo ($camisa['ancho']=='Slim')?'selected':'' ?>>Slim</option>
+                              </select>
+                            </div>
                           </div>
+
+                          <div class="col-md-4">
+                            <div class="form-group">
+                              <label class="control-label">Cuello Combi</label>
+                              <select name="cam_ccombinado" class="form-control custom-select">
+                                <option value="">Seleccione</option>
+                                <option value="Si" <?php echo ($camisa['cuello_combinado']=='Si')?'selected':'' ?>>Si</option>
+                                <option value="No" <?php echo ($camisa['cuello_combinado']=='No')?'selected':'' ?>>No</option>
+                              </select>
+                            </div>
+                          </div>
+
                         </div>
 
                       </div>
-                      <div class="row">
-
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Modelo cuello</label>
-                            <select name="cam_mcuello" class="form-control custom-select">
-                              <option value="">Seleccione</option>
-                              <option value="Pajarito" <?php echo ($camisa['modelo_cuello']=='Pajarito')?'selected':'' ?>>Pajarito</option>
-                              <option value="Normal" <?php echo ($camisa['modelo_cuello']=='Normal')?'selected':'' ?>>Normal</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Ancho</label>
-                            <select name="cam_ancho" class="form-control custom-select">
-                              <option value="">Seleccione</option>
-                              <option value="Normal" <?php echo ($camisa['ancho']=='Normal')?'selected':'' ?>>Normal</option>
-                              <option value="Slim" <?php echo ($camisa['ancho']=='Slim')?'selected':'' ?>>Slim</option>
-                            </select>
-                          </div>
-                        </div>
-
-                        <div class="col-md-4">
-                          <div class="form-group">
-                            <label class="control-label">Cuello Combi</label>
-                            <select name="cam_ccombinado" class="form-control custom-select">
-                              <option value="">Seleccione</option>
-                              <option value="Si" <?php echo ($camisa['cuello_combinado']=='Si')?'selected':'' ?>>Si</option>
-                              <option value="No" <?php echo ($camisa['cuello_combinado']=='No')?'selected':'' ?>>No</option>
-                            </select>
-                          </div>
-                        </div>
-
-                      </div>
-
                     </div>
-                  </div>
-                <?php endif ?>
+                  <?php 
+                  endif;
+                }
+                ?>
                 </div>
                 <!-- fin camisa medidas -->
 
                 <!-- extras -->
-                <?php if ($extras['corbaton']): ?>
-                <div class="col-md-7">
-                  <div class="card card-outline-inverse">
-                    <div class="card-header">
-                      <h4 class="mb-0 text-white">EXTRAS</h4>
-                    </div>
-                    <div class="card-body" style="background-color: #f0e7fe;">
+                <?php 
+                if(!empty($extras)){
+                  if ($extras['corbaton']): 
+                  ?>
+                  <div class="col-md-7">
+                    <div class="card card-outline-inverse">
+                      <div class="card-header">
+                        <h4 class="mb-0 text-white">EXTRAS</h4>
+                      </div>
+                      <div class="card-body" style="background-color: #f0e7fe;">
 
-                      <div class="row">
-                        <input type="hidden" name="extras_id" value="<?php echo $extras['id'] ?>">
-                        <div class="col">
-                          <div class="form-group">
-                            <label class="control-label">Corbaton</label>
-                            <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbaton']; ?>">
+                        <div class="row">
+                          <input type="hidden" name="extras_id" value="<?php echo $extras['id'] ?>">
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="control-label">Corbaton</label>
+                              <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbaton']; ?>">
+                            </div>
                           </div>
-                        </div>
 
-                        <div class="col">
-                          <div class="form-group">
-                            <label class="control-label">Corbata gato</label>
-                            <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbata_gato']; ?>">
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="control-label">Corbata gato</label>
+                              <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbata_gato']; ?>">
+                            </div>
                           </div>
-                        </div>
 
-                        <div class="col">
-                          <div class="form-group">
-                            <label class="control-label">Faja</label>
-                            <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['faja']; ?>">
+                          <div class="col">
+                            <div class="form-group">
+                              <label class="control-label">Faja</label>
+                              <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['faja']; ?>">
+                            </div>
                           </div>
+
                         </div>
 
                       </div>
-
                     </div>
                   </div>
-                </div>
-                <?php endif ?>
+                  <?php 
+                  endif;
+                }
+                ?>
                 <!-- fin extras -->
 
             </div>
