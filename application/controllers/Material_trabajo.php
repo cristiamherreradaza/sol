@@ -41,12 +41,16 @@ class Material_trabajo extends CI_Controller {
 
     public function guarda(){
 
+		// var_dump($this->input->post('data-id'));
+		// exit;
+
         $id =  $this->input->post('material_id');
 
         $user_id = $this->session->id_usuario;
 
         $datos = array(
             'usuario_id' => $user_id,
+			'producto_id' => $this->input->post('producto_id'),
             'detalle' => $this->input->post('detalle'),
             'precio' => $this->input->post('precio'),
             'cantidad' => $this->input->post('cantidad'),

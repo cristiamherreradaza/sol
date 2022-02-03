@@ -21,16 +21,18 @@
                                     <div class="form-group">
                                         <label class="control-label">Detalle:</label><br>
                                         <!-- <input name="detalle" type="text" id="detalle" class="form-control"> -->
-										<select name="detalle" id="detalle" class=" form-control" style="width: 100%" required>
+										<select name="producto_id" id="producto_id" class=" form-control" style="width: 100%" required onchange="recuperaNombre(this)">
 											<option value="">Elija el Producto</option>
 											<?php
 											foreach ($productos as $pro){
 												?>
-												<option value="<?=$pro->id?>"><?=$pro->nombre?></option>
+												<option value="<?=$pro->id?>" data-nombre="<?=$pro->nombre?>" ><?=$pro->nombre?></option>
 												<?php
 											}
 											?>
 										</select>
+
+										<input type="hidden" name="detalle" id="detalle">
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -242,9 +244,13 @@
 	}
 
 	$(function(){
-        $('#detalle').select2({
+        $('#producto_id').select2({
             placeholder: "Seleccion un Producto"
         });
     });
 
+	function recuperaNombre(dato){
+		var nombre = dato.selectedOptions[0].getAttribute("data-nombre");
+		$('#detalle').val(nombre);
+	}
 </script>
