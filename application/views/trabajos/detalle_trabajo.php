@@ -134,6 +134,13 @@
                                                         <th>Largo</th>
                                                         <th>Pecho</th>
                                                         <th>Estomago</th>
+                                                        <?php
+                                                        if($trabajo['genero'] == 'Mujer'){
+                                                        ?>
+                                                        <th>Busto</th>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -141,6 +148,13 @@
                                                         <td><?php echo $chaleco['largo']; ?></td>
                                                         <td><?php echo $chaleco['pecho']; ?></td>
                                                         <td><?php echo $chaleco['estomago']; ?></td>
+                                                        <?php
+                                                        if($trabajo['genero'] == 'Mujer'){
+                                                        ?>
+                                                        <td><?=$chaleco['altura_busto']?></td>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </tr>
                                                 </tbody>
                                             </table>
