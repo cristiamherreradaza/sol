@@ -160,7 +160,7 @@
                                                                             <div class="col" id="saco_albusto" style="display: none;">
                                                                                 <div class="form-group">
                                                                                     <label class="control-label">Alt Busto</label>
-                                                                                    <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any">
+                                                                                    <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
                                                                                 </div>
                                                                             </div>
 
@@ -1692,8 +1692,10 @@
             $('#ch_largo').val(dato.value);
         }else if(dato.id == 's_pecho'){
             $('#ch_pecho').val(dato.value);
-        }else{
+        }else if(dato.id == 's_estomago'){
             $('#ch_estomago').val(dato.value);
+        }else{
+            $('#ch_abusto_dato').val(dato.value);
         }
 
     }

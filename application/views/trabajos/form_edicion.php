@@ -253,179 +253,185 @@
 
         <!-- pantalon -->
         <div class="row">
-          <?php if ($pantalon['modelo_id']): ?>
+          <?php
+          if(!empty($pantalon)){
+            if ($pantalon['modelo_id']): 
+            ?>
 
-          <!-- medidas pantalon -->
-            
-          <div class="col-md-5">
-            <div class="card card-outline-success">
-              <div class="card-header">
-                <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
-              </div>
-                <div class="card-body" style="background-color: #e6ffe6;">
-
-                  <div class="row">
-                    <input type="hidden" name="pantalon_id" value="<?php echo $pantalon['id'] ?>">
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="control-label">Largo</label>
-                        <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any" value="<?php echo $pantalon['largo']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="control-label">Entrepierna</label>
-                        <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any" value="<?php echo $pantalon['entre_pierna']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="control-label">Cintura</label>
-                        <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any" value="<?php echo $pantalon['cintura']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label class="control-label">Muslo</label>
-                        <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any" value="<?php echo $pantalon['muslo']; ?>">
-                      </div>
-                    </div>
-
-                  </div>
-
-                  <div class="row">
-
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Rodilla</label>
-                        <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any" value="<?php echo $pantalon['rodilla']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Bota Pie</label>
-                        <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any" value="<?php echo $pantalon['bota_pie']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">T. Delantero</label>
-                        <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_delantero']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Tiro Atras</label>
-                        <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_atras']; ?>">
-                      </div>
-                    </div>
-
-                    <div class="col" id="pantalon_cadera" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Cadera</label>
-                        <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any" value="<?php echo $pantalon['cadera']; ?>">
-                      </div>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            </div>
-            <!-- fin medidas pantalon -->
-
-            <!-- modelos pantalon -->
-            <div class="col-md-7">
+            <!-- medidas pantalon -->
+              
+            <div class="col-md-5">
               <div class="card card-outline-success">
                 <div class="card-header">
-                  <h4 class="mb-0 text-white">CARACTERISTICAS PANTALON</h4>
+                  <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
                 </div>
-                <div class="card-body" style="background-color: #e6ffe6;">
+                  <div class="card-body" style="background-color: #e6ffe6;">
 
-                  <div class="row">
-
-                    <div class="col">
-                      <div class="form-group">
-                        <?php //vdebug($modelos_varon, false, false, true); ?>
-                        <label class="control-label">Modelo</label>
-                        <select name="pd_modelo" class="form-control custom-select">
-                          <option value="">Seleccione</option>
-                          <?php foreach ($modelos_varon_pantalon as $mvp):?>
-                            <option value="<?php echo $mvp['id']?>" <?php echo ($mvp['id'] == $pantalon['modelo_id'])?'selected':'' ?>><?php echo $mvp['nombre']?></option>
-                          <?php endforeach?>
-                        </select>
+                    <div class="row">
+                      <input type="hidden" name="pantalon_id" value="<?php echo $pantalon['id'] ?>">
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="control-label">Largo</label>
+                          <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any" value="<?php echo $pantalon['largo']; ?>">
+                        </div>
                       </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="control-label">Entrepierna</label>
+                          <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any" value="<?php echo $pantalon['entre_pierna']; ?>">
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="control-label">Cintura</label>
+                          <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any" value="<?php echo $pantalon['cintura']; ?>">
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-group">
+                          <label class="control-label">Muslo</label>
+                          <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any" value="<?php echo $pantalon['muslo']; ?>">
+                        </div>
+                      </div>
+
                     </div>
 
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Pinzas</label>
-                        <select name="pd_pinzas" class="form-control custom-select">
-                          <option value="">Seleccione</option>
-                          <?php foreach ($pinzas_varon_pantalon as $pvp):?>
-                            <option value="<?php echo $pvp['id']?>" <?php echo ($pvp['id'] == $pantalon['pinza_id'])?'selected':'' ?>><?php echo $pvp['nombre']?></option>
-                          <?php endforeach?>
-                        </select>
-                      </div>
-                    </div>
+                    <div class="row">
 
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Bragueta</label>
-                        <select name="pd_bragueta" class="form-control custom-select">
-                          <option value="Cierre" <?php echo ($pantalon['bragueta']=='Cierre')?'selected':'' ?>>Cierre</option>
-                          <option value="Boton" <?php echo ($pantalon['bragueta']=='Boton')?'selected':'' ?>>Boton</option>
-                        </select>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Rodilla</label>
+                          <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any" value="<?php echo $pantalon['rodilla']; ?>">
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Bolsillo</label>
-                        <select name="pd_batras" class="form-control custom-select">
-                          <option value="">Seleccione</option>
-                          <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
-                            <option value="<?php echo $bvp['id']?>" <?php echo ($bvp['id'] == $pantalon['bolsillo_id'])?'selected':'' ?>><?php echo $bvp['nombre']?></option>
-                          <?php endforeach?>
-                        </select>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Bota Pie</label>
+                          <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any" value="<?php echo $pantalon['bota_pie']; ?>">
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col">
-                      <div class="form-group">
-                        <label class="control-label">Bota pie</label>
-                        <select name="pd_bpie" class="form-control custom-select">
-                          <option value="Normal" <?php echo ($pantalon['bota_pie_des']=='Normal')?'selected':'' ?>>Normal</option>
-                          <option value="Dobles" <?php echo ($pantalon['bota_pie_des']=='Dobles')?'selected':'' ?>>Dobles</option>
-                          <option value="Abertura" <?php echo ($pantalon['bota_pie_des']=='Abertura')?'selected':'' ?>>Abertura</option>
-                        </select>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">T. Delantero</label>
+                          <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_delantero']; ?>">
+                        </div>
                       </div>
-                    </div>
 
-                    <div class="col" id="pd_pretina" style="display: none;">
-                      <div class="form-group">
-                        <label class="control-label">Pretina</label>
-                        <select name="pd_pretina" class="form-control custom-select">
-                          <option value="">Seleccione</option>
-                          <option value="Normal" <?php echo ($pantalon['pretina']=='Normal')?'selected':'' ?>>Normal</option>
-                          <option value="Ancho" <?php echo ($pantalon['pretina']=='Ancho')?'selected':'' ?>>Ancho</option>
-                        </select>
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Tiro Atras</label>
+                          <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any" value="<?php echo $pantalon['tiro_atras']; ?>">
+                        </div>
                       </div>
+
+                      <div class="col" id="pantalon_cadera" style="display: none;">
+                        <div class="form-group">
+                          <label class="control-label">Cadera</label>
+                          <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any" value="<?php echo $pantalon['cadera']; ?>">
+                        </div>
+                      </div>
+
                     </div>
 
                   </div>
-
                 </div>
               </div>
-            </div>
-            <!-- fin medidas pantalon -->
-          <?php endif ?>          
+              <!-- fin medidas pantalon -->
+
+              <!-- modelos pantalon -->
+              <div class="col-md-7">
+                <div class="card card-outline-success">
+                  <div class="card-header">
+                    <h4 class="mb-0 text-white">CARACTERISTICAS PANTALON</h4>
+                  </div>
+                  <div class="card-body" style="background-color: #e6ffe6;">
+
+                    <div class="row">
+
+                      <div class="col">
+                        <div class="form-group">
+                          <?php //vdebug($modelos_varon, false, false, true); ?>
+                          <label class="control-label">Modelo</label>
+                          <select name="pd_modelo" class="form-control custom-select">
+                            <option value="">Seleccione</option>
+                            <?php foreach ($modelos_varon_pantalon as $mvp):?>
+                              <option value="<?php echo $mvp['id']?>" <?php echo ($mvp['id'] == $pantalon['modelo_id'])?'selected':'' ?>><?php echo $mvp['nombre']?></option>
+                            <?php endforeach?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Pinzas</label>
+                          <select name="pd_pinzas" class="form-control custom-select">
+                            <option value="">Seleccione</option>
+                            <?php foreach ($pinzas_varon_pantalon as $pvp):?>
+                              <option value="<?php echo $pvp['id']?>" <?php echo ($pvp['id'] == $pantalon['pinza_id'])?'selected':'' ?>><?php echo $pvp['nombre']?></option>
+                            <?php endforeach?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Bragueta</label>
+                          <select name="pd_bragueta" class="form-control custom-select">
+                            <option value="Cierre" <?php echo ($pantalon['bragueta']=='Cierre')?'selected':'' ?>>Cierre</option>
+                            <option value="Boton" <?php echo ($pantalon['bragueta']=='Boton')?'selected':'' ?>>Boton</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Bolsillo</label>
+                          <select name="pd_batras" class="form-control custom-select">
+                            <option value="">Seleccione</option>
+                            <?php foreach ($bolsillos_varon_pantalon as $bvp):?>
+                              <option value="<?php echo $bvp['id']?>" <?php echo ($bvp['id'] == $pantalon['bolsillo_id'])?'selected':'' ?>><?php echo $bvp['nombre']?></option>
+                            <?php endforeach?>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label class="control-label">Bota pie</label>
+                          <select name="pd_bpie" class="form-control custom-select">
+                            <option value="Normal" <?php echo ($pantalon['bota_pie_des']=='Normal')?'selected':'' ?>>Normal</option>
+                            <option value="Dobles" <?php echo ($pantalon['bota_pie_des']=='Dobles')?'selected':'' ?>>Dobles</option>
+                            <option value="Abertura" <?php echo ($pantalon['bota_pie_des']=='Abertura')?'selected':'' ?>>Abertura</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div class="col" id="pd_pretina" style="display: none;">
+                        <div class="form-group">
+                          <label class="control-label">Pretina</label>
+                          <select name="pd_pretina" class="form-control custom-select">
+                            <option value="">Seleccione</option>
+                            <option value="Normal" <?php echo ($pantalon['pretina']=='Normal')?'selected':'' ?>>Normal</option>
+                            <option value="Ancho" <?php echo ($pantalon['pretina']=='Ancho')?'selected':'' ?>>Ancho</option>
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <!-- fin medidas pantalon -->
+            <?php 
+            endif;
+          }
+          ?>
           </div>
           <!-- fin pantalon -->
 
