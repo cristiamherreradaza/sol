@@ -71,6 +71,7 @@
                                             </thead>
                                             <tbody>
                                               <?php
+                                              $sumTotal = 0 ;
                                               foreach ($sacos as $sa){
                                                 $producto = $this->db->get_where('productos', array('id' => $sa->producto_id, 'borrado' => null ))->row_array();
                                                 ?>
@@ -80,8 +81,14 @@
                                                   <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$sa->precio_total?>"></td>
                                                 </tr>                                            
                                                 <?php
+                                                $precioFilaSaco = $sa->precio_total;
+                                                $sumTotal = $sumTotal + $precioFilaSaco;
                                               }
                                               ?>
+                                                <tr>
+                                                  <td colspan="2"><b>TOTAL</b></td>
+                                                  <td><b><?=$sumTotal?> Bs.</b></td>
+                                                </tr>
                                             </tbody>
                                           </table>
                                         </div>
@@ -114,6 +121,7 @@
                                             </thead>
                                             <tbody>
                                               <?php
+                                              $sumTotal = 0;
                                               foreach ($pantalones as $sa){
                                                 $producto = $this->db->get_where('productos', array('id' => $sa->producto_id, 'borrado' => null ))->row_array();
                                                 ?>
@@ -123,8 +131,14 @@
                                                   <td><input name="pantalon_varon_precio[]" type="text" class="form-control" value="<?=$sa->precio_total?>"></td>
                                                 </tr>                                            
                                                 <?php
+                                                $precioFilaPantalon = $sa->precio_total;
+                                                $sumTotal = $sumTotal + $precioFilaPantalon;
                                               }
                                               ?>
+                                                <tr>
+                                                  <td colspan="2"><b>TOTAL</b></td>
+                                                  <td><b><?=$sumTotal?> Bs.</b></td>
+                                                </tr>
                                             </tbody>
                                           </table>
                                         </div>
@@ -159,6 +173,7 @@
                                             </thead>
                                             <tbody>
                                               <?php
+                                              $sumTotal = 0;
                                               foreach ($chalecos as $cha){
                                                 $producto = $this->db->get_where('productos', array('id' => $cha->producto_id, 'borrado' => null ))->row_array();
                                                 ?>
@@ -168,8 +183,14 @@
                                                   <td><input name="chaleco_varon_precio[]" type="text" class="form-control" value="<?=$cha->precio_total?>"></td>
                                                 </tr>                                            
                                                 <?php
+                                                $precioFilaPantalon = $cha->precio_total;
+                                                $sumTotal = $sumTotal + $precioFilaPantalon;
                                               }
                                               ?>
+                                                <tr>
+                                                  <td colspan="2"><b>TOTAL</b></td>
+                                                  <td><b><?=$sumTotal?> Bs.</b></td>
+                                                </tr>
                                             </tbody>
                                           </table>
                                         </div>
@@ -202,6 +223,7 @@
                                             </thead>
                                             <tbody>
                                               <?php
+                                              $sumTotal = 0;
                                               foreach ($faldas as $fa){
                                                 $producto = $this->db->get_where('productos', array('id' => $fa->producto_id, 'borrado' => null ))->row_array();
                                                 ?>
@@ -211,8 +233,14 @@
                                                   <td><input name="falda_varon_precio[]" type="text" class="form-control" value="<?=$fa->precio_total?>"></td>
                                                 </tr>                                            
                                                 <?php
+                                                $precioFilaPantalon = $fa->precio_total;
+                                                $sumTotal = $sumTotal + $precioFilaPantalon;
                                               }
                                               ?>
+                                                <tr>
+                                                  <td colspan="2"><b>TOTAL</b></td>
+                                                  <td><b><?=$sumTotal?> Bs.</b></td>
+                                                </tr>
                                             </tbody>
                                           </table>
                                         </div>
@@ -275,6 +303,7 @@
                                                     </thead>
                                                     <tbody>
                                                       <?php
+                                                      $sumTotal =  0;
                                                       foreach ($datos as $sv){
                                                         ?>
                                                         <tr>
@@ -283,8 +312,14 @@
                                                           <td><input name="saco_varon_precio[]" type="text" class="form-control" value="<?=$saco_varon->cantidad*$sv->precio?>"></td>
                                                         </tr>                                            
                                                         <?php
+                                                        $preciosFilaSaco = $saco_varon->cantidad*$sv->precio;
+                                                        $sumTotal =  $sumTotal + $preciosFilaSaco;
                                                       }
                                                       ?>
+                                                        <tr>
+                                                          <td colspan="2"><b>TOTAL</b></td>
+                                                          <td><b><?=$sumTotal?> Bs.</b></td>
+                                                        </tr>
                                                     </tbody>
                                                   </table>
                                                 </div>
@@ -317,6 +352,7 @@
                                                       <tbody>
                                                       <?php
                                                       $datos = $this->db->get_where('material_trabajos', array('pieza'=>'PANTALON','genero' =>'VARON', 'borrado' => null ))->result();
+                                                      $sumTotal = 0 ;
                                                       foreach($datos as $pv){
                                                       ?>
                                                         <tr>      
@@ -325,64 +361,16 @@
                                                           <td><input name="pantalon_varon_precio[]" id="" type="text" class="form-control" value="<?=$pantalon_varon->cantidad*$pv->precio?>"></td>
                                                         </tr>  
                                                       <?php
+                                                      $preciosFilaSaco = $pantalon_varon->cantidad*$pv->precio;
+                                                      $sumTotal = $sumTotal + $preciosFilaSaco;
                                                       }
                                                       ?>
+                                                      <tr>
+                                                        <td colspan="2"><b>TOTAL</b></td>
+                                                        <td><b><?=$sumTotal?> Bs.</b></td>
+                                                      </tr>
                                                       </tbody>
-                                                    </table>
-
-                                                      <!-- <div class="row">
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label"><?php echo 'BONYE (Metros)' ?></label>
-                                                              <input name="bpv" type="number" id="bpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*0.50; ?>">
-                                                            </div>
-                                                          </div>
-
-                                                          <div class="col-md-3">
-                                                            <div class="form-group">
-                                                              <label class="control-label"><?php echo 'CIERRE (Unidades)' ?></label>
-                                                              <input name="cpv" type="number" id="cpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1; ?>">
-                                                            </div>
-                                                          </div>
-
-                                                          <div class="col-md-5">
-                                                            <div class="form-group">
-                                                              <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
-                                                              <input name="pbpv" type="number" id="pbpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*0.30; ?>">
-                                                            </div>
-                                                          </div>
-                                                      </div> -->
-
-                                                      <!-- <div class="row">
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
-                                                            <input name="bppv" type="number" id="bppv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*5; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BROCHE (Unidades)' ?></label>
-                                                            <input name="bropv" type="number" id="bropv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'PLASTON (Metros)' ?></label>
-                                                            <input name="ppv" type="number" id="ppv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*6; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'LIGA (Metros)' ?></label>
-                                                            <input name="lpv" type="number" id="lpv" class="form-control" min="0" step="any" value="<?php echo $pantalon_varon->cantidad*1.2; ?>">
-                                                          </div>
-                                                        </div>
-                                                      </div> -->
-
+                                                    </table>                                                   
                                                   </div>
                                                 </div>
                                               </div>
@@ -422,6 +410,7 @@
                                                         <tbody>
                                                         <?php
                                                         $datos = $this->db->get_where('material_trabajos', array('pieza'=>'CHALECO','genero' =>'VARON', 'borrado' => null ))->result();
+                                                        $sumTotal = 0 ;
                                                         foreach($datos as $chv){
                                                         ?>
                                                           <tr>      
@@ -430,53 +419,16 @@
                                                             <td><input name="chaleco_varon_precio[]" id="" type="text" class="form-control" value="<?=$chaleco_varon->cantidad*$chv->precio?>"></td>
                                                           </tr>  
                                                         <?php
+                                                        $preciosFilaChaleco =  $chaleco_varon->cantidad*$chv->precio; 
+                                                        $sumTotal = $sumTotal + $preciosFilaChaleco;
                                                         }
                                                         ?>
+                                                          <tr>
+                                                            <td colspan="2"><b>TOTAL</b></td>
+                                                            <td><b><?=$sumTotal?> Bs.</b></td>
+                                                          </tr>
                                                         </tbody>
-                                                      </table>
-
-                                                      <!-- <div class="row">
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
-                                                            <input name="fcv" type="number" id="fcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*1.10; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
-                                                            <input name="pcv" type="number" id="pcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*0.30; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'HEVILLA (Unidades)' ?></label>
-                                                            <input name="hcv" type="number" id="hcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*1; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
-                                                            <input name="bgcv" type="number" id="bgcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*3; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                      </div>
-
-                                                      <div class="row">
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
-                                                            <input name="bpcv" type="number" id="bpcv" class="form-control" min="0" step="any" value="<?php echo $chaleco_varon->cantidad*2; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                      </div> -->
+                                                      </table>                                                     
                                                     </div>
                                                   </div>
                                               </div>
@@ -586,6 +538,7 @@
                                                         </thead>
                                                         <tbody>
                                                           <?php
+                                                          $sumTotal =  0 ;
                                                           foreach ($datos as $sm){
                                                             ?>
                                                             <tr>
@@ -594,62 +547,16 @@
                                                               <td><input name="saco_mujer_precio[]" type="text" class="form-control" value="<?=$saco_mujer->cantidad*$sm->precio?>"></td>
                                                             </tr>                                            
                                                             <?php
+                                                            $preciosFilaSacoMujer = $saco_mujer->cantidad*$sm->precio;
+                                                            $sumTotal = $sumTotal + $preciosFilaSacoMujer;
                                                           }
                                                           ?>
+                                                            <tr>
+                                                              <td colspan="2"><b>TOTAL</b></td>
+                                                              <td><b><?=$sumTotal?> Bs.</b></td>
+                                                            </tr>
                                                         </tbody>
-                                                      </table>                                    
-
-                                                      <!-- <div class="row">
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'FORRO (Metros)' ?></label>
-                                                            <input name="fsm" type="number" id="fsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*1.10; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'TELA FUSIONABLE (Metros)' ?></label>
-                                                            <input name="fusm" type="number" id="fusm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.30; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'PELLON BLANCO (Metros)' ?></label>
-                                                            <input name="psm" type="number" id="psm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.10; ?>">
-                                                          </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'TAFETA (Metros)' ?></label>
-                                                            <input name="tsm" type="number" id="tsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*0.20; ?>">
-                                                          </div>
-                                                        </div>
-                                                      </div>
-
-                                                      <div class="row">
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'HOMBRERA DE MUJER (Unidades)' ?></label>
-                                                            <input name="hmsm" type="number" id="hmsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*2; ?>">
-                                                          </div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BOTON GRANDE (Unidades)' ?></label>
-                                                            <input name="bgsm" type="number" id="bgsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*4; ?>">
-                                                          </div>
-                                                        </div>
-
-                                                        <div class="col-md-3">
-                                                          <div class="form-group">
-                                                            <label class="control-label"><?php echo 'BOTON PEQUEÑO (Unidades)' ?></label>
-                                                            <input name="bpsm" type="number" id="bpsm" class="form-control" min="0" step="any" value="<?php echo $saco_mujer->cantidad*10; ?>">
-                                                          </div>
-                                                        </div>
-                                                      </div> -->
-
+                                                      </table>
                                                     </div>
                                                   </div>
                                               </div>
@@ -682,6 +589,7 @@
                                                     <tbody>
                                                     <?php
                                                     $datos = $this->db->get_where('material_trabajos', array('pieza'=>'PANTALON','genero' =>'MUJER', 'borrado' => null ))->result();
+                                                    $sumTotal = 0;
                                                     foreach($datos as $pm){
                                                     ?>
                                                       <tr>      
@@ -690,8 +598,14 @@
                                                         <td><input name="pantalon_mujer_precio[]" id="" type="text" class="form-control" value="<?=$pantalon_mujer->cantidad*$pm->precio?>"></td>
                                                       </tr>  
                                                     <?php
+                                                    $preciosFilaPantalonMujer = $pantalon_mujer->cantidad*$pm->precio;
+                                                    $sumTotal = $sumTotal + $preciosFilaPantalonMujer;
                                                     }
                                                     ?>
+                                                      <tr>
+                                                        <td colspan="2"><b>TOTAL</b></td>
+                                                        <td><b><?=$sumTotal?> Bs.</b></td>
+                                                      </tr>
                                                     </tbody>
                                                   </table>
 
@@ -747,6 +661,7 @@
                                                       <tbody>
                                                       <?php
                                                       $datos = $this->db->get_where('material_trabajos', array('pieza'=>'FALDA','genero' =>'MUJER', 'borrado' => null ))->result();
+                                                      $sumTotal = 0;
                                                       foreach($datos as $fm){
                                                       ?>
                                                         <tr>      
@@ -755,8 +670,14 @@
                                                           <td><input name="falda_mujer_precio[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$fm->precio?>"></td>
                                                         </tr>  
                                                       <?php
+                                                      $preciosFilaFaldaMujer = $falda_mujer->cantidad*$fm->precio;
+                                                      $sumTotal = $sumTotal + $preciosFilaFaldaMujer; 
                                                       }
                                                       ?>
+                                                        <tr>
+                                                          <td colspan="2"><b>TOTAL</b></td>
+                                                          <td><b><?=$sumTotal?> Bs.</b></td>
+                                                        </tr>
                                                       </tbody>
                                                     </table>
                                                     <!-- <div class="row">
@@ -813,6 +734,7 @@
                                                     <tbody>
                                                     <?php
                                                     $datos = $this->db->get_where('material_trabajos', array('pieza'=>'CHALECO','genero' =>'MUJER', 'borrado' => null ))->result();
+                                                    $sumTotal = 0;
                                                     foreach($datos as $chm){
                                                     ?>
                                                       <tr>      
@@ -821,8 +743,14 @@
                                                         <td><input name="chaleco_mujer_precio[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$chm->precio?>"></td>
                                                       </tr>  
                                                     <?php
+                                                    $preciosFilaChalecoMujer = $falda_mujer->cantidad*$chm->precio;
+                                                    $sumTotal = $sumTotal + $preciosFilaChalecoMujer;
                                                     }
                                                     ?>
+                                                      <tr>
+                                                        <td colspan="2"><b>TOTAL</b></td>
+                                                        <td><b><?=$sumTotal?> Bs.</b></td>
+                                                      </tr>
                                                     </tbody>
                                                   </table>
 
