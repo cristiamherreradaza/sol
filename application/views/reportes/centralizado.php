@@ -320,28 +320,41 @@
                                                                 <th>Descripcion</th>
                                                                 <th class="text-center">Cantidad</th>
                                                                 <th class="text-right">Monto</th>
+                                                                <th class="text-right">Materiales</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <?php
                                                                 $cantidadCP = 0;
                                                                 $MontoCP = 0;
+                                                                $canMat = 0;
                                                                 foreach ($costo_produccion as $cp){
                                                                 ?>
                                                                     <tr>
                                                                         <td><?=$cp->tipo?></td>
                                                                         <td class="text-center"><?=$cp->cant_tra?></td>
                                                                         <td class="text-right"><?=$cp->precio?></td>
+                                                                        <?php
+                                                                        $prenda = strtoupper($cp->tipo);
+                                                                        $query = "SELECT SUM(salida) as total 
+                                                                            FROM movimientos 
+                                                                            WHERE confeccion = '$prenda' AND fecha BETWEEN '$inicio' AND '$fin'";
+                                                                            $totalMaterial = $this->db->query($query)->result_array();
+                                                                            $canMatSa = ($totalMaterial[0]['total'] != null)? $totalMaterial[0]['total'] : 0;
+                                                                        ?>
+                                                                        <td class="text-right"><?=number_format($canMatSa,2)?></td>
                                                                     </tr>    
                                                                 <?php
                                                                     $cantidadCP = $cantidadCP + $cp->cant_tra;
                                                                     $MontoCP = $MontoCP + $cp->precio;
+                                                                    $canMat = $canMat + $totalMaterial[0]['total'];
                                                                 }
                                                             ?>
                                                             <tr>
                                                                 <th>Total</th>
                                                                 <th class="text-center"><?=$cantidadCP?></td>
                                                                 <th class="text-right"><?=number_format($MontoCP,2)?></td>
+                                                                <th class="text-right"><?=$canMat?></th>
                                                             </tr>
                                                         </tbody>
                                                     </table>
