@@ -70,7 +70,7 @@
           
         <div class="row">
           <!-- medidas saco -->
-           
+          <?php if ($saco['modelo_id']): ?>
             <div class="col-md-5">
               <div class="card card-outline-info">
                 <div class="card-header">
@@ -157,7 +157,6 @@
           <!-- fin medidas saco -->
 
           <!-- inicia modelos sacos -->
-          <?php if ($saco['modelo_id']): ?>
           <div class="col-md-7">
             <div class="card card-outline-info">
               <div class="card-header">
