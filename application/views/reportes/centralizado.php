@@ -500,13 +500,13 @@ $(function () {
             ['Task', 'Hours per Day'],
             // ['Trabajo Con Deuda',<?//=$tra_deuda?>],
             // ['Trabajo Pagados',<?//=$tra_pagado?>]
-          ['Commute',  2],
-          ['Watch TV', 2],
-          ['Sleep',    7]
+          ['Varones',  <?=$cantidad_varones['total']?>],
+        //   ['Watch TV', 2],
+          ['Mujeres',    <?=$cantidad_mujeres['total']?>]
         ]);
 
         var options = {
-            title: 'Trabajos pagados o con Deudas',
+            title: 'Cantidad de Mujeres Varones',
             is3D: true,
         };
 
@@ -530,7 +530,7 @@ $(function () {
         ]);
 
         var options = {
-            title: 'My Daily Activities',
+            title: 'Productos Cantidad',
             pieHole: 0.4,
         };
 
