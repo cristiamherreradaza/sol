@@ -162,8 +162,8 @@
     function drawChart() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Trabajo Con Deuda',<?=$tra_deuda?>],
-            ['Trabajo Pagados',<?=$tra_pagado?>]
+            ['Trabajo Con Deuda (<?=$tra_deuda?>)',<?=$tra_deuda?>],
+            ['Trabajo Pagados (<?=$tra_pagado?>)',<?=$tra_pagado?>]
         //   ['Commute',  2],
         //   ['Watch TV', 2],
         //   ['Sleep',    7]
@@ -181,16 +181,16 @@
 
     function drawChart1() {
         var data = google.visualization.arrayToDataTable([
-            ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2]
+            ['Task', 'Cantidad de Trabajos'],
+            ['Mujeres',     <?=$cantidad_mujeres?>],
+            ['Varones',      <?=$cantidad_varones?>]
             // ['Commute',  2],
             // ['Watch TV', 2],
             // ['Sleep',    7]
         ]);
 
         var options = {
-            title: 'My Daily Activities',
+            title: 'Cantidad de Trabajos por generos',
             pieHole: 0.4,
         };
 

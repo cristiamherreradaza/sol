@@ -95,6 +95,21 @@ class Panel extends CI_Controller {
         $data['tra_deuda'] = count($this->db->query($tra_deuda)->result());
         $data['tra_pagado'] = count($this->db->query($tra_pagado)->result());
 
+        $cantidad_mujeres  = "SELECT * 
+                                FROM trabajos t INNER JOIN clientes c
+                                    ON t.cliente_id =  c.id
+                                    WHERE genero = 'Mujer' AND t.borrado IS NULL";
+
+        $data['cantidad_mujeres'] = count($this->db->query($cantidad_mujeres)->result());
+        
+        $cantidad_varones  = "SELECT * 
+                                FROM trabajos t INNER JOIN clientes c
+                                    ON t.cliente_id =  c.id
+                                    WHERE genero = 'Varon' AND t.borrado IS NULL";
+
+        $data['cantidad_varones'] = count($this->db->query($cantidad_varones)->result());
+                                    
+
 
         $this->load->view('template/header');
 		$this->load->view('template/menu');
