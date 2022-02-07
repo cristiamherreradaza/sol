@@ -11,6 +11,20 @@
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-md-12">
+                    <center><h1><b>REPORTE <span class="text-info">CENTRALIZADO</span></b></h1></center>
+                </div>
+            </div>
+            <hr>
+            <div class="row text-center">
+                <div class="col-md-6">
+                    DESDE: <b class="text-info"> <?php echo fechaEs($inicio); ?></b>
+                </div>
+                <div class="col-md-6">
+                    HASTA: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-6">
@@ -23,19 +37,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
-                        <center><h1><b>REPORTE <span class="text-info">CENTRALIZADO</span></b></h1></center>
-                        <?php //vdebug($tela_confeccion, false, false, true); ?>
-                        <hr>
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="text-center">
-                                    DESDE: <b class="text-info"> <?php echo fechaEs($inicio); ?></b>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    HASTA: <b class="text-info"> <?php echo fechaEs($fin); ?></b>
-                                </div>
-                            </div>
-                            <p>&nbsp;</p>
-
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -118,7 +120,7 @@
 
                                         <div class="card card-outline-info">
                                             <div class="card-header">
-                                                <h4 class="mb-0 text-white">INGRESOS POR CONTRATOS</h4>
+                                                <h4 class="mb-0 text-white">CANTIDAD DE CONTRATOS</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
@@ -165,7 +167,7 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Trabajos</td>
+                                                                <td>Trabajos con Deuda</td>
                                                                 <td class="text-center"><?php echo $trabajos_cantidad['total']; ?></td>
                                                                 <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
                                                             </tr>
@@ -328,6 +330,7 @@
                                                                 $cantidadCP = 0;
                                                                 $MontoCP = 0;
                                                                 $canMat = 0;
+                                                                $costo_produccion1 = $costo_produccion;
                                                                 foreach ($costo_produccion as $cp){
                                                                 ?>
                                                                     <tr>
@@ -494,11 +497,15 @@ $(function () {
     function drawChart1() {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
-            ['Work',     11],
-            ['Eat',      2]
-            // ['Commute',  2],
-            // ['Watch TV', 2],
-            // ['Sleep',    7]
+            <?php
+                foreach ($costo_produccion1 as $pro){
+                ?>
+                    ['<?=$pro->tipo?>',     <?=$pro->cant_tra?>],
+                <?php
+                }
+            ?>
+            // ['Work',     11],
+            // ['Eat',      2]
         ]);
 
         var options = {
