@@ -58,18 +58,18 @@
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Trabajos</td>
-                                                                <td class="text-center"><?php echo $trabajos_cantidad['total']; ?></td>
-                                                                <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Trabajos por cobrar</td>
+                                                                <td>Trabajos con deudas</td>
                                                                 <td class="text-center"><?php echo $cantidad_deudores['total']; ?></td>
                                                                 <td class="text-right"><?php echo number_format($monto_deudores['total'], 2) ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Efectivo Cobrado</th>
-                                                                <td class="text-center"></td>
+                                                                <td>Trabajos pagados</td>
+                                                                <td class="text-center"><?php echo $cantidad_pagados['total']; ?></td>
+                                                                <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Total trabajos</th>
+                                                                <td class="text-center"><?=$cantidad_deudores['total']+$cantidad_pagados['total']?></td>
                                                                 <?php $trabajos_por_cobrar = $trabajos_totales['total']-$monto_deudores['total'] ?>
                                                                 <th class="text-right"><?php echo number_format($trabajos_por_cobrar, 2) ?></th>
                                                             </tr>
@@ -153,7 +153,7 @@
 
                                         <div class="card card-outline-success">
                                             <div class="card-header">
-                                                <h4 class="mb-0 text-white">INGRESOS POR TRABAJOS</h4>
+                                                <h4 class="mb-0 text-white">INGRESOS POR TRABAJOS POR GENEROS</h4>
                                             </div>
                                             <div class="card-body">
                                                 <div class="table-responsive">
@@ -162,25 +162,21 @@
                                                             <tr>
                                                                 <th>Descripcion</th>
                                                                 <th class="text-center">Cantidad</th>
-                                                                <th class="text-right">Monto</th>
+                                                                <!-- <th class="text-right">Monto</th> -->
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Trabajos con Deuda</td>
-                                                                <td class="text-center"><?php echo $trabajos_cantidad['total']; ?></td>
-                                                                <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
+                                                                <td>Varones</td>
+                                                                <td class="text-center"><?php echo $cantidad_varones['total']; ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Trabajos por cobrar</td>
-                                                                <td class="text-center"><?php echo $cantidad_deudores['total']; ?></td>
-                                                                <td class="text-right"><?php echo number_format($monto_deudores['total'], 2) ?></td>
+                                                                <td>Mujeres</td>
+                                                                <td class="text-center"><?php echo $cantidad_mujeres['total']; ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Efectivo Cobrado</th>
-                                                                <td class="text-center"></td>
-                                                                <?php $trabajos_por_cobrar = $trabajos_totales['total']-$monto_deudores['total'] ?>
-                                                                <th class="text-right"><?php echo number_format($trabajos_por_cobrar, 2) ?></th>
+                                                                <th>Total</th>
+                                                                <th class="text-center"><?=$cantidad_varones['total']+$cantidad_mujeres['total']?></th>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -396,11 +392,36 @@
                                     </div> -->
 
                                 </div>
-
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="card card-outline-info">
+                                            <div class="card-header">
+                                                <h4 class="mb-0 text-white text-center">INGRESOS, GASTOS, SALDOS</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table no-wrap">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Ingreso</th>
+                                                                <th class="text-center">Gasto</th>
+                                                                <th class="text-right">Saldo</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><?=$ingresos_totales?> Bs.</td>
+                                                                <td class="text-center"><?php echo $gasto_total; ?></td>
+                                                                <td class="text-right"><?php echo number_format($ingresos_totales-$gasto_total, 2) ?></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <!-- HASTA AQUI -->
-
-                                
-
                             </div>
                             
                         </div>

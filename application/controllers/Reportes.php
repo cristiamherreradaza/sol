@@ -283,6 +283,14 @@ class Reportes extends CI_Controller {
 						AND borrado IS NULL;";	
 		$data['cantidad_deudores'] = $this->db->query($cantidad_deudores)->row_array();
 
+		// cantidad total de pagados
+		$cantidad_deudores = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND saldo = 0
+						AND borrado IS NULL;";	
+		$data['cantidad_pagados'] = $this->db->query($cantidad_deudores)->row_array();
+
 		// monto por deudores
 		$monto_deudores = "SELECT SUM(saldo) as total
 						FROM trabajos 
@@ -290,6 +298,22 @@ class Reportes extends CI_Controller {
 						AND saldo <> 0
 						AND borrado IS NULL;";	
 		$data['monto_deudores'] = $this->db->query($monto_deudores)->row_array();
+
+		// cantidad de mujeres de trabajos
+		$cantidad_mujeres = "SELECT COUNT(c.id) as total
+							FROM trabajos t INNER JOIN  clientes c
+								ON c.id = t.cliente_id
+								WHERE t.borrado is null AND c.genero = 'Mujer' AND
+								ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";	
+		$data['cantidad_mujeres'] = $this->db->query($cantidad_mujeres)->row_array();
+
+		// cantidad de varones de trabajos
+		$monto_varones = "SELECT COUNT(c.id) as total
+							FROM trabajos t INNER JOIN  clientes c
+								ON c.id = t.cliente_id
+								WHERE t.borrado is null AND c.genero = 'Varon' AND
+								ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";	
+		$data['cantidad_varones'] = $this->db->query($monto_varones)->row_array();
 
 		// cantidad de no entregados
 		$trabajos_no_entregados = "SELECT COUNT(id) as total
@@ -389,6 +413,59 @@ class Reportes extends CI_Controller {
 
 
 		$data['costo_produccion'] = $this->db->query($costo_produccion)->result();
+		
+		// para los ingresos de pagos
+		$ingresos_total_pagos = "SELECT  SUM(monto) as total
+							FROM pagos 
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataPagos = $this->db->query($ingresos_total_pagos)->row_array();
+
+		// para los ingresos de caja chica
+		$ingresos_total_cajachica = "SELECT  SUM(ingreso) as total
+							FROM cajachica
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataCajaChica = $this->db->query($ingresos_total_cajachica)->row_array();
+
+		$data['ingresos_totales'] = $dataPagos['total']+$dataCajaChica['total'];
+
+
+
+		// para los gastos de caja chica
+		$salida_total_cajachica = "SELECT  SUM(salida) as total
+							FROM cajachica
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataCajaChicaSalida = $this->db->query($salida_total_cajachica)->row_array();
+
+		// para los gastos de costoy produccion
+		$salida_total_costoProduccion = "SELECT SUM(total) as total
+									FROM costos_produccion 
+									WHERE created_at BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+									AND borrado is null;";
+
+		$dataCostoProduccion = $this->db->query($salida_total_costoProduccion)->row_array();
+		
+		// para los gastos de de mocimientos
+		$salida_total_movimientos = "SELECT SUM(precio_total) as total
+										FROM movimientos 
+										WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+										AND borrado is null
+										AND precio_total is not null
+										AND estado = 'Confeccion';";
+
+		$dataMovimientos = $this->db->query($salida_total_movimientos)->row_array();
+
+		$data['gasto_total'] = $dataCajaChicaSalida['total']+$dataCostoProduccion['total']+$dataMovimientos['total'];
+
+
+		// var_dump($dataCajaChica);
+		// exit;
+
+
+
+
 		// $data['costo_produccion'] = $this->db->query($costo_produccion)->row_array();
 
 		// $data['costo_produccion'] = $this->db->query($costo_produccion)->result();
