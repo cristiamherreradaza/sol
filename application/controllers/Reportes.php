@@ -459,21 +459,6 @@ class Reportes extends CI_Controller {
 
 		$data['gasto_total'] = $dataCajaChicaSalida['total']+$dataCostoProduccion['total']+$dataMovimientos['total'];
 
-
-		// var_dump($dataCajaChica);
-		// exit;
-
-
-
-
-		// $data['costo_produccion'] = $this->db->query($costo_produccion)->row_array();
-
-		// $data['costo_produccion'] = $this->db->query($costo_produccion)->result();
-		
-		// var_dump($data['costo_produccion']);
-		// exit;
-
-
 		$this->load->view('template/header');
 		$this->load->view('template/menu');
 		$this->load->view('reportes/centralizado', $data);
@@ -626,6 +611,246 @@ class Reportes extends CI_Controller {
 		$this->load->view('reportes/sueldos_control', $data);
 		$this->load->view('template/footer');
 
+	}
+
+	public function reportePdf($inifecha = null, $finfecha = null){
+
+		$fecha_hora_inicio = str_replace('%20'," ",$inifecha);
+		$fecha_hora_fin = str_replace('%20'," ",$finfecha);
+		// echo $fecha_hora_inicio;
+		// exit;
+
+		$data['inicio'] = $fecha_hora_inicio;
+		$data['fin'] = $fecha_hora_fin;
+		// Esto hace que las consultas GROUP BY se generen de manera normal
+		$sql_mode = "set session sql_mode=''";
+		$this->db->query($sql_mode);
+
+		// suma total de trabajos
+		$trabajos_totales = "SELECT SUM(total) as total
+						FROM trabajos 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND borrado IS NULL;";	
+		$data['trabajos_totales'] = $this->db->query($trabajos_totales)->row_array();
+
+		// total gastos ingresos caja chica
+		$ingresos_gastos_cc = "SELECT SUM(salida) as gastos, SUM(ingreso) as ingreso
+							FROM cajachica 
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+							AND borrado IS NULL;";	
+		$data['ingresos_gastos_cc'] = $this->db->query($ingresos_gastos_cc)->row_array();
+
+		// total y cantidad ingresos por contratos
+		$ingresos_contratos = "SELECT SUM(cantidad*total) as total, COUNT(id) as cantidad
+							FROM contratos 
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+							AND borrado IS NULL;";	
+		$data['ingresos_contratos'] = $this->db->query($ingresos_contratos)->row_array();
+
+		// cantidad total de trabajos
+		$trabajos_cantidad = "SELECT COUNT(id) as total 
+						FROM trabajos 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND borrado IS NULL;";	
+		$data['trabajos_cantidad'] = $this->db->query($trabajos_cantidad)->row_array();
+
+		// cantidad total de deudores
+		$cantidad_deudores = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND saldo <> 0
+						AND borrado IS NULL;";	
+		$data['cantidad_deudores'] = $this->db->query($cantidad_deudores)->row_array();
+
+		// cantidad total de pagados
+		$cantidad_deudores = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND saldo = 0
+						AND borrado IS NULL;";	
+		$data['cantidad_pagados'] = $this->db->query($cantidad_deudores)->row_array();
+
+		// monto por deudores
+		$monto_deudores = "SELECT SUM(saldo) as total
+						FROM trabajos 
+						WHERE ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND saldo <> 0
+						AND borrado IS NULL;";	
+		$data['monto_deudores'] = $this->db->query($monto_deudores)->row_array();
+
+		// cantidad de mujeres de trabajos
+		$cantidad_mujeres = "SELECT COUNT(c.id) as total
+							FROM trabajos t INNER JOIN  clientes c
+								ON c.id = t.cliente_id
+								WHERE t.borrado is null AND c.genero = 'Mujer' AND
+								ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";	
+		$data['cantidad_mujeres'] = $this->db->query($cantidad_mujeres)->row_array();
+
+		// cantidad de varones de trabajos
+		$monto_varones = "SELECT COUNT(c.id) as total
+							FROM trabajos t INNER JOIN  clientes c
+								ON c.id = t.cliente_id
+								WHERE t.borrado is null AND c.genero = 'Varon' AND
+								ultimo_pago BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";	
+		$data['cantidad_varones'] = $this->db->query($monto_varones)->row_array();
+
+		// cantidad de no entregados
+		$trabajos_no_entregados = "SELECT COUNT(id) as total
+						FROM trabajos 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND entregado = 'No'
+						AND borrado IS NULL;
+						";	
+		$data['trabajos_no_entregados'] = $this->db->query($trabajos_no_entregados)->row_array();
+
+		// costos de operacion
+		$costos_operacion = "SELECT costos.descripcion, costos.varon, COUNT(costos.id) as total
+							FROM costos 
+							LEFT JOIN costos_produccion ON costos_produccion.costo_id = costos.id 
+							WHERE costos_produccion.created_at BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+							AND costos_produccion.borrado IS NULL
+							GROUP BY costos.descripcion;
+						";	
+		$data['costos_operacion'] = $this->db->query($costos_operacion)->result_array();
+		// vdebug($data['costos_operacion'], true, false, true);
+
+		// CANTIDAD DE INEVTARIOS COMPRA Y VENTA MES ACTUAL
+		$compra_inevtarios = "SELECT COUNT(id) as total
+						FROM compras 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND estado = 1;
+						";	
+		$data['cantidad_compra'] = $this->db->query($compra_inevtarios)->row_array();
+
+		// monto por compra
+		$valor_compra = "SELECT SUM(precio_total) as total
+						FROM compras 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND estado = 1;";	
+		$data['valor_compra'] = $this->db->query($valor_compra)->row_array();
+
+		// CANTIDAD DE INEVTARIOS COMPRA Y VENTA MES ACTUAL
+		$venta_inventarios = "SELECT COUNT(id) as total
+						FROM ventas 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND estado = 1";	
+		$data['venta_compra'] = $this->db->query($venta_inventarios)->row_array();
+
+		// monto por compra
+		$valor_venta = "SELECT SUM(precio_total) as total
+						FROM ventas 
+						WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+						AND estado = 1;";	
+		$data['valor_venta'] = $this->db->query($valor_venta)->row_array();
+
+		// CANTIDAD DE INEVTARIOS COMPRA Y VENTA MES ACTUAL
+		$cantidad_empleados = "SELECT COUNT(id) as total
+						FROM personal 
+						WHERE borrado IS NULL";	
+		$data['cantidad_empleados'] = $this->db->query($cantidad_empleados)->row_array();
+
+		$mes_inicio = date('m', strtotime($fecha_hora_inicio));//MES ACTUAL
+		$anio_inicio = date('Y', strtotime($fecha_hora_inicio));//AÑO ACTUAL
+
+		$mes_fin = date('m', strtotime($fecha_hora_fin));//MES ACTUAL
+		$anio_fin = date('Y', strtotime($fecha_hora_fin));//AÑO ACTUAL		
+		// monto por compra
+		$sueldo_empleados = "SELECT SUM(sueldo) as total
+						FROM sueldos 
+						WHERE mes BETWEEN '$mes_inicio' AND '$mes_fin'
+						AND anio BETWEEN '$anio_inicio' AND '$anio_fin'
+						AND borrado IS NULL;";	
+		$data['sueldo_empleados'] = $this->db->query($sueldo_empleados)->row_array();
+
+		// CANTIDAD DE INEVTARIOS COMPRA Y VENTA MES ACTUAL
+		$cantidad_descuentos = "SELECT COUNT(id) as total
+						FROM sueldos 
+						WHERE mes BETWEEN '$mes_inicio' AND '$mes_fin'
+						AND anio BETWEEN '$anio_inicio' AND '$anio_fin'
+						AND descuentos > '0'
+						AND borrado IS NULL";	
+		$data['cantidad_descuentos'] = $this->db->query($cantidad_descuentos)->row_array();
+
+		// monto por compra
+		$descuento_empleados = "SELECT SUM(descuentos) as total
+						FROM sueldos 
+						WHERE mes BETWEEN '$mes_inicio' AND '$mes_fin'
+						AND anio BETWEEN '$anio_inicio' AND '$anio_fin'
+						AND borrado IS NULL;";	
+		$data['descuento_empleados'] = $this->db->query($descuento_empleados)->row_array();
+
+		// var_dump($data['venta_compra']);
+		// COSTO Y PRODUCCION
+		$fecha_hora_fin1 = $fecha_hora_fin.' 23:59:59' ;
+		$costo_produccion = "SELECT SUM(cp.precio) as precio, COUNT(t.id) as cant_tra, c.id , c.descripcion as tipo
+							FROM trabajos t INNER JOIN costos_produccion cp
+								ON t.id = cp.trabajo_id	INNER JOIN costos c
+									ON c.id = cp.costo_id
+							WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin1' 
+							GROUP by c.id";
+							// -- WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin' ";
+
+
+		$data['costo_produccion'] = $this->db->query($costo_produccion)->result();
+		
+		// para los ingresos de pagos
+		$ingresos_total_pagos = "SELECT  SUM(monto) as total
+							FROM pagos 
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataPagos = $this->db->query($ingresos_total_pagos)->row_array();
+
+		// para los ingresos de caja chica
+		$ingresos_total_cajachica = "SELECT  SUM(ingreso) as total
+							FROM cajachica
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataCajaChica = $this->db->query($ingresos_total_cajachica)->row_array();
+
+		$data['ingresos_totales'] = $dataPagos['total']+$dataCajaChica['total'];
+
+
+
+		// para los gastos de caja chica
+		$salida_total_cajachica = "SELECT  SUM(salida) as total
+							FROM cajachica
+							WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$dataCajaChicaSalida = $this->db->query($salida_total_cajachica)->row_array();
+
+		// para los gastos de costoy produccion
+		$salida_total_costoProduccion = "SELECT SUM(total) as total
+									FROM costos_produccion 
+									WHERE created_at BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+									AND borrado is null;";
+
+		$dataCostoProduccion = $this->db->query($salida_total_costoProduccion)->row_array();
+		
+		// para los gastos de de mocimientos
+		$salida_total_movimientos = "SELECT SUM(precio_total) as total
+										FROM movimientos 
+										WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+										AND borrado is null
+										AND precio_total is not null
+										AND estado = 'Confeccion';";
+
+		$dataMovimientos = $this->db->query($salida_total_movimientos)->row_array();
+
+		$data['gasto_total'] = $dataCajaChicaSalida['total']+$dataCostoProduccion['total']+$dataMovimientos['total'];
+		
+
+		$this->load->view('reportes/reportePdf', $data);
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+		$this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+		exit;
+
+		// echo $this->input->get('inifecha');
+		// echo str_replace('%'," ",$inifecha)."<-->".$finfecha;
 	}
 
 }

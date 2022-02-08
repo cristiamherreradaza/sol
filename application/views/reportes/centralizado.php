@@ -360,9 +360,7 @@
                                             </div>
                                         </div>
                                     </div>
-
                                    <!--  <div class="col-md-4">
-
                                         <div class="card card-outline-danger">
                                             <div class="card-header">
                                                 <h4 class="mb-0 text-white">INGRESOS POR CONTRATOS</h4>
@@ -388,9 +386,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                     </div> -->
-
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -419,6 +415,11 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <button onclick="reportePdf('<?=$inicio?>', '<?=$fin?>')" type="button" class="btn btn-block btn-success">IMPRIMIR REPORTE</button>
                                     </div>
                                 </div>
                                 <!-- HASTA AQUI -->
@@ -536,5 +537,11 @@ $(function () {
 
         var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
         chart.draw(data, options);
+    }
+
+    function reportePdf(inifecha, finfecha) {
+        // alert("en desarrollo :v");
+        window.location.href = "<?php echo base_url() ?>Reportes/reportePdf/"+inifecha+"/"+finfecha;
+        // window.location.href = "<?php echo base_url() ?>Reportes/reportePdf/"+inifecha;
     }
 </script>
