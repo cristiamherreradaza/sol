@@ -540,8 +540,8 @@ $(function () {
     }
 
     function reportePdf(inifecha, finfecha) {
-        // alert("en desarrollo :v");
-        window.location.href = "<?php echo base_url() ?>Reportes/reportePdf/"+inifecha+"/"+finfecha;
-        // window.location.href = "<?php echo base_url() ?>Reportes/reportePdf/"+inifecha;
+        var url = "<?php echo base_url() ?>Reportes/reportePdf/"+inifecha+"/"+finfecha;
+
+        window.open(url, '_blank');
     }
 </script>
