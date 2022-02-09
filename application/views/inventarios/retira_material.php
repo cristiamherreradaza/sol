@@ -44,7 +44,7 @@
                             </div>
 
                               <input type="hidden" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
-                              <!-- <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
+                              <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>">
                               <input type="hidden" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
                               <div class="row">
                                 <div class="col-md-6">
@@ -274,16 +274,15 @@
                                   </div>
                                 </div>
                                 <input type="hidden" name="trabajo_id" id="trabajo_id"  value="<?php echo $trabajo['id']; ?>">
-                                <!-- <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>"> -->
+                                <input type="hidden" name="cliente_id" id="cliente_id"  value="<?php echo $trabajo['cliente_id'] ?>">
                                 <input type="hidden" name="fecha" id="fecha"  value="<?php echo date("Y-m-d") ?>">
                                 <?php if (!empty($saco_varon->cantidad)) { ?>
                                 <!-- INICIO DATOS PARA EL VARON -->
                                 <div class="col-md-12">
                                         <div class="row">
                                         <!-- <?//php if (!empty($saco_varon->cantidad)): ?> -->
-                                        <?php if ($saco_varon->modelo_id != 0): 
-                                            
-                                          ?>
+                                        <?php if ($saco_varon->modelo_id != 0):?>
+                                            <input type="hidden" name="saco_cantidad" id="saco_cantidad"  value="<?php echo $saco_varon->cantidad ?>">
                                             <div class="col-md-6">
                                               <div class="card card-outline-info">
                                                 <div class="card-header">
@@ -335,6 +334,7 @@
                                             if ($pantalon_varon->modelo_id != 0): 
                                             ?>
                                               <!-- modelos pantalon -->
+                                              <input type="hidden" name="pantalon_cantidad" id="pantalon_cantidad"  value="<?php echo $pantalon_varon->cantidad ?>">
                                               <div class="col-md-6">
                                                 <div class="card card-outline-success">
                                                   <div class="card-header">
@@ -392,6 +392,7 @@
                                         if($chaleco_varon != null){
                                           if ($chaleco_varon->modelo_id != 0): 
                                           ?>
+                                              <input type="hidden" name="ch_cantidad" id="ch_cantidad"  value="<?php echo $chaleco_varon->cantidad ?>">
                                               <div class="col-md-6">
                                                   <div class="card card-outline-primary">
                                                     <div class="card-header">
@@ -519,6 +520,7 @@
                                         if($saco_mujer != null){
                                           if ($saco_mujer->modelo_id != 0): 
                                             ?>
+                                              <input type="hidden" name="saco_cantidad" id="saco_cantidad"  value="<?php echo $saco_mujer->cantidad ?>">
                                               <div class="col-md-6">
                                                   <div class="card card-outline-info">
                                                     <div class="card-header">
@@ -572,6 +574,7 @@
                                           if ($pantalon_mujer->modelo_id != 0):
                                            ?>
                                             <!-- modelos pantalon -->
+                                            <input type="hidden" name="pantalon_cantidad" id="pantalon_cantidad"  value="<?php echo $pantalon_mujer->cantidad ?>">
                                             <div class="col-md-6">
                                               <div class="card card-outline-success">
                                                 <div class="card-header">
@@ -644,6 +647,7 @@
                                         if($falda_mujer != null){
                                           if ($falda_mujer->modelo_id != 0): 
                                           ?>
+                                            <input type="hidden" name="fa_cantidad" id="fa_cantidad"  value="<?php echo $falda_mujer->cantidad ?>">
                                             <div class="col-md-6">
                                               <div class="card card-outline-primary">
                                                   <div class="card-header">
@@ -717,6 +721,7 @@
                                           ?>
                                             
                                             <!-- modelos pantalon -->
+                                            <input type="hidden" name="ch_cantidad" id="ch_cantidad"  value="<?php echo $chaleco_mujer->cantidad ?>">
                                             <div class="col-md-6">
                                               <div class="card card-outline-inverse">
                                                 <div class="card-header">

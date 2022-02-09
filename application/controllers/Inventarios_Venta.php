@@ -131,6 +131,28 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_saco = $this->db->get_where('costos', array('id'=>1))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+			
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->varon;
+				$precio_saco = $datos_costo_saco->varon;
+			}else{
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->mujer;
+				$precio_saco = $datos_costo_saco->mujer;
+			}
+			$datos_costos_produccion = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 1,
+				'cantidad'   => $this->input->post('saco_cantidad'),
+				'precio'     => $precio_saco,
+				'total'      => $total_costo_saco,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion);
+
 		}
 
 		// // MATERIALES PARA EL PANTALON DEL VARON
@@ -155,6 +177,27 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_pantalon = $this->db->get_where('costos', array('id'=>2))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->varon;
+				$precio_pantalon = $datos_costo_pantalon->varon;
+			}else{
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->mujer;
+				$precio_pantalon = $datos_costo_pantalon->mujer;
+			}
+			$datos_costos_produccion_pantalon = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 2,
+				'cantidad'   => $this->input->post('pantalon_cantidad'),
+				'precio'     => $precio_pantalon,
+				'total'      => $total_costo_pantalon,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_pantalon);
 		}
 
 		// // MATERIALES PARA EL CHALECO DEL VARON
@@ -179,6 +222,27 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_chaleco = $this->db->get_where('costos', array('id'=>3))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->varon;
+				$precio_chaleco = $datos_costo_chaleco->varon;
+			}else{
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->mujer;
+				$precio_chaleco = $datos_costo_chaleco->mujer;
+			}
+			$datos_costos_produccion_chaleco = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 3,
+				'cantidad'   => $this->input->post('ch_cantidad'),
+				'precio'     => $precio_chaleco,
+				'total'      => $total_costo_chaleco,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_chaleco);
 		}
 
 		// // MATERIALES PARA EL SACO DE LA MUJER
@@ -203,6 +267,27 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_saco = $this->db->get_where('costos', array('id'=>1))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+			
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->varon;
+				$precio_saco = $datos_costo_saco->varon;
+			}else{
+				$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->mujer;
+				$precio_saco = $datos_costo_saco->mujer;
+			}
+			$datos_costos_produccion = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 1,
+				'cantidad'   => $this->input->post('saco_cantidad'),
+				'precio'     => $precio_saco,
+				'total'      => $total_costo_saco,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion);
 		}
 
 		// // MATERIALES PARA EL PANTALON DE LA MUJER
@@ -226,6 +311,27 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_pantalon = $this->db->get_where('costos', array('id'=>2))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->varon;
+				$precio_pantalon = $datos_costo_pantalon->varon;
+			}else{
+				$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->mujer;
+				$precio_pantalon = $datos_costo_pantalon->mujer;
+			}
+			$datos_costos_produccion_pantalon = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 2,
+				'cantidad'   => $this->input->post('pantalon_cantidad'),
+				'precio'     => $precio_pantalon,
+				'total'      => $total_costo_pantalon,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_pantalon);
 		}
 
 		// // MATERIALES PARA EL FALDA DE LA MUJER
@@ -249,6 +355,19 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion con id 4 por el valor de la tabal costos
+			$datos_costo_falda = $this->db->get_where('costos', array('id'=>4))->row();
+			$total_costo_falda = $this->input->post('fa_cantidad')*$datos_costo_falda->mujer;
+			$datos_costos_produccion_falda = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 4,
+				'cantidad'   => $this->input->post('fa_cantidad'),
+				'precio'     => $datos_costo_falda->mujer,
+				'total'      => $total_costo_falda,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_falda);
 		}
 
 		// // MATERIALES PARA EL CHALECO DE LA MUJER
@@ -272,6 +391,27 @@ class Inventarios_Venta extends CI_Controller {
 	
 				$this->db->insert('movimientos', $datos);
 			}
+
+			// insertamos los datos de costos de produccion
+			$datos_costo_chaleco = $this->db->get_where('costos', array('id'=>3))->row();
+			$persona =  $this->db->get_where('clientes', array('id'=>$this->input->post('cliente_id'),'borrado'=>null))->result();
+
+			if ($persona[0]->genero == 'Varon') {
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->varon;
+				$precio_chaleco = $datos_costo_chaleco->varon;
+			}else{
+				$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->mujer;
+				$precio_chaleco = $datos_costo_chaleco->mujer;
+			}
+			$datos_costos_produccion_chaleco = array(
+				'trabajo_id' => $this->input->post('trabajo_id'),
+				'cliente_id' => $this->input->post('cliente_id'),
+				'costo_id'   => 3,
+				'cantidad'   => $this->input->post('ch_cantidad'),
+				'precio'     => $precio_chaleco,
+				'total'      => $total_costo_chaleco,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_chaleco);
 		}
 
 
