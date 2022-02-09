@@ -501,13 +501,13 @@ $(function () {
             ['Task', 'Hours per Day'],
             // ['Trabajo Con Deuda',<?//=$tra_deuda?>],
             // ['Trabajo Pagados',<?//=$tra_pagado?>]
-          ['Varones',  <?=$cantidad_varones['total']?>],
+          ['Deudas',  <?=$cantidad_deudores['total']?>],
         //   ['Watch TV', 2],
-          ['Mujeres',    <?=$cantidad_mujeres['total']?>]
+          ['Pagados',    <?=$cantidad_pagados['total']?>]
         ]);
 
         var options = {
-            title: 'Cantidad de Mujeres Varones',
+            title: 'Ingresos por trabajos',
             is3D: true,
         };
 
