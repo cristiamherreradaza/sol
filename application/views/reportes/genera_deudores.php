@@ -1,4 +1,6 @@
-   <!-- ============================================================== -->
+<link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
+<link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
+<!-- ============================================================== -->
     <!-- Page wrapper  -->
     <!-- ============================================================== -->
     <div class="page-wrapper">
@@ -11,16 +13,16 @@
             <!-- ============================================================== -->
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card card-body printableArea">
+                    <div class="card card-body">
                         <center><h1><b>REPORTE <span class="text-info">DEUDORES</span></b></h1></center>
                         <?php //vdebug($tela_confeccion, false, false, true); ?>
                         <hr>
                         <div class="row">
                             
-                            <p>&nbsp;</p>
+                            <!-- <p>&nbsp;</p> -->
 
                             <div class="col-md-12">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
 
                                         <div class="card card-outline-success">
@@ -71,11 +73,11 @@
                                         
                                     </div>
 
-                                </div>
+                                </div> -->
 
                                 <div class="table-responsive mt-5" style="clear: both;">
                                 <?php //vdebug($entregados, false, false, true); ?>
-                                    <table class="table table-hover">
+        							<table id="config-table" class="table display table-bordered table-striped no-wrap">
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
@@ -106,6 +108,37 @@
                             
                         </div>
 
+                    </div>
+                    <div class="printableArea" hidden>
+                        <center><h1><b>REPORTE <span class="text-info">DEUDORES</span></b></h1></center>
+                        <?php //vdebug($tela_confeccion, false, false, true); ?>
+                        <hr>
+                        <table id="" class="table display table-bordered table-striped no-wrap">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">TRABAJO</th>
+                                    <th class="text-center">CLIENTE</th>
+                                    <th class="text-center">FECHA</th>
+                                    <th class="text-center">SALDO</th>
+                                    <th class="text-center">ENTREGADO</th>
+                                    <th class="text-center">DIAS</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($deudores as $key => $d): ?>
+                                    <tr>
+                                        <td class="text-center"><?php echo ++$key ?></td>
+                                        <td class="text-center"><?php echo $d['id'] ?></td>
+                                        <td class="text-left"><?php echo $d['nombre']; ?></td>
+                                        <td class="text-center"><?php echo $d['fecha']; ?></td>
+                                        <td class="text-center"><?php echo $d['saldo']; ?></td>
+                                        <td class="text-center"><?php echo $d['entregado']; ?></td>
+                                        <td class="text-center"><?php echo $d['dias']; ?></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
 
 
@@ -148,6 +181,10 @@
 <!-- End Wrapper -->
 <!-- ============================================================== -->
 <script src="<?php echo base_url(); ?>public/main/js/jquery.PrintArea.js" type="text/JavaScript"></script>
+
+<!-- This is data table -->
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/js/dataTables.responsive.min.js"></script>
 <script>
    $(document).ready(function() {
        $("#print").click(function() {
@@ -161,7 +198,7 @@
        });
    });
 </script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
   google.charts.load("current", {packages:["corechart"]});
   google.charts.setOnLoadCallback(drawChart);
@@ -181,27 +218,41 @@
     var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
     chart.draw(data, options);
   }
-</script>
+</script> -->
 
 <script type="text/javascript">
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+    // google.charts.load('current', {'packages':['corechart']});
+    // google.charts.setOnLoadCallback(drawChart);
 
-    function drawChart() {
+    // function drawChart() {
 
-    var data = google.visualization.arrayToDataTable([
-        ['MONTOS', 'TOTALES'],
-        ['ENTREGADOS', <?php echo $total_entregados['total'] ?>],
-        ['SIN ENTREGAR', <?php echo $total_sin_entregar ?>]
-    ]);
+    // var data = google.visualization.arrayToDataTable([
+    //     ['MONTOS', 'TOTALES'],
+    //     ['ENTREGADOS', <?php echo $total_entregados['total'] ?>],
+    //     ['SIN ENTREGAR', <?php echo $total_sin_entregar ?>]
+    // ]);
 
-    var options = {
-      // title: 'My Daily Activities'
-        chartArea:{width:'90%',height:'100%'}
-    };
+    // var options = {
+    //   // title: 'My Daily Activities'
+    //     chartArea:{width:'90%',height:'100%'}
+    // };
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    // var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-    chart.draw(data, options);
-    }
+    // chart.draw(data, options);
+    // }
+
+    $(function () {
+		// $('#config-table').DataTable();
+		// responsive table
+		$('#config-table').DataTable({
+			responsive: true,
+			"order": [
+				[0, 'asc']
+			],
+			"language": {
+            	"url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+        	}
+		});
+	});
 </script>
