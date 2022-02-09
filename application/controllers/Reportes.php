@@ -853,4 +853,29 @@ class Reportes extends CI_Controller {
 		// echo str_replace('%'," ",$inifecha)."<-->".$finfecha;
 	}
 
+	public function caja_chica(){
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('reportes/caja_chica');
+		$this->load->view('template/footer');
+	}
+
+	public function ajax_listado_caja_chica($fecha_ini = null, $fecha_fin = null){
+
+		$fecha_hora_inicio = $this->input->get('fecha_ini')." 00:00:00";
+		$fecha_hora_fin = $this->input->get('fecha_fin')." 23:59:59";
+
+		// var_dump($fecha_hora_inicio);
+		// var_dump($fecha_hora_fin);
+
+		$consulta = "SELECT * 
+					 FROM cajachica
+					 WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$data['cajas'] = $this->db->query($consulta)->result();	
+		// var_dump($data['cajas']);
+
+		$this->load->view('reportes/ajax_listado_caja_chica', $data);
+	}
+
 }

@@ -133,6 +133,7 @@
                         <ul aria-expanded="false" class="collapse">
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_centralizado">Centralizado</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/inicio">Trabajos</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/caja_chica">Caja Chica</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
                         </ul>
