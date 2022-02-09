@@ -81,11 +81,11 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
-                                                <th class="text-center">TRABAJO</th>
+                                                <!-- <th class="text-center">TRABAJO</th> -->
                                                 <th class="text-center">CLIENTE</th>
-                                                <th class="text-center">FECHA</th>
-                                                <th class="text-center">SALDO</th>
-                                                <th class="text-center">ENTREGADO</th>
+                                                <!-- <th class="text-center">FECHA</th> -->
+                                                <th class="text-center">TOTAL</th>
+                                                <!-- <th class="text-center">ENTREGADO</th> -->
                                                 <th class="text-center">DIAS</th>
                                             </tr>
                                         </thead>
@@ -93,11 +93,11 @@
                                             <?php foreach ($deudores as $key => $d): ?>
                                                 <tr>
                                                     <td class="text-center"><?php echo ++$key ?></td>
-                                                    <td class="text-center"><?php echo $d['id'] ?></td>
+                                                    <!-- <td class="text-center"><?php echo $d['id'] ?></td> -->
                                                     <td class="text-left"><?php echo $d['nombre']; ?></td>
-                                                    <td class="text-center"><?php echo $d['fecha']; ?></td>
+                                                    <!-- <td class="text-center"><?php echo $d['fecha']; ?></td> -->
                                                     <td class="text-center"><?php echo $d['saldo']; ?></td>
-                                                    <td class="text-center"><?php echo $d['entregado']; ?></td>
+                                                    <!-- <td class="text-center"><?php echo $d['entregado']; ?></td> -->
                                                     <td class="text-center"><?php echo $d['dias']; ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -117,11 +117,11 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">#</th>
-                                    <th class="text-center">TRABAJO</th>
+                                    <!-- <th class="text-center">TRABAJO</th> -->
                                     <th class="text-center">CLIENTE</th>
-                                    <th class="text-center">FECHA</th>
-                                    <th class="text-center">SALDO</th>
-                                    <th class="text-center">ENTREGADO</th>
+                                    <!-- <th class="text-center">FECHA</th> -->
+                                    <th class="text-center">TOTAL</th>
+                                    <!-- <th class="text-center">ENTREGADO</th> -->
                                     <th class="text-center">DIAS</th>
                                 </tr>
                             </thead>
@@ -129,11 +129,11 @@
                                 <?php foreach ($deudores as $key => $d): ?>
                                     <tr>
                                         <td class="text-center"><?php echo ++$key ?></td>
-                                        <td class="text-center"><?php echo $d['id'] ?></td>
+                                        <!-- <td class="text-center"><?php echo $d['id'] ?></td> -->
                                         <td class="text-left"><?php echo $d['nombre']; ?></td>
-                                        <td class="text-center"><?php echo $d['fecha']; ?></td>
+                                        <!-- <td class="text-center"><?php echo $d['fecha']; ?></td> -->
                                         <td class="text-center"><?php echo $d['saldo']; ?></td>
-                                        <td class="text-center"><?php echo $d['entregado']; ?></td>
+                                        <!-- <td class="text-center"><?php echo $d['entregado']; ?></td> -->
                                         <td class="text-center"><?php echo $d['dias']; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
