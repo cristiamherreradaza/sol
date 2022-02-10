@@ -165,13 +165,11 @@
                                     <li><a href="<?php echo base_url(); ?>costos/modifica">Costos Operacion</a></li>
                                 </ul>
                             </li>
-                            <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
+                            <!-- <li><a class="has-arrow" href="#" aria-expanded="false"><i class="mdi mdi-clipboard-outline"></i><span class="hide-menu"> Inventarios</span></a>
                                 <ul aria-expanded="false" class="collapse">
                                     <li><a href="<?php echo base_url(); ?>Materiales/categorias">Materiales</a></li>
-                                    <!--<li><a href="<?php echo base_url(); ?>Inventarios/productos">Productos</a></li>
-                                    <li><a href="<?php echo base_url(); ?>Inventarios">Dashboard</a></li> -->
                                 </ul>
-                            </li>
+                            </li> -->
                             <li>
                                 <a href="<?php echo base_url() ?>Usuarios/listado"><i class="mdi mdi-account-multiple"></i> Usuarios</a>
                             </li>

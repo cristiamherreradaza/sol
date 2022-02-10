@@ -878,4 +878,29 @@ class Reportes extends CI_Controller {
 		$this->load->view('reportes/ajax_listado_caja_chica', $data);
 	}
 
-}
+	public function reporteCajaChica($fecha_ini = null, $fecha_fin = null){
+
+		$data['inicio'] = $fecha_ini;
+		$data['fin'] 	= $fecha_fin;
+		
+		$fecha_hora_inicio 	= $fecha_ini." 00:00:00";
+		$fecha_hora_fin 	= $fecha_fin." 23:59:59";
+		
+		$consulta = "SELECT * 
+					 FROM cajachica
+					 WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'";
+
+		$data['cajas'] = $this->db->query($consulta)->result();	
+
+		$this->load->view('reportes/reporteCajaChica', $data);
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+		$this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+		exit;
+	}
+
+};

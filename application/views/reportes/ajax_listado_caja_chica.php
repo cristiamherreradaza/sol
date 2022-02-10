@@ -31,6 +31,11 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-block btn-info"  onclick="reporteCajaChica()">IMPRIMIR</button>
+    </div>
+</div>
 <!-- This is data table -->
 <script src="<?php echo base_url(); ?>/public/assets/plugins/jquery/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>/public/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
