@@ -109,8 +109,11 @@ class Reportes extends CI_Controller {
 		$data['no_entregados'] = $this->db->query($sql_no_entregados, array($fecha_hora_inicio, $fecha_hora_fin))->row_array();
 
 		// vdebug($consulta_totales, true, false, true);
-		$data['inicio'] = $fecha_hora_inicio;
-		$data['fin'] = $fecha_hora_fin;
+		// $data['inicio'] = $fecha_hora_inicio;
+		// $data['fin'] = $fecha_hora_fin;
+		$data['inicio'] = $this->input->post('fecha_inicio');
+		$data['fin'] 	= $this->input->post('fecha_fin');
+
 		$data['trabajos'] = $this->db->get()->result_array();
 		
 		// vdebug($data['trabajo'], true, false, true);
@@ -909,5 +912,33 @@ class Reportes extends CI_Controller {
         $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
 		exit;
 	}
+
+	public function reporteTrabajos($fecha_ini = null, $fecha_fin = null){
+		// echo $fecha_ini."<--->".$fecha_fin;
+
+		$data['inicio'] = $fecha_ini;
+		$data['fin'] 	= $fecha_fin;
+		
+		$fecha_hora_inicio 	= $fecha_ini." 00:00:00";
+		$fecha_hora_fin 	= $fecha_fin." 23:59:59";
+		
+		$consulta = "SELECT c.nombre, c.ci, c.celulares, c.genero, t.*
+					FROM trabajos t INNER JOIN clientes c
+						ON t.cliente_id = c.id
+					WHERE t.borrado is null AND fecha BETWEEN '$fecha_hora_inicio'  AND '$fecha_hora_fin'";
+
+		$data['trabajos'] = $this->db->query($consulta)->result();	
+
+		$this->load->view('reportes/reporteTrabajos', $data);
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+		$this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+		exit;
+	}
+
 
 };

@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-body printableArea">
-                        <center><h1><b>REPORTE <span class="text-info">INGRESOS</span></b></h1></center>
+                        <center><h1><b>REPORTE <span class="text-info">TRABAJOS</span></b></h1></center>
                         <?php //vdebug($tela_confeccion, false, false, true); ?>
                         <hr>
                         <div class="row">
@@ -109,7 +109,7 @@
 
                                 <div class="table-responsive mt-5" style="clear: both;">
                                 <?php //vdebug($entregados, false, false, true); ?>
-                                <h3>LISTADO DE LOS TRABAJOS</h3>
+                                    <h3>LISTADO DE LOS TRABAJOS</h3>
                                     <table class="table display table-bordered table-striped no-wrap" id="config-table">
                                         <thead>
                                             <tr>
@@ -143,9 +143,14 @@
                                                         
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
+                                            <?php endforeach; ?>                                            
                                         </tbody>
                                     </table>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button type="button" class="btn btn-block btn-success" onclick="reporteTrabajos()">IMPRIMIR</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -240,20 +245,28 @@ $(function () {
     google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+        ['MONTOS', 'TOTALES'],
+        ['ENTREGADOS', <?php echo $entregados['cantidad'] ?>],
+        ['SIN ENTREGAR', <?php echo $no_entregados['cantidad'] ?>]
+        ]);
 
-    var data = google.visualization.arrayToDataTable([
-      ['MONTOS', 'TOTALES'],
-      ['ENTREGADOS', <?php echo $entregados['cantidad'] ?>],
-      ['SIN ENTREGAR', <?php echo $no_entregados['cantidad'] ?>]
-      ]);
+        var options = {
+        // title: 'My Daily Activities'
+        chartArea:{width:'90%',height:'100%'}
+        };
 
-    var options = {
-      // title: 'My Daily Activities'
-      chartArea:{width:'90%',height:'100%'}
-    };
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+    }
 
-    chart.draw(data, options);
+    function reporteTrabajos(){
+        var fecha_ini = '<?=$inicio?>';
+        var fecha_fin = '<?=$fin?>';
+
+        var url = "<?php echo base_url() ?>/reportes/reporteTrabajos/"+fecha_ini+"/"+fecha_fin;
+
+        window.open(url, '_blank');
     }
 </script>
