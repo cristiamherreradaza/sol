@@ -121,8 +121,15 @@ class Reportes extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function reporte_deudas()
+	public function reporte_deudas($fecha_ini = null, $fecha_fin = null)
 	{
+		
+		$fecha_hora_inicio = $fecha_ini.' 00:00:00';
+		$fecha_hora_fin    = $fecha_fin.' 23:59:00';
+
+		$data['inicio'] = $fecha_ini;
+		$data['fin'] 	= $fecha_fin;
+
 		// Esto hace que las consultas GROUP BY se generen de manera normal
 		$sql_mode = "set session sql_mode=''";
 		$this->db->query($sql_mode);
@@ -130,7 +137,7 @@ class Reportes extends CI_Controller {
 		$sql_deudores = "SELECT t.id, c.nombre, t.fecha, t.saldo, t.entregado, DATEDIFF(CURDATE(), t.fecha) AS dias 
 						FROM trabajos as t
 						LEFT JOIN clientes as c ON t.cliente_id = c.id
-						WHERE t.saldo > 0 
+						WHERE t.saldo > 0 AND fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
 						AND t.borrado IS NULL
 						ORDER BY dias DESC";
 

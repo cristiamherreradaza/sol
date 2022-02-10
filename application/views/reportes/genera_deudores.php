@@ -15,12 +15,16 @@
                 <div class="col-md-12">
                     <div class="card card-body">
                         <center><h1><b>REPORTE <span class="text-info">DEUDORES</span></b></h1></center>
-                        <?php //vdebug($tela_confeccion, false, false, true); ?>
+                        <div class="row text-center">
+                            <div class="col-md-6">
+                                <h3 class="text-info"><?=fechaEs($inicio)?></h3>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="text-info"><?=fechaEs($fin)?></h3>
+                            </div>
+                        </div>
                         <hr>
                         <div class="row">
-                            
-                            <!-- <p>&nbsp;</p> -->
-
                             <div class="col-md-12">
                                 <!-- <div class="row">
                                     <div class="col-md-6">
@@ -140,21 +144,12 @@
                             </tbody>
                         </table>
                     </div>
-
-
                     <div class="row">
-                        <div class="col-md-6">
-                            <a href="<?php echo base_url(); ?>trabajos/impresion_cliente/1">
-                                <button class="btn waves-effect waves-light btn-block btn-info" type="button"> <span><i class="fa fa-print"></i> Impresion Cliente</span> </button>
-                            </a>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <button id="print" class="btn waves-effect waves-light btn-block btn-dark" type="button"> <span><i class="fa fa-print"></i> Impresion Empresa</span> </button>
                         </div>
                     </div>
-                    
                 </div>
-
             </div>
             <!-- ============================================================== -->
             <!-- End PAge Content -->
@@ -167,7 +162,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            2020 desarrollado por GoGhu
+            <?=date('Y')?> desarrollado por GoGhu
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->

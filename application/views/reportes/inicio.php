@@ -27,7 +27,10 @@
 										<h4 class="mb-0 text-white">TRABAJOS</h4>
 									</div>
 									<div class="card-body" style="background-color: #e6f2ff;">
-										<?php echo form_open('reportes/genera_ingresos') ?>
+										<?php 
+                                        $atributos = array('id'=>'form_trabajos');
+										echo form_open('reportes/genera_ingresos',$atributos) 
+										?>
 
 										<div class="row">
 											<div class="col-md-4">
@@ -57,9 +60,9 @@
 										<hr>
 										<div class="row">
 											<div class="col-md-12">
-												<a href="<?php echo base_url() ?>reportes/reporte_deudas">
-													<button type="submit" class="btn waves-effect waves-light btn-block btn-dark">GENERA DEUDAS</button>
-												</a>
+												<!-- <a href="<?php echo base_url() ?>reportes/reporte_deudas"> -->
+													<button type="button" class="btn waves-effect waves-light btn-block btn-dark" onclick="GeneraDeudas()">GENERA DEUDAS</button>
+												<!-- </a> -->
 											</div>
 										</div>
 									</div>
@@ -82,3 +85,16 @@
 		</div>
 	</div>
 </div>
+<script>
+	function GeneraDeudas(){
+		if($('#form_trabajos')[0].checkValidity()){
+			var fecha_ini = $('#fecha_inicio').val();
+			var fecha_fin = $('#fecha_fin').val();
+
+			window.location.href = "<?php echo base_url() ?>reportes/reporte_deudas/"+fecha_ini+"/"+fecha_fin;
+
+		}else{
+			$('#form_trabajos')[0].reportValidity()
+		}
+	}
+</script>
