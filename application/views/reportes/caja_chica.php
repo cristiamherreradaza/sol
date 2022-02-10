@@ -98,11 +98,14 @@
     }
 
     function reporteCajaChica(){
-        // console.log("holas desde reporte");
+        
         var fecha_ini = $('#fecha_inicio').val();
         var fecha_fin = $('#fecha_fin').val();
 
-        window.location.href = "<?php echo base_url() ?>/reportes/reporteCajaChica/"+fecha_ini+"/"+fecha_fin;
+        var url = "<?php echo base_url() ?>/reportes/reporteCajaChica/"+fecha_ini+"/"+fecha_fin;
+
+        // abrir un PDF en una pestaña nueva
+        window.open(url, '_blank');
     }
 
 </script>
