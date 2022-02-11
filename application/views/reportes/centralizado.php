@@ -335,9 +335,10 @@
                                                                         <td class="text-right"><?=$cp->precio?></td>
                                                                         <?php
                                                                         $prenda = strtoupper($cp->tipo);
-                                                                        $query = "SELECT SUM(salida) as total 
+                                                                        // $query = "SELECT SUM(salida) as total 
+                                                                        $query = "SELECT SUM(precio_total) as total 
                                                                             FROM movimientos 
-                                                                            WHERE confeccion = '$prenda' AND fecha BETWEEN '$inicio' AND '$fin'";
+                                                                            WHERE confeccion = '$prenda' AND fecha BETWEEN '$inicio' AND '$fin' AND borrado is null";
                                                                             $totalMaterial = $this->db->query($query)->result_array();
                                                                             $canMatSa = ($totalMaterial[0]['total'] != null)? $totalMaterial[0]['total'] : 0;
                                                                         ?>

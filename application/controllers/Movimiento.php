@@ -43,7 +43,8 @@ class Movimiento extends CI_Controller {
         $datos1 = array(
             'usuarios_id'    => $user_id,
             'producto_id'  => $this->input->post('producto_id-agregar'),
-            'almacen_id'    => $this->session->almacen_id,
+            // 'almacen_id'    => $this->session->almacen_id,
+            'almacen_id'    => $this->input->post('almacen_id-agregar'),
 			'ingreso'        => $this->input->post('cantidad-agregar'),
             'fecha'         => date("Y-m-d"),
 			'estado'        => 'Regularizacion',
@@ -60,7 +61,8 @@ class Movimiento extends CI_Controller {
         $datos1 = array(
             'usuarios_id'    => $user_id,
             'producto_id'    => $this->input->post('producto_id'),
-            'almacen_id'     => $this->session->almacen_id,
+            // 'almacen_id'     => $this->session->almacen_id,
+            'almacen_id'     => $this->input->post('almacen_id'),
 			'precio_compra'  =>	$this->input->post('precio_unidad'),
 			'precio_venta'   => $this->input->post('precio_venta'),
 			'precio_total'   => $this->input->post('precio_total'),

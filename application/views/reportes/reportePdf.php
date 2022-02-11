@@ -114,13 +114,15 @@
             width:380px;
         }
         .compraVenta{
-            padding-top: -77px;
+            /* padding-top: -77px; */
         }
         .pagoSalarios{
-            padding-top: -57px;
+            /* padding-top: -57px; */
         }
-        .costoProduccion{
-            
+        .contenidos1 th{
+          height: 20px;
+          background-color: #616362;
+          color: #fff;
         }
     </style>
 </head>
@@ -289,7 +291,7 @@
     <table>
         <tr>
             <td class="compraVenta">
-                <table class="contenidos">
+                <table class="contenidos1">
                     <tr>
                         <th colspan="3">
                             <center>
@@ -321,7 +323,7 @@
                 </table>
             </td>
             <td class="pagoSalarios">
-                <table class="contenidos">
+                <table class="contenidos1">
                     <tr>
                         <th colspan="3">
                             <center>
@@ -353,7 +355,7 @@
                 </table>
             </td>
             <td class="costoProduccion">
-                <table class="contenidos">
+                <table class="contenidos1">
                     <tr>
                         <th colspan="4">
                             <center>
@@ -380,7 +382,7 @@
                                 <td class="text-right"><?=$cp->precio?></td>
                                 <?php
                                 $prenda = strtoupper($cp->tipo);
-                                $query = "SELECT SUM(salida) as total 
+                                $query = "SELECT SUM(precio_total) as total 
                                     FROM movimientos 
                                     WHERE confeccion = '$prenda' AND fecha BETWEEN '$inicio' AND '$fin'";
                                     $totalMaterial = $this->db->query($query)->result_array();

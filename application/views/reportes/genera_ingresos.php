@@ -148,7 +148,7 @@
                                     </table>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button type="button" class="btn btn-block btn-success" onclick="reporteTrabajos()">IMPRIMIR</button>
+                                            <button type="button" class="btn btn-block btn-info" onclick="reporteTrabajos()">IMPRIMIR</button>
                                         </div>
                                     </div>
                                 </div>

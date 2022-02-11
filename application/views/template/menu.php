@@ -187,7 +187,7 @@
                     <li>
                         <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">ITEMS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de itemns</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de items</a></li>
                         </ul>
                     </li>
                     <li>

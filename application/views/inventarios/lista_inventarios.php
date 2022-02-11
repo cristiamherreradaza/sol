@@ -80,6 +80,20 @@
                                                 </div>
                                                 <!--/span-->
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="control-label">Almacen</label>
+                                                    <select name="almacen_id" id="almacen_id" class="form-control">
+                                                        <?php
+                                                        foreach ($almacenes as $al){
+                                                        ?>
+                                                        <option  value="<?=$al->id?>" <?php $seleccionado  =  ($al->id == $this->session->almacen_id)? 'selected' : ''; echo $seleccionado?>><?=$al->nombre?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn waves-effect waves-light btn-block btn-success" onclick="guardaProductoLegal();">GUARDA</button>
@@ -96,6 +110,7 @@
             <!-- /.modal-dialog -->
         </div>
        <!-- end modal de ingrso de material -->
+
 
         <!-- MODAL AGREGAR ITEM -->
         <div id="myModalAgregarItem" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -128,6 +143,20 @@
                                                                 <label class="control-label">Detalle</label>
                                                                 <input type="text" name="detalle-agregar"id="detalle-agregar" class="form-control" required>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <label class="control-label">Almacen</label>
+                                                            <select name="almacen_id-agregar" id="almacen_id-agregar" class="form-control">
+                                                                <?php
+                                                                foreach ($almacenes as $al){
+                                                                ?>
+                                                                <option  value="<?=$al->id?>" <?php $seleccionado  =  ($al->id == $this->session->almacen_id)? 'selected' : ''; echo $seleccionado?>><?=$al->nombre?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -200,7 +229,7 @@
         <!-- END MODAL SACAR ITEM -->
 
         <div id="myModalEditar" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <!-- Row -->
                         <div class="row">
@@ -235,6 +264,47 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <hr>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Cantidad</label>
+                                                            <input name="cantidad-producto-edita" type="number" id="cantidad-producto-edita" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Precio por unidad</label>
+                                                            <input name="preciounidad-edita" type="number" id="preciounidad-edita" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Precio por venta</label>
+                                                            <input name="precioventa-edita" type="number" id="precioventa-edita" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <label class="control-label">Precio Total</label>
+                                                            <input name="preciototal-edita" type="number" id="preciototal-edita" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Fecha</label>
+                                                            <input name="fecha-edita" type="date" id="fecha-edita" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Detalle</label>
+                                                            <input name="detalle-edita" type="text" id="detalle-edita" class="form-control">
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <label class="control-label">Almacen</label>
+                                                            <select name="almacen_id-edita" id="almacen_id-edita" class="form-control">
+                                                                <?php
+                                                                foreach ($almacenes as $al){
+                                                                ?>
+                                                                <option  value="<?=$al->id?>" <?php $seleccionado  =  ($al->id == $this->session->almacen_id)? 'selected' : ''; echo $seleccionado?>><?=$al->nombre?></option>
+                                                                <?php
+                                                                }
+                                                                ?>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -257,8 +327,15 @@
             <div class="col-lg-12 col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title">LISTA DE ITEMS &nbsp;&nbsp;&nbsp;&nbsp;
-                        </h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="card-title">LISTA DE ITEMS &nbsp;&nbsp;&nbsp;&nbsp;</h3>
+                            </div>
+                            <div class="col-md-6 align-right">
+                                <button class="btn btn-success btn-block" onclick="nuevoItem()"> + Nuevo Item</button>
+                            </div>
+                        </div>
+                        <hr>
                         <div class="table-responsive m-t-40" id="tabla">
                                 <table id="config-table" class="table display table-bordered table-striped no-wrap">
                                     <thead>
@@ -307,31 +384,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-lg-6">
-                <div class="col-md-12">
-                  <div class="card card-outline-success">
-                      <div class="card-header">
-                          <h4 class="mb-0 text-white">RESUMEN INGRESOS DE INVENTARIO</h4>
-                      </div>
-                      <div class="card-body">
-                          <div id="piechart_3d" style="width: 100%; height: 300px;"></div>
-                          <br>
-                      </div>
-                  </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="card card-outline-primary">
-                      <div class="card-header">
-                          <h4 class="mb-0 text-white">RESUMEN SALIDA DE INVENTARIO</h4>
-                      </div>
-                      <div class="card-body">
-                          <div id="piechart" style="width: 100%; height: 300px;"></div>
-                          <br>
-                      </div>
-                    </div>
-                </div>
-
-            </div> -->
         </div>
         <!-- End PAge Content -->
         <!-- ============================================================== -->
@@ -413,7 +465,7 @@
     }
 
     function SacarProducto(){
-        // alert("En desarrollo :v");
+        
         if($('#formulario-saca-producto')[0].checkValidity()){
 			$('#formulario-saca-producto').submit();
             Swal.fire("Excelente!", "Registro Guardado!", "success");
@@ -459,6 +511,21 @@
             $('#formulario-agregar-producto-legal')[0].reportValidity()
         }
     }
+
+    function nuevoItem(){
+        $('#producto-edita').val('0');
+        $('#nombre-producto').val('');
+        $('#tipo-producto').val('METROS');
+        $('#cantidad-producto-edita').val('');
+        $('#myModalEditar').modal('show');
+    }
+
+    $('#preciounidad-edita').on('change', function(e){
+        var precio_unidad = e.target.value;
+        var stock = $("#cantidad-producto-edita").val();
+        var total = precio_unidad * stock;
+        $('#preciototal-edita').val(total);
+    });
 </script>
     
 

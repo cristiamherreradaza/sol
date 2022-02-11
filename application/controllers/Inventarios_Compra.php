@@ -185,9 +185,13 @@ class Inventarios_Compra extends CI_Controller {
 
     public function lista()
     {
-		$sql_productos = $this->db->query("SELECT * FROM productos")->result(); // este no devuleve array recuperacion es ->
+		$sql_productos = $this->db->query("SELECT * FROM productos WHERE borrado is null")->result(); // este no devuleve array recuperacion es ->
 
 		$data['productos'] = $sql_productos;
+
+		$sql_almacenes = $this->db->query("SELECT * FROM almacenes WHERE borrado is null")->result(); // este no devuleve array recuperacion es ->
+
+		$data['almacenes'] = $sql_almacenes;
 		
         $this->load->view('template/header');
 		$this->load->view('template/menu');
@@ -211,12 +215,43 @@ class Inventarios_Compra extends CI_Controller {
 		
 		$id = $this->input->post("producto-edita");
 
-		$data = array(
-            'nombre' => $this->input->post("nombre-producto"),
-            'tipo' => $this->input->post("tipo-producto")
-        );
-        $this->db->where('id', $id);
-        $this->db->update('categorias', $data);
+		if($id == 0){
+			
+			$datos = array(
+				'nombre' => $this->input->post('nombre-producto'),
+				'tipo'   => $this->input->post('tipo-producto'),
+				'estado'   => 1,
+			);
+
+			$this->db->insert('productos', $datos);
+
+			$canPro = $this->input->post('cantidad-producto-edita');
+			$almacen = $this->input->post('almacen_id-edita');
+
+			if($canPro != null && $almacen != null){
+				$datos = array(
+					'usuarios_id' 		=> $this->session->id_usuario,
+					'producto_id'   	=> $this->db->insert_id(),
+					'almacen_id' 		=> $this->input->post('almacen_id-edita'),
+					'precio_compra'   	=> $this->input->post('preciounidad-edita'),
+					'precio_venta'   	=> $this->input->post('precioventa-edita'),
+					'precio_total'   	=> $this->input->post('preciototal-edita'),
+					'ingreso'   		=> $this->input->post('cantidad-producto-edita'),
+					'fecha'   			=> $this->input->post('fecha-edita'),
+					'descripcion'      	=> $this->input->post('detalle-edita')
+				);
+	
+				$this->db->insert('movimientos', $datos);
+			}
+			
+		}else{
+			$data = array(
+				'nombre' => $this->input->post("nombre-producto"),
+				'tipo' => $this->input->post("tipo-producto")
+			);
+			$this->db->where('id', $id);
+			$this->db->update('categorias', $data);
+		}
 
         redirect("Inventarios_Compra/lista");
 	}

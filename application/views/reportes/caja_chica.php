@@ -14,7 +14,7 @@
 			<div class="col-lg-12">
 				<div class="card card-outline-info">
 					<div class="card-header">
-						<h4 class="mb-0 text-white">REPORTES DE TRABAJO</h4>
+						<h4 class="mb-0 text-white">REPORTES DE CAJA CHICA</h4>
 					</div>
 					<div class="card-body">
 						<div class="row">
