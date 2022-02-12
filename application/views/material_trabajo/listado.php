@@ -245,6 +245,7 @@
 
 	$(function(){
         $('#producto_id').select2({
+			dropdownParent: $('#myModaledit'),
             placeholder: "Seleccion un Producto"
         });
     });
