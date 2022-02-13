@@ -59,71 +59,7 @@
 							<div id="tabla-trabajos">
 
 							</div>
-							<!-- <table id="config-table" class="table display table-bordered table-striped no-wrap">
-								<thead>
-									<tr>
-										<th>No.</th>
-										<th>Cliente</th>
-										<th>Celular</th>
-										<th>Fecha Prueba</th>
-										<th>Fecha Entrega</th>
-										<th>$. Tela</th>
-										<th>$.Conf</th>
-										<th>Total</th>
-										<th>Saldo</th>
-										<th>Ent</th>
-										<th>Acciones</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php foreach ($trabajos as $t): ?>
-									<tr>
-										<td><?php echo $t['id'] ?></td>
-										<td><?php echo $t['nombre'] ?></td>
-										<td><?php echo $t['celulares'] ?></td>
-										<td><?php echo $t['fecha_prueba'] ?></td>
-										<td><?php echo $t['fecha_entrega'] ?></td>
-										<td align="right"><?php echo $t['costo_tela'] ?></td>
-										<td align="right"><?php echo $t['costo_confeccion'] ?></td>
-										<td align="right"><?php echo $t['total'] ?></td>
-										<td align="right"><?php echo $t['saldo'] ?></td>
-										<td><?php echo $t['entregado'] ?></td>
-										<td>
-											<a href="<?php echo base_url() ?>Trabajos/detalle_trabajo/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-info"><i class="fas fa-eye"></i></button>
-											</a>
-
-											<a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-success"><i class="fas fa-star"></i></button>
-											</a>
-
-											<a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-warning"><i class="fas fa-edit"></i></button>
-											</a>
-
-											<button type="button" class="btn btn-danger" onclick="eliminar(<?php echo $t['id'] ?>, '<?php echo $t['nombre'] ?>')"><i class="fas fa-trash"></i></button>
-
-											<?php
-												$id = $t['id'];
-												$venta = $this->db->query("SELECT trabajo_id
-                                                                             FROM ventas
-                                                                             WHERE trabajo_id = $id
-                                                                             AND estado = 1")->row();	
-										 		if (!empty($venta)) { 
-											 ?>
-											<button type="button" class="btn btn-dark" onclick="alerta(<?php echo $t['id']; ?>);"><i class="fas fa-cart-arrow-down"></i></button>
-											<?php } else { ?>
-											<a href="<?php echo base_url() ?>Inventarios_Venta/retira_material/<?php echo $t['id'] ?>">
-												<button type="button" class="btn btn-dark"><i class="fas fa-cart-arrow-down"></i></button>
-											</a>
-											<?php } ?>
-
-
-										</td>
-									</tr>
-									<?php endforeach ?>
-								</tbody>
-							</table> -->
+							
 						</div>
 					</div>
 				</div>
