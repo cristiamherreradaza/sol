@@ -52,23 +52,23 @@
                                                         <thead>
                                                             <tr>
                                                                 <th>Descripcion</th>
-                                                                <th class="text-center">Cantidad</th>
+                                                                <th class="text-center">Trabajos</th>
                                                                 <th class="text-right">Monto</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
-                                                                <td>Trabajos con deudas</td>
+                                                                <td>Saldos</td>
                                                                 <td class="text-center"><?php echo $cantidad_deudores['total']; ?></td>
                                                                 <td class="text-right"><?php echo number_format($monto_deudores['total'], 2) ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Trabajos pagados</td>
+                                                                <td>Total</td>
                                                                 <td class="text-center"><?php echo $cantidad_pagados['total']; ?></td>
                                                                 <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Total trabajos</th>
+                                                                <th>Pagado</th>
                                                                 <td class="text-center"><?=$cantidad_deudores['total']+$cantidad_pagados['total']?></td>
                                                                 <?php $trabajos_por_cobrar = $trabajos_totales['total']-$monto_deudores['total'] ?>
                                                                 <th class="text-right"><?php echo number_format($trabajos_por_cobrar, 2) ?></th>
