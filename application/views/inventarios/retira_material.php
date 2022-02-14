@@ -740,15 +740,17 @@
                                                     <?php
                                                     $datos = $this->db->get_where('material_trabajos', array('pieza'=>'CHALECO','genero' =>'MUJER', 'borrado' => null ))->result();
                                                     $sumTotal = 0;
+                                                    // var_dump($datos);
+                                                    // exit;
                                                     foreach($datos as $chm){
                                                     ?>
                                                       <tr>      
                                                         <td><?=$chm->detalle?> <input type="hidden" name="chaleco_mujer_ids[]" value="<?=$chm->producto_id?>"></td>
-                                                        <td><input name="chaleco_mujer_cantidad[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$chm->cantidad?>"></td>
-                                                        <td><input name="chaleco_mujer_precio[]" id="" type="text" class="form-control" value="<?=$falda_mujer->cantidad*$chm->precio?>"></td>
+                                                        <td><input name="chaleco_mujer_cantidad[]" id="" type="text" class="form-control" value="<?=$chaleco_mujer->cantidad*$chm->cantidad?>"></td>
+                                                        <td><input name="chaleco_mujer_precio[]" id="" type="text" class="form-control" value="<?=$chaleco_mujer->cantidad*$chm->precio?>"></td>
                                                       </tr>  
                                                     <?php
-                                                    $preciosFilaChalecoMujer = $falda_mujer->cantidad*$chm->precio;
+                                                    $preciosFilaChalecoMujer = $chaleco_mujer->cantidad*$chm->precio;
                                                     $sumTotal = $sumTotal + $preciosFilaChalecoMujer;
                                                     }
                                                     ?>
