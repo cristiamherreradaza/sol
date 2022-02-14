@@ -107,22 +107,19 @@
                     <li>
                         <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open"></i><span class="hide-menu">TRABAJOS</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nuevo</a></li>
-                            <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado</a></li>
-                        </ul>
+                            <li><a href="<?php echo base_url(); ?>trabajos/nuevo">Nueva Confeccion</a></li>
+                            <li><a href="<?php echo base_url(); ?>trabajos/listado_trabajos">Listado Confecciones</a></li>
+                            <li><a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false">Listado Pagos</a></li>
+                            <li><a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><span class="hide-menu">Lista Clientes</span></a>
                     </li>
-
-                    <li>
-                        <a href="<?php echo base_url(); ?>trabajos/listado_pagos" aria-expanded="false"><i class="mdi mdi-cash"></i>PAGOS</a>
+                        </ul>
                     </li>
                     
                     <li>
                         <a href="<?php echo base_url(); ?>contratos/listado" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i>CONTRATOS</a>
                     </li>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>clientes/listado" aria-expanded="false"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">CLIENTES</span></a>
-                    </li>
+                    
 
                     <li>
                         <a href="<?php echo base_url() ?>cajachica/inicio" aria-expanded="false"><i class="mdi mdi-coin"></i><span class="hide-menu">CAJA CHICA</span></a>
@@ -185,9 +182,11 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">ITEMS</span></a>
+                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-book-open-page-variant"></i><span class="hide-menu">INVENTARIO</span></a>
                         <ul aria-expanded="false" class="collapse">
-                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista">Lista de items</a></li>
+                            <li><a href="<?php echo base_url(); ?>Inventarios_Compra/lista"> Items</a></li>
+                            <a href="<?php echo base_url() ?>Movimiento/nuevo"> Transferencias</a>
+
                         </ul>
                     </li>
                     <li>
@@ -201,18 +200,6 @@
                         </ul>
                     </li>
 
-                    <li>
-                        <a href="<?php echo base_url(); ?>trabajos/presentacion" aria-expanded="false"><i class="fa fa-circle"></i><span class="hide-menu">PRESENTACION</span></a>
-                    </li>
-
-                    <li>
-                        <a class="has-arrow " href="#" aria-expanded="false"><i class="mdi mdi-puzzle"></i><span class="hide-menu">ENVIOS</span></a>
-                        <ul aria-expanded="false" class="collapse">
-                            <li>
-                                <a href="<?php echo base_url() ?>Movimiento/nuevo"><i class="mdi mdi-book"></i> Nuevo</a>
-                            </li>
-                        </ul>
-                    </li>
                     <?php
                 }
                 ?>
