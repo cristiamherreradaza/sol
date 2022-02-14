@@ -208,7 +208,8 @@
 	function editar(id, producto_id, detalle, cantidad, precio, genero, pieza, tipo)
     {
         $('#material_id').val(id);
-		$('#detalle').val(producto_id).trigger('change.select2');
+		$('#producto_id').val(producto_id).trigger('change.select2');
+		// $("#producto_id").select2().select2('val', producto_id);
         // $('#detalle').val(detalle);
         $('#cantidad').val(cantidad);
         $('#precio').val(precio);
