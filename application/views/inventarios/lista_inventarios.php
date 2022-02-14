@@ -13,6 +13,35 @@
         <!-- ============================================================== -->
        <!-- Row -->
 
+       
+       <!-- modal de ingrso de material -->
+       <div id="modal-revisaAlmacen" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <!-- Row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-outline-info">
+                                <div class="card-header">
+                                    <h4 class="mb-0 text-white">DETALLE DEL PRODCUTO</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div id="info-almacenes">
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Row -->
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+       <!-- end modal de ingrso de material -->
+       
+
        <!-- modal de ingrso de material -->
         <div id="modal-ingrega-material" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -373,6 +402,7 @@
                                                     <button class="btn btn-dark" onclick="agregarProductoLegal('<?=$pro->id?>')"><i class=" fas fa-chevron-circle-down"></i></button>
                                                     <button class="btn btn-danger" onclick="quitar('<?=$pro->id?>', '<?=$pro->nombre?>')" title="Editar <?=$pro->nombre?>"><i class="fas fa-minus-circle"></i></button>
                                                     <button class="btn btn-success" onclick="add('<?=$pro->id?>', '<?=$pro->nombre?>','<?=$pro->tipo?>')" title="Editar <?=$pro->nombre?>"><i class="fas fa-plus-circle"></i></button>
+                                                    <button class="btn btn-primary" onclick="verAlmacen('<?=$pro->id?>')" title="Ver alamcenes"><i class="mdi mdi-store"></i></button>
                                                 </td>
                                             </tr>
                                             <?php
@@ -394,7 +424,7 @@
     <!-- ============================================================== -->
     <!-- footer -->
     <!-- ============================================================== -->
-    <footer class="footer"> 2020 desarrollado por GoGhu </footer>
+    <footer class="footer"> <?date('Y')?> desarrollado por GoGhu </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
     <!-- ============================================================== -->
@@ -526,6 +556,22 @@
         var total = precio_unidad * stock;
         $('#preciototal-edita').val(total);
     });
+
+    function verAlmacen(id){
+        var id_producto = id;
+        
+        $.ajax({
+            url: '<?php echo base_url() ?>/Inventarios_Compra/ajaxVerAlmacen',
+            type: 'GET',
+            data: {
+                producto_id: id_producto
+            },
+            success: function (data) {
+                $('#modal-revisaAlmacen').modal('show');
+                $("#info-almacenes").html(data);
+            }
+        });
+    }
 </script>
     
 
