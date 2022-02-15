@@ -1,24 +1,41 @@
-<?php if (!empty($clientes_encontrados)) : ?>
+<?php if (!empty($almacenes)) : ?>
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-info text-center">            
+                <?=$producto[0]->nombre?>
+            </h2>
+        </div>
+    </div>
+    <hr>
     <div class="table-responsive">
         <table class="table no-wrap">
             <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Nombre</th>
-                    <th>Carnet</th>
-                    <th>Celular</th>
-                    <th></th>
+                    <th>Almacen</th>
+                    <th>Existencia</th>
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($clientes_encontrados as $key => $c) : ?>
+                <?php 
+                $producto_id = $producto[0]->id;
+                foreach ($almacenes as $key => $al) : 
+                    ?>
                     <tr>
-                        <td><?php echo ++$key; ?></td>
-                        <td><?php echo $c['nombre'] ?></td>
-                        <td><?php echo $c['ci'] ?></td>
-                        <td><?php echo $c['celulares'] ?></td>
+                        <td><?php echo $al->nombre ?></td>
+                        <?php
+                            $cantidadEntrada = $this->db->query("SELECT sum(ingreso) as cantidadEntrada FROM movimientos WHERE producto_id = $producto_id AND almacen_id = $al->id AND borrado is null")->result();
+                            $cantidadSalida = $this->db->query("SELECT sum(salida) as cantidadSalida FROM movimientos WHERE producto_id = $producto_id AND almacen_id = $al->id AND borrado is null")->result();
+
+                            $cantidadTotal = $cantidadEntrada[0]->cantidadEntrada - $cantidadSalida[0]->cantidadSalida;
+                        ?>
                         <td>
-                            <a href="#" class="btn btn-sm btn-success" onclick="extraer_datos(<?php echo $c['id'] ?>);">ELEGIR</a>
+                            <?php
+                                if($cantidadTotal > 0){
+                                    echo $cantidadTotal." ". $producto[0]->tipo;
+                                }else{
+                                    echo 0 ." ". $producto[0]->tipo; 
+                                }
+                            ?>
                         </td>
                     </tr>
                 <?php endforeach ?>

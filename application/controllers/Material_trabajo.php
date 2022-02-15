@@ -48,15 +48,19 @@ class Material_trabajo extends CI_Controller {
 
         $user_id = $this->session->id_usuario;
 
+		$producto_id = $this->input->post('producto_id');
+
+		$prducto = $this->db->get_where('productos', array('id' => $producto_id,'borrado' => null))->result();
+
         $datos = array(
             'usuario_id' => $user_id,
-			'producto_id' => $this->input->post('producto_id'),
+			'producto_id' => $prducto[0]->id,
             'detalle' => $this->input->post('detalle'),
             'precio' => $this->input->post('precio'),
             'cantidad' => $this->input->post('cantidad'),
             'genero' => $this->input->post('genero'),
             'pieza' => $this->input->post('pieza'),
-            'tipo' => $this->input->post('tipo')
+            'tipo' => $prducto[0]->tipo
         );
 
         if($id == 0){

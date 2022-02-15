@@ -257,12 +257,13 @@ class Inventarios_Compra extends CI_Controller {
 	}
 
 	public function ajaxVerAlmacen($producto_id = null){	
+
 		$producto_id = $this->input->get('producto_id');
+		$data['producto'] = $this->db->get_where('productos', array('id'=>$producto_id, 'borrado' => null))->result();
 
-		$cantidadEntrada = $this->db->query("SELECT sum(ingreso) as cantidadEntrada FROM movimientos WHERE producto_id = $producto_id AND  borrado is null")->result();
-		$cantidadSalida = $this->db->query("SELECT sum(salida) as cantidadSalida FROM movimientos WHERE producto_id = $producto_id AND  borrado is null")->result();
+		$data['almacenes'] = $this->db->get_where('almacenes', array('borrado' => null))->result();
 
-		$this->load->view('inventarios/ajaxVerAlmacen');
+		$this->load->view('inventarios/ajaxVerAlmacen',$data);
 	}
 
 }
