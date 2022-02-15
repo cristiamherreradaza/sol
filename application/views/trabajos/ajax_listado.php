@@ -37,7 +37,7 @@
                     </a>
 
                     <a href="<?php echo base_url() ?>Trabajos/registro_pagos/<?php echo $t['id'] ?>">
-                        <button type="button" class="btn btn-success"><i class="fas fa-star"></i></button>
+                        <button type="button" class="btn btn-success"><i class="fas fa-dollar-sign"></i></button>
                     </a>
 
                     <a href="<?php echo base_url() ?>Trabajos/form_edicion/<?php echo $t['id'] ?>">
