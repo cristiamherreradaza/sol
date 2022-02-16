@@ -410,19 +410,30 @@ class Reportes extends CI_Controller {
 						AND borrado IS NULL;";	
 		$data['descuento_empleados'] = $this->db->query($descuento_empleados)->row_array();
 
-		// var_dump($data['venta_compra']);
 		// COSTO Y PRODUCCION
+		// $fecha_hora_fin1 = $fecha_hora_fin.' 23:59:59' ;
+		$costo_produccion = "SELECT confeccion, SUM(precio_total) as total
+							 FROM movimientos  
+							 WHERE fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin'
+							 AND estado =  'Confeccion'
+							 GROUP BY confeccion";
+
+		$data['costo_produccion'] = $this->db->query($costo_produccion)->result();
+
+		// COSTO Y PRODUCCION PARA EL GRAFICO
 		$fecha_hora_fin1 = $fecha_hora_fin.' 23:59:59' ;
-		$costo_produccion = "SELECT SUM(cp.precio) as precio, COUNT(t.id) as cant_tra, c.id , c.descripcion as tipo
+		$costo_producciongrafico = "SELECT SUM(cp.precio) as precio, COUNT(t.id) as cant_tra, c.id , c.descripcion as tipo
 							FROM trabajos t INNER JOIN costos_produccion cp
 								ON t.id = cp.trabajo_id	INNER JOIN costos c
 									ON c.id = cp.costo_id
 							WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin1' 
+								AND cp.created_at BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin1'
+								AND t.borrado is null
+								AND cp.borrado is null
+								AND c.borrado is null
 							GROUP by c.id";
-							// -- WHERE t.fecha BETWEEN '$fecha_hora_inicio' AND '$fecha_hora_fin' ";
 
-
-		$data['costo_produccion'] = $this->db->query($costo_produccion)->result();
+		$data['costo_producciongrafico'] = $this->db->query($costo_producciongrafico)->result();
 		
 		// para los ingresos de pagos
 		$ingresos_total_pagos = "SELECT  SUM(monto) as total

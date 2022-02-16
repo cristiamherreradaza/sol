@@ -327,27 +327,43 @@
                                                                 $MontoCP = 0;
                                                                 $canMat = 0;
                                                                 $costo_produccion1 = $costo_produccion;
+                                                                // var_dump($costo_produccion[0]);
+                                                                // exit;
                                                                 foreach ($costo_produccion as $cp){
                                                                 ?>
                                                                     <tr>
-                                                                        <td><?=$cp->tipo?></td>
-                                                                        <td class="text-center"><?=$cp->cant_tra?></td>
-                                                                        <td class="text-right"><?=$cp->precio?></td>
+                                                                        <td><?=strtoupper($cp->confeccion)?></td>
                                                                         <?php
-                                                                        $prenda = strtoupper($cp->tipo);
-                                                                        // $query = "SELECT SUM(salida) as total 
-                                                                        $query = "SELECT SUM(precio_total) as total 
-                                                                            FROM movimientos 
-                                                                            WHERE confeccion = '$prenda' AND fecha BETWEEN '$inicio' AND '$fin' AND borrado is null";
-                                                                            $totalMaterial = $this->db->query($query)->result_array();
-                                                                            $canMatSa = ($totalMaterial[0]['total'] != null)? $totalMaterial[0]['total'] : 0;
+                                                                            $prenda = strtolower($cp->confeccion);
+                                                                            // $prenda = ucfirst($cp->confeccion);
+                                                                            // echo '<h1>'.$prenda.'</h1>';
+
+                                                                            $query = "SELECT SUM(cp.precio) as precio, COUNT(t.id) as cant_tra, c.id , c.descripcion as tipo
+                                                                                        FROM trabajos t INNER JOIN costos_produccion cp
+                                                                                            ON t.id = cp.trabajo_id	INNER JOIN costos c
+                                                                                                ON c.id = cp.costo_id
+                                                                                        WHERE t.fecha BETWEEN '$inicio' AND '$fin' AND c.descripcion = '$prenda'
+                                                                                              AND cp.created_at BETWEEN '$inicio' AND '$fin'
+                                                                                              AND t.borrado is null
+                                                                                              AND cp.borrado is null
+                                                                                              AND c.borrado is null
+                                                                                        GROUP by c.id";
+                                                                                             
+                                                                            // $prenda = strtolower($cp->confeccion)."s";
+
+                                                                            // $query = "SELECT * FROM $prenda WHERE created_at BETWEEN '$inicio' AND '$fin' ";
+
+                                                                            $totalMaterial = $this->db->query($query)->result();
+
                                                                         ?>
-                                                                        <td class="text-right"><?=number_format($canMatSa,2)?></td>
-                                                                    </tr>    
+                                                                        <td class="text-center"><?=$totalMaterial[0]->cant_tra?></td>
+                                                                        <td class="text-center"><?=$totalMaterial[0]->precio?></td>
+                                                                        <td class="text-right"><?=number_format($cp->total,2)?></td>
+                                                                    </tr>
                                                                 <?php
-                                                                    $cantidadCP = $cantidadCP + $cp->cant_tra;
-                                                                    $MontoCP = $MontoCP + $cp->precio;
-                                                                    $canMat = $canMat + $totalMaterial[0]['total'];
+                                                                    $cantidadCP = $cantidadCP + $totalMaterial[0]->cant_tra;
+                                                                    $MontoCP = $MontoCP + $totalMaterial[0]->precio;
+                                                                    $canMat = $canMat + $cp->total;
                                                                 }
                                                             ?>
                                                             <tr>
@@ -444,7 +460,7 @@
         <!-- footer -->
         <!-- ============================================================== -->
         <footer class="footer">
-            2020 desarrollado por GoGhu
+            <?=date('Y')?> desarrollado por GoGhu
         </footer>
         <!-- ============================================================== -->
         <!-- End footer -->
@@ -521,7 +537,7 @@ $(function () {
         var data = google.visualization.arrayToDataTable([
             ['Task', 'Hours per Day'],
             <?php
-                foreach ($costo_produccion1 as $pro){
+                foreach ($costo_producciongrafico as $pro){
                 ?>
                     ['<?=$pro->tipo?>',     <?=$pro->cant_tra?>],
                 <?php
