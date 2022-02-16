@@ -63,12 +63,12 @@
                                                                 <td class="text-right"><?php echo number_format($monto_deudores['total'], 2) ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <td>Total</td>
+                                                                <td>Pagados</td>
                                                                 <td class="text-center"><?php echo $cantidad_pagados['total']; ?></td>
                                                                 <td class="text-right"><?php echo number_format($trabajos_totales['total'], 2) ?></td>
                                                             </tr>
                                                             <tr>
-                                                                <th>Pagado</th>
+                                                                <th>Total</th>
                                                                 <td class="text-center"><?=$cantidad_deudores['total']+$cantidad_pagados['total']?></td>
                                                                 <?php $trabajos_por_cobrar = $trabajos_totales['total']-$monto_deudores['total'] ?>
                                                                 <th class="text-right"><?php echo number_format($trabajos_por_cobrar, 2) ?></th>
@@ -518,9 +518,12 @@ $(function () {
             ['Task', 'Hours per Day'],
             // ['Trabajo Con Deuda',<?//=$tra_deuda?>],
             // ['Trabajo Pagados',<?//=$tra_pagado?>]
-          ['Deudas',  <?=$cantidad_deudores['total']?>],
+        //   ['Saldos',  <?=$cantidad_deudores['total']?>],
+          ['Saldos',  <?=$monto_deudores['total']?>],
         //   ['Watch TV', 2],
-          ['Pagados',    <?=$cantidad_pagados['total']?>]
+        //   ['Watch TV1', 2],
+        //   ['Pagados',    <?=$cantidad_pagados['total']?>]
+          ['Pagados',    <?=$trabajos_totales['total']?>]
         ]);
 
         var options = {
