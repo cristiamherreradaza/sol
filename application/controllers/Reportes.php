@@ -951,5 +951,66 @@ class Reportes extends CI_Controller {
 		exit;
 	}
 
+	public function reporte_items(){
+		$data['almacenes'] = $this->db->get_where('almacenes', array('borrado'=>null))->result();
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('reportes/reporte_items', $data);
+		$this->load->view('template/footer');
+	}
+
+	public function ajax_items(){
+		// $this->db->select('t.id, c.nombre, c.celulares, t.fecha_entrega, t.fecha_prueba, t.costo_tela, t.costo_confeccion ,t.total , t.saldo, t.entregado');
+		$this->db->select('*');
+		$this->db->from('movimientos');
+		// $this->db->from('trabajos as t');
+		// $this->db->join('clientes as c','c.id = t.cliente_id');
+		// $this->db->where('t.id',30);
+
+		if($this->input->get('fecha_ini') != '' && $this->input->get('fecha_fin') != ''){
+
+			$fecha_inicio = $this->input->get('fecha_ini');
+			$fecha_fin 	  = $this->input->get('fecha_fin');
+
+			$this->db->where("fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'");
+		}
+
+		if($this->input->get('almacen') != 'todos'){
+
+			$almacen_id =  $this->input->get('almacen');
+
+			$this->db->where('almacen_id', $almacen_id);
+		}
+
+		if($this->input->get('tipo') != ''){
+			$tipo = $this->input->get('tipo');
+
+			if($tipo == 'ingreso'){
+				$this->db->where('ingreso is not null');
+			}else{
+				$this->db->where('salida is not null');
+			}
+		}
+
+		$this->db->where('borrado',null);
+
+		if($this->input->get('fecha_ini') != '' && $this->input->get('fecha_fin') != '' && $this->input->get('almacen') != '' && $this->input->get('tipo') != ''){
+			$this->db->limit(200);
+		}else{
+			$this->db->limit(50);
+		}
+
+		// var_dump($this->db);
+		// exit;
+		
+		$data['productos'] = $this->db->get()->result();
+		// $data['productos'] = $this->db->get()->result_array();
+
+		$this->load->view('reportes/ajax_items', $data);
+		
+		// var_dump($data['productos']);
+		// exit;
+	}
+
 
 };

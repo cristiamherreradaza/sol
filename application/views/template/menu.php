@@ -133,6 +133,7 @@
                             <li><a href="<?php echo base_url(); ?>reportes/caja_chica">Caja Chica</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/reporte_items">Reporte de Items</a></li>
                         </ul>
                     </li>
 
