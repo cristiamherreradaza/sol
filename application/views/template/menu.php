@@ -134,6 +134,7 @@
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_inventario">Inventarios</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/fecha_rrhh">Sueldos y Control del Personal</a></li>
                             <li><a href="<?php echo base_url(); ?>reportes/reporte_items">Reporte de Items</a></li>
+                            <li><a href="<?php echo base_url(); ?>reportes/saldos">Reporte de Saldos</a></li>
                         </ul>
                     </li>
 

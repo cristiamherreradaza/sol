@@ -1060,5 +1060,25 @@ class Reportes extends CI_Controller {
 		exit;
 	}
 
+	public function saldos(){
+		$this->load->view('template/header');
+		$this->load->view('template/menu');
+		$this->load->view('reportes/saldos');
+		$this->load->view('template/footer');
+	}
+
+	public function ajax_saldos(){
+		$fecha = $this->input->get('fecha_ini');
+
+		$data['fecha'] = $fecha;
+
+		$data['productos'] = $this->db->get_where('productos', array('borrado' => null))->result();
+
+		$data['almacenes'] = $this->db->get_where('almacenes', array('borrado' => null))->result();
+
+		$this->load->view('reportes/ajax_saldos', $data);
+		
+	}
+
 
 };
