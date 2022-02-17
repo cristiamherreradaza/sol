@@ -999,17 +999,65 @@ class Reportes extends CI_Controller {
 		}else{
 			$this->db->limit(50);
 		}
-
-		// var_dump($this->db);
-		// exit;
 		
 		$data['productos'] = $this->db->get()->result();
-		// $data['productos'] = $this->db->get()->result_array();
+		$data['tipo'] = $tipo;
 
 		$this->load->view('reportes/ajax_items', $data);
 		
-		// var_dump($data['productos']);
-		// exit;
+	}
+
+	public function reporteProductoPdf($fecha_inig = null, $fecha_fing = null, $almaceng =  null, $tipog =  null){
+		$this->db->select('*');
+		$this->db->from('movimientos');
+		$data['inicio'] = $fecha_inig;
+		$data['fin'] = $fecha_fing;
+
+		if($fecha_inig != '' && $fecha_fing != ''){
+
+			$fecha_inicio = $fecha_inig;
+			$fecha_fin 	  = $fecha_fing;
+
+			$this->db->where("fecha BETWEEN '$fecha_inicio' AND '$fecha_fin'");
+		}
+
+		if($almaceng != 'todos'){
+
+			$almacen_id =  $almaceng;
+
+			$this->db->where('almacen_id', $almacen_id);
+		}
+
+		if($tipog != ''){
+			$tipo = $tipog;
+
+			if($tipo == 'ingreso'){
+				$this->db->where('ingreso is not null');
+			}else{
+				$this->db->where('salida is not null');
+			}
+		}
+
+		$this->db->where('borrado',null);
+
+		if($fecha_inig != '' && $fecha_fing != '' && $almaceng != '' && $tipog != ''){
+			$this->db->limit(200);
+		}else{
+			$this->db->limit(50);
+		}
+		
+		$data['productos'] = $this->db->get()->result();
+		$data['tipo'] = $tipo;
+
+		$this->load->view('reportes/reporteProductoPdf', $data);
+		$html = $this->output->get_output();
+        $this->load->library('pdf');
+        $this->dompdf->loadHtml($html);
+        $this->dompdf->set_option('isRemoteEnabled', TRUE);  
+        $this->dompdf->setPaper('letter', 'portrait');
+		$this->dompdf->render();
+        $this->dompdf->stream("welcome.pdf", array("Attachment"=>0));
+		exit;
 	}
 
 

@@ -10,7 +10,7 @@
                         <thead>
                             <tr>
                                 <th>Item</th>
-                                <th>Ingreso</th>
+                                <th><?php $modo = ($tipo=='ingreso')? 'Ingreso' : 'Salida'; echo $modo?></th>
                                 <th>Almacen</th>
                                 <th>Observacion</th>
                                 <th>Fecha</th>
@@ -19,9 +19,23 @@
                         <tbody>
                           <?php foreach ($productos as $pro): ?>
                             <tr>
-                              <td><?php echo $pro->producto_id; ?></td>
-                              <td><?php echo $pro->ingreso; ?></td>
-                              <td><?php echo $pro->almacen_id; ?></td>
+                                <?php
+                                $producto = $this->db->get_where('productos', array('id'=>$pro->producto_id, 'borrado' => null))->result();
+                                ?>
+                              <td><?php echo $producto[0]->nombre; ?></td>
+                              <?php
+                              if($tipo == 'ingreso'){
+                                ?>
+                                  <td><?php echo $pro->ingreso." ".$producto[0]->tipo; ?></td>
+                                <?php
+                              }else{
+                                ?>
+                                  <td><?php echo $pro->salida." ".$producto[0]->tipo; ?></td>
+                                <?php
+                              }
+                                $almacene = $this->db->get_where('almacenes', array('id'=> $pro->almacen_id, 'borrado' => null))->result();
+                              ?>
+                              <td><?php echo $almacene[0]->nombre; ?></td>
                               <td><?php echo $pro->descripcion; ?></td>
                               <td><?php echo $pro->fecha; ?></td>
                             </tr>
@@ -35,7 +49,7 @@
 </div>
 <div class="row">
     <div class="col-md-12">
-        <button class="btn btn-block btn-info"  onclick="reporteCajaChica()">IMPRIMIR</button>
+        <button class="btn btn-block btn-info"  onclick="reporteProductoPdf()">IMPRIMIR</button>
     </div>
 </div>
 <!-- This is data table -->

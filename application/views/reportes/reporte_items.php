@@ -122,12 +122,14 @@
         }
     }
 
-    function reporteCajaChica(){
+    function reporteProductoPdf(){
         
-        var fecha_ini = $('#fecha_inicio').val();
-        var fecha_fin = $('#fecha_fin').val();
+        var fecha_inig = $('#fecha_inicio').val();
+        var fecha_fing = $('#fecha_fin').val();
+        var almaceng   = $('#almacen').val();
+        var tipog      = $('#tipo').val();
 
-        var url = "<?php echo base_url() ?>/reportes/reporteCajaChica/"+fecha_ini+"/"+fecha_fin;
+        var url = "<?php echo base_url() ?>/reportes/reporteProductoPdf/"+fecha_inig+"/"+fecha_fing+"/"+almaceng+"/"+tipog;
 
         // abrir un PDF en una pestaña nueva
         window.open(url, '_blank');
