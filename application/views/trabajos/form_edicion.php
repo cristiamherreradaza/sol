@@ -499,7 +499,7 @@
                         <div class="row">
                           <input type="hidden" name="chaleco_id" value="<?php echo $chaleco['id'] ?>">
 
-                          <div class="col">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <?php //vdebug($modelos_varon, false, false, true); ?>
                               <label class="control-label">Modelo</label>
@@ -512,7 +512,7 @@
                             </div>
                           </div>
 
-                          <div class="col-md-2">
+                          <div class="col-md-4">
                             <div class="form-group">
                               <label class="control-label">Botones</label>
                               <input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any"  value="<?php echo $chaleco['botones']; ?>">
@@ -531,14 +531,25 @@
                             </div>
                           </div>
 
-                          <div class="col">
-                            <div class="form-group">
-                              <label class="control-label">Color Ojales</label>
-                              <input name="ch_color" type="text" id="ch_color" class="form-control" value="<?php echo $chaleco['color_ojales']; ?>">
-                            </div>
-                          </div>
-
                         </div>
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Color Ojales</label>
+															<input name="ch_color" type="text" id="ch_color" class="form-control" value="<?php echo $chaleco['color_ojales']; ?>">
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-group">
+															<label class="control-label">Boton Forrado</label>
+															<select name="ch_boton_forrado" id="ch_boton_forrado" class="form-control">
+																<option <?=($chaleco['boton_forrado'] == 'NO')? 'selected' : ''?> value="No">No</option>
+																<option <?=($chaleco['boton_forrado'] == 'Si')? 'selected' : ''?> value="Si">Si</option>
+															</select>
+														</div>
+													</div>
+												</div>
+
 
                       </div>
                     </div>
@@ -653,32 +664,64 @@
                         <h4 class="mb-0 text-white">EXTRAS</h4>
                       </div>
                       <div class="card-body" style="background-color: #f0e7fe;">
+												<div class="row">
+													<div class="col-md-6">
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="corbaton" id="corbaton" <?php echo (!is_null($extras['corbaton']))? 'checked' : '' ?> onclick="abreColorCaja(this)">
+															<label class="form-check-label" for="corbaton">
+																Corbaton
+															</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="corbata_gato" id="corbata_gato" <?php echo (!is_null($extras['corbata_gato']))? 'checked' : '' ?> onclick="abreColorCaja(this)">
+															<label class="form-check-label" for="corbata_gato">
+																Corbata de Gato
+															</label>
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="faja" id="faja" <?php echo (!is_null($extras['faja']))? 'checked' : '' ?> onclick="abreColorCaja(this)">
+															<label class="form-check-label" for="faja">
+																Faja
+															</label>
+														</div>
+														<div class="form-check">
+															<input type="checkbox" class="form-check-input" name="panuelo" id="panuelo" <?php echo (!is_null($extras['panuelo']))? 'checked' : '' ?> onclick="abreColorCaja(this)">
+															<label class="form-check-label" for="panuelo">
+																Pañuelo
+															</label>
+														</div>
+													</div>
+												</div>
 
-                        <div class="row">
-                          <input type="hidden" name="extras_id" value="<?php echo $extras['id'] ?>">
-                          <div class="col">
-                            <div class="form-group">
-                              <label class="control-label">Corbaton</label>
-                              <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbaton']; ?>">
-                            </div>
-                          </div>
-
-                          <div class="col">
-                            <div class="form-group">
-                              <label class="control-label">Corbata gato</label>
-                              <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbata_gato']; ?>">
-                            </div>
-                          </div>
-
-                          <div class="col">
-                            <div class="form-group">
-                              <label class="control-label">Faja</label>
-                              <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['faja']; ?>">
-                            </div>
-                          </div>
-
+                        <div class="row mt-4">
+													<div class="col-md-3">
+														<input type="hidden" name="extras_id" value="<?php echo $extras['id'] ?>">
+														<div class="form-group" style="display: <?php echo (!is_null($extras['corbaton']))? 'block' : 'none'?>" id="input_corbaton">
+															<label class="control-label">Corbaton</label>
+															<input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbaton']; ?>">
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group" style="display: <?php echo (!is_null($extras['corbata_gato']))? 'block' : 'none'?>" id="input_corbata_gato">
+															<label class="control-label">Corbata gato</label>
+															<input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['corbata_gato']; ?>">
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group" style="display: <?php echo (!is_null($extras['faja']))? 'block' : 'none'?>" id="input_faja">
+															<label class="control-label">Faja</label>
+															<input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['faja']; ?>">
+														</div>
+													</div>
+													<div class="col-md-3">
+														<div class="form-group" style="display: <?php echo (!is_null($extras['panuelo']))? 'block' : 'none'?>" id="input_panuelo">
+															<label class="control-label">Pañuelo</label>
+															<input name="panuelo_color" type="text" id="panuelo_color" class="form-control" placeholder="Ej: Negro" value="<?php echo $extras['panuelo']; ?>">
+														</div>
+													</div>
                         </div>
-
                       </div>
                     </div>
                   </div>
@@ -1148,6 +1191,14 @@
           return false;
       }
   });
+
+	function abreColorCaja(input){
+		if (document.getElementById(input.id).checked)
+			$('#input_'+input.id).show('toggle');
+		else
+			$('#input_'+input.id).hide('toggle');
+	}
+	
 </script>
 <script src="<?php echo base_url() ?>public/assets/plugins/switchery/dist/switchery.min.js"></script>
 <script src="<?php echo base_url() ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>

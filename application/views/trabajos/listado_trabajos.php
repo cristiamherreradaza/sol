@@ -1,5 +1,38 @@
 <link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/dataTables.bootstrap4.css">
 <link rel="stylesheet" type="text/css"	href="<?php echo base_url(); ?>public/assets/plugins/datatables.net-bs4/css/responsive.dataTables.min.css">
+
+
+<!-- inicio modal LOCALIZACION content -->
+<div id="myModalLocalizacion" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<?php 
+				$atributos = array('id'=>'formularioContrato');
+				echo form_open('contratos/guarda', $atributos); 
+			?>
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">LOCALIZACION DE TRABAJO POR PRENDA</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<!-- <input type="text" name="gruSpo_id" id="grupo_id" value="0"> -->
+				</div>
+				<div class="modal-body">
+					<div id="bloque_localizacion_trabajo">
+
+					</div>
+				</div>
+				<div class="modal-footer">
+					<!-- <button type="button" onclick="guardarDetallePrendas()" class="btn waves-effect waves-light btn-block btn-success">GUARDA</button> -->
+				</div>
+			</form>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- fin modal LOCALIZACION -->
+
+
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
@@ -165,5 +198,43 @@
 		});
 		// console.log('en desarrollo :v');
 
+	}
+
+	function abreModalCambiaLugar(trabajo){
+
+		$.ajax({
+			url: '<?php echo base_url() ?>Trabajos/ajaxDetalleLocalizacion/',
+			type: 'GET',
+			data: {
+				trabajo_id: trabajo
+			},
+			success: function(data) {
+				$("#bloque_localizacion_trabajo").html(data);
+			}
+		});
+
+		$('#myModalLocalizacion').modal('show');
+
+	}
+
+	function guardaEstadoUbicacion(prenda, detalle, d_prenda_id){
+
+		var valor = $('#'+prenda+'_'+detalle).val();
+
+		$.ajax({
+			url: '<?php echo base_url() ?>Trabajos/guardaEstadoUbicacion/',
+			type: 'GET',
+			dataType: 'json',
+			data: {
+				tipo_prenda:  prenda,
+				tipo_detalle: detalle,
+				campo_valor:  valor,
+				prenda_id:    d_prenda_id
+			},
+			success: function(data) {
+				if(data.respuesta === 'success')
+					$('#_'+data.prenda+'_'+data.campo).show('toggle');
+			}
+		});
 	}
 </script>

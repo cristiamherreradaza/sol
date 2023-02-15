@@ -34,7 +34,6 @@
                                 </div>
                             </div>
 
-
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-12">
@@ -252,14 +251,22 @@
                                                         <tr>
                                                             <td class="text-info">Color</td>
                                                             <td class="text-right"><?php echo $saco['color']; ?></td>
-                                                            <td></td>
-                                                            <td class="text-right"></td>
+                                                            <td class="text-info">Bolsillo</td>
+                                                            <td class="text-right"><?=$saco['tipo_bolsillo']?></td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-info">Ojal</td>
                                                             <td class="text-right"><?php echo $saco['ojal_puno']; ?></td>
                                                             <td class="text-info">Color Ojal</td>
                                                             <td class="text-right"><?php echo $saco['color_ojal']; ?></td>
+                                                        </tr>
+														<tr>
+                                                            <td class="text-info">Imagen</td>
+                                                            <td class="text-right" colspan="3">
+																<center>
+																	<img width="50%" src="<?= base_url().'public/fotoModelos/'.$saco['imagen'] ?>" alt="">
+																</center>
+															</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -302,6 +309,14 @@
                                                             <td></td>
                                                             <td class="text-right"></td>
                                                         </tr>
+														<tr>
+                                                            <td class="text-success">Imagen</td>
+                                                            <td class="text-right" colspan="3">
+																<center>
+																	<img width="50%" src="<?= base_url().'public/fotoModelos/'.$pantalon['imagen'] ?>" alt="">
+																</center>
+															</td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                                 
@@ -334,6 +349,20 @@
                                                             <td class="text-right"><?php echo $chaleco['detalle_nombre']; ?></td>
                                                             <td class="text-primary">Color ojales</td>
                                                             <td class="text-right"><?php echo $chaleco['color_ojales']; ?></td>
+                                                        </tr>
+														<tr>
+                                                            <td class="text-primary">Boton Forrado</td>
+                                                            <td class="text-right"><?php echo $chaleco['boton_forrado']; ?></td>
+                                                            <td class="text-primary"></td>
+                                                            <td class="text-right"></td>
+                                                        </tr>
+														<tr>
+                                                            <td class="text-primary">Imagen</td>
+                                                            <td class="text-right" colspan="3">
+																<center>
+																	<img width="50%" src="<?= base_url().'public/fotoModelos/'.$chaleco['imagen'] ?>" alt="">
+																</center>
+															</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -454,16 +483,16 @@
                                                 <table class="table table-hover">
                                                     <tbody>
                                                         <tr>
-                                                            <td>Corbaton</td>
+                                                            <td class="text-info">Corbaton</td>
                                                             <td class="text-right"><?php echo $extras['corbaton']; ?> </td>
-                                                            <td>Corbata Gato</td>
-                                                            <td class="text-right"><?php echo $extras['corbata_gato']; ?></td>
+                                                            <td class="text-info">Corbata Gato</td>
+                                                            <td class="text-right "><?php echo $extras['corbata_gato']; ?></td>
                                                         </tr>
                                                         <tr>
-                                                            <td>Faja</td>
+                                                            <td class="text-info">Faja</td>
                                                             <td class="text-right"><?php echo $extras['faja']; ?></td>
-                                                            <td></td>
-                                                            <td class="text-right"></td>
+                                                            <td class="text-info">Pañuelo</td>
+                                                            <td class="text-right"><?php echo $extras['panuelo']; ?></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

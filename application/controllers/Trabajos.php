@@ -20,15 +20,23 @@ class Trabajos extends CI_Controller {
 
 		// $valor = $this->encrypt->encode('123456');
 		// vdebug($valor, true, false, true);
-		$this->db->select('g.nombre, g.celulares, g.direccion, c.*');
-		$this->db->from('contratos as c');
-		$this->db->order_by('c.id', 'desc');
-		$this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
-		$this->db->where('c.borrado =', NULL);
-		$this->db->where('c.genero =', 'Varon');
-		$this->db->where('c.terminado', 'No');
-		$this->db->limit(100);
-		$data['contratos'] = $this->db->get()->result_array();
+		// QUERY ANTIGUO
+		// $this->db->select('g.nombre, g.celulares, g.direccion, c.*');
+		// $this->db->from('contratos as c');
+		// $this->db->order_by('c.id', 'desc');
+		// $this->db->join('grupos as g', 'g.id = c.grupo_id', 'left');
+		// $this->db->where('c.borrado =', NULL);
+		// $this->db->where('c.genero =', 'Varon');
+		// $this->db->where('c.terminado', 'No');
+		// $this->db->limit(100);
+		// $data['contratos'] = $this->db->get()->result_array();
+		// END QUERY ANTIGUO
+
+		// QUERY NUEVO
+			$data['grupos'] = $this->db->get_where('grupos', array('borrado'=>NULL))->result_array();
+		// END QUERY NUEVO
+
+
 
 		// $contratos = $this->db->select('')->get_where('contratos', array('genero'=>'Varon', 'borrado'=>NULL))->result_array();
 
@@ -75,9 +83,20 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo()
 	{
+		// var_dump($this->input->post('grupo_id'));
 		// vdebug($this->input->post(), true, false, true);
+		// var_dump($this->input->post('img_modelo_saco'), true, false, true);
+		// print_r($this->input->post('img_modelo_saco'));
+		// var_dump($this->upload('img_modelo_saco'));
+		// var_dump($_FILES['img_modelo_saco']);
+		// echo "<br>-----------------<br>";
+		// var_dump($_FILES['img_modelo_pantalon']);
+		// print_r($this->input->post(), true, false, true);
+		// printf($this->input->post(), true, false, true);
+		// exit;
 		$usuario_id = $this->session->id_usuario;
 
+		// PREGUNTAMOS SI EL CLIENTE EXISTE O NO
 		if (!empty($this->input->post('cod_cliente'))) {
 			$id_cliente = $this->input->post('cod_cliente');
 		} else {
@@ -105,7 +124,7 @@ class Trabajos extends CI_Controller {
 		$datos_trabajo = array(
 			'cliente_id'       => $id_cliente,
 			'usuario_id'       => $usuario_id,
-			'contrato_id'      => $this->input->post('contrato_id'),
+			// 'contrato_id'      => $this->input->post('contrato_id'),
 			'grupo_id'         => $this->input->post('grupo_id'),
 			'fecha'            => $fecha_hora_trabajo,
 			'ultimo_pago'      => $fecha_pago,
@@ -136,10 +155,32 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('s_pecho'))) {
 
+			// verificamos si hay la imagen
+			$directory             = "./public/fotoModelos/";
+			$this->createFolder($directory);
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$config['max_size']      = '4096';
+			$config['remove_spaces'] = TRUE;
+			$config['overwrite']     = TRUE;
+			$config['detect_mime']   = TRUE;
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$nombre_documento = 'saco_'.date('YmdHis');
+			$config['file_name']     = $nombre_documento;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			if ($this->upload->do_upload('img_modelo_saco'))
+				$nombreFoto = $nombre_documento.".".pathinfo($_FILES['img_modelo_saco']['name'], PATHINFO_EXTENSION);
+			else
+				$nombreFoto = null;
+
 			$datos_saco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'     => $this->input->post('grupo_id'),
 				'modelo_id'       => $this->input->post('sd_modelo'),
 				'abertura_id'     => $this->input->post('sd_aberturas'),
 				'detalle_id'      => $this->input->post('sd_detalle'),
@@ -158,8 +199,14 @@ class Trabajos extends CI_Controller {
 				'altura_busto'    => $this->input->post('s_abusto'),
 				'precio_unitario' => $this->input->post('saco_pu'),
 				'cantidad'        => $this->input->post('saco_cantidad'),
+				'tipo_bolsillo'   => $this->input->post('tipo_bolsillo'),
+				'estado'   		  => 'Trabajando',
+				'ubicacion'   	  => 'Taller',
+				'imagen'   		  => $nombreFoto,
 			);
 			$this->db->insert('sacos', $datos_saco);
+
+
 
 			// if (!empty($this->input->post('sd_modelo'))) {
 			// 	// insertamos los datos de costos de produccion
@@ -184,10 +231,33 @@ class Trabajos extends CI_Controller {
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
+
+			// verificamos si hay la imagen
+			$directory             = "./public/fotoModelos/";
+			$this->createFolder($directory);
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$config['max_size']      = '4096';
+			$config['remove_spaces'] = TRUE;
+			$config['overwrite']     = TRUE;
+			$config['detect_mime']   = TRUE;
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$nombre_documento = 'pantalon_'.date('YmdHis');
+			$config['file_name']     = $nombre_documento;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			if ($this->upload->do_upload('img_modelo_pantalon'))
+				$nombreFotoPantalon = $nombre_documento.".".pathinfo($_FILES['img_modelo_pantalon']['name'], PATHINFO_EXTENSION);
+			else
+				$nombreFotoPantalon = null;
+
+
 			$datos_pantalon = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'     => $this->input->post('grupo_id'),
 				'modelo_id'       => $this->input->post('pd_modelo'),
 				'pinza_id'        => $this->input->post('pd_pinzas'),
 				'bolsillo_id'     => $this->input->post('pd_batras'),
@@ -205,6 +275,9 @@ class Trabajos extends CI_Controller {
 				'pretina'         => $this->input->post('pd_pretina'),
 				'precio_unitario' => $this->input->post('pantalon_pu'),
 				'cantidad'        => $this->input->post('pantalon_cantidad'),
+				'estado'   		  => 'Trabajando',
+				'ubicacion'   	  => 'Taller',
+				'imagen'   		  => $nombreFotoPantalon,
 			);
 			$this->db->insert('pantalones', $datos_pantalon);
 
@@ -231,20 +304,46 @@ class Trabajos extends CI_Controller {
 		}
 
 		if (!empty($this->input->post('ch_estomago'))) {
+
+			// verificamos si hay la imagen
+			$directory             = "./public/fotoModelos/";
+			$this->createFolder($directory);
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$config['max_size']      = '4096';
+			$config['remove_spaces'] = TRUE;
+			$config['overwrite']     = TRUE;
+			$config['detect_mime']   = TRUE;
+			$config['upload_path']   = $directory;
+			$config['allowed_types'] = '*';
+			$nombre_documento = 'chaleco_'.date('YmdHis');
+			$config['file_name']     = $nombre_documento;
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+			if ($this->upload->do_upload('img_modelo_chaleco'))
+				$nombreFotoChaleco = $nombre_documento.".".pathinfo($_FILES['img_modelo_chaleco']['name'], PATHINFO_EXTENSION);
+			else
+				$nombreFotoChaleco = null;
+
 			$datos_chaleco = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'        => $this->input->post('grupo_id'),
 				'modelo_id'       => $this->input->post('ch_modelo'),
 				'detalle_id'      => $this->input->post('ch_detalle'),
 				'largo'           => $this->input->post('ch_largo'),
 				'pecho'           => $this->input->post('ch_pecho'),
 				'estomago'        => $this->input->post('ch_estomago'),
 				'botones'         => $this->input->post('ch_botones'),
+				'boton_forrado'   => $this->input->post('ch_boton_forrado'),
 				'color_ojales'    => $this->input->post('ch_color'),
 				'altura_busto'    => $this->input->post('ch_abusto'),
 				'precio_unitario' => $this->input->post('ch_pu'),
 				'cantidad'        => $this->input->post('ch_cantidad'),
+				'estado'   		  => 'Trabajando',
+				'ubicacion'   	  => 'Taller',
+				'imagen'   		  => $nombreFotoChaleco,
 			);
 			$this->db->insert('chalecos', $datos_chaleco);
 
@@ -271,10 +370,12 @@ class Trabajos extends CI_Controller {
 		}
 
 		if (!empty($this->input->post('cam_cuello'))) {
+
 			$datos_camisa = array(
 				'cliente_id'       => $id_cliente,
 				'trabajo_id'       => $id_trabajo,
-				'contrato_id'      => $this->input->post('contrato_id'),
+				// 'contrato_id'      => $this->input->post('contrato_id'),
+				'grupo_id'         => $this->input->post('grupo_id'),
 				'cuello'           => $this->input->post('cam_cuello'),
 				'modelo_cuello'    => $this->input->post('cam_mcuello'),
 				'cuello_combinado' => $this->input->post('cam_ccombinado'),
@@ -314,7 +415,8 @@ class Trabajos extends CI_Controller {
 			$datos_falda = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'     => $this->input->post('grupo_id'),
 				'modelo_id'       => $this->input->post('fa_modelo'),
 				'abertura_id'     => $this->input->post('fa_abertura'),
 				'largo'           => $this->input->post('fa_largo'),
@@ -347,7 +449,8 @@ class Trabajos extends CI_Controller {
 			$datos_jumper = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'        => $this->input->post('grupo_id'),
 				'modelo_id'       => $this->input->post('j_modelo'),
 				'abertura_id'     => $this->input->post('j_abertura'),
 				'bolsillo_id'     => $this->input->post('j_bolsillo'),
@@ -399,6 +502,19 @@ class Trabajos extends CI_Controller {
 			$this->db->insert('costos_produccion', $datos_costos_produccion_corbaton);
 		}
 
+		// var_dump($this->input->post('corbaton_color'),
+		// 		 $this->input->post('cg_color'),
+		// 		 $this->input->post('faja_color'),
+		// 		 $this->input->post('panuelo_color'));
+		// 		echo "<br>-------<br>";
+				
+		// var_dump(!empty($this->input->post('corbaton')),
+		// 		 !empty($this->input->post('corbata_gato')),
+		// 		 !empty($this->input->post('faja')),
+		// 		 !empty($this->input->post('panuelo')));
+
+		// exit();
+		
 		if (!empty($this->input->post('cg_color')))
 		{
 			$cg_color = $this->input->post('cg_color');
@@ -435,14 +551,36 @@ class Trabajos extends CI_Controller {
 			);
 			$this->db->insert('costos_produccion', $datos_costos_produccion_faja);
 		}
+
+		if (!empty($this->input->post('panuelo_color'))){
+
+			$panuelo_color = $this->input->post('panuelo_color');
+			$sw = 1;
+			// insertamos los datos de costos de produccion con id 9 por el valor de la tabal costos
+			$datos_costo_panuelo = $this->db->get_where('costos', array('id'=>10))->row();
+			$total_costo_panuelo = $this->input->post('ext_cantidad')*$datos_costo_panuelo->varon;
+			$datos_costos_produccion_panuelo = array(
+				'trabajo_id' => $id_trabajo,
+				'cliente_id' => $id_cliente,
+				'costo_id'   => 10,
+				'cantidad'   => $this->input->post('ext_cantidad'),
+				'precio'     => $datos_costo_panuelo->varon,
+				'total'      => $total_costo_panuelo,
+			);
+			$this->db->insert('costos_produccion', $datos_costos_produccion_panuelo);
+		}
+		
+
 		if($sw == 1){
 			$datos_extras = array(
 				'cliente_id'      => $id_cliente,
 				'trabajo_id'      => $id_trabajo,
-				'contrato_id'     => $this->input->post('contrato_id'),
+				// 'contrato_id'     => $this->input->post('contrato_id'),
+				'grupo_id'        => $this->input->post('grupo_id'),
 				'corbaton'        => $corbaton_color,
 				'corbata_gato'    => $cg_color,
 				'faja'            => $faja_color,
+				'panuelo'         => $panuelo_color,
 				'precio_unitario' => $this->input->post('ext_pu'),
 				'cantidad'        => $this->input->post('ext_cantidad'),
 			);
@@ -1162,6 +1300,7 @@ class Trabajos extends CI_Controller {
 				'botones'         => $this->input->post('ch_botones'),
 				'color_ojales'    => $this->input->post('ch_color'),
 				'altura_busto'    => $this->input->post('ch_abusto'),
+				'boton_forrado'    => $this->input->post('ch_boton_forrado'),
 				// 'precio_unitario' => $this->input->post('ch_pu'),
 				// 'cantidad'        => $this->input->post('ch_cantidad'),
 			);
@@ -1203,18 +1342,18 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('j_talle'))) {
 			$datos_jumper = array(
-				'cliente_id'  => $id_cliente,
-				'trabajo_id'  => $id_trabajo,
-				'modelo_id'   => $this->input->post('j_modelo'),
-				'abertura_id' => $this->input->post('j_abertura'),
-				'bolsillo_id' => $this->input->post('j_bolsillo'),
-				'talle'       => $this->input->post('j_talle'),
-				'largo'       => $this->input->post('j_largo'),
-				'cintura'     => $this->input->post('j_cintura'),
-				'cadera'      => $this->input->post('j_cadera'),
-				'pecho'       => $this->input->post('j_pecho'),
+				'cliente_id'   => $id_cliente,
+				'trabajo_id'   => $id_trabajo,
+				'modelo_id'    => $this->input->post('j_modelo'),
+				'abertura_id'  => $this->input->post('j_abertura'),
+				'bolsillo_id'  => $this->input->post('j_bolsillo'),
+				'talle'        => $this->input->post('j_talle'),
+				'largo'        => $this->input->post('j_largo'),
+				'cintura'      => $this->input->post('j_cintura'),
+				'cadera'       => $this->input->post('j_cadera'),
+				'pecho'        => $this->input->post('j_pecho'),
 				'estomago'     => $this->input->post('j_estomago'),
-				'altura_busto'     => $this->input->post('j_abusto'),
+				'altura_busto' => $this->input->post('j_abusto'),
 			);
 			$this->db->where('id', $this->input->post('jumper_id'));
 			$this->db->update('jumpers', $datos_jumper);
@@ -1222,12 +1361,18 @@ class Trabajos extends CI_Controller {
 
 		if(!empty($this->input->post('extras_id')))
 		{
+			$corbaton 		= (!empty($this->input->post('corbaton')))? $this->input->post('corbaton_color') : NULL ;
+			$corbata_gato 	= (!empty($this->input->post('corbata_gato')))? $this->input->post('cg_color') : NULL ;
+			$faja	 		= (!empty($this->input->post('faja')))? $this->input->post('faja_color') : NULL ;
+			$panuelo 		= (!empty($this->input->post('panuelo')))? $this->input->post('panuelo_color') : NULL ;
+
 			$datos_extras = array(
 				'cliente_id'   => $id_cliente,
 				'trabajo_id'   => $id_trabajo,
-				'corbaton'     => $this->input->post('corbaton_color'),
-				'corbata_gato' => $this->input->post('cg_color'),
-				'faja'         => $this->input->post('faja_color'),
+				'corbaton'     => $corbaton,
+				'corbata_gato' => $corbata_gato,
+				'faja'         => $faja,
+				'panuelo'      => $panuelo,
 			);
 			$this->db->where('id', $this->input->post('extras_id'));
 			$this->db->update('extras', $datos_extras);
@@ -1493,6 +1638,7 @@ class Trabajos extends CI_Controller {
 		}
 
 		$this->db->where('t.borrado',null);
+		$this->db->order_by("id", "desc");
 
 		if($this->input->get('numero') != '' && $this->input->get('cliente') != '' && $this->input->get('celular') != '' && $this->input->get('fecha_prueba') != '' && $this->input->get('fecha_entrega') != ''){
 			$this->db->limit(200);
@@ -1508,6 +1654,110 @@ class Trabajos extends CI_Controller {
 		// var_dump($resultado);
 		// exit;
 	}
+
+	public function ajaxDetalleLocalizacion(){
+		
+		// print_r($this->input->get('trabajo_id'));
+
+		$id_trabajo = $this->input->get('trabajo_id');
+
+		$this->db->select('c.nombre, c.ci, c.celulares, c.genero, t.*');
+		$this->db->from('trabajos as t');
+		$this->db->join('clientes as c', 'c.id = t.cliente_id', 'left');
+		$this->db->where('t.id', $id_trabajo);
+		$data['trabajo'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ab.nombre as nombre_abertura, sa.*');
+		$this->db->from('sacos as sa');
+		$this->db->join('modelos as mo', 'mo.id = sa.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
+		$this->db->where('sa.trabajo_id', $id_trabajo);
+		$data['saco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
+		$this->db->from('pantalones as pa');
+		$this->db->join('modelos as mo', 'mo.id = pa.modelo_id', 'left');
+		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
+		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
+		$this->db->where('pa.trabajo_id', $id_trabajo);
+		$data['pantalon'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
+		$this->db->from('chalecos as ch');
+		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
+		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
+		$this->db->where('ch.trabajo_id', $id_trabajo);
+		$data['chaleco'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
+		$this->db->from('faldas as f');
+		$this->db->join('modelos as mo', 'mo.id = f.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = f.abertura_id', 'left');
+		$this->db->where('f.trabajo_id', $id_trabajo);
+		$data['falda'] = $this->db->get()->row_array();
+
+		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, b.nombre as bolsillo_nombre, j.*');
+		$this->db->from('jumpers as j');
+		$this->db->join('modelos as mo', 'mo.id = j.modelo_id', 'left');
+		$this->db->join('aberturas as ab', 'ab.id = j.abertura_id', 'left');
+		$this->db->join('bolsillos as b', 'b.id = j.bolsillo_id', 'left');
+		$this->db->where('j.trabajo_id', $id_trabajo);
+		$data['jumper'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('camisas as ca');
+		$this->db->where('ca.trabajo_id', $id_trabajo);
+		$data['camisa'] = $this->db->get()->row_array();
+
+		$this->db->select('*');
+		$this->db->from('extras as ex');
+		$this->db->where('ex.trabajo_id', $id_trabajo);
+		$data['extras'] = $this->db->get()->row_array();
+
+		$this->load->view('trabajos/ajaxDetalleLocalizacion', $data);
+
+	}
+
+	function guardaEstadoUbicacion(){
+
+		$tipo_prenda 	= $this->input->get('tipo_prenda');
+		$tipo_detalle 	= $this->input->get('tipo_detalle');
+		$campo_valor 	= $this->input->get('campo_valor');
+		$prenda_id 		= $this->input->get('prenda_id');
+
+		if($tipo_prenda == "saco")
+			$tabla = "sacos";
+		else if($tipo_prenda == "pantalon")
+			$tabla = "pantalones";
+		else if($tipo_prenda == "chaleco")
+			$tabla = "chalecos";
+		else if($tipo_prenda == "falda")
+			$tabla = "faldas";
+		else if($tipo_prenda == "jumper")
+			$tabla = "jumpers";
+
+		$data = array(
+			$tipo_detalle => $campo_valor
+		);
+
+		if($this->db->update($tabla, $data, "id=$prenda_id")){
+			$data['respuesta'] = 'success';
+			$data['prenda'] = $tipo_prenda;
+			$data['campo'] = $tipo_detalle;
+		}else{
+			$data['respuesta'] = 'error';
+		}
+
+		echo json_encode($data);
+	}
+
+	private function createFolder($nombreCarpeta){
+        if(!file_exists($nombreCarpeta))
+            mkdir($nombreCarpeta, 0777, true);
+			
+        return $nombreCarpeta;
+    }
 
 }
 

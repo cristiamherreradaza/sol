@@ -206,6 +206,7 @@
                                             <td><span class="font-bold">Nombre: </span> <?php echo $grupo['nombre'] ?></td>
                                             <td><span class="font-bold">Celulares: </span> <?php echo $grupo['celulares'] ?></td>
                                             <td><span class="font-bold">Direccion: </span> <?php echo $grupo['direccion'] ?></td>
+                                            <td><span class="font-bold">Terminado: </span> <?php echo $grupo['terminado'] ?></td>
                                             <td>
                                                 <button type="button" class="btn btn-warning" onclick="edita_grupo()"><i class="fas fa-edit"></i></button>
                                             </td>
@@ -213,120 +214,12 @@
                                     </table>
                                 </div>
                             </div>
-
                             <div class="row">
-
-                                <div class="col-md-12">
-                                    <div class="card card-outline-primary">                                
-                                    <div class="card-header">
-                                        <h4 class="mb-0 text-white">DETALLE DEL CONTRATO</h4>
-                                    </div>
-                                    <?php 
-                                        $contratos_json = json_encode($contratos); 
-                                        // vdebug($contratos_json, false, false, true); 
-                                    ?>
-
-                                        <table class="table table-striped no-wrap">
-                                            <thead>
-                                                <tr>
-                                                    <th>Genero</th>
-                                                    <th>Fecha</th>
-                                                    <th>Cantidad</th>
-                                                    <th>P. Saco</th>
-                                                    <th>P. Pantalon</th>
-                                                    <th>P. Chaleco</th>
-                                                    <th>P. Falda</th>
-                                                    <th>Tela Propia</th>
-                                                    <th>Marca</th>
-                                                    <th>P. Confec.</th>
-                                                    <th>P. Tela</th>
-                                                    <th>Subtotal</th>
-                                                    <th>Total</th>
-                                                    <th style="width: 5%;"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php 
-                                                    $cantidad_personas = 0;
-                                                    $precio_saco       = 0;
-                                                    $precio_pantalon   = 0;
-                                                    $precio_chaleco    = 0;
-                                                    $precio_falda      = 0;
-                                                    $costo_confeccion  = 0;
-                                                    $costo_tela        = 0;
-                                                    $costo_total       = 0;
-                                                    $subTotal          = 0;
-                                                ?>
-                                                <?php foreach ($contratos as $key => $c): ?>
-                                                <?php 
-                                                    $cantidad_personas  = $c['cantidad'];
-                                                    $precio_saco       += $c['costo_saco'];
-                                                    $precio_pantalon   += $c['costo_pantalon'];
-                                                    $precio_chaleco    += $c['costo_chaleco'];
-                                                    $precio_falda      += $c['costo_falda'];
-                                                    $costo_confeccion  += $c['costo_confeccion'];
-                                                    $costo_tela        += $c['costo_tela'];
-                                                    $costo_total       += $c['total'];
-                                                    $subTotal           = $costo_tela+$costo_confeccion;
-                                                ?>
-                                                    <tr>
-                                                        <td><?php echo $c['genero'] ?></td>
-                                                        <td><?php echo $c['fecha'] ?></td>
-                                                        <?php if($c['genero']=='Varon'): ?>
-                                                            <td><?php echo $c['cantidad_varones'] ?></td>
-                                                        <?php else: ?>
-                                                            <td><?php echo $c['cantidad_mujeres'] ?></td>
-                                                        <?php endif; ?>
-                                                        <td><?php echo $c['costo_saco'] ?></td>
-                                                        <td><?php echo $c['costo_pantalon'] ?></td>
-                                                        <td><?php echo $c['costo_chaleco'] ?></td>
-                                                        <td><?php echo $c['costo_falda'] ?></td>
-                                                        <td><?php echo $c['tela_propia'] ?></td>
-                                                        <td><?php echo $c['marca'] ?></td>
-                                                        <td><?php echo $c['costo_confeccion'] ?></td>
-                                                        <td><?php echo $c['costo_tela'] ?></td>
-                                                        <td><?php echo $c['costo_confeccion']+$c['costo_tela'] ?></td>
-                                                        <td><?php echo $c['total'] ?></td>
-                                                        <td align="left">
-                                                            <button type="button" class="btn btn-warning" onclick="edita_detalle_contrato(<?php echo $c['id'] ?>)"><i class="fas fa-edit"></i></button>
-                                                            <button type="button" class="btn btn-danger" onclick="elimina_contrato(<?php echo $c['id'] ?>, '<?php echo $c['descripcion'] ?>', <?php echo $c['grupo_id'] ?>)"><i class="fas fa-times"></i></button>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                            <thead>
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <th><?php echo $cantidad_personas; ?></th>
-                                                    <th><?php echo $precio_saco; ?></th>
-                                                    <th><?php echo $precio_pantalon; ?></th>
-                                                    <th><?php echo $precio_chaleco; ?></th>
-                                                    <th><?php echo $precio_falda; ?></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th><?php echo $costo_confeccion; ?></th>
-                                                    <th><?php echo $costo_tela; ?></th>
-                                                    <th><?php echo $subTotal; ?></th>
-                                                    <th class="text-info" style="font-size: 16pt;"><?php echo $costo_total; ?></th>
-                                                    <td style="width: 5%;"></td>
-                                                </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="row">
-
                                 <div class="col-md-12">
                                     <div class="card card-outline-success">                                
                                     <div class="card-header">
                                         <h4 class="mb-0 text-white">LISTADO DE PERSONAS</h4>
                                     </div>
-                                    <?php //vdebug($trabajos, false, false, true); ?>
-
                                         <table class="table table-striped no-wrap">
                                             <thead>
                                                 <tr>
@@ -339,7 +232,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php foreach ($trabajos as $key => $t): ?>
+                                                <?php 
+													$st = 0;
+													foreach ($trabajos as $key => $t): 
+												?>
                                                     <tr>
                                                         <td><?php echo $t['nombre'] ?></td>
                                                         <td><?php echo $t['total'] ?></td>
@@ -350,8 +246,18 @@
                                                             <button type="button" class="btn btn-danger" onclick="elimina_persona_contrato(<?php echo $t['id'] ?>, '<?php echo $t['nombre'] ?>', <?php echo $t['grupo_id'] ?>)"><i class="fas fa-times"></i></button>
                                                         </td>
                                                     </tr>
-                                                <?php endforeach; ?>
+                                                <?php 
+													$st = $st + $t['total'];
+
+													endforeach; 
+												?>
                                             </tbody>
+											<tfoot>
+												<tr>
+													<th colspan="5">TOTAL</th>
+													<th><h3><?=$st?> Bs.</h3></th>
+												</tr>
+											</tfoot>
                                             
                                         </table>
                                     </div>
@@ -360,6 +266,12 @@
 
 
                             </div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<a class="btn btn-dark btn-block text-white" href="<?php echo base_url();?>contratos/listado">Volver</a>
+								</div>
+							</div>
 
                         </div>
                     </div>

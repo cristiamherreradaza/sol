@@ -13,7 +13,11 @@
         <!-- Row -->
         <div class="row">
 
-            <?php echo form_open('Trabajos/guarda_trabajo') ?>
+            <?php
+				// $atributos = array(); 
+				// echo form_open('Trabajos/guarda_trabajo') 
+				echo form_open_multipart('Trabajos/guarda_trabajo')
+			?>
             <div class="col-lg-12">
                 <div class="card card-outline-info">
                     <div class="card-header">
@@ -64,14 +68,13 @@
                                     <div class="form-group">
                                         <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
                                         <div id="carga_contratos">
-                                            <select name="contrato_id" id="contrato_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
+                                            <select name="grupo_id" id="grupo_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
                                                 <option value="">Seleccione</option>
-                                                <?php foreach ($contratos as $key => $c) : ?>
-                                                    <option value="<?php echo $c['id'] ?>"><?php echo $c['nombre'] ?> (<?php echo $c['genero'] ?>)</option>
+                                                <?php foreach ($grupos as $key => $g) : ?>
+                                                    <option value="<?php echo $g['id'] ?>"><?php echo $g['nombre'] ?></option>
                                                 <?php endforeach ?>
                                             </select>
                                         </div>
-                                        <input type="hidden" name="grupo_id" id="grupo_id">
                                     </div>
                                 </div>
 
@@ -84,1011 +87,1108 @@
                                 </div>
                             </div>
 
+							<hr>
+							<div class="row mb-2">
+								<div class="col-md-11">
+									<botton class="btn btn-block btn-primary" onclick="pagoParcialTotal()">TOTAL / PARCIAL</botton>
+									<div class="form-group" id="bloque_pago_total" style="display: none">
+										<label class="control-label"><h4>Cantidad Total de la confeccion</h4></label>
+										<input type="number" class="form-control" id="modalidad_pago" name="modalidad_pago" placeholder="Precio en Bs." onClick="this.select();">
+									</div>			
+									<input type="hidden" value="no" id="valor_input_verificador">
+								</div>
+								<div class="col-md-1">
+									<button type="button" id="nombre_boton_btn" class="btn btn-block btn-danger"><span id="nombre_boton">NO</span></button>
+								</div>
+							</div>
+
+
                             <div class="row">
                                 <div class="col-md-12">
-
-                                    <div class="row" id="tabsProductos">
-                                        <div class="col-md-3">
-                                            <button type="button" id="tab1" class="btn btn-block btn-info activo">DATOS SACO</button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="button" id="tab2" class="btn btn-block btn-success inactivo">DATOS PANTALON</button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="button" id="tab3" class="btn btn-block btn-primary inactivo">DATOS CHALECO</button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="button" id="tab4" class="btn btn-block btn-inverse inactivo">EXTRAS / FALDAS Y JUMPER</button>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12 tabContenido" id="tab1C">
-                                            <div class="card border-danger">
-                                                <div class="card-body">
-                                                     <!-- saco -->
-                                                        <div class="row">
-                                                            <!-- medidas saco -->
-
-                                                            <div class="col-md-5">
-                                                                <div class="card card-outline-info">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">MEDIDAS SACO</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #e6f2ff;">
-
-                                                                        <div class="row">
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Talle</label>
-                                                                                    <input name="s_talla" type="number" id="s_talla" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Largo</label>
-                                                                                    <input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Hombro</label>
-                                                                                    <input name="s_hombro" type="number" id="s_hombro" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Espalda</label>
-                                                                                    <input name="s_espalda" type="number" id="s_espalda" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Pecho</label>
-                                                                                    <input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col" id="saco_albusto" style="display: none;">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Alt Busto</label>
-                                                                                    <input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Estomago</label>
-                                                                                    <input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Medio Brazo</label>
-                                                                                    <input name="s_mbrazo" type="number" id="s_mbrazo" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">L. Manga</label>
-                                                                                    <input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <!-- fin medidas saco -->
-
-                                                            <!-- inicia modelos sacos -->
-                                                            <div class="col-md-7">
-                                                                <div class="card card-outline-info">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">CARACTERISTICAS SACO</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #e6f2ff;">
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <?php //vdebug($modelos_varon, false, false, true); 
-                                                                                    ?>
-                                                                                    <label class="control-label">Modelo</label>
-                                                                                    <select name="sd_modelo" id="sd_modelo" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($modelos_varon_saco as $mv) : ?>
-                                                                                            <option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-2">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Botones</label>
-                                                                                    <input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Aberturas</label>
-                                                                                    <select name="sd_aberturas" id="sd_aberturas" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($aberturas_varon_saco as $a) : ?>
-                                                                                            <option value="<?php echo $a['id'] ?>"><?php echo $a['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Detalle</label>
-                                                                                    <select name="sd_detalle" id="sd_detalle" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($detalles_varon_saco as $d) : ?>
-                                                                                            <option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Color</label>
-                                                                                    <input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-2">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Ojal Pu&ntilde;o</label>
-                                                                                    <select name="sd_ojal" id="sd_ojal" class="form-control custom-select">
-                                                                                        <option value="Si">Si</option>
-                                                                                        <option value="No">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Color Ojal</label>
-                                                                                    <input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Cantidad</b></label>
-                                                                                    <input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                    <input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Subtotal</b></label>
-                                                                                    <input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- fin sacos -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 tabContenido" id="tab2C" style="display: none;">
-                                            <div class="card border-danger">
-                                                <div class="card-body">
-                                                    <!-- pantalon -->
-                                                    <div class="row">
-
-                                                        <!-- medidas pantalon -->
-                                                        <div class="col-md-5">
-                                                            <div class="card card-outline-success">
-                                                                <div class="card-header">
-                                                                    <h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
-                                                                </div>
-                                                                <div class="card-body" style="background-color: #e6ffe6;">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Largo</label>
-                                                                                <input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Entrepierna</label>
-                                                                                <input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Cintura</label>
-                                                                                <input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col" id="pantalon_cadera" style="display: none;">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Cadera</label>
-                                                                                <input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Muslo</label>
-                                                                                <input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Rodilla</label>
-                                                                                <input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Bota Pie</label>
-                                                                                <input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">T. Delantero</label>
-                                                                                <input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Tiro Atras</label>
-                                                                                <input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- fin medidas pantalon -->
-
-                                                        <!-- modelos pantalon -->
-                                                        <div class="col-md-7">
-                                                            <div class="card card-outline-success">
-                                                                <div class="card-header">
-                                                                    <h4 class="mb-0 text-white">CARACTERISTICAS PANTALON</h4>
-                                                                </div>
-                                                                <div class="card-body" style="background-color: #e6ffe6;">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <?php //vdebug($modelos_varon, false, false, true); 
-                                                                                ?>
-                                                                                <label class="control-label">Modelo</label>
-                                                                                <select name="pd_modelo" id="pd_modelo" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <?php foreach ($modelos_varon_pantalon as $mvp) : ?>
-                                                                                        <option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Pinzas</label>
-                                                                                <select name="pd_pinzas" id="pd_pinzas" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <?php foreach ($pinzas_varon_pantalon as $pvp) : ?>
-                                                                                        <option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col" id="select_bragueta" style="display: block;">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Bragueta</label>
-                                                                                <select name="pd_bragueta" name="pd_bragueta" class="form-control custom-select">
-                                                                                    <option value="Cierre">Cierre</option>
-                                                                                    <option value="Boton">Boton</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col" id="pd_cpretina" style="display: none;">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Pretina</label>
-                                                                                <select name="pd_pretina" id="pd_pretina" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <option value="Normal">Normal</option>
-                                                                                    <option value="Ancho">Ancho</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Bolsillo</label>
-                                                                                <select name="pd_batras" id="pd_batras" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <?php foreach ($bolsillos_varon_pantalon as $bvp) : ?>
-                                                                                        <?php if ($bvp['id'] == 1) : ?>
-                                                                                            <option value="<?php echo $bvp['id'] ?>" selected><?php echo $bvp['nombre'] ?></option>
-                                                                                        <?php else : ?>
-                                                                                            <option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
-                                                                                        <?php endif ?>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Bota pie</label>
-                                                                                <select name="pd_bpie" id="pd_bpie" class="form-control custom-select">
-                                                                                    <option value="Normal">Normal</option>
-                                                                                    <option value="Dobles">Dobles</option>
-                                                                                    <option value="Abertura">Abertura</option>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Cantidad</b></label>
-                                                                                <input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="1">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                <input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" placeholder="Ej: 150">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Subtotal</b></label>
-                                                                                <input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- fin medidas pantalon -->
-                                                    </div>
-                                                    <!-- fin pantalon -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 tabContenido" id="tab3C" style="display: none;">
-                                            <div class="card border-danger">
-                                                <div class="card-body">
-                                                    <!-- chalecos -->
-                                                    <div class="row">
-                                                        <!-- chaleco medidas -->
-                                                        <div class="col-md-5">
-                                                            <div class="card card-outline-primary">
-                                                                <div class="card-header">
-                                                                    <h4 class="mb-0 text-white">CHALECO</h4>
-                                                                </div>
-                                                                <div class="card-body" style="background-color: #f0e7fe;">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Largo</label>
-                                                                                <input name="ch_largo" type="number" id="ch_largo" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Pecho</label>
-                                                                                <input name="ch_pecho" type="number" id="ch_pecho" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Estomago</label>
-                                                                                <input name="ch_estomago" type="number" id="ch_estomago" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col" id="ch_abusto" style="display: none;">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Altura busto</label>
-                                                                                <input name="ch_abusto" type="number" id="ch_abusto_dato" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- fin chaleco medidas -->
-
-                                                        <!-- chalecos -->
-                                                        <div class="col-md-7">
-                                                            <div class="card card-outline-primary">
-                                                                <div class="card-header">
-                                                                    <h4 class="mb-0 text-white">CARACTERISTICAS CHALECO</h4>
-                                                                </div>
-                                                                <div class="card-body" style="background-color: #f0e7fe;">
-
-                                                                    <div class="row">
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <?php //vdebug($modelos_varon, false, false, true); 
-                                                                                ?>
-                                                                                <label class="control-label">Modelo</label>
-                                                                                <select name="ch_modelo" id="ch_modelo" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <?php foreach ($modelos_varon_chalecos as $mvch) : ?>
-                                                                                        <option value="<?php echo $mvch['id'] ?>"><?php echo $mvch['nombre'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-2">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Botones</label>
-                                                                                <input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Detalle</label>
-                                                                                <select name="ch_detalle" id="ch_detalle" class="form-control custom-select">
-                                                                                    <option value="">Seleccione</option>
-                                                                                    <?php foreach ($detalles_varon_chalecos as $dvch) : ?>
-                                                                                        <option value="<?php echo $dvch['id'] ?>"><?php echo $dvch['nombre'] ?></option>
-                                                                                    <?php endforeach ?>
-                                                                                </select>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label">Color Ojales</label>
-                                                                                <input name="ch_color" type="text" id="ch_color" class="form-control" placeholder="">
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="row">
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Cantidad</b></label>
-                                                                                <input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="1">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                <input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150">
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="col-md-4">
-                                                                            <div class="form-group">
-                                                                                <label class="control-label"><b>Subtotal</b></label>
-                                                                                <input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" readonly>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- fin chalecos -->
-
-                                                    </div>
-                                                    <!-- fin chalecos -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 tabContenido" id="tab4C" style="display: none;">
-                                            <div class="card border-danger">
-                                                <div class="card-body">
-                                                    <!-- camisa y extras -->
-                                                    <div id="bloque_extras" style="display: block;">
-
-                                                        <div class="row">
-
-                                                            <!-- camisa medidas -->
-                                                            <div class="col-md-5">
-                                                                <div class="card card-outline-inverse">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">CAMISA</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #f5f5f5;">
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cuello</label>
-                                                                                    <input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Largo manga</label>
-                                                                                    <input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Color</label>
-                                                                                    <input name="cam_color" type="text" id="cam_color" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Modelo cuello</label>
-                                                                                    <select name="cam_mcuello" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <option value="Pajarito">Pajarito</option>
-                                                                                        <option value="Normal">Normal</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Ancho</label>
-                                                                                    <select name="cam_ancho" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <option value="Normal">Normal</option>
-                                                                                        <option value="Slim">Slim</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cuello Combi</label>
-                                                                                    <select name="cam_ccombinado" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <option value="Si">Si</option>
-                                                                                        <option value="No">No</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Cantidad</b></label>
-                                                                                    <input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" value="1">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                    <input name="cam_pu" type="number" id="cam_pu" class="form-control" placeholder="Ej: 150">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Subtotal</b></label>
-                                                                                    <input name="cam_subtotal" type="number" id="cam_subtotal" class="form-control" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- fin camisa medidas -->
-
-                                                            <!-- extras -->
-                                                            <div class="col-md-7">
-                                                                <div class="card card-outline-inverse">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">EXTRAS</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #f5f5f5;">
-
-                                                                        <div class="row">
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Corbaton</label>
-                                                                                    <input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Corbata gato</label>
-                                                                                    <input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Faja</label>
-                                                                                    <input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Cantidad</b></label>
-                                                                                    <input name="ext_cantidad" type="number" id="ext_cantidad" class="form-control" value="1">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                    <input name="ext_pu" type="number" id="ext_pu" class="form-control" placeholder="Ej: 150">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Subtotal</b></label>
-                                                                                    <input name="ext_subtotal" type="number" id="ext_subtotal" class="form-control" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- fin extras -->
-
-                                                        </div>
-                                                    </div>
-                                                    <!-- fin camisa y extras -->
-
-                                                    <!-- Falda y jumper -->
-                                                    <div id="bloque_mujer" style="display: none;">
-                                                        <div class="row">
-
-                                                            <!-- falda medidas -->
-                                                            <div class="col-md-5">
-                                                                <div class="card card-outline-warning">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">FALDA</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #ffffcc;">
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Largo</label>
-                                                                                    <input name="fa_largo" type="number" id="fa_largo" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cintura</label>
-                                                                                    <input name="fa_cintura" type="number" id="fa_cintura" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cadera</label>
-                                                                                    <input name="fa_cadera" type="number" id="fa_cadera" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-3">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Vasta</label>
-                                                                                    <input name="fa_vasta" type="number" id="fa_vasta" class="form-control" min="0" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Modelo</label>
-                                                                                    <select name="fa_modelo" id="fa_modelo" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($modelos_faldas as $m) : ?>
-                                                                                            <option value="<?php echo $m['id'] ?>"><?php echo $m['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Aberturas</label>
-                                                                                    <select name="fa_abertura" id="fa_abertura" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($aberturas_falda as $af) : ?>
-                                                                                            <option value="<?php echo $af['id'] ?>"><?php echo $af['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Pretina</label>
-                                                                                    <select name="fa_pretina" id="fa_pretina" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <option value="Normal">Normal</option>
-                                                                                        <option value="Ancho">Ancho</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Cantidad</b></label>
-                                                                                    <input name="fa_cantidad" type="number" id="fa_cantidad" class="form-control" value="1">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                    <input name="fa_pu" type="number" id="fa_pu" class="form-control" placeholder="Ej: 150">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Subtotal</b></label>
-                                                                                    <input name="fa_subtotal" type="number" id="fa_subtotal" class="form-control" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- fin camisa medidas -->
-
-                                                            <!-- jumper -->
-                                                            <div class="col-md-7">
-                                                                <div class="card card-outline-warning">
-                                                                    <div class="card-header">
-                                                                        <h4 class="mb-0 text-white">JAMPER</h4>
-                                                                    </div>
-                                                                    <div class="card-body" style="background-color: #ffffcc;">
-
-                                                                        <div class="row">
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Talle</label>
-                                                                                    <input type="number" name="j_talle" id="j_talle" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Largo</label>
-                                                                                    <input name="j_largo" type="number" id="j_largo" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cintura</label>
-                                                                                    <input name="j_cintura" type="number" id="j_cintura" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Cadera</label>
-                                                                                    <input name="j_cadera" type="number" id="j_cadera" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Pecho</label>
-                                                                                    <input type="number" name="j_pecho" id="j_pecho" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Estomago</label>
-                                                                                    <input name="j_estomago" type="number" id="j_estomago" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Altura Busto</label>
-                                                                                    <input name="j_abusto" type="number" id="j_abusto" class="form-control" step="any">
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Modelo</label>
-                                                                                    <select name="j_modelo" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($modelos_jumper as $mj) : ?>
-                                                                                            <option value="<?php echo $mj['id'] ?>"><?php echo $mj['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Aberturas</label>
-                                                                                    <select name="j_abertura" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($aberturas_jumper as $aj) : ?>
-                                                                                            <option value="<?php echo $aj['id'] ?>"><?php echo $aj['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label">Bolsillo</label>
-                                                                                    <select name="j_bolsillo" class="form-control custom-select">
-                                                                                        <option value="">Seleccione</option>
-                                                                                        <?php foreach ($bolsillos_jumper as $bj) : ?>
-                                                                                            <option value="<?php echo $bj['id'] ?>"><?php echo $bj['nombre'] ?></option>
-                                                                                        <?php endforeach ?>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="row">
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Cantidad</b></label>
-                                                                                    <input name="jam_cantidad" type="number" id="jam_cantidad" class="form-control" value="1">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Precio Unitario</b></label>
-                                                                                    <input name="jam_pu" type="number" id="jam_pu" class="form-control" placeholder="Ej: 150">
-                                                                                </div>
-                                                                            </div>
-
-                                                                            <div class="col-md-4">
-                                                                                <div class="form-group">
-                                                                                    <label class="control-label"><b>Subtotal</b></label>
-                                                                                    <input name="jam_subtotal" type="number" id="jam_subtotal" class="form-control" readonly>
-                                                                                </div>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <!-- fin jumper -->
-
-                                                        </div>
-                                                    </div>
-                                                    <!-- fin camisa y extras -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+									<hr>
+									<ul class="nav nav-pills bg-nav-pills nav-justified mb-3">
+										<li class="nav-item">
+											<a href="#home1" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0 active">
+												<i class="mdi mdi-home-variant d-lg-none d-block mr-1"></i>
+												<span class="d-none d-lg-block">DATOS DEL SACO</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#profile1" data-toggle="tab" aria-expanded="true" class="nav-link rounded-0">
+												<i class="mdi mdi-account-circle d-lg-none d-block mr-1"></i>
+												<span class="d-none d-lg-block">DATOS DEL PANTALON</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#settings1" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+												<i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+												<span class="d-none d-lg-block">DATOS DEL CHALECO</span>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a href="#extras_jumper" data-toggle="tab" aria-expanded="false" class="nav-link rounded-0">
+												<i class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i>
+												<span class="d-none d-lg-block">EXTRAS / FALDAS Y JUMPER</span>
+											</a>
+										</li>
+									</ul>
+									<div class="tab-content">
+										<div class="tab-pane show active" id="home1">
+											<div class="row">
+												<div class="col-md-12">
+													<!-- saco -->
+													<div class="row">
+														<!-- medidas saco -->
+														<div class="col-md-5">
+															<div class="card card-outline-info">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">MEDIDAS SACO</h4>
+																</div>
+																<div class="card-body" style="background-color: #e6f2ff;">
+
+																	<div class="row">
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Talle</label>
+																				<input name="s_talla" type="number" id="s_talla" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Largo</label>
+																				<input name="s_largo" type="number" id="s_largo" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
+																			</div>
+																		</div>
+
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Hombro</label>
+																				<input name="s_hombro" type="number" id="s_hombro" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Espalda</label>
+																				<input name="s_espalda" type="number" id="s_espalda" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Pecho</label>
+																				<input name="s_pecho" type="number" id="s_pecho" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
+																			</div>
+																		</div>
+
+																		<div class="col" id="saco_albusto" style="display: none;">
+																			<div class="form-group">
+																				<label class="control-label">Alt Busto</label>
+																				<input name="s_abusto" type="number" id="s_abusto" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Estomago</label>
+																				<input name="s_estomago" type="number" id="s_estomago" class="form-control" min="0" step="any" onchange="copyDateChaleco(this)">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Medio Brazo</label>
+																				<input name="s_mbrazo" type="number" id="s_mbrazo" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">L. Manga</label>
+																				<input name="s_lmanga" type="number" id="s_lmanga" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<!-- fin medidas saco -->
+														<!-- inicia modelos sacos -->
+														<div class="col-md-7">
+															<div class="card card-outline-info">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">CARACTERISTICAS SACO</h4>
+																</div>
+																<div class="card-body" style="background-color: #e6f2ff;">
+
+																	<div class="row">
+
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<?php //vdebug($modelos_varon, false, false, true); 
+																				?>
+																				<label class="control-label">Modelo</label>
+																				<select name="sd_modelo" id="sd_modelo" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($modelos_varon_saco as $mv) : ?>
+																						<option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col-md-2">
+																			<div class="form-group">
+																				<label class="control-label">Botones</label>
+																				<input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Aberturas</label>
+																				<select name="sd_aberturas" id="sd_aberturas" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($aberturas_varon_saco as $a) : ?>
+																						<option value="<?php echo $a['id'] ?>"><?php echo $a['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Detalle</label>
+																				<select name="sd_detalle" id="sd_detalle" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($detalles_varon_saco as $d) : ?>
+																						<option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Color</label>
+																				<input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
+																			</div>
+																		</div>
+
+																		<div class="col-md-2">
+																			<div class="form-group">
+																				<label class="control-label">Ojal Pu&ntilde;o</label>
+																				<select name="sd_ojal" id="sd_ojal" class="form-control custom-select">
+																					<option value="Si">Si</option>
+																					<option value="No">No</option>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Color Ojal</label>
+																				<input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Tipo de bolsillo</label>
+																				<input name="tipo_bolsillo" type="text" id="tipo_bolsillo" class="form-control" placeholder="Ej: Doble, Simple">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<label class="control-label">Imagen del modelo</label>
+																				<input name="img_modelo_saco" type="file" accept="image/*" id="img_modelo_saco" class="form-control">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_saco_precio_unitario">
+																				<label class="control-label"><b>Precio Unitario</b></label>
+																				<input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_saco_subtotal">
+																				<label class="control-label"><b>Subtotal</b></label>
+																				<input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+													</div>
+													<!-- fin sacos -->
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="profile1">
+											<div class="row">
+												<div class="col-md-12">
+													<!-- pantalon -->
+													<div class="row">
+														<!-- medidas pantalon -->
+														<div class="col-md-5">
+															<div class="card card-outline-success">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">MEDIDAS PANTALON</h4>
+																</div>
+																<div class="card-body" style="background-color: #e6ffe6;">
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Largo</label>
+																				<input name="p_largo" type="number" id="p_largo" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Entrepierna</label>
+																				<input name="p_entrepierna" type="number" id="p_entrepierna" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Cintura</label>
+																				<input name="p_cintura" type="number" id="p_cintura" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col" id="pantalon_cadera" style="display: none;">
+																			<div class="form-group">
+																				<label class="control-label">Cadera</label>
+																				<input name="p_cadera" type="number" id="p_cadera" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Muslo</label>
+																				<input name="p_muslo" type="number" id="p_muslo" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Rodilla</label>
+																				<input name="p_rodilla" type="number" id="p_rodilla" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Bota Pie</label>
+																				<input name="p_bpie" type="number" id="p_bpie" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">T. Delantero</label>
+																				<input name="p_tdelantero" type="number" id="p_tdelantero" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Tiro Atras</label>
+																				<input name="p_tatras" type="number" id="p_tatras" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<!-- fin medidas pantalon -->
+														<!-- modelos pantalon -->
+														<div class="col-md-7">
+															<div class="card card-outline-success">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">CARACTERISTICAS PANTALON</h4>
+																</div>
+																<div class="card-body" style="background-color: #e6ffe6;">
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<?php //vdebug($modelos_varon, false, false, true); 
+																				?>
+																				<label class="control-label">Modelo</label>
+																				<select name="pd_modelo" id="pd_modelo" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($modelos_varon_pantalon as $mvp) : ?>
+																						<option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Pinzas</label>
+																				<select name="pd_pinzas" id="pd_pinzas" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($pinzas_varon_pantalon as $pvp) : ?>
+																						<option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col" id="select_bragueta" style="display: block;">
+																			<div class="form-group">
+																				<label class="control-label">Bragueta</label>
+																				<select name="pd_bragueta" name="pd_bragueta" class="form-control custom-select">
+																					<option value="Cierre">Cierre</option>
+																					<option value="Boton">Boton</option>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col" id="pd_cpretina" style="display: none;">
+																			<div class="form-group">
+																				<label class="control-label">Pretina</label>
+																				<select name="pd_pretina" id="pd_pretina" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<option value="Normal">Normal</option>
+																					<option value="Ancho">Ancho</option>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Bolsillo</label>
+																				<select name="pd_batras" id="pd_batras" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($bolsillos_varon_pantalon as $bvp) : ?>
+																						<?php if ($bvp['id'] == 1) : ?>
+																							<option value="<?php echo $bvp['id'] ?>" selected><?php echo $bvp['nombre'] ?></option>
+																						<?php else : ?>
+																							<option value="<?php echo $bvp['id'] ?>"><?php echo $bvp['nombre'] ?></option>
+																						<?php endif ?>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Bota pie</label>
+																				<select name="pd_bpie" id="pd_bpie" class="form-control custom-select">
+																					<option value="Normal">Normal</option>
+																					<option value="Dobles">Dobles</option>
+																					<option value="Abertura">Abertura</option>
+																				</select>
+																			</div>
+																		</div>
+
+																	</div>
+
+																	<div class="row">
+																		<div class="col-md-12">
+																			<div class="form-group">
+																				<label class="control-label">Imagen del modelo</label>
+																				<input type="file" class="form-control" accept="image/*" id="img_modelo_pantalon" name="img_modelo_pantalon">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="1">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_pantalon_precio_unitario">
+																				<label class="control-label"><b>Precio Unitario</b></label>
+																				<input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" placeholder="Ej: 150">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_pantalon_subtotal">
+																				<label class="control-label"><b>Subtotal</b></label>
+																				<input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" readonly>
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<!-- fin medidas pantalon -->
+													</div>
+													<!-- fin pantalon -->
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="settings1">
+											<div class="row">
+												<div class="col-md-12">
+													<!-- chalecos -->
+													<div class="row">
+														<!-- chaleco medidas -->
+														<div class="col-md-5">
+															<div class="card card-outline-primary">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">CHALECO</h4>
+																</div>
+																<div class="card-body" style="background-color: #f0e7fe;">
+
+																	<div class="row">
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Largo</label>
+																				<input name="ch_largo" type="number" id="ch_largo" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Pecho</label>
+																				<input name="ch_pecho" type="number" id="ch_pecho" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col">
+																			<div class="form-group">
+																				<label class="control-label">Estomago</label>
+																				<input name="ch_estomago" type="number" id="ch_estomago" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col" id="ch_abusto" style="display: none;">
+																			<div class="form-group">
+																				<label class="control-label">Altura busto</label>
+																				<input name="ch_abusto" type="number" id="ch_abusto_dato" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<!-- fin chaleco medidas -->
+														<!-- chalecos -->
+														<div class="col-md-7">
+															<div class="card card-outline-primary">
+																<div class="card-header">
+																	<h4 class="mb-0 text-white">CARACTERISTICAS CHALECO</h4>
+																</div>
+																<div class="card-body" style="background-color: #f0e7fe;">
+
+																	<div class="row">
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Modelo</label>
+																				<select name="ch_modelo" id="ch_modelo" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($modelos_varon_chalecos as $mvch) : ?>
+																						<option value="<?php echo $mvch['id'] ?>"><?php echo $mvch['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Botones</label>
+																				<input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Detalle</label>
+																				<select name="ch_detalle" id="ch_detalle" class="form-control custom-select">
+																					<option value="">Seleccione</option>
+																					<?php foreach ($detalles_varon_chalecos as $dvch) : ?>
+																						<option value="<?php echo $dvch['id'] ?>"><?php echo $dvch['nombre'] ?></option>
+																					<?php endforeach ?>
+																				</select>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Color Ojales</label>
+																				<input name="ch_color" type="text" id="ch_color" class="form-control" placeholder="">
+																			</div>
+																		</div>
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Boton Forrado</label>
+																				<select name="ch_boton_forrado" id="ch_boton_forrado" class="form-control">
+																					<option value="No">No</option>
+																					<option value="Si">Si</option>
+																				</select>
+																			</div>
+																		</div>
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Imagen del modelo</label>
+																				<input type="file" class="form-control" accept="image/*" name="img_modelo_chaleco" id="img_modelo_chaleco">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div class="row">
+
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="1">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_chaleco_precio_unitario">
+																				<label class="control-label"><b>Precio Unitario</b></label>
+																				<input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150">
+																			</div>
+																		</div>
+
+																		<div class="col-md-4">
+																			<div class="form-group" id="input_chaleco_subtotal">
+																				<label class="control-label"><b>Subtotal</b></label>
+																				<input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" readonly>
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+															</div>
+														</div>
+														<!-- fin chalecos -->
+													</div>
+													<!-- fin chalecos -->
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane" id="extras_jumper">
+											<div class="row">
+												<div class="col-md-12">
+													<!-- camisa y extras -->
+													<div id="bloque_extras" style="display: block;">
+														<div class="row">
+															<!-- camisa medidas -->
+															<div class="col-md-5">
+																<div class="card card-outline-inverse">
+																	<div class="card-header">
+																		<h4 class="mb-0 text-white">CAMISA</h4>
+																	</div>
+																	<div class="card-body" style="background-color: #f5f5f5;">
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Cuello</label>
+																					<input name="cam_cuello" type="number" id="cam_cuello" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Largo manga</label>
+																					<input name="cam_lmanga" type="number" id="cam_lmanga" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Color</label>
+																					<input name="cam_color" type="text" id="cam_color" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																		</div>
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Modelo cuello</label>
+																					<select name="cam_mcuello" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<option value="Pajarito">Pajarito</option>
+																						<option value="Normal">Normal</option>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Ancho</label>
+																					<select name="cam_ancho" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<option value="Normal">Normal</option>
+																						<option value="Slim">Slim</option>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Cuello Combi</label>
+																					<select name="cam_ccombinado" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<option value="Si">Si</option>
+																						<option value="No">No</option>
+																					</select>
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Cantidad</b></label>
+																					<input name="cam_cantidad" type="number" id="cam_cantidad" class="form-control" value="1">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group" id="input_camisa_precio_unitario">
+																					<label class="control-label"><b>Precio Unitario</b></label>
+																					<input name="cam_pu" type="number" id="cam_pu" class="form-control" placeholder="Ej: 150">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group" id="input_camisa_subtotal">
+																					<label class="control-label"><b>Subtotal</b></label>
+																					<input name="cam_subtotal" type="number" id="cam_subtotal" class="form-control" readonly>
+																				</div>
+																			</div>
+
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+															<!-- fin camisa medidas -->
+
+															<!-- extras -->
+															<div class="col-md-7">
+																<div class="card card-outline-inverse">
+																	<div class="card-header">
+																		<h4 class="mb-0 text-white">EXTRAS</h4>
+																	</div>
+																	<div class="card-body" style="background-color: #f5f5f5;">
+
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="row">
+																					<div class="col-md-6">
+																						<div class="form-check">
+																							<input type="checkbox" class="form-check-input" name="corbaton" id="corbaton" onclick="abreColorCaja(this)">
+																							<label class="form-check-label" for="corbaton">
+																								Corbaton
+																							</label>
+																						</div>
+
+																						<div class="form-check">
+																							<input type="checkbox" class="form-check-input" name="corbata_gato" id="corbata_gato" onclick="abreColorCaja(this)">
+																							<label class="form-check-label" for="corbata_gato">
+																								Corbata de Gato
+																							</label>
+																						</div>
+																					</div>
+																					<div class="col-md-6">
+
+																						<div class="form-check">
+																							<input type="checkbox" class="form-check-input" name="faja" id="faja" onclick="abreColorCaja(this)">
+																							<label class="form-check-label" for="faja">
+																								Faja
+																							</label>
+																						</div>
+
+																						<div class="form-check">
+																							<input type="checkbox" class="form-check-input" name="panuelo" id="panuelo" onclick="abreColorCaja(this)">
+																							<label class="form-check-label" for="panuelo">
+																								Pañuelo
+																							</label>
+																						</div>
+
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div class="row mt-2">
+																			<div class="col">
+																				<div class="form-group" style="display: none" id="input_corbaton">
+																					<label class="control-label">Corbaton</label>
+																					<input type="text" name="corbaton_color" id="corbaton_color" class="form-control" placeholder="Ej: Negro">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group" style="display: none" id="input_corbata_gato">
+																					<label class="control-label">Corbata gato</label>
+																					<input name="cg_color" type="text" id="cg_color" class="form-control" placeholder="Ej: Negro">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group" style="display: none" id="input_faja">
+																					<label class="control-label">Faja</label>
+																					<input name="faja_color" type="text" id="faja_color" class="form-control" placeholder="Ej: Negro">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group" style="display: none" id="input_panuelo">
+																					<label class="control-label">Pañuelo</label>
+																					<input name="panuelo_color" type="text" id="panuelo_color" class="form-control" placeholder="Ej: Negro">
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Cantidad</b></label>
+																					<input name="ext_cantidad" type="number" id="ext_cantidad" class="form-control" value="1">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Precio Unitario</b></label>
+																					<input name="ext_pu" type="number" id="ext_pu" class="form-control" placeholder="Ej: 150">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Subtotal</b></label>
+																					<input name="ext_subtotal" type="number" id="ext_subtotal" class="form-control" readonly>
+																				</div>
+																			</div>
+
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+															<!-- fin extras -->
+
+														</div>
+													</div>
+													<!-- fin camisa y extras -->
+													<!-- Falda y jumper -->
+													<div id="bloque_mujer" style="display: none;">
+														<div class="row">
+
+															<!-- falda medidas -->
+															<div class="col-md-5">
+																<div class="card card-outline-warning">
+																	<div class="card-header">
+																		<h4 class="mb-0 text-white">FALDA</h4>
+																	</div>
+																	<div class="card-body" style="background-color: #ffffcc;">
+
+																		<div class="row">
+
+																			<div class="col-md-3">
+																				<div class="form-group">
+																					<label class="control-label">Largo</label>
+																					<input name="fa_largo" type="number" id="fa_largo" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-3">
+																				<div class="form-group">
+																					<label class="control-label">Cintura</label>
+																					<input name="fa_cintura" type="number" id="fa_cintura" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-3">
+																				<div class="form-group">
+																					<label class="control-label">Cadera</label>
+																					<input name="fa_cadera" type="number" id="fa_cadera" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-3">
+																				<div class="form-group">
+																					<label class="control-label">Vasta</label>
+																					<input name="fa_vasta" type="number" id="fa_vasta" class="form-control" min="0" step="any">
+																				</div>
+																			</div>
+
+																		</div>
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Modelo</label>
+																					<select name="fa_modelo" id="fa_modelo" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<?php foreach ($modelos_faldas as $m) : ?>
+																							<option value="<?php echo $m['id'] ?>"><?php echo $m['nombre'] ?></option>
+																						<?php endforeach ?>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Aberturas</label>
+																					<select name="fa_abertura" id="fa_abertura" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<?php foreach ($aberturas_falda as $af) : ?>
+																							<option value="<?php echo $af['id'] ?>"><?php echo $af['nombre'] ?></option>
+																						<?php endforeach ?>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group">
+																					<label class="control-label">Pretina</label>
+																					<select name="fa_pretina" id="fa_pretina" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<option value="Normal">Normal</option>
+																						<option value="Ancho">Ancho</option>
+																					</select>
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Cantidad</b></label>
+																					<input name="fa_cantidad" type="number" id="fa_cantidad" class="form-control" value="1">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Precio Unitario</b></label>
+																					<input name="fa_pu" type="number" id="fa_pu" class="form-control" placeholder="Ej: 150">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Subtotal</b></label>
+																					<input name="fa_subtotal" type="number" id="fa_subtotal" class="form-control" readonly>
+																				</div>
+																			</div>
+
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+															<!-- fin camisa medidas -->
+
+															<!-- jumper -->
+															<div class="col-md-7">
+																<div class="card card-outline-warning">
+																	<div class="card-header">
+																		<h4 class="mb-0 text-white">JAMPER</h4>
+																	</div>
+																	<div class="card-body" style="background-color: #ffffcc;">
+
+																		<div class="row">
+
+																			<div class="col">
+																				<div class="form-group">
+																					<label class="control-label">Talle</label>
+																					<input type="number" name="j_talle" id="j_talle" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group">
+																					<label class="control-label">Largo</label>
+																					<input name="j_largo" type="number" id="j_largo" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group">
+																					<label class="control-label">Cintura</label>
+																					<input name="j_cintura" type="number" id="j_cintura" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col">
+																				<div class="form-group">
+																					<label class="control-label">Cadera</label>
+																					<input name="j_cadera" type="number" id="j_cadera" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Pecho</label>
+																					<input type="number" name="j_pecho" id="j_pecho" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Estomago</label>
+																					<input name="j_estomago" type="number" id="j_estomago" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Altura Busto</label>
+																					<input name="j_abusto" type="number" id="j_abusto" class="form-control" step="any">
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Modelo</label>
+																					<select name="j_modelo" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<?php foreach ($modelos_jumper as $mj) : ?>
+																							<option value="<?php echo $mj['id'] ?>"><?php echo $mj['nombre'] ?></option>
+																						<?php endforeach ?>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Aberturas</label>
+																					<select name="j_abertura" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<?php foreach ($aberturas_jumper as $aj) : ?>
+																							<option value="<?php echo $aj['id'] ?>"><?php echo $aj['nombre'] ?></option>
+																						<?php endforeach ?>
+																					</select>
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label">Bolsillo</label>
+																					<select name="j_bolsillo" class="form-control custom-select">
+																						<option value="">Seleccione</option>
+																						<?php foreach ($bolsillos_jumper as $bj) : ?>
+																							<option value="<?php echo $bj['id'] ?>"><?php echo $bj['nombre'] ?></option>
+																						<?php endforeach ?>
+																					</select>
+																				</div>
+																			</div>
+
+																		</div>
+
+																		<div class="row">
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Cantidad</b></label>
+																					<input name="jam_cantidad" type="number" id="jam_cantidad" class="form-control" value="1">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Precio Unitario</b></label>
+																					<input name="jam_pu" type="number" id="jam_pu" class="form-control" placeholder="Ej: 150">
+																				</div>
+																			</div>
+
+																			<div class="col-md-4">
+																				<div class="form-group">
+																					<label class="control-label"><b>Subtotal</b></label>
+																					<input name="jam_subtotal" type="number" id="jam_subtotal" class="form-control" readonly>
+																				</div>
+																			</div>
+
+																		</div>
+
+																	</div>
+																</div>
+															</div>
+															<!-- fin jumper -->
+
+														</div>
+													</div>
+													<!-- fin camisa y extras -->
+												</div>
+											</div>
+										</div>
+									</div>
                                 </div>
-
                             </div>
+							<hr>
 
                             <!-- detalles trabajo -->
                             <div class="row justify-content-md-center">
@@ -1273,15 +1373,19 @@
 
     // generamos los tabs
     $('#tabsProductos div .btn').click(function () {
+
         var t = $(this).attr('id');
 
-        if ($(this).hasClass('inactivo')) { //preguntamos si tiene la clase inactivo 
+        if ($(this).hasClass('inactivo')) { 
+			//preguntamos si tiene la clase inactivo 
             $('#tabsProductos div .btn').addClass('inactivo');
             $(this).removeClass('inactivo');
 
             $('.tabContenido').hide();
             $('#' + t + 'C').fadeIn('slow');
         }
+
+		console.log("este tab ghaber", t);
     });
 
     $("#saco_pu, #saco_cantidad").keyup(function() {
@@ -1437,13 +1541,13 @@
             $("#select_bragueta").show('slow');
 
             // invocamos los contratos para mujer
-            $.ajax({
-                url: '<?php echo base_url() ?>Contratos/ajaxContratos/Mujer',
-                type: 'GET',
-                success: function(data) {
-                    $("#carga_contratos").html(data);
-                }
-            });
+            // $.ajax({
+            //     url: '<?php echo base_url() ?>Contratos/ajaxContratos/Mujer',
+            //     type: 'GET',
+            //     success: function(data) {
+            //         $("#carga_contratos").html(data);
+            //     }
+            // });
 
         } else {
             $("#saco_albusto").hide('slow');
@@ -1455,13 +1559,13 @@
             $("#select_bragueta").hide('slow');
 
             // invocamos los contratos para val
-            $.ajax({
-                url: '<?php echo base_url() ?>Contratos/ajaxContratos/Varon',
-                type: 'GET',
-                success: function(data) {
-                    $("#carga_contratos").html(data);
-                }
-            });
+            // $.ajax({
+            //     url: '<?php echo base_url() ?>Contratos/ajaxContratos/Varon',
+            //     type: 'GET',
+            //     success: function(data) {
+            //         $("#carga_contratos").html(data);
+            //     }
+            // });
 
         }
     }
@@ -1496,15 +1600,7 @@
                 datos_cliente = JSON.parse(data);
                 console.log(datos_cliente);
                 // console.log(datos_cliente.cliente.nombre);
-                if (datos_cliente.cliente.genero == 'Mujer') {
-                    $("#genero").val('Mujer');
-                    // $("#genero").attr("disabled", true);
-                    cambia_genero();
-                    // console.log('entro');
-                }else{
-                    $("#genero").val('Varon');
-                    cambia_genero();
-                }
+                // iw
 
                 $("#cod_cliente").val(datos_cliente.cliente.id);
                 $("#nombre").val(datos_cliente.cliente.nombre);
@@ -1581,33 +1677,38 @@
 
     // extrae datos del contrato y setea form
     function extraer_datos_contrato() {
-        var contrato_id = $("#contrato_id").val();
-        valida_cliente_contrato(contrato_id);
+        var grupo_id = $("#grupo_id").val();
+
+        // valida_cliente_contrato(grupo_id);
         // var cliente_id = $("#cod_cliente").val();
-        // console.log(contrato_id);  
+        // console.log(grupo_id);  
 
         $.ajax({
-            url: '<?php echo base_url() ?>contratos/ajax_extrae_modelos/' + contrato_id,
+            url: '<?php echo base_url() ?>contratos/ajax_extrae_modelos/' + grupo_id,
             type: 'GET',
             success: function(data) {
                 datos_modelos = JSON.parse(data);
-                $("#grupo_id").val(datos_modelos.contrato.grupo_id);
-                console.log(datos_modelos);
 
-                $("#saco_pu").val(datos_modelos.contrato.costo_saco);
-                $("#pantalon_pu").val(datos_modelos.contrato.costo_pantalon);
-                $("#ch_pu").val(datos_modelos.contrato.costo_chaleco);
-                $("#fa_pu").val(datos_modelos.contrato.costo_falda);
-                calcula_precio_saco();
-                calcula_precio_pantalon();
-                calcula_precio_chaleco();
-                calcula_precio_falda();
+				// console.log(datos_modelos);
+
+                // $("#grupo_id").val(datos_modelos.grupo.grupo_id);
+
+                // console.log(datos_modelos.grupo);
+
+                // $("#saco_pu").val(datos_modelos.contrato.costo_saco);
+                // $("#pantalon_pu").val(datos_modelos.contrato.costo_pantalon);
+                // $("#ch_pu").val(datos_modelos.contrato.costo_chaleco);
+                // $("#fa_pu").val(datos_modelos.contrato.costo_falda);
+                // calcula_precio_saco();
+                // calcula_precio_pantalon();
+                // calcula_precio_chaleco();
+                // calcula_precio_falda();
 
                 //llenamos datos del trabajo
-                $("#costo_tela").val(datos_modelos.contrato.costo_tela);
-                $("#monto_total").val(datos_modelos.contrato.total);
-                $("#tela_propia").val(datos_modelos.contrato.tela_propia);
-                $("#marca").val(datos_modelos.contrato.marca);
+                // $("#costo_tela").val(datos_modelos.contrato.costo_tela);
+                // $("#monto_total").val(datos_modelos.contrato.total);
+                // $("#tela_propia").val(datos_modelos.contrato.tela_propia);
+                // $("#marca").val(datos_modelos.contrato.marca);
                 //fin llenamos datos del trabajo
 
                 if (datos_modelos.sacos != null) {
@@ -1708,6 +1809,98 @@
     // });
 
     // fin extrae datos del contrato
+
+	function abreColorCaja(input){
+		if (document.getElementById(input.id).checked)
+			$('#input_'+input.id).show('toggle');
+		else
+			$('#input_'+input.id).hide('toggle');
+	}
+
+	function modificaModalidadDePago(select){
+		if(select.value === "total"){
+			// saco
+			$('#input_saco_precio_unitario').hide('toggle');
+			$('#input_saco_subtotal').hide('toggle');
+			// pantalon
+			$('#input_pantalon_precio_unitario').hide('toggle');
+			$('#input_pantalon_subtotal').hide('toggle');
+			// chaleco
+			$('#input_chaleco_precio_unitario').hide('toggle');
+			$('#input_chaleco_subtotal').hide('toggle');
+			// camisa
+			$('#input_camisa_precio_unitario').hide('toggle');
+			$('#input_camisa_subtotal').hide('toggle');
+
+			// caja de precio
+			$('#input_precio_total').show('toggle')
+		}else{
+			// saco
+			$('#input_saco_precio_unitario').show('toggle');
+			$('#input_saco_subtotal').show('toggle');
+			// pantalon
+			$('#input_pantalon_precio_unitario').show('toggle');
+			$('#input_pantalon_subtotal').show('toggle');
+			// chaleco
+			$('#input_chaleco_precio_unitario').show('toggle');
+			$('#input_chaleco_subtotal').show('toggle');
+			// camisa
+			$('#input_camisa_precio_unitario').show('toggle');
+			$('#input_camisa_subtotal').show('toggle');
+
+			// caja de precio
+			$('#input_precio_total').hide('toggle')
+		}
+	}
+
+	function pagoParcialTotal(){
+
+		$('#bloque_pago_total').toggle('show');
+		let valor = $('#valor_input_verificador').val();
+
+		if(valor === 'no'){
+			$('#nombre_boton').text("SI");
+			$('#valor_input_verificador').val('si');
+			$('#nombre_boton_btn').removeClass('btn-danger');
+			$('#nombre_boton_btn').addClass('btn-success');
+
+			// saco
+			$('#input_saco_precio_unitario').hide('toggle');
+			$('#input_saco_subtotal').hide('toggle');
+			// pantalon
+			$('#input_pantalon_precio_unitario').hide('toggle');
+			$('#input_pantalon_subtotal').hide('toggle');
+			// chaleco
+			$('#input_chaleco_precio_unitario').hide('toggle');
+			$('#input_chaleco_subtotal').hide('toggle');
+			// camisa
+			$('#input_camisa_precio_unitario').hide('toggle');
+			$('#input_camisa_subtotal').hide('toggle');
+
+			// seteamos el apo del valor total a 0
+			$('#modalidad_pago').val(0)
+		}
+		else{
+			$('#nombre_boton').text("NO");
+			$('#valor_input_verificador').val('no');
+			$('#nombre_boton_btn').removeClass('btn-success');
+			$('#nombre_boton_btn').addClass('btn-danger');
+
+			// saco
+			$('#input_saco_precio_unitario').show('toggle');
+			$('#input_saco_subtotal').show('toggle');
+			// pantalon
+			$('#input_pantalon_precio_unitario').show('toggle');
+			$('#input_pantalon_subtotal').show('toggle');
+			// chaleco
+			$('#input_chaleco_precio_unitario').show('toggle');
+			$('#input_chaleco_subtotal').show('toggle');
+			// camisa
+			$('#input_camisa_precio_unitario').show('toggle');
+			$('#input_camisa_subtotal').show('toggle');
+		}
+	}
+	
 </script>
 <script src="<?php echo base_url() ?>public/assets/plugins/switchery/dist/switchery.min.js"></script>
 <script src="<?php echo base_url() ?>public/assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>

@@ -74,8 +74,7 @@
         							<div class="col-md-4">
         								<div class="form-group">
         									<label class="control-label">Cantidad Personas</label>
-        									<input name="cantidad" type="text" id="cantidad" class="form-control"
-        										required>
+        									<input name="cantidad" type="text" id="cantidad" class="form-control">
         								</div>
         							</div>
 
