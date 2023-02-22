@@ -334,41 +334,37 @@
         $("#modal_grupo").modal('show');
     }
 
-    function edita_detalle_contrato(contrato_id)
-    {
-        var contrato = '<?php echo $contratos_json; ?>';
-        var obj_contrato = JSON.parse(contrato);
-        // console.log(obj_contrato);
+    // function edita_detalle_contrato(contrato_id){
+    //     var contrato = '<?php //echo $contratos_json; ?>';
+    //     var obj_contrato = JSON.parse(contrato);
+    //     // console.log(obj_contrato);
 
-        $.each(obj_contrato, function(key, element){
-            if(element['id']==contrato_id)
-            {
-                $("#contrato_id").val(element['id']);
-                $("#contrato_grupo_id").val(element['grupo_id']);
-                $("#descripcion").val(element['descripcion']);
-                $("#fecha").val(element['fecha']);
-                if(element['genero']=='Varon'){
-                    $("#cantidad").val(element['cantidad_varones']);
-                }else{
-                    $("#cantidad").val(element['cantidad_mujeres']);
-                }
-                $("#costo_saco").val(element['costo_saco']);
-                $("#costo_pantalon").val(element['costo_pantalon']);
-                $("#costo_chaleco").val(element['costo_chaleco']);
-                $("#costo_falda").val(element['costo_falda']);
-                $("#costo_confeccion").val(element['costo_confeccion']);
-                $("#tela_propia").val(element['tela_propia']);
-                $("#marca").val(element['marca']);
-                $("#costo_tela").val(element['costo_tela']);
-                $("#total").val(element['total']);
-            }
-            // console.log(key+' : '+element['id']);
-        });
+    //     $.each(obj_contrato, function(key, element){
+    //         if(element['id']==contrato_id)
+    //         {
+    //             $("#contrato_id").val(element['id']);
+    //             $("#contrato_grupo_id").val(element['grupo_id']);
+    //             $("#descripcion").val(element['descripcion']);
+    //             $("#fecha").val(element['fecha']);
+    //             if(element['genero']=='Varon'){
+    //                 $("#cantidad").val(element['cantidad_varones']);
+    //             }else{
+    //                 $("#cantidad").val(element['cantidad_mujeres']);
+    //             }
+    //             $("#costo_saco").val(element['costo_saco']);
+    //             $("#costo_pantalon").val(element['costo_pantalon']);
+    //             $("#costo_chaleco").val(element['costo_chaleco']);
+    //             $("#costo_falda").val(element['costo_falda']);
+    //             $("#costo_confeccion").val(element['costo_confeccion']);
+    //             $("#tela_propia").val(element['tela_propia']);
+    //             $("#marca").val(element['marca']);
+    //             $("#costo_tela").val(element['costo_tela']);
+    //             $("#total").val(element['total']);
+    //         }
+    //     });
 
-        // console.log($.getJSON(contrato));
-
-        $("#modal_edita_contrato").modal('show');
-    }
+    //     $("#modal_edita_contrato").modal('show');
+    // }
 
     $(".calculo").keyup(function(){
 

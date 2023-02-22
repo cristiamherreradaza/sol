@@ -73,7 +73,7 @@
 		$('#myTable').DataTable();
 		// responsive table
 		$('#config-table').DataTable({
-			responsive: true,
+			// responsive: true,
 			// paging: false,
 			searching: false,
 			lengthChange: false,

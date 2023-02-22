@@ -125,7 +125,7 @@
 		$('#myTable').DataTable();
 		// responsive table
 		$('#config-table').DataTable({
-			responsive: true,
+			// responsive: false,
 			// paging: false,
 			searching: false,
 			lengthChange: false,

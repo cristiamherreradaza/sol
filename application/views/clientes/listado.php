@@ -174,7 +174,7 @@
 		// $('#myTable').DataTable();
 		// responsive table
 		$('#config-table').DataTable({
-			responsive: true,
+			// responsive: true,
 			"order": [
 				[0, 'desc']
 			],
@@ -190,7 +190,6 @@
 		var table = $('#config-table').DataTable();
 		$('#config-table tbody').on( 'click', 'tr', function () {
 		    var fila = table.row( this ).data();
-		    // console.log( fila[1] );
 		    $('#ida').val(fila[0]);
 		    $('#nombre').val(fila[1]);
 		    $('#carnet').val(fila[2]);

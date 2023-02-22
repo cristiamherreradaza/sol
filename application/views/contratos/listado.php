@@ -176,7 +176,7 @@
 
 	$(function () {
 		$('#config-table').DataTable({
-			responsive: true,
+			// responsive: true,
 			"order": [
 				[0, 'desc']
 			],
