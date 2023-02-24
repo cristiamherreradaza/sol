@@ -108,7 +108,7 @@
 	<!-- ============================================================== -->
 	<!-- footer -->
 	<!-- ============================================================== -->
-	<footer class="footer"> 2020 desarrollado por GoGhu </footer>
+	<footer class="footer"> <?=date('Y')?> desarrollado por GoGhu </footer>
 	<!-- ============================================================== -->
 	<!-- End footer -->
 	<!-- ============================================================== -->
@@ -236,5 +236,61 @@
 					$('#_'+data.prenda+'_'+data.campo).show('toggle');
 			}
 		});
+	}
+	
+	function asignarPrenda(prenda, prenda_id, tipo){
+
+		Swal.fire({
+			title: 'Estas seguro de '+tipo+' la prenda?',
+			text: "No podras recuperarlo!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, estoy seguro!',
+			cancelButtonText: "Cancelar",
+		}).then((result) => {
+			if (result.value) {
+
+				var persona = $('#persona_destinada_'+prenda).val();
+
+				// console.log(prenda, prenda_id, tipo);
+
+				if(persona === ''){
+					Swal.fire(
+						'Error!',
+						'Debe seleccionar una persona.',
+						'error'
+					);
+				}else{
+					$.ajax({
+						url: '<?php echo base_url() ?>Trabajos/asignarPrenda/',
+						type: 'GET',
+						dataType: 'json',
+						data: {
+							persona_id: persona,
+							prenda_id:  prenda_id,
+							prenda: 	prenda,
+							tipo: 		tipo,
+							// campo_valor:  valor,
+							// prenda_id:    d_prenda_id
+						},
+						success: function(data) {
+							if(data.respuesta === 'success'){
+								Swal.fire(
+									'Excelente!',
+									'Se asignno con exito el trabajo.',
+									'success'
+								);
+
+								setTimeout(function(){
+									$('#myModalLocalizacion').modal('hide');
+								},2000); // el tiempo a que pasara antes de ejecutar el codigo
+							}
+						}
+					});
+				}
+			}
+		})
 	}
 </script>

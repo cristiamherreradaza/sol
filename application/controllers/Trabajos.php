@@ -93,7 +93,42 @@ class Trabajos extends CI_Controller {
 		// var_dump($_FILES['img_modelo_pantalon']);
 		// print_r($this->input->post(), true, false, true);
 		// printf($this->input->post(), true, false, true);
+		// var_dump($this->input->post('Schoolname'));
+
+		var_dump($this->input->post('sd_modelo'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_botones'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_aberturas'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_detalle'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_color'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_ojal'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('sd_color_ojal'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('tipo_bolsillo'));
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('marca_tela'));
+		echo "<br>-----------------<br>";
+		var_dump($_FILES['img_modelo_saco']['name'][1]);
+		echo "<br>-----------------<br>";
+		var_dump($this->input->post('s_pecho'));
+		echo "<br>-----------------<br>";
+		echo "<br>-----------------<br>";
+		echo "<br>-----------------<br>";
+
+		// $cantidadSacos = count(array_filter($this->input->post('sd_modelo')));
+
+		// for($i=0; $i<$cantidadSacos; $i++){
+		// 	echo $this->input->post('sd_modelo')[$i]."<br>";
+		// }
+		// var_dump(array_filter($this->input->post('sd_modelo')));
+
 		// exit;
+
 		$usuario_id = $this->session->id_usuario;
 
 		// PREGUNTAMOS SI EL CLIENTE EXISTE O NO
@@ -155,56 +190,118 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('s_pecho'))) {
 
+			$cantidadSacos = count(array_filter($this->input->post('sd_modelo')));
+
 			// verificamos si hay la imagen
-			$directory             = "./public/fotoModelos/";
-			$this->createFolder($directory);
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$config['max_size']      = '4096';
-			$config['remove_spaces'] = TRUE;
-			$config['overwrite']     = TRUE;
-			$config['detect_mime']   = TRUE;
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$nombre_documento = 'saco_'.date('YmdHis');
-			$config['file_name']     = $nombre_documento;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
 
-			if ($this->upload->do_upload('img_modelo_saco'))
-				$nombreFoto = $nombre_documento.".".pathinfo($_FILES['img_modelo_saco']['name'], PATHINFO_EXTENSION);
-			else
-				$nombreFoto = null;
+			// $directory             	 = "./public/fotoModelos/";
+			// $this->createFolder($directory);
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
+			// $config['max_size']      = '4096';
+			// $config['remove_spaces'] = TRUE;
+			// $config['overwrite']     = TRUE;
+			// $config['detect_mime']   = TRUE;
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
 
-			$datos_saco = array(
-				'cliente_id'      => $id_cliente,
-				'trabajo_id'      => $id_trabajo,
-				// 'contrato_id'     => $this->input->post('contrato_id'),
-				'grupo_id'     => $this->input->post('grupo_id'),
-				'modelo_id'       => $this->input->post('sd_modelo'),
-				'abertura_id'     => $this->input->post('sd_aberturas'),
-				'detalle_id'      => $this->input->post('sd_detalle'),
-				'color'           => $this->input->post('sd_color'),
-				'color_ojal'      => $this->input->post('sd_color_ojal'),
-				'ojal_puno'       => $this->input->post('sd_ojal'),
-				'botones'         => $this->input->post('sd_botones'),
-				'talla'           => $this->input->post('s_talla'),
-				'largo'           => $this->input->post('s_largo'),
-				'hombro'          => $this->input->post('s_hombro'),
-				'espalda'         => $this->input->post('s_espalda'),
-				'pecho'           => $this->input->post('s_pecho'),
-				'estomago'        => $this->input->post('s_estomago'),
-				'medio_brazo'     => $this->input->post('s_mbrazo'),
-				'largo_manga'     => $this->input->post('s_lmanga'),
-				'altura_busto'    => $this->input->post('s_abusto'),
-				'precio_unitario' => $this->input->post('saco_pu'),
-				'cantidad'        => $this->input->post('saco_cantidad'),
-				'tipo_bolsillo'   => $this->input->post('tipo_bolsillo'),
-				'estado'   		  => 'Trabajando',
-				'ubicacion'   	  => 'Taller',
-				'imagen'   		  => $nombreFoto,
-			);
-			$this->db->insert('sacos', $datos_saco);
+			// $nombre_documento = 'saco_'.$i.'_'.date('YmdHis');
+			// $config['file_name']     = $nombre_documento;
+			// $this->load->library('upload', $config);
+			// $this->upload->initialize($config);
+
+			// if ($this->upload->do_upload('img_modelo_saco'))
+			// 	$nombreFoto = $nombre_documento.".".pathinfo($_FILES['img_modelo_saco']['name'], PATHINFO_EXTENSION);
+			// else
+			// 	$nombreFoto = null;
+
+			for($i=0; $i<$cantidadSacos; $i++){
+
+				$_FILES['img_modelo_saco_un']['name'] = $_FILES['img_modelo_saco']['name'][$i];
+                $_FILES['img_modelo_saco_un']['type'] = $_FILES['img_modelo_saco']['type'][$i];
+                $_FILES['img_modelo_saco_un']['tmp_name'] = $_FILES['img_modelo_saco']['tmp_name'][$i];
+                $_FILES['img_modelo_saco_un']['error'] = $_FILES['img_modelo_saco']['error'][$i];
+                $_FILES['img_modelo_saco_un']['size'] = $_FILES['img_modelo_saco']['size'][$i];
+
+				$directory = './public/fotoModelos/';
+				$config['upload_path']   = $directory;
+				$config['max_size']      = '4096';
+				$config['remove_spaces'] = TRUE;
+				$config['overwrite']     = TRUE;
+				$config['detect_mime']   = TRUE;
+				$config['allowed_types'] = '*';
+				$nombre_documento 		 = 'saco_'.$i.'_'.date('YmdHis');
+				$config['file_name']     = $nombre_documento;
+
+				$this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload('img_modelo_saco_un'))
+					$nombreFoto = $nombre_documento.".".pathinfo($_FILES['img_modelo_saco_un']['name'], PATHINFO_EXTENSION);
+                else
+					$nombreFoto = null;
+
+				$datos_saco = array(
+					'cliente_id'      => $id_cliente,
+					'trabajo_id'      => $id_trabajo,
+					// 'contrato_id'     => $this->input->post('contrato_id'),
+					'grupo_id'     => $this->input->post('grupo_id'),
+
+					'modelo_id'       => $this->input->post('sd_modelo')[$i],
+					'botones'         => $this->input->post('sd_botones')[$i],
+					'abertura_id'     => $this->input->post('sd_aberturas')[$i],
+					'detalle_id'      => $this->input->post('sd_detalle')[$i],
+					'color'           => $this->input->post('sd_color')[$i],
+					'ojal_puno'       => $this->input->post('sd_ojal')[$i],
+					'color_ojal'      => $this->input->post('sd_color_ojal')[$i],
+					'tipo_bolsillo'   => $this->input->post('tipo_bolsillo')[$i],
+					'imagen'   		  => $nombreFoto,
+
+					'talla'           => $this->input->post('s_talla'),
+					'largo'           => $this->input->post('s_largo'),
+					'hombro'          => $this->input->post('s_hombro'),
+					'espalda'         => $this->input->post('s_espalda'),
+					'pecho'           => $this->input->post('s_pecho'),
+					'estomago'        => $this->input->post('s_estomago'),
+					'medio_brazo'     => $this->input->post('s_mbrazo'),
+					'largo_manga'     => $this->input->post('s_lmanga'),
+					'altura_busto'    => $this->input->post('s_abusto'),
+					'precio_unitario' => $this->input->post('saco_pu'),
+					'cantidad'        => $this->input->post('saco_cantidad'),
+					'estado'   		  => 'Trabajando',
+					'ubicacion'   	  => 'Taller',
+				);
+				$this->db->insert('sacos', $datos_saco);
+			}
+
+			// $datos_saco = array(
+			// 	'cliente_id'      => $id_cliente,
+			// 	'trabajo_id'      => $id_trabajo,
+			// 	// 'contrato_id'     => $this->input->post('contrato_id'),
+			// 	'grupo_id'     => $this->input->post('grupo_id'),
+			// 	'modelo_id'       => $this->input->post('sd_modelo'),
+			// 	'abertura_id'     => $this->input->post('sd_aberturas'),
+			// 	'detalle_id'      => $this->input->post('sd_detalle'),
+			// 	'color'           => $this->input->post('sd_color'),
+			// 	'color_ojal'      => $this->input->post('sd_color_ojal'),
+			// 	'ojal_puno'       => $this->input->post('sd_ojal'),
+			// 	'botones'         => $this->input->post('sd_botones'),
+			// 	'talla'           => $this->input->post('s_talla'),
+			// 	'largo'           => $this->input->post('s_largo'),
+			// 	'hombro'          => $this->input->post('s_hombro'),
+			// 	'espalda'         => $this->input->post('s_espalda'),
+			// 	'pecho'           => $this->input->post('s_pecho'),
+			// 	'estomago'        => $this->input->post('s_estomago'),
+			// 	'medio_brazo'     => $this->input->post('s_mbrazo'),
+			// 	'largo_manga'     => $this->input->post('s_lmanga'),
+			// 	'altura_busto'    => $this->input->post('s_abusto'),
+			// 	'precio_unitario' => $this->input->post('saco_pu'),
+			// 	'cantidad'        => $this->input->post('saco_cantidad'),
+			// 	'tipo_bolsillo'   => $this->input->post('tipo_bolsillo'),
+			// 	'estado'   		  => 'Trabajando',
+			// 	'ubicacion'   	  => 'Taller',
+			// 	'imagen'   		  => $nombreFoto,
+			// );
+			// $this->db->insert('sacos', $datos_saco);
 
 
 
@@ -232,54 +329,84 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('p_largo'))) {
 
+			$cantidadPantalones = count(array_filter($this->input->post('pd_modelo')));
+
+			for($i=0; $i<$cantidadPantalones; $i++){
+
+				$_FILES['img_modelo_pantalon_un']['name'] = $_FILES['img_modelo_pantalon']['name'][$i];
+                $_FILES['img_modelo_pantalon_un']['type'] = $_FILES['img_modelo_pantalon']['type'][$i];
+                $_FILES['img_modelo_pantalon_un']['tmp_name'] = $_FILES['img_modelo_pantalon']['tmp_name'][$i];
+                $_FILES['img_modelo_pantalon_un']['error'] = $_FILES['img_modelo_pantalon']['error'][$i];
+                $_FILES['img_modelo_pantalon_un']['size'] = $_FILES['img_modelo_pantalon']['size'][$i];
+
+				$directory = './public/fotoModelos/';
+				$config['upload_path']   = $directory;
+				$config['max_size']      = '4096';
+				$config['remove_spaces'] = TRUE;
+				$config['overwrite']     = TRUE;
+				$config['detect_mime']   = TRUE;
+				$config['allowed_types'] = '*';
+				$nombre_documento 		 = 'pantalon_'.$i.'_'.date('YmdHis');
+				$config['file_name']     = $nombre_documento;
+
+				$this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload('img_modelo_pantalon_un'))
+					$nombreFotoPantalon = $nombre_documento.".".pathinfo($_FILES['img_modelo_pantalon_un']['name'], PATHINFO_EXTENSION);
+                else
+					$nombreFotoPantalon = null;
+
+				$datos_pantalon = array(
+					'cliente_id'      => $id_cliente,
+					'trabajo_id'      => $id_trabajo,
+					// 'contrato_id'     => $this->input->post('contrato_id'),
+					'grupo_id'    	  => $this->input->post('grupo_id'),
+					'modelo_id'       => $this->input->post('pd_modelo')[$i],
+					'pinza_id'        => $this->input->post('pd_pinzas')[$i],
+					'bolsillo_id'     => $this->input->post('pd_batras')[$i],
+					'largo'           => $this->input->post('p_largo'),
+					'entre_pierna'    => $this->input->post('p_entrepierna'),
+					'cintura'         => $this->input->post('p_cintura'),
+					'muslo'           => $this->input->post('p_muslo'),
+					'rodilla'         => $this->input->post('p_rodilla'),
+					'bota_pie'        => $this->input->post('p_bpie')[$i],
+					'tiro_delantero'  => $this->input->post('p_tdelantero'),
+					'tiro_atras'      => $this->input->post('p_tatras'),
+					'cadera'          => $this->input->post('p_cadera'),
+					'bragueta'        => $this->input->post('pd_bragueta')[$i],
+					'bota_pie_des'    => $this->input->post('pd_bpie')[$i],
+					'pretina'         => $this->input->post('pd_pretina')[$i],
+					'precio_unitario' => $this->input->post('pantalon_pu'),
+					'cantidad'        => $this->input->post('pantalon_cantidad'),
+					'estado'   		  => 'Trabajando',
+					'ubicacion'   	  => 'Taller',
+					'imagen'   		  => $nombreFotoPantalon,
+				);
+
+				$this->db->insert('pantalones', $datos_pantalon);
+
+			}
+
 			// verificamos si hay la imagen
-			$directory             = "./public/fotoModelos/";
-			$this->createFolder($directory);
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$config['max_size']      = '4096';
-			$config['remove_spaces'] = TRUE;
-			$config['overwrite']     = TRUE;
-			$config['detect_mime']   = TRUE;
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$nombre_documento = 'pantalon_'.date('YmdHis');
-			$config['file_name']     = $nombre_documento;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if ($this->upload->do_upload('img_modelo_pantalon'))
-				$nombreFotoPantalon = $nombre_documento.".".pathinfo($_FILES['img_modelo_pantalon']['name'], PATHINFO_EXTENSION);
-			else
-				$nombreFotoPantalon = null;
+			// $directory             = "./public/fotoModelos/";
+			// $this->createFolder($directory);
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
+			// $config['max_size']      = '4096';
+			// $config['remove_spaces'] = TRUE;
+			// $config['overwrite']     = TRUE;
+			// $config['detect_mime']   = TRUE;
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
+			// $nombre_documento = 'pantalon_'.date('YmdHis');
+			// $config['file_name']     = $nombre_documento;
+			// $this->load->library('upload', $config);
+			// $this->upload->initialize($config);
+			// if ($this->upload->do_upload('img_modelo_pantalon'))
+			// 	$nombreFotoPantalon = $nombre_documento.".".pathinfo($_FILES['img_modelo_pantalon']['name'], PATHINFO_EXTENSION);
+			// else
+			// 	$nombreFotoPantalon = null;
 
-
-			$datos_pantalon = array(
-				'cliente_id'      => $id_cliente,
-				'trabajo_id'      => $id_trabajo,
-				// 'contrato_id'     => $this->input->post('contrato_id'),
-				'grupo_id'     => $this->input->post('grupo_id'),
-				'modelo_id'       => $this->input->post('pd_modelo'),
-				'pinza_id'        => $this->input->post('pd_pinzas'),
-				'bolsillo_id'     => $this->input->post('pd_batras'),
-				'largo'           => $this->input->post('p_largo'),
-				'entre_pierna'    => $this->input->post('p_entrepierna'),
-				'cintura'         => $this->input->post('p_cintura'),
-				'muslo'           => $this->input->post('p_muslo'),
-				'rodilla'         => $this->input->post('p_rodilla'),
-				'bota_pie'        => $this->input->post('p_bpie'),
-				'tiro_delantero'  => $this->input->post('p_tdelantero'),
-				'tiro_atras'      => $this->input->post('p_tatras'),
-				'cadera'          => $this->input->post('p_cadera'),
-				'bragueta'        => $this->input->post('pd_bragueta'),
-				'bota_pie_des'    => $this->input->post('pd_bpie'),
-				'pretina'         => $this->input->post('pd_pretina'),
-				'precio_unitario' => $this->input->post('pantalon_pu'),
-				'cantidad'        => $this->input->post('pantalon_cantidad'),
-				'estado'   		  => 'Trabajando',
-				'ubicacion'   	  => 'Taller',
-				'imagen'   		  => $nombreFotoPantalon,
-			);
-			$this->db->insert('pantalones', $datos_pantalon);
 
 			// if (!empty($this->input->post('pd_modelo'))) {
 			// 	// insertamos los datos de costos de produccion
@@ -305,47 +432,77 @@ class Trabajos extends CI_Controller {
 
 		if (!empty($this->input->post('ch_estomago'))) {
 
-			// verificamos si hay la imagen
-			$directory             = "./public/fotoModelos/";
-			$this->createFolder($directory);
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$config['max_size']      = '4096';
-			$config['remove_spaces'] = TRUE;
-			$config['overwrite']     = TRUE;
-			$config['detect_mime']   = TRUE;
-			$config['upload_path']   = $directory;
-			$config['allowed_types'] = '*';
-			$nombre_documento = 'chaleco_'.date('YmdHis');
-			$config['file_name']     = $nombre_documento;
-			$this->load->library('upload', $config);
-			$this->upload->initialize($config);
-			if ($this->upload->do_upload('img_modelo_chaleco'))
-				$nombreFotoChaleco = $nombre_documento.".".pathinfo($_FILES['img_modelo_chaleco']['name'], PATHINFO_EXTENSION);
-			else
-				$nombreFotoChaleco = null;
+			$cantidadChalecos = count(array_filter($this->input->post('ch_modelo')));
 
-			$datos_chaleco = array(
-				'cliente_id'      => $id_cliente,
-				'trabajo_id'      => $id_trabajo,
-				// 'contrato_id'     => $this->input->post('contrato_id'),
-				'grupo_id'        => $this->input->post('grupo_id'),
-				'modelo_id'       => $this->input->post('ch_modelo'),
-				'detalle_id'      => $this->input->post('ch_detalle'),
-				'largo'           => $this->input->post('ch_largo'),
-				'pecho'           => $this->input->post('ch_pecho'),
-				'estomago'        => $this->input->post('ch_estomago'),
-				'botones'         => $this->input->post('ch_botones'),
-				'boton_forrado'   => $this->input->post('ch_boton_forrado'),
-				'color_ojales'    => $this->input->post('ch_color'),
-				'altura_busto'    => $this->input->post('ch_abusto'),
-				'precio_unitario' => $this->input->post('ch_pu'),
-				'cantidad'        => $this->input->post('ch_cantidad'),
-				'estado'   		  => 'Trabajando',
-				'ubicacion'   	  => 'Taller',
-				'imagen'   		  => $nombreFotoChaleco,
-			);
-			$this->db->insert('chalecos', $datos_chaleco);
+			for($i=0 ; $i<$cantidadChalecos; $i++){
+
+				$_FILES['img_modelo_chaleco_un']['name'] = $_FILES['img_modelo_chaleco']['name'][$i];
+                $_FILES['img_modelo_chaleco_un']['type'] = $_FILES['img_modelo_chaleco']['type'][$i];
+                $_FILES['img_modelo_chaleco_un']['tmp_name'] = $_FILES['img_modelo_chaleco']['tmp_name'][$i];
+                $_FILES['img_modelo_chaleco_un']['error'] = $_FILES['img_modelo_chaleco']['error'][$i];
+                $_FILES['img_modelo_chaleco_un']['size'] = $_FILES['img_modelo_chaleco']['size'][$i];
+
+				$directory = './public/fotoModelos/';
+				$config['upload_path']   = $directory;
+				$config['max_size']      = '4096';
+				$config['remove_spaces'] = TRUE;
+				$config['overwrite']     = TRUE;
+				$config['detect_mime']   = TRUE;
+				$config['allowed_types'] = '*';
+				$nombre_documento 		 = 'chaleco_'.$i.'_'.date('YmdHis');
+				$config['file_name']     = $nombre_documento;
+
+				$this->load->library('upload', $config);
+                $this->upload->initialize($config);
+                if($this->upload->do_upload('img_modelo_chaleco_un'))
+					$nombreFotoChaleco = $nombre_documento.".".pathinfo($_FILES['img_modelo_chaleco_un']['name'], PATHINFO_EXTENSION);
+                else
+					$nombreFotoChaleco = null;
+
+				$datos_chaleco = array(
+					'cliente_id'      => $id_cliente,
+					'trabajo_id'      => $id_trabajo,
+					// 'contrato_id'     => $this->input->post('contrato_id'),
+					'grupo_id'        => $this->input->post('grupo_id'),
+					'modelo_id'       => $this->input->post('ch_modelo')[$i],
+					'detalle_id'      => $this->input->post('ch_detalle')[$i],
+					'largo'           => $this->input->post('ch_largo'),
+					'pecho'           => $this->input->post('ch_pecho'),
+					'estomago'        => $this->input->post('ch_estomago'),
+					'botones'         => $this->input->post('ch_botones')[$i],
+					'boton_forrado'   => $this->input->post('ch_boton_forrado')[$i],
+					'color_ojales'    => $this->input->post('ch_color')[$i],
+					'altura_busto'    => $this->input->post('ch_abusto'),
+					'precio_unitario' => $this->input->post('ch_pu'),
+					'cantidad'        => $this->input->post('ch_cantidad'),
+					'estado'   		  => 'Trabajando',
+					'ubicacion'   	  => 'Taller',
+					'imagen'   		  => $nombreFotoChaleco,
+				);
+				$this->db->insert('chalecos', $datos_chaleco);
+
+			}
+
+			// verificamos si hay la imagen
+			// $directory             = "./public/fotoModelos/";
+			// $this->createFolder($directory);
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
+			// $config['max_size']      = '4096';
+			// $config['remove_spaces'] = TRUE;
+			// $config['overwrite']     = TRUE;
+			// $config['detect_mime']   = TRUE;
+			// $config['upload_path']   = $directory;
+			// $config['allowed_types'] = '*';
+			// $nombre_documento = 'chaleco_'.date('YmdHis');
+			// $config['file_name']     = $nombre_documento;
+			// $this->load->library('upload', $config);
+			// $this->upload->initialize($config);
+			// if ($this->upload->do_upload('img_modelo_chaleco'))
+			// 	$nombreFotoChaleco = $nombre_documento.".".pathinfo($_FILES['img_modelo_chaleco']['name'], PATHINFO_EXTENSION);
+			// else
+			// 	$nombreFotoChaleco = null;
+
 
 			// if (!empty($this->input->post('ch_modelo'))) {
 			// 	// insertamos los datos de costos de produccion
@@ -1715,6 +1872,15 @@ class Trabajos extends CI_Controller {
 		$this->db->where('ex.trabajo_id', $id_trabajo);
 		$data['extras'] = $this->db->get()->row_array();
 
+		// mandamos los usuarios
+		$this->db->select('*');
+		$this->db->from('usuarios');
+		$this->db->where('borrado', null);
+		$data['usuarios'] = $this->db->get()->result_array();
+
+		// var_dump($data['usuarios'][4]['nombre']);
+		// exit;
+
 		$this->load->view('trabajos/ajaxDetalleLocalizacion', $data);
 
 	}
@@ -1758,6 +1924,53 @@ class Trabajos extends CI_Controller {
 			
         return $nombreCarpeta;
     }
+
+	public function asignarPrenda(){
+
+		$persona_id = $this->input->get('persona_id');
+		$prenda_id = $this->input->get('prenda_id');
+		$prenda = $this->input->get('prenda');
+		$tipo = $this->input->get('tipo');
+		
+
+		if($prenda == "saco")
+			$tabla = "sacos";
+		else if($prenda == "pantalon")
+			$tabla = "pantalones";
+		else if($prenda == "chaleco")
+			$tabla = "chalecos";
+		else if($prenda == "falda")
+			$tabla = "faldas";
+		else if($prenda == "jumper")
+			$tabla = "jumpers";
+
+
+		if($tipo == 'asignar')
+			$campo = 'fecha_asignado';
+		else
+			$campo = 'fecha_concluido';
+
+
+		$data = array(
+			'usuario_asignado_id' => $persona_id,
+			$campo => date('Y-m-d H:i:s'),
+		);
+
+		if($this->db->update($tabla, $data, "id=$prenda_id")){
+			$data['respuesta'] = 'success';
+			// $data['prenda'] = $tipo_prenda;
+			// $data['campo'] = $tipo_detalle;
+		}else{
+			$data['respuesta'] = 'error';
+		}
+
+		// var_dump($persona_id,$prenda_id,$prenda,$tipo, $tabla);
+
+		// echo $this->db->last_query();
+
+		echo json_encode($data);
+
+	}
 
 }
 

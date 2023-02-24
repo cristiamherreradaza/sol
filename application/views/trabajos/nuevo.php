@@ -57,7 +57,7 @@
                                 <div class="col-md-1">
                                     <div class="form-group">
                                         <label class="control-label" style="color: #ad3939; font-weight: bold;">Genero</label>
-                                        <select name="genero" id="genero" class="form-control custom-select" onchange="cambia_genero();">
+                                        <select name="genero" id="genero" class="form-control " onchange="cambia_genero();">
                                             <option value="Varon">Varon</option>
                                             <option value="Mujer">Mujer</option>
                                         </select>
@@ -68,7 +68,7 @@
                                     <div class="form-group">
                                         <label class="control-label" style="color: #00659c; font-weight: bold;">Contrato</label>
                                         <div id="carga_contratos">
-                                            <select name="grupo_id" id="grupo_id" class="form-control custom-select" onchange="extraer_datos_contrato()">
+                                            <select name="grupo_id" id="grupo_id" class="form-control " onchange="extraer_datos_contrato()">
                                                 <option value="">Seleccione</option>
                                                 <?php foreach ($grupos as $key => $g) : ?>
                                                     <option value="<?php echo $g['id'] ?>"><?php echo $g['nombre'] ?></option>
@@ -229,13 +229,10 @@
 																<div class="card-body" style="background-color: #e6f2ff;">
 
 																	<div class="row">
-
 																		<div class="col-md-3">
 																			<div class="form-group">
-																				<?php //vdebug($modelos_varon, false, false, true); 
-																				?>
 																				<label class="control-label">Modelo</label>
-																				<select name="sd_modelo" id="sd_modelo" class="form-control custom-select">
+																				<select name="sd_modelo[]" id="sd_modelo" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($modelos_varon_saco as $mv) : ?>
 																						<option value="<?php echo $mv['id'] ?>"><?php echo $mv['nombre'] ?></option>
@@ -243,18 +240,16 @@
 																				</select>
 																			</div>
 																		</div>
-
 																		<div class="col-md-2">
 																			<div class="form-group">
 																				<label class="control-label">Botones</label>
-																				<input name="sd_botones" type="number" id="sd_botones" class="form-control" min="0" step="any">
+																				<input name="sd_botones[]" type="number" id="sd_botones1" class="form-control" min="0" step="any">
 																			</div>
 																		</div>
-
 																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Aberturas</label>
-																				<select name="sd_aberturas" id="sd_aberturas" class="form-control custom-select">
+																				<select name="sd_aberturas[]" id="sd_aberturas1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($aberturas_varon_saco as $a) : ?>
 																						<option value="<?php echo $a['id'] ?>"><?php echo $a['nombre'] ?></option>
@@ -262,11 +257,10 @@
 																				</select>
 																			</div>
 																		</div>
-
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Detalle</label>
-																				<select name="sd_detalle" id="sd_detalle" class="form-control custom-select">
+																				<select name="sd_detalle[]" id="sd_detalle1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($detalles_varon_saco as $d) : ?>
 																						<option value="<?php echo $d['id'] ?>"><?php echo $d['nombre'] ?></option>
@@ -274,46 +268,63 @@
 																				</select>
 																			</div>
 																		</div>
-
 																	</div>
-
 																	<div class="row">
-
-																		<div class="col">
+																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Color</label>
-																				<input name="sd_color" type="text" id="sd_color" class="form-control" placeholder="Ej: Plomo">
+																				<input name="sd_color[]" type="text" id="sd_color1" class="form-control" placeholder="Ej: Plomo">
 																			</div>
 																		</div>
 
-																		<div class="col-md-2">
+																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Ojal Pu&ntilde;o</label>
-																				<select name="sd_ojal" id="sd_ojal" class="form-control custom-select">
+																				<select name="sd_ojal[]" id="sd_ojal1" class="form-control ">
 																					<option value="Si">Si</option>
 																					<option value="No">No</option>
 																				</select>
 																			</div>
 																		</div>
 
-																		<div class="col">
+																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Color Ojal</label>
-																				<input name="sd_color_ojal" type="text" id="sd_color_ojal" class="form-control" placeholder="Ej: Gris">
+																				<input name="sd_color_ojal[]" type="text" id="sd_color_ojal1" class="form-control" placeholder="Ej: Gris">
 																			</div>
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-6">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Tipo de bolsillo</label>
-																				<input name="tipo_bolsillo" type="text" id="tipo_bolsillo" class="form-control" placeholder="Ej: Doble, Simple">
+																				<input name="tipo_bolsillo[]" type="text" id="tipo_bolsillo1" class="form-control" placeholder="Ej: Doble, Simple">
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Marca de la tela</label>
+																				<input name="marca_tela[]" type="text" id="marca_tela1" class="form-control" placeholder="Ej: Merino, Lino">
 																			</div>
 																		</div>
 																		<div class="col-md-6">
 																			<div class="form-group">
 																				<label class="control-label">Imagen del modelo</label>
-																				<input name="img_modelo_saco" type="file" accept="image/*" id="img_modelo_saco" class="form-control">
+																				<input name="img_modelo_saco[]" type="file" accept="image/*" id="img_modelo_saco1" class="form-control">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div id="education_fields"></div>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields(<?=json_encode($modelos_varon_saco)?>, <?=json_encode($aberturas_varon_saco)?>, <?=json_encode($detalles_varon_saco)?>);'>Añadir nuevo saco <i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input type="text" value="1" disabled class="form-control text-center" id="numero_sacos">
 																			</div>
 																		</div>
 																	</div>
@@ -343,6 +354,34 @@
 
 																	</div>
 
+																	<!-- <div class="row">
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<input type="text" class="form-control" id="Schoolname1" name="Schoolname[]" placeholder="School Name">
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<input type="text" class="form-control" id="Age1" name="Age[]" placeholder="Age">
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<input type="text" class="form-control" id="Degree1" name="Degree[]" placeholder="Degree">
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<select class="form-control" id="educationDate1" name="educationDate[]">
+																					<option>Date</option>
+																					<option value="2015">2015</option>
+																					<option value="2016">2016</option>
+																					<option value="2017">2017</option>
+																					<option value="2018">2018</option>
+																				</select>
+																			</div>
+																		</div>
+																	</div> -->
 																</div>
 															</div>
 														</div>
@@ -451,10 +490,8 @@
 
 																		<div class="col">
 																			<div class="form-group">
-																				<?php //vdebug($modelos_varon, false, false, true); 
-																				?>
 																				<label class="control-label">Modelo</label>
-																				<select name="pd_modelo" id="pd_modelo" class="form-control custom-select">
+																				<select name="pd_modelo[]" id="pd_modelo1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($modelos_varon_pantalon as $mvp) : ?>
 																						<option value="<?php echo $mvp['id'] ?>"><?php echo $mvp['nombre'] ?></option>
@@ -466,7 +503,7 @@
 																		<div class="col">
 																			<div class="form-group">
 																				<label class="control-label">Pinzas</label>
-																				<select name="pd_pinzas" id="pd_pinzas" class="form-control custom-select">
+																				<select name="pd_pinzas[]" id="pd_pinzas1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($pinzas_varon_pantalon as $pvp) : ?>
 																						<option value="<?php echo $pvp['id'] ?>"><?php echo $pvp['nombre'] ?></option>
@@ -478,7 +515,7 @@
 																		<div class="col" id="select_bragueta" style="display: block;">
 																			<div class="form-group">
 																				<label class="control-label">Bragueta</label>
-																				<select name="pd_bragueta" name="pd_bragueta" class="form-control custom-select">
+																				<select name="pd_bragueta[]" name="pd_bragueta1" class="form-control ">
 																					<option value="Cierre">Cierre</option>
 																					<option value="Boton">Boton</option>
 																				</select>
@@ -488,7 +525,7 @@
 																		<div class="col" id="pd_cpretina" style="display: none;">
 																			<div class="form-group">
 																				<label class="control-label">Pretina</label>
-																				<select name="pd_pretina" id="pd_pretina" class="form-control custom-select">
+																				<select name="pd_pretina[]" id="pd_pretina1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<option value="Normal">Normal</option>
 																					<option value="Ancho">Ancho</option>
@@ -499,7 +536,7 @@
 																		<div class="col">
 																			<div class="form-group">
 																				<label class="control-label">Bolsillo</label>
-																				<select name="pd_batras" id="pd_batras" class="form-control custom-select">
+																				<select name="pd_batras[]" id="pd_batras1" class="form-control ">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($bolsillos_varon_pantalon as $bvp) : ?>
 																						<?php if ($bvp['id'] == 1) : ?>
@@ -515,7 +552,7 @@
 																		<div class="col">
 																			<div class="form-group">
 																				<label class="control-label">Bota pie</label>
-																				<select name="pd_bpie" id="pd_bpie" class="form-control custom-select">
+																				<select name="pd_bpie[]" id="pd_bpie" class="form-control ">
 																					<option value="Normal">Normal</option>
 																					<option value="Dobles">Dobles</option>
 																					<option value="Abertura">Abertura</option>
@@ -529,7 +566,21 @@
 																		<div class="col-md-12">
 																			<div class="form-group">
 																				<label class="control-label">Imagen del modelo</label>
-																				<input type="file" class="form-control" accept="image/*" id="img_modelo_pantalon" name="img_modelo_pantalon">
+																				<input type="file" class="form-control" accept="image/*" id="img_modelo_pantalon1" name="img_modelo_pantalon[]">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div id="education_fields_pantalones"></div>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_pantalones(<?=json_encode($modelos_varon_pantalon)?>, <?=json_encode($pinzas_varon_pantalon)?>, <?=json_encode($bolsillos_varon_pantalon)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input type="text" value="1" disabled class="form-control text-center" id="numero_pantalones">
 																			</div>
 																		</div>
 																	</div>
@@ -630,7 +681,7 @@
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Modelo</label>
-																				<select name="ch_modelo" id="ch_modelo" class="form-control custom-select">
+																				<select name="ch_modelo[]" id="ch_modelo1" class="form-control">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($modelos_varon_chalecos as $mvch) : ?>
 																						<option value="<?php echo $mvch['id'] ?>"><?php echo $mvch['nombre'] ?></option>
@@ -642,14 +693,14 @@
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Botones</label>
-																				<input type="number" name="ch_botones" id="ch_botones" class="form-control" min="0" step="any">
+																				<input type="number" name="ch_botones[]" id="ch_botones1" class="form-control" min="0" step="any">
 																			</div>
 																		</div>
 
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Detalle</label>
-																				<select name="ch_detalle" id="ch_detalle" class="form-control custom-select">
+																				<select name="ch_detalle[]" id="ch_detalle1" class="form-control">
 																					<option value="">Seleccione</option>
 																					<?php foreach ($detalles_varon_chalecos as $dvch) : ?>
 																						<option value="<?php echo $dvch['id'] ?>"><?php echo $dvch['nombre'] ?></option>
@@ -662,13 +713,13 @@
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Color Ojales</label>
-																				<input name="ch_color" type="text" id="ch_color" class="form-control" placeholder="">
+																				<input name="ch_color[]" type="text" id="ch_color1" class="form-control" placeholder="">
 																			</div>
 																		</div>
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Boton Forrado</label>
-																				<select name="ch_boton_forrado" id="ch_boton_forrado" class="form-control">
+																				<select name="ch_boton_forrado[]" id="ch_boton_forrado1" class="form-control">
 																					<option value="No">No</option>
 																					<option value="Si">Si</option>
 																				</select>
@@ -677,7 +728,21 @@
 																		<div class="col-md-4">
 																			<div class="form-group">
 																				<label class="control-label">Imagen del modelo</label>
-																				<input type="file" class="form-control" accept="image/*" name="img_modelo_chaleco" id="img_modelo_chaleco">
+																				<input type="file" class="form-control" accept="image/*" name="img_modelo_chaleco[]" id="img_modelo_chaleco1">
+																			</div>
+																		</div>
+																	</div>
+
+																	<div id="education_fields_chalecos"></div>
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_chalecos(<?=json_encode($modelos_varon_chalecos)?>, <?=json_encode($detalles_varon_chalecos)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="form-group">
+																				<input type="text" value="1" disabled class="form-control text-center" id="numero_chalecos">
 																			</div>
 																		</div>
 																	</div>
@@ -759,7 +824,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Modelo cuello</label>
-																					<select name="cam_mcuello" class="form-control custom-select">
+																					<select name="cam_mcuello" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<option value="Pajarito">Pajarito</option>
 																						<option value="Normal">Normal</option>
@@ -770,7 +835,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Ancho</label>
-																					<select name="cam_ancho" class="form-control custom-select">
+																					<select name="cam_ancho" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<option value="Normal">Normal</option>
 																						<option value="Slim">Slim</option>
@@ -781,7 +846,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Cuello Combi</label>
-																					<select name="cam_ccombinado" class="form-control custom-select">
+																					<select name="cam_ccombinado" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<option value="Si">Si</option>
 																						<option value="No">No</option>
@@ -980,7 +1045,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Modelo</label>
-																					<select name="fa_modelo" id="fa_modelo" class="form-control custom-select">
+																					<select name="fa_modelo" id="fa_modelo" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<?php foreach ($modelos_faldas as $m) : ?>
 																							<option value="<?php echo $m['id'] ?>"><?php echo $m['nombre'] ?></option>
@@ -992,7 +1057,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Aberturas</label>
-																					<select name="fa_abertura" id="fa_abertura" class="form-control custom-select">
+																					<select name="fa_abertura" id="fa_abertura" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<?php foreach ($aberturas_falda as $af) : ?>
 																							<option value="<?php echo $af['id'] ?>"><?php echo $af['nombre'] ?></option>
@@ -1004,7 +1069,7 @@
 																			<div class="col">
 																				<div class="form-group">
 																					<label class="control-label">Pretina</label>
-																					<select name="fa_pretina" id="fa_pretina" class="form-control custom-select">
+																					<select name="fa_pretina" id="fa_pretina" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<option value="Normal">Normal</option>
 																						<option value="Ancho">Ancho</option>
@@ -1114,7 +1179,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Modelo</label>
-																					<select name="j_modelo" class="form-control custom-select">
+																					<select name="j_modelo" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<?php foreach ($modelos_jumper as $mj) : ?>
 																							<option value="<?php echo $mj['id'] ?>"><?php echo $mj['nombre'] ?></option>
@@ -1126,7 +1191,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Aberturas</label>
-																					<select name="j_abertura" class="form-control custom-select">
+																					<select name="j_abertura" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<?php foreach ($aberturas_jumper as $aj) : ?>
 																							<option value="<?php echo $aj['id'] ?>"><?php echo $aj['nombre'] ?></option>
@@ -1138,7 +1203,7 @@
 																			<div class="col-md-4">
 																				<div class="form-group">
 																					<label class="control-label">Bolsillo</label>
-																					<select name="j_bolsillo" class="form-control custom-select">
+																					<select name="j_bolsillo" class="form-control ">
 																						<option value="">Seleccione</option>
 																						<?php foreach ($bolsillos_jumper as $bj) : ?>
 																							<option value="<?php echo $bj['id'] ?>"><?php echo $bj['nombre'] ?></option>
@@ -1239,7 +1304,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label class="control-label">Tela</label>
-                                                        <select name="tela_propia" id="tela_propia" class="form-control custom-select">
+                                                        <select name="tela_propia" id="tela_propia" class="form-control ">
                                                             <option value="NO">Sin Tela</option>
                                                             <option value="SI">Con Tela</option>
                                                         </select>
@@ -1273,7 +1338,7 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label class="control-label">Motivo Rebaja</label>
-                                                        <select id="motivo_rebaja" name="motivo_rebaja" class="form-control custom-select" onchange='habilita()'>
+                                                        <select id="motivo_rebaja" name="motivo_rebaja" class="form-control " onchange='habilita()'>
                                                             <option value="">Seleccione</option>
                                                             <option value="Comision">Comision</option>
                                                             <option value="Familiar">Familiar</option>
@@ -1355,6 +1420,11 @@
         <!-- Row -->
     </div>
 </div>
+
+<script src="<?php echo base_url(); ?>public/assets/libs/jquery.repeater/jquery.repeater.min.js"></script>
+<script src="<?php echo base_url(); ?>public/assets/extra-libs/jquery.repeater/repeater-init.js"></script>
+<script src="<?php echo base_url(); ?>public/assets/extra-libs/jquery.repeater/dff.js"></script>
+
 <script type="text/javascript">
     var costo_tela = 0;
     var costo_confeccion = 0;
