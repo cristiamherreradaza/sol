@@ -480,7 +480,6 @@ class Trabajos extends CI_Controller {
 					'imagen'   		  => $nombreFotoChaleco,
 				);
 				$this->db->insert('chalecos', $datos_chaleco);
-
 			}
 
 			// verificamos si hay la imagen
