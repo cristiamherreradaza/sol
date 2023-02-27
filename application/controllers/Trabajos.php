@@ -58,6 +58,8 @@ class Trabajos extends CI_Controller {
 		$aberturas_jumper = $this->db->order_by('nombre', 'ASC')->get_where('aberturas', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 		$bolsillos_jumper = $this->db->order_by('nombre', 'ASC')->get_where('bolsillos', array('tipo' => 'jumper', 'borrado ='=>NULL))->result_array();
 
+		$telas = $this->db->order_by('nombre', 'ASC')->get_where('telas', array('borrado ='=>NULL))->result_array();
+
 
 
 		$data['modelos_varon_saco']       = $modelos_varon_saco;
@@ -69,10 +71,11 @@ class Trabajos extends CI_Controller {
 		$data['pinzas_varon_pantalon']    = $pinzas_varon_pantalon;
 		$data['bolsillos_varon_pantalon'] = $bolsillos_varon_pantalon;
 		$data['modelos_faldas']           = $modelos_faldas;
-		$data['aberturas_falda']           = $aberturas_falda;
-		$data['modelos_jumper']            = $modelos_jumper;
-		$data['aberturas_jumper']          = $aberturas_jumper;
-		$data['bolsillos_jumper']          = $bolsillos_jumper;
+		$data['aberturas_falda']          = $aberturas_falda;
+		$data['modelos_jumper']           = $modelos_jumper;
+		$data['aberturas_jumper']         = $aberturas_jumper;
+		$data['bolsillos_jumper']         = $bolsillos_jumper;
+		$data['telas']          		  = $telas;
 		// vdebug($modelos_varon_pantalon, true, false, true);
 		// echo 'la vista desde trabajos';
 		$this->load->view('template/header');
@@ -83,52 +86,6 @@ class Trabajos extends CI_Controller {
 
 	public function guarda_trabajo()
 	{
-		// var_dump($this->input->post('grupo_id'));
-		// vdebug($this->input->post(), true, false, true);
-		// var_dump($this->input->post('img_modelo_saco'), true, false, true);
-		// print_r($this->input->post('img_modelo_saco'));
-		// var_dump($this->upload('img_modelo_saco'));
-		// var_dump($_FILES['img_modelo_saco']);
-		// echo "<br>-----------------<br>";
-		// var_dump($_FILES['img_modelo_pantalon']);
-		// print_r($this->input->post(), true, false, true);
-		// printf($this->input->post(), true, false, true);
-		// var_dump($this->input->post('Schoolname'));
-
-		var_dump($this->input->post('sd_modelo'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_botones'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_aberturas'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_detalle'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_color'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_ojal'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('sd_color_ojal'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('tipo_bolsillo'));
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('marca_tela'));
-		echo "<br>-----------------<br>";
-		var_dump($_FILES['img_modelo_saco']['name'][1]);
-		echo "<br>-----------------<br>";
-		var_dump($this->input->post('s_pecho'));
-		echo "<br>-----------------<br>";
-		echo "<br>-----------------<br>";
-		echo "<br>-----------------<br>";
-
-		// $cantidadSacos = count(array_filter($this->input->post('sd_modelo')));
-
-		// for($i=0; $i<$cantidadSacos; $i++){
-		// 	echo $this->input->post('sd_modelo')[$i]."<br>";
-		// }
-		// var_dump(array_filter($this->input->post('sd_modelo')));
-
-		// exit;
-
 		$usuario_id = $this->session->id_usuario;
 
 		// PREGUNTAMOS SI EL CLIENTE EXISTE O NO
@@ -192,28 +149,10 @@ class Trabajos extends CI_Controller {
 
 			$cantidadSacos = count(array_filter($this->input->post('sd_modelo')));
 
-			// verificamos si hay la imagen
-
-			// $directory             	 = "./public/fotoModelos/";
-			// $this->createFolder($directory);
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-			// $config['max_size']      = '4096';
-			// $config['remove_spaces'] = TRUE;
-			// $config['overwrite']     = TRUE;
-			// $config['detect_mime']   = TRUE;
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-
-			// $nombre_documento = 'saco_'.$i.'_'.date('YmdHis');
-			// $config['file_name']     = $nombre_documento;
-			// $this->load->library('upload', $config);
-			// $this->upload->initialize($config);
-
-			// if ($this->upload->do_upload('img_modelo_saco'))
-			// 	$nombreFoto = $nombre_documento.".".pathinfo($_FILES['img_modelo_saco']['name'], PATHINFO_EXTENSION);
-			// else
-			// 	$nombreFoto = null;
+			if($cantidadSacos > 0){
+				$directory             	 = "./public/fotoModelos/";
+				$this->createFolder($directory);
+			}
 
 			for($i=0; $i<$cantidadSacos; $i++){
 
@@ -254,6 +193,8 @@ class Trabajos extends CI_Controller {
 					'ojal_puno'       => $this->input->post('sd_ojal')[$i],
 					'color_ojal'      => $this->input->post('sd_color_ojal')[$i],
 					'tipo_bolsillo'   => $this->input->post('tipo_bolsillo')[$i],
+					'cantidad'        => $this->input->post('saco_cantidad')[$i],
+					'tela_id'         => $this->input->post('marca_tela_saco')[$i],
 					'imagen'   		  => $nombreFoto,
 
 					'talla'           => $this->input->post('s_talla'),
@@ -266,70 +207,21 @@ class Trabajos extends CI_Controller {
 					'largo_manga'     => $this->input->post('s_lmanga'),
 					'altura_busto'    => $this->input->post('s_abusto'),
 					'precio_unitario' => $this->input->post('saco_pu'),
-					'cantidad'        => $this->input->post('saco_cantidad'),
 					'estado'   		  => 'Trabajando',
 					'ubicacion'   	  => 'Taller',
 				);
 				$this->db->insert('sacos', $datos_saco);
 			}
-
-			// $datos_saco = array(
-			// 	'cliente_id'      => $id_cliente,
-			// 	'trabajo_id'      => $id_trabajo,
-			// 	// 'contrato_id'     => $this->input->post('contrato_id'),
-			// 	'grupo_id'     => $this->input->post('grupo_id'),
-			// 	'modelo_id'       => $this->input->post('sd_modelo'),
-			// 	'abertura_id'     => $this->input->post('sd_aberturas'),
-			// 	'detalle_id'      => $this->input->post('sd_detalle'),
-			// 	'color'           => $this->input->post('sd_color'),
-			// 	'color_ojal'      => $this->input->post('sd_color_ojal'),
-			// 	'ojal_puno'       => $this->input->post('sd_ojal'),
-			// 	'botones'         => $this->input->post('sd_botones'),
-			// 	'talla'           => $this->input->post('s_talla'),
-			// 	'largo'           => $this->input->post('s_largo'),
-			// 	'hombro'          => $this->input->post('s_hombro'),
-			// 	'espalda'         => $this->input->post('s_espalda'),
-			// 	'pecho'           => $this->input->post('s_pecho'),
-			// 	'estomago'        => $this->input->post('s_estomago'),
-			// 	'medio_brazo'     => $this->input->post('s_mbrazo'),
-			// 	'largo_manga'     => $this->input->post('s_lmanga'),
-			// 	'altura_busto'    => $this->input->post('s_abusto'),
-			// 	'precio_unitario' => $this->input->post('saco_pu'),
-			// 	'cantidad'        => $this->input->post('saco_cantidad'),
-			// 	'tipo_bolsillo'   => $this->input->post('tipo_bolsillo'),
-			// 	'estado'   		  => 'Trabajando',
-			// 	'ubicacion'   	  => 'Taller',
-			// 	'imagen'   		  => $nombreFoto,
-			// );
-			// $this->db->insert('sacos', $datos_saco);
-
-
-
-			// if (!empty($this->input->post('sd_modelo'))) {
-			// 	// insertamos los datos de costos de produccion
-			// 	$datos_costo_saco = $this->db->get_where('costos', array('id'=>1))->row();
-			// 	if ($this->input->post('genero') == 'Varon') {
-			// 		$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->varon;
-			// 		$precio_saco = $datos_costo_saco->varon;
-			// 	}else{
-			// 		$total_costo_saco = $this->input->post('saco_cantidad')*$datos_costo_saco->mujer;
-			// 		$precio_saco = $datos_costo_saco->mujer;
-			// 	}
-			// 	$datos_costos_produccion = array(
-			// 		'trabajo_id' => $id_trabajo,
-			// 		'cliente_id' => $id_cliente,
-			// 		'costo_id'   => 1,
-			// 		'cantidad'   => $this->input->post('saco_cantidad'),
-			// 		'precio'     => $precio_saco,
-			// 		'total'      => $total_costo_saco,
-			// 	);
-			// 	$this->db->insert('costos_produccion', $datos_costos_produccion);
-			// }
 		}
 
 		if (!empty($this->input->post('p_largo'))) {
 
 			$cantidadPantalones = count(array_filter($this->input->post('pd_modelo')));
+			
+			if($cantidadPantalones > 0){
+				$directory             	 = "./public/fotoModelos/";
+				$this->createFolder($directory);
+			}
 
 			for($i=0; $i<$cantidadPantalones; $i++){
 
@@ -377,62 +269,25 @@ class Trabajos extends CI_Controller {
 					'bota_pie_des'    => $this->input->post('pd_bpie')[$i],
 					'pretina'         => $this->input->post('pd_pretina')[$i],
 					'precio_unitario' => $this->input->post('pantalon_pu'),
-					'cantidad'        => $this->input->post('pantalon_cantidad'),
+					'cantidad'        => $this->input->post('pantalon_cantidad')[$i],
+					'tela_id'         => $this->input->post('marca_tela_pantalon')[$i],
 					'estado'   		  => 'Trabajando',
 					'ubicacion'   	  => 'Taller',
 					'imagen'   		  => $nombreFotoPantalon,
 				);
 
 				$this->db->insert('pantalones', $datos_pantalon);
-
 			}
-
-			// verificamos si hay la imagen
-			// $directory             = "./public/fotoModelos/";
-			// $this->createFolder($directory);
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-			// $config['max_size']      = '4096';
-			// $config['remove_spaces'] = TRUE;
-			// $config['overwrite']     = TRUE;
-			// $config['detect_mime']   = TRUE;
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-			// $nombre_documento = 'pantalon_'.date('YmdHis');
-			// $config['file_name']     = $nombre_documento;
-			// $this->load->library('upload', $config);
-			// $this->upload->initialize($config);
-			// if ($this->upload->do_upload('img_modelo_pantalon'))
-			// 	$nombreFotoPantalon = $nombre_documento.".".pathinfo($_FILES['img_modelo_pantalon']['name'], PATHINFO_EXTENSION);
-			// else
-			// 	$nombreFotoPantalon = null;
-
-
-			// if (!empty($this->input->post('pd_modelo'))) {
-			// 	// insertamos los datos de costos de produccion
-			// 	$datos_costo_pantalon = $this->db->get_where('costos', array('id'=>2))->row();
-			// 	if ($this->input->post('genero') == 'Varon') {
-			// 		$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->varon;
-			// 		$precio_pantalon = $datos_costo_pantalon->varon;
-			// 	}else{
-			// 		$total_costo_pantalon = $this->input->post('pantalon_cantidad')*$datos_costo_pantalon->mujer;
-			// 		$precio_pantalon = $datos_costo_pantalon->mujer;
-			// 	}
-			// 	$datos_costos_produccion_pantalon = array(
-			// 		'trabajo_id' => $id_trabajo,
-			// 		'cliente_id' => $id_cliente,
-			// 		'costo_id'   => 2,
-			// 		'cantidad'   => $this->input->post('pantalon_cantidad'),
-			// 		'precio'     => $precio_pantalon,
-			// 		'total'      => $total_costo_pantalon,
-			// 	);
-			// 	$this->db->insert('costos_produccion', $datos_costos_produccion_pantalon);
-			// }
 		}
 
 		if (!empty($this->input->post('ch_estomago'))) {
 
 			$cantidadChalecos = count(array_filter($this->input->post('ch_modelo')));
+
+			if($cantidadChalecos > 0){
+				$directory             	 = "./public/fotoModelos/";
+				$this->createFolder($directory);
+			}
 
 			for($i=0 ; $i<$cantidadChalecos; $i++){
 
@@ -474,55 +329,14 @@ class Trabajos extends CI_Controller {
 					'color_ojales'    => $this->input->post('ch_color')[$i],
 					'altura_busto'    => $this->input->post('ch_abusto'),
 					'precio_unitario' => $this->input->post('ch_pu'),
-					'cantidad'        => $this->input->post('ch_cantidad'),
+					'cantidad'        => $this->input->post('ch_cantidad')[$i],
+					'tela_id'         => $this->input->post('marca_tela_chaleco')[$i],
 					'estado'   		  => 'Trabajando',
 					'ubicacion'   	  => 'Taller',
 					'imagen'   		  => $nombreFotoChaleco,
 				);
 				$this->db->insert('chalecos', $datos_chaleco);
 			}
-
-			// verificamos si hay la imagen
-			// $directory             = "./public/fotoModelos/";
-			// $this->createFolder($directory);
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-			// $config['max_size']      = '4096';
-			// $config['remove_spaces'] = TRUE;
-			// $config['overwrite']     = TRUE;
-			// $config['detect_mime']   = TRUE;
-			// $config['upload_path']   = $directory;
-			// $config['allowed_types'] = '*';
-			// $nombre_documento = 'chaleco_'.date('YmdHis');
-			// $config['file_name']     = $nombre_documento;
-			// $this->load->library('upload', $config);
-			// $this->upload->initialize($config);
-			// if ($this->upload->do_upload('img_modelo_chaleco'))
-			// 	$nombreFotoChaleco = $nombre_documento.".".pathinfo($_FILES['img_modelo_chaleco']['name'], PATHINFO_EXTENSION);
-			// else
-			// 	$nombreFotoChaleco = null;
-
-
-			// if (!empty($this->input->post('ch_modelo'))) {
-			// 	// insertamos los datos de costos de produccion
-			// 	$datos_costo_chaleco = $this->db->get_where('costos', array('id'=>3))->row();
-			// 	if ($this->input->post('genero') == 'Varon') {
-			// 		$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->varon;
-			// 		$precio_chaleco = $datos_costo_chaleco->varon;
-			// 	}else{
-			// 		$total_costo_chaleco = $this->input->post('ch_cantidad')*$datos_costo_chaleco->mujer;
-			// 		$precio_chaleco = $datos_costo_chaleco->mujer;
-			// 	}
-			// 	$datos_costos_produccion_chaleco = array(
-			// 		'trabajo_id' => $id_trabajo,
-			// 		'cliente_id' => $id_cliente,
-			// 		'costo_id'   => 3,
-			// 		'cantidad'   => $this->input->post('ch_cantidad'),
-			// 		'precio'     => $precio_chaleco,
-			// 		'total'      => $total_costo_chaleco,
-			// 	);
-			// 	$this->db->insert('costos_produccion', $datos_costos_produccion_chaleco);
-			// }
 		}
 
 		if (!empty($this->input->post('cam_cuello'))) {
@@ -759,7 +573,8 @@ class Trabajos extends CI_Controller {
 		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
 		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
 		$this->db->where('sa.trabajo_id', $id_trabajo);
-		$data['saco'] = $this->db->get()->row_array();
+		// $data['saco'] = $this->db->get()->row_array();
+		$data['saco'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
 		$this->db->from('pantalones as pa');
@@ -767,14 +582,16 @@ class Trabajos extends CI_Controller {
 		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
 		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
 		$this->db->where('pa.trabajo_id', $id_trabajo);
-		$data['pantalon'] = $this->db->get()->row_array();
+		// $data['pantalon'] = $this->db->get()->row_array();
+		$data['pantalon'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
 		$this->db->from('chalecos as ch');
 		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
 		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
 		$this->db->where('ch.trabajo_id', $id_trabajo);
-		$data['chaleco'] = $this->db->get()->row_array();
+		// $data['chaleco'] = $this->db->get()->row_array();
+		$data['chaleco'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
 		$this->db->from('faldas as f');
@@ -1829,7 +1646,8 @@ class Trabajos extends CI_Controller {
 		$this->db->join('detalles as de', 'de.id = sa.detalle_id', 'left');
 		$this->db->join('aberturas as ab', 'ab.id = sa.abertura_id', 'left');
 		$this->db->where('sa.trabajo_id', $id_trabajo);
-		$data['saco'] = $this->db->get()->row_array();
+		// $data['saco'] = $this->db->get()->row_array();
+		$data['saco'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, pi.nombre as pinzas_nombre, bo.nombre as bolsillo_nombre, pa.*');
 		$this->db->from('pantalones as pa');
@@ -1837,14 +1655,16 @@ class Trabajos extends CI_Controller {
 		$this->db->join('pinzas as pi', 'pi.id = pa.pinza_id', 'left');
 		$this->db->join('bolsillos as bo', 'bo.id = pa.bolsillo_id', 'left');
 		$this->db->where('pa.trabajo_id', $id_trabajo);
-		$data['pantalon'] = $this->db->get()->row_array();
+		// $data['pantalon'] = $this->db->get()->row_array();
+		$data['pantalon'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, de.nombre as detalle_nombre, ch.*');
 		$this->db->from('chalecos as ch');
 		$this->db->join('modelos as mo', 'mo.id = ch.modelo_id', 'left');
 		$this->db->join('detalles as de', 'de.id = ch.detalle_id', 'left');
 		$this->db->where('ch.trabajo_id', $id_trabajo);
-		$data['chaleco'] = $this->db->get()->row_array();
+		// $data['chaleco'] = $this->db->get()->row_array();
+		$data['chaleco'] = $this->db->get()->result_array();
 
 		$this->db->select('mo.nombre as modelo_nombre, ab.nombre as abertura_nombre, f.*');
 		$this->db->from('faldas as f');
@@ -1943,32 +1763,26 @@ class Trabajos extends CI_Controller {
 		else if($prenda == "jumper")
 			$tabla = "jumpers";
 
-
-		if($tipo == 'asignar')
+		if($tipo == 'asignar'){
 			$campo = 'fecha_asignado';
-		else
-			$campo = 'fecha_concluido';
-
-
-		$data = array(
-			'usuario_asignado_id' => $persona_id,
-			$campo => date('Y-m-d H:i:s'),
-		);
-
-		if($this->db->update($tabla, $data, "id=$prenda_id")){
-			$data['respuesta'] = 'success';
-			// $data['prenda'] = $tipo_prenda;
-			// $data['campo'] = $tipo_detalle;
+			$estado = 'Trabajando';
 		}else{
-			$data['respuesta'] = 'error';
+			$campo = 'fecha_concluido';
+			$estado = 'Terminado';
 		}
 
-		// var_dump($persona_id,$prenda_id,$prenda,$tipo, $tabla);
+		$data = array(
+			'usuario_asignado_id' 	=> $persona_id,
+			$campo 					=> date('Y-m-d H:i:s'),
+			'estado'				=> $estado
+		);
 
-		// echo $this->db->last_query();
+		if($this->db->update($tabla, $data, "id=$prenda_id"))
+			$data['respuesta'] = 'success';
+		else
+			$data['respuesta'] = 'error';
 
 		echo json_encode($data);
-
 	}
 
 }

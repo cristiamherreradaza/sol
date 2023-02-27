@@ -30,6 +30,7 @@
 			<thead>
 				<tr>
 					<th>PRENDA</th>
+					<th>CANTIDAD</th>
 					<th>ESTADO</th>
 					<th>UBICACION</th>
 					<th>ASIGNACION</th>
@@ -40,174 +41,179 @@
 			</thead>
 			<tbody>
 			<?php
-			if(!empty($saco['modelo_nombre'])){
-			?>
-				<tr>
-					<td>
-						SACO
-					</td>
-					<td>
-						<select name="saco_estado" id="saco_estado" class="form-control" onchange="guardaEstadoUbicacion('saco', 'estado', <?=$saco['id']?>)">
-							<option <?= ($saco['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
-							<option <?= ($saco['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
-						</select>
-						<center>
-							<small id="_saco_estado" class="text-success" style="display: none;">Guardado Estado</small>
-						</center>
-					</td>
-					<td>
-						<select name="saco_ubicacion" id="saco_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('saco', 'ubicacion', <?=$saco['id']?>)">
-							<option <?= ($saco['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
-							<option <?= ($saco['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
-						</select>
-						<center>
-							<small id="_saco_ubicacion" class="text-success" style="display: none;">Guardado Ubicacion</small>
-						</center>
-					</td>
-					<td>
-						<select name="persona_destinada_saco" id="persona_destinada_saco" class="form-control" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
-						<option value="">Seleccione</option>
-						<?php
-							foreach ($usuarios as $u){
+			// if(!empty($saco['modelo_nombre'])){
+			if(count($saco) > 0){
+				foreach ($saco as $key => $s) {
+				?>	
+					<tr>
+						<td>
+							SACO <b class="text-danger">#<?=$key + 1?></b>
+						</td>
+						<td class="text-center"><?=$s['cantidad']?></td>
+						<td>
+							<select name="saco_estado" id="saco_estado" class="form-control" onchange="guardaEstadoUbicacion('saco', 'estado', <?=$s['id']?>)" <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+								<option <?= ($s['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
+								<option <?= ($s['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
+							</select>
+							<center>
+								<small id="_saco_estado" class="text-success" style="display: none;">Guardado Estado</small>
+							</center>
+						</td>
+						<td>
+							<select name="saco_ubicacion" id="saco_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('saco', 'ubicacion', <?=$s['id']?>)">
+								<option <?= ($s['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
+								<option <?= ($s['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
+							</select>
+							<center>
+								<small id="_saco_ubicacion" class="text-success" style="display: none;">Guardado Ubicacion</small>
+							</center>
+						</td>
+						<td>
+							<select name="persona_destinada_saco" id="persona_destinada_saco_<?=$key?>" style="width: 100%;" class="form-control select2" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+							<option value="">Seleccione</option>
+							<?php
+								foreach ($usuarios as $u){
+								?>
+								<option <?=(($s['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
+								<?php
+								}
 							?>
-							<option <?=(($saco['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
+							</select>
+						</td>
+						<td><?=(empty($s['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $s['fecha_asignado']?></td>
+						<td><?=(empty($s['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $s['fecha_concluido']?></td>
+						<td>
+							<?php
+							if($s['fecha_asignado'] != null){
+								if($this->session->id_usuario == $s['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
+							?>
+								<button type="button" onclick="asignarPrenda('saco', <?=$s['id']?>, 'concluir', <?=$key?>)" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
+							<?php
+								}
+							}
+							?>
+							<?php
+							if($this->session->rol == 'Administrador'){
+							?>
+							<button type="button" onclick="asignarPrenda('saco', <?=$s['id']?>, 'asignar', <?=$key?>)" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
 							<?php
 							}
-						?>
-						</select>
-					</td>
-					<td><?=(empty($saco['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $saco['fecha_asignado']?></td>
-					<td><?=(empty($saco['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $saco['fecha_concluido']?></td>
-					<td>
-						<?php
-						if($saco['fecha_asignado'] != null){
-							if($this->session->id_usuario == $saco['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
-						?>
-							<button type="button" onclick="asignarPrenda('saco', <?=$saco['id']?>, 'concluir')" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
-						<?php
-							}
-						}
-						?>
-						<?php
-						if($this->session->rol == 'Administrador'){
-						?>
-						<button type="button" onclick="asignarPrenda('saco', <?=$saco['id']?>, 'asignar')" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
-						<?php
-						}
-						?>
-					</td>
-				</tr>	
-			<?php
-			}
-			?>
-
-			<?php
-			if(!empty($pantalon['modelo_nombre'])){
-			?>
-				<tr>
-					<td>
-						PANTALON
-					</td>
-					<td>
-						<select name="pantalon_estado" id="pantalon_estado" class="form-control" onchange="guardaEstadoUbicacion('pantalon', 'estado', <?=$pantalon['id']?>)">
-							<option <?= ($pantalon['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
-							<option <?= ($pantalon['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
-						</select>
-						<center>
-							<small id="_pantalon_estado" class="text-success" style="display: none;">Guardado Estado</small>
-						</center>
-					</td>
-					<td>
-						<select name="pantalon_ubicacion" id="pantalon_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('pantalon', 'ubicacion', <?=$pantalon['id']?>)">
-							<option <?= ($pantalon['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
-							<option <?= ($pantalon['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
-						</select>
-						<center>
-							<small id="_pantalon_ubicacion" class="text-success" style="display: none;">Guardado Ubicacion</small>
-						</center>
-					</td>
-					<td>
-						<select name="persona_destinada_pantalon" id="persona_destinada_pantalon" class="form-control" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
-						<option value="">Seleccione</option>
-						<?php
-							foreach ($usuarios as $u){
 							?>
-							<option <?=(($pantalon['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
+						</td>
+					</tr>	
+				<?php
+				}
+			}
+
+			if(count($pantalon) > 0){
+				foreach ($pantalon as $key => $p) {
+				?>
+					<tr>
+						<td>
+							PANTALON <b class="text-danger">#<?=$key + 1?></b>
+						</td>
+						<td class="text-center"><?=$p['cantidad']?></td>
+						<td>
+							<select name="pantalon_estado" id="pantalon_estado" class="form-control" onchange="guardaEstadoUbicacion('pantalon', 'estado', <?=$p['id']?>)" <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+								<option <?= ($p['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
+								<option <?= ($p['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
+							</select>
+							<center>
+								<small id="_pantalon_estado" class="text-success" style="display: none;">Guardado Estado</small>
+							</center>
+						</td>
+						<td>
+							<select name="pantalon_ubicacion" id="pantalon_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('pantalon', 'ubicacion', <?=$p['id']?>)">
+								<option <?= ($p['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
+								<option <?= ($p['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
+							</select>
+							<center>
+								<small id="_pantalon_ubicacion" class="text-success" style="display: none;">Guardado Ubicacion</small>
+							</center>
+						</td>
+						<td>
+							<select name="persona_destinada_pantalon" id="persona_destinada_pantalon_<?=$key?>" style="width: 100%;" class="form-control select2" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+							<option value="">Seleccione</option>
+							<?php
+								foreach ($usuarios as $u){
+								?>
+								<option <?=(($p['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
+								<?php
+								}
+							?>
+							</select>
+						</td>
+						<td><?=(empty($p['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $p['fecha_asignado']?></td>
+						<td><?=(empty($p['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $p['fecha_concluido']?></td>
+						<td>
+							<?php
+							if($p['fecha_asignado'] != null){
+								if($this->session->id_usuario == $p['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
+							?>
+								<button type="button" onclick="asignarPrenda('pantalon', <?=$p['id']?>, 'concluir', <?=$key?>)" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
+							<?php
+								}
+							}
+							?>
+							<?php
+							if($this->session->rol == 'Administrador'){
+							?>
+							<button type="button" onclick="asignarPrenda('pantalon', <?=$p['id']?>, 'asignar', <?=$key?>)" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
 							<?php
 							}
-						?>
-						</select>
-					</td>
-					<td><?=(empty($pantalon['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $pantalon['fecha_asignado']?></td>
-					<td><?=(empty($pantalon['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $pantalon['fecha_concluido']?></td>
-					<td>
-						<?php
-						if($pantalon['fecha_asignado'] != null){
-							if($this->session->id_usuario == $pantalon['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
-						?>
-							<button type="button" onclick="asignarPrenda('pantalon', <?=$pantalon['id']?>, 'concluir')" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
-						<?php
-							}
-						}
-						?>
-						<?php
-						if($this->session->rol == 'Administrador'){
-						?>
-						<button type="button" onclick="asignarPrenda('pantalon', <?=$pantalon['id']?>, 'asignar')" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
-						<?php
-						}
-						?>
-					</td>
-				</tr>	
-			<?php
+							?>
+						</td>
+					</tr>	
+				<?php
+				}
 			}
-			?>
-
-			<?php
-			if(!empty($chaleco['modelo_nombre'])){
-			?>
+			
+			if(count($chaleco) > 0){
+				foreach ($chaleco as $key => $c) {
+				?>
 				<tr>
 					<td>
-						CHALECO
+						CHALECO <b class="text-danger">#<?=$key + 1?></b>
 					</td>
+					<td class="text-center"><?=$c['cantidad']?></td>
 					<td>
-						<select name="chaleco_estado" id="chaleco_estado" class="form-control" onchange="guardaEstadoUbicacion('chaleco', 'estado', <?=$chaleco['id']?>)">
-							<option <?= ($chaleco['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
-							<option <?= ($chaleco['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
+						<select name="chaleco_estado" id="chaleco_estado" class="form-control" onchange="guardaEstadoUbicacion('chaleco', 'estado', <?=$c['id']?>)" <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+							<option <?= ($c['estado'] == 'Trabajando')? 'selected' : ''?> value="Trabajando">Trabajando</option>
+							<option <?= ($c['estado'] == 'Terminado')? 'selected' : ''?> value="Terminado">Terminado</option>
 						</select>
 						<center>
 							<small id="_chaleco_estado" class="text-success" style="display: none;">Guardado Estado</small>
 						</center>
 					</td>
 					<td>
-						<select name="chaleco_ubicacion" id="chaleco_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('chaleco', 'ubicacion', <?=$chaleco['id']?>)">
-							<option <?= ($chaleco['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
-							<option <?= ($chaleco['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
+						<select name="chaleco_ubicacion" id="chaleco_ubicacion" class="form-control" onchange="guardaEstadoUbicacion('chaleco', 'ubicacion', <?=$c['id']?>)">
+							<option <?= ($c['ubicacion'] == 'Taller')? 'selected' : ''?> value="Taller">Taller</option>
+							<option <?= ($c['ubicacion'] == 'Tienda')? 'selected' : ''?> value="Tienda">Tienda</option>
 						</select>
 						<center>
 							<small id="_chaleco_ubicacion" class="text-success" style="display: none;">Guardado Ubicacion</small>
 						</center>
 					</td>
 					<td>
-						<select name="persona_destinada_chaleco" id="persona_destinada_chaleco" class="form-control" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+						<select name="persona_destinada_chaleco" id="persona_destinada_chaleco_<?=$key?>" style="width: 100%;" class="form-control select2" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
 						<option value="">Seleccione</option>
 						<?php
 							foreach ($usuarios as $u){
 							?>
-							<option <?=(($chaleco['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
+							<option <?=(($c['usuario_asignado_id'] == $u['id'])? 'selected' : '')?> value="<?=$u['id']?>"><?=$u['nombre']?></option>
 							<?php
 							}
 						?>
 						</select>
 					</td>
-					<td><?=(empty($chaleco['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $chaleco['fecha_asignado']?></td>
-					<td><?=(empty($chaleco['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $chaleco['fecha_concluido']?></td>
+					<td><?=(empty($c['fecha_asignado']))? '<span class="text-danger">No Asiganado</span>' : $c['fecha_asignado']?></td>
+					<td><?=(empty($c['fecha_concluido']))? '<span class="text-danger">No Concluido</span>' : $c['fecha_concluido']?></td>
 					<td>
 						<?php
-						if($chaleco['fecha_asignado'] != null){
-							if($this->session->id_usuario == $chaleco['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
+						if($c['fecha_asignado'] != null){
+							if($this->session->id_usuario == $c['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
 						?>
-							<button type="button" onclick="asignarPrenda('chaleco', <?=$chaleco['id']?>, 'concluir')" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
+							<button type="button" onclick="asignarPrenda('chaleco', <?=$c['id']?>, 'concluir', <?=$key?>)" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
 						<?php
 							}
 						}
@@ -215,17 +221,16 @@
 						<?php
 						if($this->session->rol == 'Administrador'){
 						?>
-						<button type="button" onclick="asignarPrenda('chaleco', <?=$chaleco['id']?>, 'asignar')" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
+						<button type="button" onclick="asignarPrenda('chaleco', <?=$c['id']?>, 'asignar', <?=$key?>)" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
 						<?php
 						}
 						?>
 					</td>
 				</tr>	
-			<?php
+				<?php
+				}
 			}
-			?>
 
-			<?php
 			if(!empty($falda['modelo_nombre'])){
 			?>
 				<tr>
@@ -251,7 +256,7 @@
 						</center>
 					</td>
 					<td>
-						<select name="persona_destinada_falda" id="persona_destinada_falda" class="form-control" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+						<select name="persona_destinada_falda" id="persona_destinada_falda_0" class="form-control select2" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
 						<option value="">Seleccione</option>
 						<?php
 							foreach ($usuarios as $u){
@@ -269,7 +274,7 @@
 						if($falda['fecha_asignado'] != null){
 							if($this->session->id_usuario == $falda['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
 						?>
-							<button type="button" onclick="asignarPrenda('falda', <?=$falda['id']?>, 'concluir')" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
+							<button type="button" onclick="asignarPrenda('falda', <?=$falda['id']?>, 'concluir', 0)" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
 						<?php
 							}
 						}
@@ -277,7 +282,7 @@
 						<?php
 						if($this->session->rol == 'Administrador'){
 						?>
-						<button type="button" onclick="asignarPrenda('falda', <?=$falda['id']?>, 'asignar')" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
+						<button type="button" onclick="asignarPrenda('falda', <?=$falda['id']?>, 'asignar', 0)" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
 						<?php
 						}
 						?>
@@ -313,7 +318,7 @@
 						</center>
 					</td>
 					<td>
-						<select name="persona_destinada_jumper" id="persona_destinada_jumper" class="form-control" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
+						<select name="persona_destinada_jumper" id="persona_destinada_jumper_0" class="form-control select2" required <?= ($this->session->rol != 'Administrador')? 'disabled' : ''?>>
 						<option value="">Seleccione</option>
 						<?php
 							foreach ($usuarios as $u){
@@ -331,7 +336,7 @@
 						if($jumper['fecha_asignado'] != null){
 							if($this->session->id_usuario == $jumper['usuario_asignado_id'] || $this->session->rol == 'Administrador'){
 						?>
-							<button type="button" onclick="asignarPrenda('jumper', <?=$jumper['id']?>, 'concluir')" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
+							<button type="button" onclick="asignarPrenda('jumper', <?=$jumper['id']?>, 'concluir', 0)" class="btn btn-primary btn-icon"><i class="fa fa-cart-arrow-down"></i></button>
 						<?php
 							}
 						}
@@ -339,7 +344,7 @@
 						<?php
 						if($this->session->rol == 'Administrador'){
 						?>
-						<button type="button" onclick="asignarPrenda('jumper', <?=$jumper['id']?>, 'asignar')" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
+						<button type="button" onclick="asignarPrenda('jumper', <?=$jumper['id']?>, 'asignar', 0)" class="btn btn-success btn-icon"><i class="fa fa-cart-plus"></i></button>
 						<?php
 						}
 						?>
@@ -356,23 +361,27 @@
 
 <script>
 	$(document).ready(function() {
-		$('#persona_destinada_saco').select2({
-			dropdownParent: $('#myModalLocalizacion'),
-		});
 
-		$('#persona_destinada_pantalon').select2({
-			dropdownParent: $('#myModalLocalizacion'),
-		});
+		<?php
+			for ($i=0; $i < count($saco) ; $i++)
+				echo "$('#persona_destinada_saco_$i').select2({dropdownParent: $('#myModalLocalizacion')});";
 
-		$('#persona_destinada_chaleco').select2({
-			dropdownParent: $('#myModalLocalizacion'),
-		});
+			for ($i=0; $i < count($pantalon) ; $i++)
+				echo "$('#persona_destinada_pantalon_$i').select2({dropdownParent: $('#myModalLocalizacion')});";
+
+			for ($i=0; $i < count($chaleco) ; $i++)
+				echo "$('#persona_destinada_chaleco_$i').select2({dropdownParent: $('#myModalLocalizacion')});";
+		?>
 
 		$('#persona_destinada_falda').select2({
 			dropdownParent: $('#myModalLocalizacion'),
 		});
 
 		$('#persona_destinada_jumper').select2({
+			dropdownParent: $('#myModalLocalizacion'),
+		});
+
+		$('.select2').select2({
 			dropdownParent: $('#myModalLocalizacion'),
 		});
 	});

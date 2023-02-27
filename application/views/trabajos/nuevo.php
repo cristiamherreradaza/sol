@@ -270,14 +270,14 @@
 																		</div>
 																	</div>
 																	<div class="row">
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Color</label>
 																				<input name="sd_color[]" type="text" id="sd_color1" class="form-control" placeholder="Ej: Plomo">
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Ojal Pu&ntilde;o</label>
 																				<select name="sd_ojal[]" id="sd_ojal1" class="form-control ">
@@ -287,24 +287,33 @@
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Color Ojal</label>
 																				<input name="sd_color_ojal[]" type="text" id="sd_color_ojal1" class="form-control" placeholder="Ej: Gris">
 																			</div>
 																		</div>
-																	</div>
-																	<div class="row">
+
 																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Tipo de bolsillo</label>
 																				<input name="tipo_bolsillo[]" type="text" id="tipo_bolsillo1" class="form-control" placeholder="Ej: Doble, Simple">
 																			</div>
 																		</div>
+																	</div>
+																	<div class="row">
 																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Marca de la tela</label>
-																				<input name="marca_tela[]" type="text" id="marca_tela1" class="form-control" placeholder="Ej: Merino, Lino">
+																				<select name="marca_tela_saco[]" id="marca_tela_saco1" class="form-control">
+																					<?php
+																					foreach ($telas as $t) {
+																					?>
+																					<option value="<?=$t['id']?>"><?=$t['nombre']?></option>
+																					<?php
+																					}
+																					?>
+																				</select>
 																			</div>
 																		</div>
 																		<div class="col-md-6">
@@ -313,13 +322,19 @@
 																				<input name="img_modelo_saco[]" type="file" accept="image/*" id="img_modelo_saco1" class="form-control">
 																			</div>
 																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="saco_cantidad[]" type="number" id="saco_cantidad1" class="form-control saco-cal" value="1">
+																			</div>
+																		</div>
 																	</div>
 
 																	<div id="education_fields"></div>
 																	<div class="row">
 																		<div class="col-md-6">
 																			<div class="form-group">
-																				<button class="btn btn-success btn-block" type="button" onclick='education_fields(<?=json_encode($modelos_varon_saco)?>, <?=json_encode($aberturas_varon_saco)?>, <?=json_encode($detalles_varon_saco)?>);'>Añadir nuevo saco <i class="fa fa-plus"></i></button>
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields(<?=json_encode($modelos_varon_saco)?>, <?=json_encode($aberturas_varon_saco)?>, <?=json_encode($detalles_varon_saco)?>, <?=json_encode($telas)?>);'>Añadir nuevo saco <i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																		<div class="col-md-6">
@@ -330,22 +345,14 @@
 																	</div>
 
 																	<div class="row">
-
-																		<div class="col-md-4">
-																			<div class="form-group">
-																				<label class="control-label"><b>Cantidad</b></label>
-																				<input name="saco_cantidad" type="number" id="saco_cantidad" class="form-control saco-cal" value="1">
-																			</div>
-																		</div>
-
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_saco_precio_unitario">
 																				<label class="control-label"><b>Precio Unitario</b></label>
 																				<input name="saco_pu" type="number" id="saco_pu" class="form-control saco-cal" placeholder="Ej: 150">
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_saco_subtotal">
 																				<label class="control-label"><b>Subtotal</b></label>
 																				<input name="saco_subtotal" type="number" id="saco_subtotal" class="form-control" readonly>
@@ -563,10 +570,30 @@
 																	</div>
 
 																	<div class="row">
-																		<div class="col-md-12">
+																		<div class="col-md-4">
+																			<div class="form-group">
+																				<label class="control-label">Marca de la tela</label>
+																				<select name="marca_tela_pantalon[]" id="marca_tela_pantalon1" class="form-control">
+																					<?php
+																					foreach ($telas as $t) {
+																					?>
+																					<option value="<?=$t['id']?>"><?=$t['nombre']?></option>
+																					<?php
+																					}
+																					?>
+																				</select>
+																			</div>
+																		</div>
+																		<div class="col-md-5">
 																			<div class="form-group">
 																				<label class="control-label">Imagen del modelo</label>
 																				<input type="file" class="form-control" accept="image/*" id="img_modelo_pantalon1" name="img_modelo_pantalon[]">
+																			</div>
+																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="pantalon_cantidad[]" type="number" id="pantalon_cantidad1" class="form-control" value="1">
 																			</div>
 																		</div>
 																	</div>
@@ -575,7 +602,7 @@
 																	<div class="row">
 																		<div class="col-md-6">
 																			<div class="form-group">
-																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_pantalones(<?=json_encode($modelos_varon_pantalon)?>, <?=json_encode($pinzas_varon_pantalon)?>, <?=json_encode($bolsillos_varon_pantalon)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_pantalones(<?=json_encode($modelos_varon_pantalon)?>, <?=json_encode($pinzas_varon_pantalon)?>, <?=json_encode($bolsillos_varon_pantalon)?>, <?=json_encode($telas)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																		<div class="col-md-6">
@@ -586,22 +613,14 @@
 																	</div>
 
 																	<div class="row">
-
-																		<div class="col-md-4">
-																			<div class="form-group">
-																				<label class="control-label"><b>Cantidad</b></label>
-																				<input name="pantalon_cantidad" type="number" id="pantalon_cantidad" class="form-control" value="1">
-																			</div>
-																		</div>
-
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_pantalon_precio_unitario">
 																				<label class="control-label"><b>Precio Unitario</b></label>
 																				<input name="pantalon_pu" type="number" id="pantalon_pu" class="form-control" placeholder="Ej: 150">
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_pantalon_subtotal">
 																				<label class="control-label"><b>Subtotal</b></label>
 																				<input name="pantalon_subtotal" type="number" id="pantalon_subtotal" class="form-control" readonly>
@@ -678,7 +697,7 @@
 
 																	<div class="row">
 
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Modelo</label>
 																				<select name="ch_modelo[]" id="ch_modelo1" class="form-control">
@@ -690,14 +709,14 @@
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Botones</label>
 																				<input type="number" name="ch_botones[]" id="ch_botones1" class="form-control" min="0" step="any">
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Detalle</label>
 																				<select name="ch_detalle[]" id="ch_detalle1" class="form-control">
@@ -708,15 +727,29 @@
 																				</select>
 																			</div>
 																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="col-md-4">
+																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label">Color Ojales</label>
 																				<input name="ch_color[]" type="text" id="ch_color1" class="form-control" placeholder="">
 																			</div>
 																		</div>
-																		<div class="col-md-4">
+																	</div>
+																	<div class="row">
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label">Marca de la tela</label>
+																				<select name="marca_tela_chaleco[]" id="marca_tela_chaleco1" class="form-control">
+																					<?php
+																					foreach ($telas as $t) {
+																					?>
+																					<option value="<?=$t['id']?>"><?=$t['nombre']?></option>
+																					<?php
+																					}
+																					?>
+																				</select>
+																			</div>
+																		</div>
+																		<div class="col-md-2">
 																			<div class="form-group">
 																				<label class="control-label">Boton Forrado</label>
 																				<select name="ch_boton_forrado[]" id="ch_boton_forrado1" class="form-control">
@@ -731,13 +764,19 @@
 																				<input type="file" class="form-control" accept="image/*" name="img_modelo_chaleco[]" id="img_modelo_chaleco1">
 																			</div>
 																		</div>
+																		<div class="col-md-3">
+																			<div class="form-group">
+																				<label class="control-label"><b>Cantidad</b></label>
+																				<input name="ch_cantidad[]" type="number" id="ch_cantidad1" class="form-control" value="1">
+																			</div>
+																		</div>
 																	</div>
 
 																	<div id="education_fields_chalecos"></div>
 																	<div class="row">
 																		<div class="col-md-6">
 																			<div class="form-group">
-																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_chalecos(<?=json_encode($modelos_varon_chalecos)?>, <?=json_encode($detalles_varon_chalecos)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
+																				<button class="btn btn-success btn-block" type="button" onclick='education_fields_chalecos(<?=json_encode($modelos_varon_chalecos)?>, <?=json_encode($detalles_varon_chalecos)?>, <?=json_encode($telas)?>);'>Añadir nuevo pantalon <i class="fa fa-plus"></i></button>
 																			</div>
 																		</div>
 																		<div class="col-md-6">
@@ -748,22 +787,14 @@
 																	</div>
 
 																	<div class="row">
-
-																		<div class="col-md-4">
-																			<div class="form-group">
-																				<label class="control-label"><b>Cantidad</b></label>
-																				<input name="ch_cantidad" type="number" id="ch_cantidad" class="form-control" value="1">
-																			</div>
-																		</div>
-
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_chaleco_precio_unitario">
 																				<label class="control-label"><b>Precio Unitario</b></label>
 																				<input name="ch_pu" type="number" id="ch_pu" class="form-control" placeholder="Ej: 150">
 																			</div>
 																		</div>
 
-																		<div class="col-md-4">
+																		<div class="col-md-6">
 																			<div class="form-group" id="input_chaleco_subtotal">
 																				<label class="control-label"><b>Subtotal</b></label>
 																				<input name="ch_subtotal" type="number" id="ch_subtotal" class="form-control" readonly>

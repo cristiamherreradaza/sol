@@ -238,7 +238,7 @@
 		});
 	}
 	
-	function asignarPrenda(prenda, prenda_id, tipo){
+	function asignarPrenda(prenda, prenda_id, tipo, key){
 
 		Swal.fire({
 			title: 'Estas seguro de '+tipo+' la prenda?',
@@ -252,9 +252,9 @@
 		}).then((result) => {
 			if (result.value) {
 
-				var persona = $('#persona_destinada_'+prenda).val();
+				var persona = $('#persona_destinada_'+prenda+'_'+key).val();
 
-				// console.log(prenda, prenda_id, tipo);
+				// console.log(prenda, prenda_id, tipo, persona);
 
 				if(persona === ''){
 					Swal.fire(

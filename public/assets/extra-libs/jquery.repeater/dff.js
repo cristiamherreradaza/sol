@@ -1,6 +1,6 @@
 var room = 1;
 
-function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon_saco) {
+function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon_saco, telas) {
     room++;
     var objTo = document.getElementById('education_fields')
     var divtest = document.createElement("div");
@@ -64,6 +64,11 @@ function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon
 		option_detalles_varon_saco = option_detalles_varon_saco + '<option value="'+element.id+'">'+element.nombre+'</option>'
 	});
 
+	var  option_telas = '';
+	telas.forEach(element => {
+		option_telas = option_telas + '<option value="'+element.id+'">'+element.nombre+'</option>'
+	});
+
 	divtest.innerHTML = '<hr>'+
 						'<div class="row">'+
 							'<div class="col-md-3">'+
@@ -98,13 +103,13 @@ function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon
 							'</div>'+
 						'</div>'+
 						'<div class="row">'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Color</label>'+
 									'<input name="sd_color[]" type="text" id="sd_color'+room+'" class="form-control" placeholder="Ej: Plomo">'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Ojal Pu&ntilde;o</label>'+
 									'<select name="sd_ojal[]" id="sd_ojal'+room+'" class="form-control ">'+
@@ -113,24 +118,26 @@ function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon
 									'</select>'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Color Ojal</label>'+
 									'<input name="sd_color_ojal[]" type="text" id="sd_color_ojal'+room+'" class="form-control" placeholder="Ej: Gris">'+
 								'</div>'+
 							'</div>'+
-						'</div>'+
-						'<div class="row">'+
 							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Tipo de bolsillo</label>'+
 									'<input name="tipo_bolsillo[]" type="text" id="tipo_bolsillo'+room+'" class="form-control" placeholder="Ej: Doble, Simple">'+
 								'</div>'+
 							'</div>'+
+						'</div>'+
+						'<div class="row">'+
 							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Marca de la tela</label>'+
-									'<input name="marca_tela[]" type="text" id="marca_tela'+room+'" class="form-control" placeholder="Ej: Merino, Lino">'+
+									'<select name="marca_tela_saco[]" id="marca_tela_saco'+room+'" class="form-control ">'+
+										option_telas+
+									'</select>'+
 								'</div>'+
 							'</div>'+
 							'<div class="col-md-4">'+
@@ -139,9 +146,15 @@ function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon
 									'<input name="img_modelo_saco[]" type="file" accept="image/*" id="img_modelo_saco'+room+'" class="form-control">'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-2">'+
+							'<div class="col-md-3">'+
+								'<div class="form-group">'+
+									'<label class="control-label"><b>Cantidad</b></label>'+
+									'<input name="saco_cantidad[]" type="number" id="saco_cantidad'+room+'" class="form-control saco-cal" value="1">'+
+								'</div>'+
+							'</div>'+
+							'<div class="col-md-2"'+
 								'<div class="form-group" style="margin-top:32px;">'+
-									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields(' + room + ');"> <i class="fa fa-minus"></i></button>'+
+									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields(' + room + ');"> <i class="fa fa-trash"></i></button>'+
 								'</div>'+
 							'</div>'+
 						+'</div>';
@@ -162,7 +175,7 @@ function actualizaCampo(num){
 // PARA EL PANTALON
 var roomPantalon = 1;
 
-function education_fields_pantalones(json_modelo_pantalon, json_pinzas_varon_pantalon, json_bolsillos_varon_pantalon) {
+function education_fields_pantalones(json_modelo_pantalon, json_pinzas_varon_pantalon, json_bolsillos_varon_pantalon, telas) {
     roomPantalon++;
     var objTo = document.getElementById('education_fields_pantalones')
     var divtest = document.createElement("div");
@@ -181,6 +194,11 @@ function education_fields_pantalones(json_modelo_pantalon, json_pinzas_varon_pan
 	var  option_json_bolsillos_varon_pantalon = '<option value="">Seleccione</option>';
 	json_bolsillos_varon_pantalon.forEach(element => {
 		option_json_bolsillos_varon_pantalon = option_json_bolsillos_varon_pantalon + '<option value="'+element.id+'">'+element.nombre+'</option>'
+	});
+
+	var  option_telas = '';
+	telas.forEach(element => {
+		option_telas = option_telas + '<option value="'+element.id+'">'+element.nombre+'</option>'
 	});
 
 	divtest.innerHTML = '<hr>'+
@@ -240,15 +258,29 @@ function education_fields_pantalones(json_modelo_pantalon, json_pinzas_varon_pan
 							'</div>'+
 						'</div>'+
 						'<div class="row">'+
-							'<div class="col-md-10">'+
+							'<div class="col-md-3">'+
+								'<div class="form-group">'+
+									'<label class="control-label">Bolsillo</label>'+
+									'<select name="marca_tela_pantalon[]" id="marca_tela_pantalon'+roomPantalon+'" class="form-control ">'+
+									option_telas+
+									'</select>'+
+								'</div>'+
+							'</div>'+
+							'<div class="col-md-5">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Imagen del modelo</label>'+
 									'<input type="file" class="form-control" accept="image/*" id="img_modelo_pantalon'+roomPantalon+'" name="img_modelo_pantalon[]">'+
 								'</div>'+
 							'</div>'+
 							'<div class="col-md-2">'+
+								'<div class="form-group">'+
+									'<label class="control-label"><b>Cantidad</b></label>'+
+									'<input name="pantalon_cantidad[]" type="number" id="pantalon_cantidad'+roomPantalon+'" class="form-control" value="1">'+
+								'</div>'+
+							'</div>'+
+							'<div class="col-md-2">'+
 								'<div class="form-group" style="margin-top:32px;">'+
-									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields_pantalon(' + roomPantalon + ');"> <i class="fa fa-minus"></i></button>'+
+									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields_pantalon(' + roomPantalon + ');"> <i class="fa fa-trash"></i></button>'+
 								'</div>'+
 							'</div>'+
 						'</div>';
@@ -270,7 +302,7 @@ function actualizaCampoPantalon(num){
 // PARA LOS CHALECOS
 var roomChaleco = 1;
 
-function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_varon_chalecos) {
+function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_varon_chalecos, telas) {
     roomChaleco++;
     var objTo = document.getElementById('education_fields_chalecos')
     var divtest = document.createElement("div");
@@ -286,9 +318,14 @@ function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_va
 		option_detalles_varon_chalecos = option_detalles_varon_chalecos + '<option value="'+element.id+'">'+element.nombre+'</option>'
 	});
 
+	var  option_telas = '';
+	telas.forEach(element => {
+		option_telas = option_telas + '<option value="'+element.id+'">'+element.nombre+'</option>'
+	});
+
 	divtest.innerHTML = '<hr>'+
 						'<div class="row">'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Modelo</label>'+
 									'<select name="ch_modelo[]" id="ch_modelo'+roomChaleco+'" class="form-control ">'+
@@ -296,13 +333,13 @@ function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_va
 									'</select>'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Botones</label>'+
 									'<input name="ch_botones[]" type="number" id="ch_botones'+roomChaleco+'" class="form-control" min="0" step="any">'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-4">'+
+							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Detalle</label>'+
 									'<select name="ch_detalle[]" id="ch_detalle'+roomChaleco+'" class="form-control">'+
@@ -310,15 +347,23 @@ function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_va
 									'</select>'+
 								'</div>'+
 							'</div>'+
+							'<div class="col-md-3">'+
+								'<div class="form-group">'+
+									'<label class="control-label">Color Ojales</label>'+
+									'<input name="ch_color[]" type="text" id="ch_color'+roomChaleco+'" class="form-control" min="0" step="any">'+
+								'</div>'+
+							'</div>'+
 						'</div>'+
 						'<div class="row">'+
 							'<div class="col-md-3">'+
 								'<div class="form-group">'+
-									'<label class="control-label">Color Ojales</label>'+
-									'<input name="ch_color[]" type="number" id="ch_color'+roomChaleco+'" class="form-control" min="0" step="any">'+
+									'<label class="control-label">Detalle</label>'+
+									'<select name="marca_tela_chaleco[]" id="marca_tela_chaleco'+roomChaleco+'" class="form-control">'+
+									option_telas+
+									'</select>'+
 								'</div>'+
 							'</div>'+
-							'<div class="col-md-3">'+
+							'<div class="col-md-2">'+
 								'<div class="form-group">'+
 									'<label class="control-label">Boton Forrado</label>'+
 									'<select name="ch_boton_forrado[]" id="ch_boton_forrado'+roomChaleco+'" class="form-control">'+
@@ -334,8 +379,14 @@ function education_fields_chalecos(json_modelos_varon_chalecos, json_detalles_va
 								'</div>'+
 							'</div>'+
 							'<div class="col-md-2">'+
+								'<div class="form-group">'+
+									'<label class="control-label"><b>Cantidad</b></label>'+
+									'<input name="ch_cantidad[]" type="number" id="ch_cantidad'+roomChaleco+'" class="form-control" value="1">'+
+								'</div>'+
+							'</div>'+
+							'<div class="col-md-1">'+
 								'<div class="form-group" style="margin-top:32px;">'+
-									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields_chaleco(' + roomChaleco + ');"> <i class="fa fa-minus"></i></button>'+
+									'<button class="btn btn-danger btn-block" type="button" onclick="remove_education_fields_chaleco(' + roomChaleco + ');"> <i class="fa fa-trash"></i></button>'+
 								'</div>'+
 							'</div>'+
 						'</div>';
