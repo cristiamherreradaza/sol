@@ -87,8 +87,9 @@
                                 </div>
                             </div>
 
-							<hr>
-							<div class="row mb-2">
+							<!-- <hr> -->
+
+							<!-- <div class="row mb-2">
 								<div class="col-md-11">
 									<botton class="btn btn-block btn-primary" onclick="pagoParcialTotal()">TOTAL / PARCIAL</botton>
 									<div class="form-group" id="bloque_pago_total" style="display: none">
@@ -100,7 +101,7 @@
 								<div class="col-md-1">
 									<button type="button" id="nombre_boton_btn" class="btn btn-block btn-danger"><span id="nombre_boton">NO</span></button>
 								</div>
-							</div>
+							</div> -->
 
 
                             <div class="row">
