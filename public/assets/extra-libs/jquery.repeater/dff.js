@@ -149,7 +149,7 @@ function education_fields(json_modelo_saco, aberturas_varon_saco, detalles_varon
 							'<div class="col-md-3">'+
 								'<div class="form-group">'+
 									'<label class="control-label"><b>Cantidad</b></label>'+
-									'<input name="saco_cantidad[]" type="number" id="saco_cantidad'+room+'" class="form-control saco-cal" value="1">'+
+									'<input name="saco_cantidad[]" type="number" id="saco_cantidad'+room+'" class="form-control saco-cal saco_can" value="1">'+
 								'</div>'+
 							'</div>'+
 							'<div class="col-md-2"'+

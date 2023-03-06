@@ -325,7 +325,7 @@
 																		<div class="col-md-3">
 																			<div class="form-group">
 																				<label class="control-label"><b>Cantidad</b></label>
-																				<input name="saco_cantidad[]" type="number" id="saco_cantidad1" class="form-control saco-cal" value="1">
+																				<input name="saco_cantidad[]" type="number" id="saco_cantidad1" class="form-control saco-cal saco_can" value="1">
 																			</div>
 																		</div>
 																	</div>
@@ -1335,25 +1335,25 @@
                                                 <div class="col">
                                                     <div class="form-group">
                                                         <label class="control-label">Tela</label>
-                                                        <select name="tela_propia" id="tela_propia" class="form-control ">
-                                                            <option value="NO">Sin Tela</option>
+                                                        <select name="tela_propia" id="tela_propia" class="form-control " onchange="ocultaCampoTela(this)">
                                                             <option value="SI">Con Tela</option>
+                                                            <option value="NO">Sin Tela</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
-                                                <div class="col">
+                                                <!-- <div class="col">
                                                     <div class="form-group">
                                                         <label class="control-label">Marca</label>
                                                         <input type="text" name="marca" id="marca" class="form-control">
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
 
                                             <div class="row">
 
                                                 <div class="col">
-                                                    <div class="form-group has-success">
+                                                    <div class="form-group has-success" id="bloque_costo_tela">
                                                         <label class="control-label">Costo Tela</label>
                                                         <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" required>
                                                     </div>
@@ -1494,12 +1494,16 @@
     });
 
     function calcula_precio_saco() {
-        cantidad_saco = parseFloat($("#saco_cantidad").val());
-        precio_saco = parseFloat($("#saco_pu").val());
-        subtotal_saco = cantidad_saco * precio_saco;
+		let sumaTotalCantSaco = 0;
 
-        costo_confeccion_calculado = parseFloat(subtotal_saco + subtotal_pantalon + subtotal_ch);
+		$('input[name^="saco_cantidad"]').each(function() {
+			sumaTotalCantSaco = parseInt(sumaTotalCantSaco)+parseInt($(this).val());
+		});
+
+        precio_saco = parseFloat($("#saco_pu").val());
+        subtotal_saco = sumaTotalCantSaco * precio_saco;
         $('#saco_subtotal').val(subtotal_saco);
+        costo_confeccion_calculado = parseFloat(subtotal_saco + subtotal_pantalon + subtotal_ch);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
     }
@@ -1509,9 +1513,14 @@
     });
 
     function calcula_precio_pantalon() {
-        cantidad_pantalon = parseFloat($("#pantalon_cantidad").val());
+		let sumaTotalCantPantalon = 0;
+
+		$('input[name^="pantalon_cantidad"]').each(function() {
+			sumaTotalCantPantalon = parseInt(sumaTotalCantPantalon)+parseInt($(this).val());
+		});
+
         precio_pantalon = parseFloat($("#pantalon_pu").val());
-        subtotal_pantalon = cantidad_pantalon * precio_pantalon;
+        subtotal_pantalon = sumaTotalCantPantalon * precio_pantalon;
 
         $('#pantalon_subtotal').val(subtotal_pantalon);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch)
@@ -1523,14 +1532,18 @@
     });
 
     function calcula_precio_chaleco() {
-        cantidad_ch = parseFloat($("#ch_cantidad").val());
-        precio_ch = parseFloat($("#ch_pu").val());
-        subtotal_ch = cantidad_ch * precio_ch;
+		let sumaTotalCantChaleco = 0;
+
+		$('input[name^="ch_cantidad"]').each(function() {
+			sumaTotalCantChaleco = parseInt(sumaTotalCantChaleco)+parseInt($(this).val());
+		});
+
+		precio_chaleco = parseFloat($("#ch_pu").val());
+        subtotal_ch = sumaTotalCantChaleco * precio_chaleco;
 
         $('#ch_subtotal').val(subtotal_ch);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
-
     }
 
     $("#cam_pu, #cam_cantidad").keyup(function() {
@@ -1699,7 +1712,7 @@
             success: function(data) {
                 // dv.html(data);
                 datos_cliente = JSON.parse(data);
-                console.log(datos_cliente);
+                // console.log(datos_cliente);
                 // console.log(datos_cliente.cliente.nombre);
                 // iw
 
@@ -1707,6 +1720,9 @@
                 $("#nombre").val(datos_cliente.cliente.nombre);
                 $("#ci").val(datos_cliente.cliente.ci);
                 $("#celulares").val(datos_cliente.cliente.celulares);
+                $("#genero").val(datos_cliente.cliente.genero);
+
+				cambia_genero();	
 
                 if (datos_cliente.sacos != null) {
                     $("#s_talla").val(datos_cliente.sacos.talla);
@@ -2000,6 +2016,13 @@
 			$('#input_camisa_precio_unitario').show('toggle');
 			$('#input_camisa_subtotal').show('toggle');
 		}
+	}
+
+	function ocultaCampoTela(select){
+		if(select.value === "NO")
+			$('#bloque_costo_tela').hide('toggle');
+		else
+			$('#bloque_costo_tela').show('toggle');
 	}
 	
 </script>

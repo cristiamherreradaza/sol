@@ -30,6 +30,7 @@
 									<option value="saco">SACO</option>
 									<option value="falda">FALDA</option>
 									<option value="jumper">JUMPER</option>
+									<option value="pantalon">PANTALON</option>
 								</select>
 							</div>
 						</div>
