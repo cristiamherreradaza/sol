@@ -1356,7 +1356,7 @@
                                                 <div class="col">
                                                     <div class="form-group has-success" id="bloque_costo_tela">
                                                         <label class="control-label">Costo Tela</label>
-                                                        <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any">
+                                                        <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" value="0">
                                                     </div>
                                                 </div>
 
@@ -1400,7 +1400,7 @@
                                                 <div class="col">
                                                     <div class="form-group has-warning">
                                                         <label class="control-label">A cuenta</label>
-                                                        <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" required>
+                                                        <input type="number" name="a_cuenta" id="a_cuenta" class="form-control calculo" min="0" step="any" required value="0" onclick="this.select()">
                                                     </div>
                                                 </div>
 
@@ -1507,6 +1507,12 @@
         costo_confeccion_calculado = parseFloat(subtotal_saco + subtotal_pantalon + subtotal_ch);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
+
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#pantalon_pu, #pantalon_cantidad").keyup(function() {
@@ -1526,6 +1532,11 @@
         $('#pantalon_subtotal').val(subtotal_pantalon);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#ch_pu, #ch_cantidad").keyup(function() {
@@ -1545,6 +1556,11 @@
         $('#ch_subtotal').val(subtotal_ch);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#cam_pu, #cam_cantidad").keyup(function() {
@@ -1559,6 +1575,11 @@
         $('#cam_subtotal').val(subtotal_cam);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#ext_pu, #ext_cantidad").keyup(function() {
@@ -1573,6 +1594,11 @@
         $('#ext_subtotal').val(subtotal_ext);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam + subtotal_ext)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam + subtotal_ext);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_cam + subtotal_ext;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#fa_pu, #fa_cantidad").keyup(function() {
@@ -1587,6 +1613,11 @@
         $('#fa_subtotal').val(subtotal_fa);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#jam_pu, jam_cantidad").keyup(function() {
@@ -1601,6 +1632,11 @@
         $('#jam_subtotal').val(subtotal_jam);
         $('#costo_confeccion').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa + subtotal_jam)
         $('#costo_confeccion_calculado').val(subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa + subtotal_jam);
+
+		// para el total
+		let precioTotalSuma = subtotal_saco + subtotal_pantalon + subtotal_ch + subtotal_fa + subtotal_jam;
+		$('#monto_total').val(precioTotalSuma);
+		$('#saldo').val(precioTotalSuma);
     }
 
     $("#costo_confeccion").keyup(function() {
@@ -1618,28 +1654,18 @@
 
     // $(".calculo").change(function() {
     $(".calculo").on("change paste keyup", function() {
-
-
         costo_tela = parseFloat($("#costo_tela").val());
         costo_confeccion = parseFloat($("#costo_confeccion").val());
         suma = costo_tela + costo_confeccion;
-
         var obj = document.getElementById('rebaja');
         if(obj.getAttribute("readonly") == null){
             var rebaja = $('#rebaja').val()
             suma = suma - rebaja;
         }
-
         $("#monto_total").val(suma);
-
         a_cuenta = parseFloat($("#a_cuenta").val());
         saldo = suma - a_cuenta
-
-        
-
         $("#saldo").val(saldo);
-        // console.log("Costo: "+suma);
-        // console.log("Costo de tela: "+costo_tela);
     });
 
     function cambia_genero() {
