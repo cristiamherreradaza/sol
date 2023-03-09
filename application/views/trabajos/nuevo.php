@@ -1356,7 +1356,7 @@
                                                 <div class="col">
                                                     <div class="form-group has-success" id="bloque_costo_tela">
                                                         <label class="control-label">Costo Tela</label>
-                                                        <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any" required>
+                                                        <input type="number" name="costo_tela" id="costo_tela" class="form-control calculo" min="0" step="any">
                                                     </div>
                                                 </div>
 
