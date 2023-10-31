@@ -1342,13 +1342,6 @@
                                                         </select>
                                                     </div>
                                                 </div>
-
-                                                <!-- <div class="col">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Marca</label>
-                                                        <input type="text" name="marca" id="marca" class="form-control">
-                                                    </div>
-                                                </div> -->
                                             </div>
 
                                             <div class="row">
@@ -1651,8 +1644,6 @@
         }
     });
 
-
-    // $(".calculo").change(function() {
     $(".calculo").on("change paste keyup", function() {
         costo_tela = parseFloat($("#costo_tela").val());
         costo_confeccion = parseFloat($("#costo_confeccion").val());
@@ -1671,7 +1662,6 @@
     function cambia_genero() {
         
         var genero = $("#genero").val();
-        console.log(genero);
         if (genero == 'Mujer') {
             $("#saco_albusto").show('slow');
             $("#pantalon_cadera").show('slow');
